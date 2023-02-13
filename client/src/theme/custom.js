@@ -13,7 +13,8 @@ export const customTheme = () => {
 			},
 		},
 		"& > div > input": {
-			padding: "21.5px 14px 11.5px !important",
+			padding: "27.5px 14px 11.5px !important",
+            marginTop: "-4px"
 		},
 		"& legend": {
 			display: "none",

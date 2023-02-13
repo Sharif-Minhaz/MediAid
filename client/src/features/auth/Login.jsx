@@ -44,9 +44,6 @@ const Login = () => {
 					p: 3,
 				}}
 			>
-				{/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-					<LockOutlinedIcon />
-				</Avatar> */}
 				<img src="/images/cover.png" height="85" />
 
 				<Typography fontWeight={700} color="primary" component="h5" variant="h5">
@@ -104,12 +101,13 @@ const Login = () => {
 							label="Password"
 							type={showPassword ? "text" : "password"}
 							endAdornment={
-								<InputAdornment sx={{ mb: "6px"}} position="end">
+								<InputAdornment sx={{ mb: "6px" }} position="end">
 									<IconButton
 										aria-label="toggle password visibility"
 										onClick={handleClickShowPassword}
 										onMouseDown={handleMouseDownPassword}
 										edge="end"
+										size="large"
 									>
 										{showPassword ? <VisibilityOff /> : <Visibility />}
 									</IconButton>
