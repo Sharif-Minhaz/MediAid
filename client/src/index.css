@@ -4,3 +4,11 @@
   box-sizing: border-box;
   font-family: "roboto", Arial, Helvetica, sans-serif;
 }
+
+body {
+  background-color: #eef2f6 !important;
+}
+
+a {
+  text-decoration: none;
+}
