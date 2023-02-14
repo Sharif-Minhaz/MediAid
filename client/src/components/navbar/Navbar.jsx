@@ -1,4 +1,4 @@
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import {
 	Box,
 	Drawer,
@@ -17,10 +17,13 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { useStateContext } from "../../contexts/ContextProvider";
 import CustomIconButton from "../../theme/customComponent/CustomIconButton";
+import SearchBar from "../SearchBar";
+import ProfileBtn from "./ProfileBtn";
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const openedMixin = (theme) => ({
 	width: drawerWidth,
@@ -60,14 +63,6 @@ const CustomAppBar = styled(AppBar, {
 		easing: theme.transitions.easing.sharp,
 		duration: theme.transitions.duration.leavingScreen,
 	}),
-	...(open && {
-		marginLeft: drawerWidth,
-		width: `calc(100% - ${drawerWidth}px)`,
-		transition: theme.transitions.create(["width", "margin"], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.enteringScreen,
-		}),
-	}),
 }));
 
 const CustomDrawer = styled(Drawer, { shouldForwardProp: (prop) => prop !== "open" })(
@@ -78,51 +73,61 @@ const CustomDrawer = styled(Drawer, { shouldForwardProp: (prop) => prop !== "ope
 		boxSizing: "border-box",
 		...(open && {
 			...openedMixin(theme),
-			"& .MuiDrawer-paper": openedMixin(theme),
+			"& .MuiDrawer-paper": { ...openedMixin(theme), borderRight: 0 },
 		}),
 		...(!open && {
 			...closedMixin(theme),
-			"& .MuiDrawer-paper": closedMixin(theme),
+			"& .MuiDrawer-paper": { ...closedMixin(theme), borderRight: 0 },
 		}),
 	})
 );
 
 export default function MiniDrawer() {
-	const { leftDrawerOpen, handleLeftDrawerOpen, handleLeftDrawerClose } = useStateContext();
+	const { leftDrawerOpen, handleLeftDrawerToggle } = useStateContext();
 
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
-			<CustomAppBar position="fixed" open={leftDrawerOpen}>
-				<Toolbar>
-					<CustomIconButton
-						color="inherit"
-						aria-label="open drawer"
-						onClick={handleLeftDrawerOpen}
-						edge="start"
-						sx={{
-							marginRight: 5,
-							...(leftDrawerOpen && { display: "none" }),
-						}}
+			<CustomAppBar
+				sx={{ height: "83px" }}
+				elevation={0}
+				color="light"
+				position="fixed"
+				open={leftDrawerOpen}
+			>
+				<Toolbar sx={{ display: "flex", alignItems: "center", height: "100%" }}>
+					<Stack
+						direction="row"
+						alignItems="center"
+						justifyContent="space-between"
+						width="285px"
 					>
-						<MenuIcon />
-					</CustomIconButton>
-					<Typography variant="h6" noWrap component="div">
-						Mini variant drawer
-					</Typography>
+						<img src="/images/default.png" alt="brand-logo" height="27" />
+						<DrawerHeader>
+							<CustomIconButton onClick={handleLeftDrawerToggle}>
+								<MenuIcon fontSize="small" />
+							</CustomIconButton>
+						</DrawerHeader>
+					</Stack>
+					<Stack
+						direction="row"
+						width="100%"
+						alignItems="center"
+						justifyContent="space-between"
+					>
+						<SearchBar />
+						<Stack direction="row" alignItems="center" gap={2}>
+							<CustomIconButton>
+								<NotificationsNoneIcon fontSize="small" />
+							</CustomIconButton>
+							<ProfileBtn />
+						</Stack>
+					</Stack>
 				</Toolbar>
 			</CustomAppBar>
 			<CustomDrawer variant="permanent" open={leftDrawerOpen}>
-				<Stack direction="row" alignItems="center" justifyContent="space-between" ml={2}>
-					<img src="/images/default.png" alt="brand-logo" height="30" />
-					<DrawerHeader>
-						<CustomIconButton onClick={handleLeftDrawerClose}>
-							<MenuIcon fontSize="small" />
-						</CustomIconButton>
-					</DrawerHeader>
-				</Stack>
 				<Divider />
-				<List>
+				<List sx={{ mt: 8 }}>
 					{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
 						<ListItem key={text} disablePadding sx={{ display: "block" }}>
 							<ListItemButton
@@ -178,60 +183,65 @@ export default function MiniDrawer() {
 					))}
 				</List>
 			</CustomDrawer>
-			<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+			<Box component="main" sx={{ flexGrow: 1, pt: "5px" }}>
 				<DrawerHeader />
-				<Typography paragraph>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim
-					praesent elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet.
-					Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis
-					tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio
-					aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-					integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu
-					scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet
-					massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-					arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi
-					tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-				</Typography>
-				<Typography paragraph>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim
-					praesent elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet.
-					Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis
-					tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio
-					aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-					integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu
-					scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet
-					massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-					arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi
-					tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-				</Typography>
-				<Typography paragraph>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim
-					praesent elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet.
-					Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis
-					tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio
-					aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-					integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu
-					scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet
-					massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-					arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi
-					tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-				</Typography>
-				<Typography paragraph>
-					Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget
-					nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim neque
-					volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus.
-					Purus sit amet volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-					Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt ornare massa
-					eget egestas purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-					tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant morbi
-					tristique senectus et. Adipiscing elit duis tristique sollicitudin nibh sit.
-					Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-					accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices
-					sagittis orci a.
-				</Typography>
+				<Box borderRadius={3} bgcolor="#eef2f6" px="20px" pt="15px" mt="14px" mr="20px">
+					<Typography textAlign={"justify"} paragraph>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
+						enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
+						imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
+						Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio
+						morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing
+						bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
+						Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris
+						commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
+						vivamus at augue. At augue eget arcu dictum varius duis at consectetur
+						lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
+						faucibus et molestie ac.
+					</Typography>
+					<Typography textAlign={"justify"} paragraph>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
+						enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
+						imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
+						Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio
+						morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing
+						bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
+						Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris
+						commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
+						vivamus at augue. At augue eget arcu dictum varius duis at consectetur
+						lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
+						faucibus et molestie ac.
+					</Typography>
+					<Typography textAlign={"justify"} paragraph>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
+						enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
+						imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
+						Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio
+						morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing
+						bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
+						Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris
+						commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
+						vivamus at augue. At augue eget arcu dictum varius duis at consectetur
+						lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
+						faucibus et molestie ac.
+					</Typography>
+					<Typography textAlign={"justify"} paragraph>
+						Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+						eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
+						neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
+						tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis sed
+						odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
+						tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
+						gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
+						et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
+						tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+						eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+						posuere sollicitudin aliquam ultrices sagittis orci a.
+					</Typography>
+				</Box>
 			</Box>
 		</Box>
 	);

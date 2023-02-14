@@ -23,6 +23,7 @@ import {
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { strengthColor, strengthIndicator } from "../../utils/passwordStrength";
+import BrandAuthImg from "./BrandAuthImg";
 
 const initialData = { password: "" };
 
@@ -66,7 +67,7 @@ const Register = () => {
 					p: 3,
 				}}
 			>
-				<img src="/images/cover.png" height="85" />
+				<BrandAuthImg />
 
 				<Typography fontWeight={700} color="primary" component="h5" variant="h5">
 					Register Now

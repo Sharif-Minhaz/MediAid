@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import KeyIcon from "@mui/icons-material/Key";
 import Visibility from "@mui/icons-material/Visibility";
@@ -22,6 +22,7 @@ import {
 	IconButton,
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import BrandAuthImg from "./BrandAuthImg";
 
 const Login = () => {
 	const theme = useTheme();
@@ -31,6 +32,13 @@ const Login = () => {
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault();
 	};
+
+	useEffect(() => {
+		document.body.style.backgroundColor = "#eef2f6";
+		return () => {
+			document.body.style.backgroundColor = null;
+		};
+	}, []);
 
 	return (
 		<Container component="main" sx={{ width: "520px !important" }}>
@@ -44,8 +52,8 @@ const Login = () => {
 					p: 3,
 				}}
 			>
-				<img src="/images/cover.png" height="85" />
-
+				<BrandAuthImg />
+				
 				<Typography fontWeight={700} color="primary" component="h5" variant="h5">
 					Hi, Welcome Back
 				</Typography>

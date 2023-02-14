@@ -1,20 +1,39 @@
-import { FormControl, InputLabel, OutlinedInput, useTheme } from "@mui/material";
+import { FormControl, InputAdornment, OutlinedInput } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import TuneIcon from "@mui/icons-material/Tune";
+import CustomIconButton from "../theme/customComponent/CustomIconButton";
 
 const SearchBar = () => {
-	const theme = useTheme();
 	return (
-		<FormControl fullWidth sx={{ ...theme.customInput, mb: "13px" }}>
-			<InputLabel htmlFor="outlined-adornment-email-login">
-				Email Address / Username
-			</InputLabel>
+		<FormControl sx={{ ml: 1 }}>
 			<OutlinedInput
+				startAdornment={
+					<InputAdornment position="start">
+						<SearchIcon />
+					</InputAdornment>
+				}
+				sx={{
+					width: { lg: "430px", md: "250px" },
+					height: "51px",
+					background: "#f8fafc",
+					fontSize: "14px",
+					fontWeight: 500,
+				}}
 				id="outlined-adornment-email-login"
 				type="email"
 				// value={"values.email"}
 				name="email"
 				// onBlur={"handleBlur"}
 				// onChange={"handleChange"}
-				label="Email Address / Username"
+				notched={false}
+				placeholder="Search medicine..."
+				endAdornment={
+					<InputAdornment position="end">
+						<CustomIconButton sx={{ mr: "-3px" }} aria-label="filter search" edge="end">
+							<TuneIcon />
+						</CustomIconButton>
+					</InputAdornment>
+				}
 			/>
 		</FormControl>
 	);

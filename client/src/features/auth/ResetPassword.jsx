@@ -22,6 +22,7 @@ import {
 	IconButton,
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import BrandAuthImg from "./BrandAuthImg";
 
 const ResetPassword = () => {
 	const theme = useTheme();
@@ -45,7 +46,7 @@ const ResetPassword = () => {
 					p: 3,
 				}}
 			>
-				<img src="/images/cover.png" height="85" />
+				<BrandAuthImg />
 
 				<Typography fontWeight={700} color="primary" component="h5" variant="h5">
 					Reset Password

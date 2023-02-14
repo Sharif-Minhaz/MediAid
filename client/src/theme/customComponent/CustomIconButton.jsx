@@ -8,7 +8,7 @@ const CustomIconButton = styled(IconButton)(({ theme }) => ({
 		backgroundColor: theme.palette.primary.main,
 		color: theme.palette.primaryLight.main,
 	},
-	borderRadius: "12px",
+	borderRadius: "9px",
 	height: "32px",
 	width: "34px",
 }));
