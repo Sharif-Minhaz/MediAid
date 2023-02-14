@@ -4,13 +4,15 @@ import Login from "../features/auth/Login";
 import "./App.css";
 import Register from "../features/auth/Register";
 import ResetPassword from "../features/auth/ResetPassword"
+import Navbar from "../components/navbar/Navbar";
 
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<Login />
+			{/* <Login /> */}
 			{/* <Register /> */}
 			{/* <ResetPassword /> */}
+			<Navbar />
 		</ThemeProvider>
 	);
 }

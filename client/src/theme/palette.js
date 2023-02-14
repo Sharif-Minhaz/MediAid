@@ -13,6 +13,9 @@ export const paletteTheme = () => {
 			main: "#64748B",
 			contrastText: "#fff",
 		},
+		primaryLight: {
+			main: "#ede7f6"
+		}
 	};
 
 	return theme;
