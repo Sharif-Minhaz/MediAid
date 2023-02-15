@@ -1,7 +1,7 @@
 import { Box} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { IconMenu2 as MenuIcon } from "@tabler/icons-react";
 import CustomIconButton from "../../theme/customComponent/CustomIconButton";
-import SearchIcon from "@mui/icons-material/Search";
+import { IconSearch as SearchIcon } from "@tabler/icons-react";
 
 const DrawerHeaderContents = ({ handleShowFullSearch, handleLeftDrawerToggle }) => {
 	return (
@@ -10,7 +10,7 @@ const DrawerHeaderContents = ({ handleShowFullSearch, handleLeftDrawerToggle }) 
 				<img src="/images/default.png" alt="brand-logo" height="27" />
 			</Box>
 			<CustomIconButton onClick={handleLeftDrawerToggle}>
-				<MenuIcon fontSize="small" />
+				<MenuIcon size={22} />
 			</CustomIconButton>
 			<CustomIconButton
 				sx={{
@@ -18,7 +18,7 @@ const DrawerHeaderContents = ({ handleShowFullSearch, handleLeftDrawerToggle }) 
 				}}
 				onClick={handleShowFullSearch}
 			>
-				<SearchIcon fontSize="small" />
+				<SearchIcon size={22} />
 			</CustomIconButton>
 		</>
 	);

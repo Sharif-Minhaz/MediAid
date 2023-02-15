@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import KeyIcon from "@mui/icons-material/Key";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { IconCircleKey as KeyIcon } from "@tabler/icons-react";
+import { IconEye as Visibility } from "@tabler/icons-react";
+import { IconEyeOff as VisibilityOff } from "@tabler/icons-react";
 import {
 	Button,
 	CssBaseline,
@@ -53,7 +53,7 @@ const Login = () => {
 				}}
 			>
 				<BrandAuthImg />
-				
+
 				<Typography fontWeight={700} color="primary" component="h5" variant="h5">
 					Hi, Welcome Back
 				</Typography>
@@ -61,7 +61,11 @@ const Login = () => {
 					Enter your credentials to continue
 				</Typography>
 				<Divider sx={{ width: "100%", mt: "20px", mb: "20px" }}>
-					<Chip icon={<KeyIcon />} label={" Authentication"} variant="outlined" />
+					<Chip
+						icon={<KeyIcon stroke={1} />}
+						label={" Authentication"}
+						variant="outlined"
+					/>
 				</Divider>
 				<Typography fontWeight={500} sx={{ fontSize: "0.875rem" }} mb={1}>
 					Log in with Email address

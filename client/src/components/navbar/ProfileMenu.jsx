@@ -1,5 +1,5 @@
 import { Avatar, Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
-import Logout from "@mui/icons-material/Logout";
+import { IconLogout as Logout, IconEdit } from "@tabler/icons-react";
 
 const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 	return (
@@ -44,7 +44,13 @@ const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 			<Divider />
 			<MenuItem onClick={handleClose}>
 				<ListItemIcon>
-					<Logout fontSize="small" />
+					<IconEdit size={22} />
+				</ListItemIcon>
+				Edit
+			</MenuItem>
+			<MenuItem onClick={handleClose}>
+				<ListItemIcon>
+					<Logout size={22} />
 				</ListItemIcon>
 				Logout
 			</MenuItem>

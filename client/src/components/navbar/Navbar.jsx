@@ -10,7 +10,7 @@ import {
 	Stack,
 	useMediaQuery,
 } from "@mui/material";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import { IconBell as NotificationsNoneIcon } from "@tabler/icons-react";
 import { useStateContext } from "../../contexts/ContextProvider";
 import CustomIconButton from "../../theme/customComponent/CustomIconButton";
 import SearchBar from "../SearchBar";
@@ -170,7 +170,7 @@ export default function MiniDrawer() {
 							/>
 							<Stack direction="row" alignItems="center" gap={2}>
 								<CustomIconButton onClick={handleNotificationClick}>
-									<NotificationsNoneIcon fontSize="small" />
+									<NotificationsNoneIcon size={22} />
 								</CustomIconButton>
 								<ProfileBtn handleClick={handleClick} />
 							</Stack>
@@ -187,10 +187,7 @@ export default function MiniDrawer() {
 								display: { xs: "block", sm: "block", md: "none" },
 							}}
 						>
-							<DrawerLists
-								drawerWidth={drawerWidth}
-								leftDrawerOpen={leftDrawerOpen}
-							/>
+							<DrawerLists isSmallScreen={isSmallScreen} drawerWidth={drawerWidth} />
 						</Drawer>
 					) : (
 						<CustomDrawer
@@ -199,11 +196,9 @@ export default function MiniDrawer() {
 							}}
 							variant="permanent"
 							open={leftDrawerOpen}
+							className="down-list"
 						>
-							<DrawerLists
-								drawerWidth={drawerWidth}
-								leftDrawerOpen={leftDrawerOpen}
-							/>
+							<DrawerLists isSmallScreen={isSmallScreen} drawerWidth={drawerWidth} />
 						</CustomDrawer>
 					)}
 				</Box>

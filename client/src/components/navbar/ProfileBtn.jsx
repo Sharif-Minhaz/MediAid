@@ -1,6 +1,6 @@
 import { Avatar, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import SettingsIcon from "@mui/icons-material/Settings";
+import { IconSettings as SettingsIcon } from "@tabler/icons-react";
 
 const RoundedButton = styled(Button)(({ theme }) => ({
 	width: 84,
@@ -14,7 +14,7 @@ const RoundedButton = styled(Button)(({ theme }) => ({
 	},
 }));
 
-const ProfileBtn = ({handleClick}) => {
+const ProfileBtn = ({ handleClick }) => {
 	return (
 		<RoundedButton
 			onClick={handleClick}
@@ -25,7 +25,7 @@ const ProfileBtn = ({handleClick}) => {
 					sx={{ width: 36, height: 36, ml: "2px" }}
 				/>
 			}
-			endIcon={<SettingsIcon fontSize="22px" sx={{ ml: "1px" }} />}
+			endIcon={<SettingsIcon size={24} sx={{ ml: "1px" }} />}
 		/>
 	);
 };

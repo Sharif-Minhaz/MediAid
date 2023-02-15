@@ -1,8 +1,8 @@
 import { Box, FormControl, InputAdornment, OutlinedInput, useTheme } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import TuneIcon from "@mui/icons-material/Tune";
+import { IconSearch as SearchIcon } from "@tabler/icons-react";
+import { IconAdjustmentsHorizontal as TuneIcon } from "@tabler/icons-react";
+import { IconX as CloseIcon } from "@tabler/icons-react";
 import CustomIconButton from "../theme/customComponent/CustomIconButton";
-import CloseIcon from "@mui/icons-material/Close";
 
 const absoluteStyle = {
 	zIndex: 999,
@@ -39,7 +39,7 @@ const SearchBar = ({
 				<OutlinedInput
 					startAdornment={
 						<InputAdornment position="start">
-							<SearchIcon />
+							<SearchIcon size={18} />
 						</InputAdornment>
 					}
 					sx={{

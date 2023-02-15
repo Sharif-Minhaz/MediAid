@@ -1,14 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import KeyIcon from "@mui/icons-material/Key";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { IconCircleKey as KeyIcon } from "@tabler/icons-react";
+import { IconEye as Visibility } from "@tabler/icons-react";
+import { IconEyeOff as VisibilityOff } from "@tabler/icons-react";
 import {
 	Button,
 	CssBaseline,
-	FormControlLabel,
-	Checkbox,
-	Grid,
 	Box,
 	Typography,
 	Container,
@@ -28,6 +25,13 @@ const ResetPassword = () => {
 	const theme = useTheme();
 	const [showPassword, setShowPassword] = useState(false);
 	const [matchedPrevPsw, setMatchedPrevPsw] = useState(false);
+
+	useEffect(() => {
+		document.body.style.backgroundColor = "#eef2f6";
+		return () => {
+			document.body.style.backgroundColor = null;
+		};
+	}, []);
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const handleMouseDownPassword = (event) => {
@@ -55,7 +59,11 @@ const ResetPassword = () => {
 					Enter your previous password & reset
 				</Typography>
 				<Divider sx={{ width: "100%", mt: "20px", mb: "20px" }}>
-					<Chip icon={<KeyIcon />} label={" Authentication"} variant="outlined" />
+					<Chip
+						icon={<KeyIcon stroke={1} />}
+						label={" Authentication"}
+						variant="outlined"
+					/>
 				</Divider>
 				<Typography fontWeight={500} sx={{ fontSize: "0.875rem" }} mb={1}>
 					Reset with previous password

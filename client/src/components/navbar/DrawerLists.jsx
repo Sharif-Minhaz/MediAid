@@ -1,70 +1,47 @@
+import { List, Divider, Box } from "@mui/material";
 import {
-	List,
-	Divider,
-	ListItem,
-	ListItemButton,
-	ListItemIcon,
-	ListItemText,
-	Box,
-} from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import BrandAuthImg from '../../features/auth/BrandAuthImg';
+	IconHome as Home,
+	IconVaccineBottle,
+	IconBrandGooglePhotos,
+	IconHistory,
+	IconClipboardList,
+	IconCheckupList,
+	IconAward,
+	IconClipboardHeart,
+	IconLockOpen,
+	IconMessage,
+	IconAddressBook,
+	IconNotebook,
+	IconDashboard,
+} from "@tabler/icons-react";
+import BrandAuthImg from "../../features/auth/BrandAuthImg";
+import SingleNavLink from "./SingleNavLink";
 
-const DrawerLists = ({ leftDrawerOpen, drawerWidth = { drawerWidth } }) => {
+const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 	return (
 		<Box component="div" sx={{ width: drawerWidth }}>
-			<Box p="28px 20px 13px">
-				<BrandAuthImg height={27} disableMargin={true} />
-			</Box>
-			<List>
-				{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-					<ListItem key={text} disablePadding sx={{ display: "block" }}>
-						<ListItemButton
-							sx={{
-								minHeight: 48,
-								justifyContent: leftDrawerOpen ? "initial" : "center",
-								px: 2.5,
-							}}
-						>
-							<ListItemIcon
-								sx={{
-									minWidth: 0,
-									mr: leftDrawerOpen ? 3 : "auto",
-									justifyContent: "center",
-								}}
-							>
-								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-							</ListItemIcon>
-							<ListItemText primary={text} sx={{ opacity: leftDrawerOpen ? 1 : 0 }} />
-						</ListItemButton>
-					</ListItem>
-				))}
+			{isSmallScreen && (
+				<Box p="28px 20px 13px">
+					<BrandAuthImg height={27} disableMargin={true} />
+				</Box>
+			)}
+			<List sx={{ pt: "3px" }}>
+				<SingleNavLink link="/" text="Home" icon={<Home size={20} />} />
+				{/* <SingleNavLink link="/dashboard" text="Dashboard" icon={<IconDashboard size={20} />} /> */}
+				<SingleNavLink link="/medicines" text="Medicines" icon={<IconVaccineBottle size={20} />} />
+				<SingleNavLink link="/g" text="Gallery" icon={<IconBrandGooglePhotos size={20} />} />
+				<SingleNavLink link="/h" text="History" icon={<IconHistory size={20} />} />
+				<SingleNavLink link="/d" text="Donor List" icon={<IconClipboardList size={20} />} />
+				<SingleNavLink link="/r" text="Receiver List" icon={<IconCheckupList size={20} />} />
+				<SingleNavLink link="/b" text="Best Donor" icon={<IconAward size={20} />} />
+				<SingleNavLink link="/he" text="Health Tips" icon={<IconClipboardHeart size={20} />} />
 			</List>
 			<Divider />
 			<List>
-				{["All mail", "Trash", "Spam"].map((text, index) => (
-					<ListItem key={text} disablePadding sx={{ display: "block" }}>
-						<ListItemButton
-							sx={{
-								minHeight: 48,
-								justifyContent: leftDrawerOpen ? "initial" : "center",
-								px: 2.5,
-							}}
-						>
-							<ListItemIcon
-								sx={{
-									minWidth: 0,
-									mr: leftDrawerOpen ? 3 : "auto",
-									justifyContent: "center",
-								}}
-							>
-								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-							</ListItemIcon>
-							<ListItemText primary={text} sx={{ opacity: leftDrawerOpen ? 1 : 0 }} />
-						</ListItemButton>
-					</ListItem>
-				))}
+				<SingleNavLink link="re" text="Reset Password" icon={<IconLockOpen size={20} />} />
+				<SingleNavLink link="f" text="FAQ" icon={<IconMessage size={20} />} />
+				<SingleNavLink link="c" text="Contact" icon={<IconAddressBook size={20} />} />
+				<SingleNavLink link="ab" text="About" icon={<IconNotebook size={20} />} />
 			</List>
 		</Box>
 	);

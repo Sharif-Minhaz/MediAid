@@ -9,3 +9,28 @@
 .search-floating-md .MuiFormControl-root.css-1x3zuk7-MuiFormControl-root {
     padding-inline: 16px;
 }
+
+.down-list>.MuiPaper-root {
+    margin-top: 83px;
+    height: calc(100% - 83px);
+    overflow-y: hidden;
+}
+
+.down-list>.MuiPaper-root:hover {
+    overflow-y: visible;
+}
+
+.nav-text>.MuiTypography-root {
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: inherit;
+    /* color: #364152; */
+}
+
+.active .MuiListItemIcon-root.css-wa5fuu-MuiListItemIcon-root {
+    color: #5e35b1;
+}
+.active .MuiButtonBase-root.MuiListItemButton-root {
+    background-color: #ede7f6;
+    color: #5e35b1;
+}
