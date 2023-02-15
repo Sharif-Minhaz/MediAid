@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import {
 	Box,
@@ -22,6 +23,9 @@ import { useStateContext } from "../../contexts/ContextProvider";
 import CustomIconButton from "../../theme/customComponent/CustomIconButton";
 import SearchBar from "../SearchBar";
 import ProfileBtn from "./ProfileBtn";
+import ProfileMenu from "./ProfileMenu";
+import NotificationMenu from "./NotificationMenu";
+import SearchIcon from "@mui/icons-material/Search";
 
 const drawerWidth = 260;
 
@@ -85,164 +89,235 @@ const CustomDrawer = styled(Drawer, { shouldForwardProp: (prop) => prop !== "ope
 export default function MiniDrawer() {
 	const { leftDrawerOpen, handleLeftDrawerToggle } = useStateContext();
 
+	const [showFullSearch, setShowFullSearch] = useState(false);
+	const [anchorEl, setAnchorEl] = useState({ profile: null, notification: null });
+	const openProfile = Boolean(anchorEl.profile);
+	const openNotification = Boolean(anchorEl.notification);
+
+	const handleClick = (event) => {
+		setAnchorEl((prev) => ({ ...prev, profile: event.currentTarget }));
+	};
+
+	const handleNotificationClick = (event) => {
+		setAnchorEl((prev) => ({ ...prev, notification: event.currentTarget }));
+	};
+
+	const handleClose = () => {
+		setAnchorEl({ profile: null, notification: null });
+	};
+
+	const handleShowFullSearch = () => {
+		setShowFullSearch((prev) => !prev);
+	};
+
 	return (
-		<Box sx={{ display: "flex" }}>
-			<CssBaseline />
-			<CustomAppBar
-				sx={{ height: "83px" }}
-				elevation={0}
-				color="light"
-				position="fixed"
-				open={leftDrawerOpen}
-			>
-				<Toolbar sx={{ display: "flex", alignItems: "center", height: "100%" }}>
-					<Stack
-						direction="row"
-						alignItems="center"
-						justifyContent="space-between"
-						width="285px"
-					>
-						<img src="/images/default.png" alt="brand-logo" height="27" />
-						<DrawerHeader>
+		<>
+			<Box sx={{ display: "flex" }}>
+				<CssBaseline />
+				<CustomAppBar
+					sx={{ height: "83px" }}
+					elevation={0}
+					color="light"
+					position="fixed"
+					open={leftDrawerOpen}
+				>
+					{/* visible full search */}
+					{showFullSearch && (
+						<SearchBar
+							sm="flex"
+							md="none"
+							lgWidth="100%"
+							mdWidth="100%"
+							smWidth="100%"
+							position="absolute"
+							handleShowFullSearch={handleShowFullSearch}
+						/>
+					)}
+					<Toolbar sx={{ display: "flex", alignItems: "center", height: "100%" }}>
+						<DrawerHeader
+							sx={{
+								display: "flex",
+								alignItems: "center",
+								justifyContent: {
+									xs: "flex-start",
+									sm: "flex-start",
+									md: "space-between",
+								},
+								gap: 2,
+								minWidth: 234,
+								pl: { xs: 0, sm: 0 },
+							}}
+						>
+							<Box sx={{ display: { xs: "none", sm: "none", md: "inline-block" } }}>
+								<img src="/images/default.png" alt="brand-logo" height="27" />
+							</Box>
 							<CustomIconButton onClick={handleLeftDrawerToggle}>
 								<MenuIcon fontSize="small" />
 							</CustomIconButton>
-						</DrawerHeader>
-					</Stack>
-					<Stack
-						direction="row"
-						width="100%"
-						alignItems="center"
-						justifyContent="space-between"
-					>
-						<SearchBar />
-						<Stack direction="row" alignItems="center" gap={2}>
-							<CustomIconButton>
-								<NotificationsNoneIcon fontSize="small" />
+							<CustomIconButton
+								sx={{
+									display: { xs: "flex", sm: "flex", md: "none" },
+								}}
+								onClick={handleShowFullSearch}
+							>
+								<SearchIcon fontSize="small" />
 							</CustomIconButton>
-							<ProfileBtn />
+						</DrawerHeader>
+						<Stack
+							direction="row"
+							width="100%"
+							alignItems="center"
+							sx={{
+								justifyContent: {
+									xs: "flex-end",
+									sm: "flex-end",
+									md: "space-between",
+								},
+								ml: 1,
+							}}
+						>
+							<SearchBar
+								sm="none"
+								md="flex"
+								lgWidth="430px"
+								mdWidth="250px"
+								smWidth="250px"
+							/>
+							<Stack direction="row" alignItems="center" gap={2}>
+								<CustomIconButton onClick={handleNotificationClick}>
+									<NotificationsNoneIcon fontSize="small" />
+								</CustomIconButton>
+								<ProfileBtn handleClick={handleClick} />
+							</Stack>
 						</Stack>
-					</Stack>
-				</Toolbar>
-			</CustomAppBar>
-			<CustomDrawer variant="permanent" open={leftDrawerOpen}>
-				<Divider />
-				<List sx={{ mt: 8 }}>
-					{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-						<ListItem key={text} disablePadding sx={{ display: "block" }}>
-							<ListItemButton
-								sx={{
-									minHeight: 48,
-									justifyContent: leftDrawerOpen ? "initial" : "center",
-									px: 2.5,
-								}}
-							>
-								<ListItemIcon
+					</Toolbar>
+				</CustomAppBar>
+				<CustomDrawer variant="permanent" open={leftDrawerOpen}>
+					<Divider />
+					<List sx={{ mt: 9 }}>
+						{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+							<ListItem key={text} disablePadding sx={{ display: "block" }}>
+								<ListItemButton
 									sx={{
-										minWidth: 0,
-										mr: leftDrawerOpen ? 3 : "auto",
-										justifyContent: "center",
+										minHeight: 48,
+										justifyContent: leftDrawerOpen ? "initial" : "center",
+										px: 2.5,
 									}}
 								>
-									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-								</ListItemIcon>
-								<ListItemText
-									primary={text}
-									sx={{ opacity: leftDrawerOpen ? 1 : 0 }}
-								/>
-							</ListItemButton>
-						</ListItem>
-					))}
-				</List>
-				<Divider />
-				<List>
-					{["All mail", "Trash", "Spam"].map((text, index) => (
-						<ListItem key={text} disablePadding sx={{ display: "block" }}>
-							<ListItemButton
-								sx={{
-									minHeight: 48,
-									justifyContent: leftDrawerOpen ? "initial" : "center",
-									px: 2.5,
-								}}
-							>
-								<ListItemIcon
+									<ListItemIcon
+										sx={{
+											minWidth: 0,
+											mr: leftDrawerOpen ? 3 : "auto",
+											justifyContent: "center",
+										}}
+									>
+										{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+									</ListItemIcon>
+									<ListItemText
+										primary={text}
+										sx={{ opacity: leftDrawerOpen ? 1 : 0 }}
+									/>
+								</ListItemButton>
+							</ListItem>
+						))}
+					</List>
+					<Divider />
+					<List>
+						{["All mail", "Trash", "Spam"].map((text, index) => (
+							<ListItem key={text} disablePadding sx={{ display: "block" }}>
+								<ListItemButton
 									sx={{
-										minWidth: 0,
-										mr: leftDrawerOpen ? 3 : "auto",
-										justifyContent: "center",
+										minHeight: 48,
+										justifyContent: leftDrawerOpen ? "initial" : "center",
+										px: 2.5,
 									}}
 								>
-									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-								</ListItemIcon>
-								<ListItemText
-									primary={text}
-									sx={{ opacity: leftDrawerOpen ? 1 : 0 }}
-								/>
-							</ListItemButton>
-						</ListItem>
-					))}
-				</List>
-			</CustomDrawer>
-			<Box component="main" sx={{ flexGrow: 1, pt: "5px" }}>
-				<DrawerHeader />
-				<Box borderRadius={3} bgcolor="#eef2f6" px="20px" pt="15px" mt="14px" mr="20px">
-					<Typography textAlign={"justify"} paragraph>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-						enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-						imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-						Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio
-						morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing
-						bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-						Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris
-						commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-						vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-						lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-						faucibus et molestie ac.
-					</Typography>
-					<Typography textAlign={"justify"} paragraph>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-						enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-						imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-						Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio
-						morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing
-						bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-						Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris
-						commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-						vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-						lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-						faucibus et molestie ac.
-					</Typography>
-					<Typography textAlign={"justify"} paragraph>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-						enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-						imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-						Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio
-						morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing
-						bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-						Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris
-						commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-						vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-						lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-						faucibus et molestie ac.
-					</Typography>
-					<Typography textAlign={"justify"} paragraph>
-						Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-						eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-						neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-						tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis sed
-						odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-						tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-						gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-						et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-						tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-						eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-						posuere sollicitudin aliquam ultrices sagittis orci a.
-					</Typography>
+									<ListItemIcon
+										sx={{
+											minWidth: 0,
+											mr: leftDrawerOpen ? 3 : "auto",
+											justifyContent: "center",
+										}}
+									>
+										{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+									</ListItemIcon>
+									<ListItemText
+										primary={text}
+										sx={{ opacity: leftDrawerOpen ? 1 : 0 }}
+									/>
+								</ListItemButton>
+							</ListItem>
+						))}
+					</List>
+				</CustomDrawer>
+				<Box component="main" sx={{ flexGrow: 1, pt: "13px" }}>
+					<DrawerHeader />
+					<Box borderRadius={3} bgcolor="#eef2f6" px="20px" pt="15px" mt="14px" mr="20px">
+						<Typography textAlign={"justify"} paragraph>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus
+							non enim praesent elementum facilisis leo vel. Risus at ultrices mi
+							tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non
+							tellus. Convallis convallis tellus id interdum velit laoreet id donec
+							ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl
+							suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod
+							quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet
+							proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras
+							tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum
+							varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt.
+							Lorem donec massa sapien faucibus et molestie ac.
+						</Typography>
+						<Typography textAlign={"justify"} paragraph>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus
+							non enim praesent elementum facilisis leo vel. Risus at ultrices mi
+							tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non
+							tellus. Convallis convallis tellus id interdum velit laoreet id donec
+							ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl
+							suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod
+							quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet
+							proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras
+							tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum
+							varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt.
+							Lorem donec massa sapien faucibus et molestie ac.
+						</Typography>
+						<Typography textAlign={"justify"} paragraph>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus
+							non enim praesent elementum facilisis leo vel. Risus at ultrices mi
+							tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non
+							tellus. Convallis convallis tellus id interdum velit laoreet id donec
+							ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl
+							suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod
+							quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet
+							proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras
+							tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum
+							varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt.
+							Lorem donec massa sapien faucibus et molestie ac.
+						</Typography>
+						<Typography textAlign={"justify"} paragraph>
+							Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
+							ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar elementum
+							integer enim neque volutpat ac tincidunt. Ornare suspendisse sed nisi
+							lacus sed viverra tellus. Purus sit amet volutpat consequat mauris.
+							Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
+							vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra
+							accumsan in. In hendrerit gravida rutrum quisque non tellus orci ac.
+							Pellentesque nec nam aliquam sem et tortor. Habitant morbi tristique
+							senectus et. Adipiscing elit duis tristique sollicitudin nibh sit.
+							Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra
+							maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
+							aliquam ultrices sagittis orci a.
+						</Typography>
+					</Box>
 				</Box>
 			</Box>
-		</Box>
+			<NotificationMenu
+				anchorEl={anchorEl.notification}
+				open={openNotification}
+				handleClose={handleClose}
+			/>
+			<ProfileMenu anchorEl={anchorEl.profile} open={openProfile} handleClose={handleClose} />
+		</>
 	);
 }

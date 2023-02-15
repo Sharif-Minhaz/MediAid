@@ -20,6 +20,10 @@ export const paletteTheme = () => {
 			main: "#fff",
 			darkShed: "#f8fafc",
 		},
+		warning: {
+			main: "#d84315",
+			light: "#fbe9e7",
+		},
 	};
 
 	return theme;

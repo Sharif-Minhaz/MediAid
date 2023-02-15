@@ -14,13 +14,14 @@ const RoundedButton = styled(Button)(({ theme }) => ({
 	},
 }));
 
-const ProfileBtn = () => {
+const ProfileBtn = ({handleClick}) => {
 	return (
 		<RoundedButton
+			onClick={handleClick}
 			startIcon={
 				<Avatar
-					alt="Remy Sharp"
-					src="https://mui.com/static/images/avatar/2.jpg"
+					alt="John Doe"
+					src="https://mui.com/static/images/avatar/1.jpg"
 					sx={{ width: 36, height: 36, ml: "2px" }}
 				/>
 			}

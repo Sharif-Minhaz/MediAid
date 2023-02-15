@@ -5,3 +5,7 @@
 .MuiButton-endIcon.MuiButton-iconSizeMedium.css-1gnd1fd-MuiButton-endIcon {
     margin-left: 1px;
 }
+
+.search-floating-md .MuiFormControl-root.css-1x3zuk7-MuiFormControl-root {
+    padding-inline: 16px;
+}
