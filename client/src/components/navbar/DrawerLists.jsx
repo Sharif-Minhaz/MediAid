@@ -27,18 +27,42 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 			)}
 			<List sx={{ pt: "3px" }}>
 				<SingleNavLink link="/" text="Home" icon={<Home size={20} />} />
-				<SingleNavLink link="/dashboard" text="Dashboard" icon={<IconDashboard size={20} />} />
-				<SingleNavLink link="/medicines" text="Medicines" icon={<IconVaccineBottle size={20} />} />
-				<SingleNavLink link="/g" text="Gallery" icon={<IconBrandGooglePhotos size={20} />} />
+				<SingleNavLink
+					link="/dashboard"
+					text="Dashboard"
+					icon={<IconDashboard size={20} />}
+				/>
+				<SingleNavLink
+					link="/medicines"
+					text="Medicines"
+					icon={<IconVaccineBottle size={20} />}
+				/>
+				<SingleNavLink
+					link="/gallery"
+					text="Gallery"
+					icon={<IconBrandGooglePhotos size={20} />}
+				/>
 				<SingleNavLink link="/h" text="History" icon={<IconHistory size={20} />} />
 				<SingleNavLink link="/d" text="Donor List" icon={<IconClipboardList size={20} />} />
-				<SingleNavLink link="/r" text="Receiver List" icon={<IconCheckupList size={20} />} />
+				<SingleNavLink
+					link="/r"
+					text="Receiver List"
+					icon={<IconCheckupList size={20} />}
+				/>
 				<SingleNavLink link="/b" text="Best Donor" icon={<IconAward size={20} />} />
-				<SingleNavLink link="/he" text="Health Tips" icon={<IconClipboardHeart size={20} />} />
+				<SingleNavLink
+					link="/he"
+					text="Health Tips"
+					icon={<IconClipboardHeart size={20} />}
+				/>
 			</List>
 			<Divider />
 			<List>
-				<SingleNavLink link="re" text="Reset Password" icon={<IconLockOpen size={20} />} />
+				<SingleNavLink
+					link="/reset-password"
+					text="Reset Password"
+					icon={<IconLockOpen size={20} />}
+				/>
 				<SingleNavLink link="f" text="FAQ" icon={<IconMessage size={20} />} />
 				<SingleNavLink link="c" text="Contact" icon={<IconAddressBook size={20} />} />
 				<SingleNavLink link="ab" text="About" icon={<IconNotebook size={20} />} />
