@@ -1,0 +1,117 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'josefin sans';
+    box-sizing: border-box;
+}
+h1{
+    color: black;
+}
+.card{
+    /* height: 400px; */
+    width: 400px;
+    /* background-color: rgb(219, 13, 13); */
+    background-color: white;
+    border-radius: 15px;
+    background-image: url('../images/image.jpg');
+}
+.upper{
+    /* background-color: white; */
+    height: 100px;
+    display: flex;
+    justify-content : space-between;
+}
+.lower{
+    /* background-color: white; */
+    padding-left: 28px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+.left{
+    /* background-color: white; */
+    width: 200px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.right{
+    /* background-color: white; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 15px;
+    width: 125px;
+}
+.button{
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(99, 81, 177);
+    padding: 10px 20px;
+    border: 2px solid transparent; 
+    border-radius: 10px;
+    transition: transform .4s;
+}
+.button:hover{
+    transform: scale(1.2);
+}
+
+.display{
+    /* height: 100%; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: green;
+
+}
+.plate{
+    background-color: white;
+    width: 80%;
+    display: flex;
+}
+.left_part{
+    width: auto;
+    background-color: white;
+    justify-content :flex-end;
+    padding-left: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 2px solid rgb(100, 61, 173);
+    /* line-height: 1.6; */
+}
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: rgb(100, 61, 173);
+    border-radius: 50%;
+    display: inline-block;
+}
+.right_part{
+    background-color:white; 
+    width: auto;
+    /* height: 500px; */
+}
+
+.right_part{
+    line-height: 0px;
+}
+/*///////////////////////////////////////////////*/
+.cards{
+    background-color: aqua;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+}.product_card{
+    height: 400px;
+    width: 350px;
+    background-color: white;
+    border-radius: 15px;
+}
+.pic{
+    background-image: url('../images/image.jpg');
+    height: 150px;
+    width: auto;
+
+}
