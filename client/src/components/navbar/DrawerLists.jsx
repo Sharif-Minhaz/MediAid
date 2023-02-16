@@ -27,7 +27,7 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 			)}
 			<List sx={{ pt: "3px" }}>
 				<SingleNavLink link="/" text="Home" icon={<Home size={20} />} />
-				{/* <SingleNavLink link="/dashboard" text="Dashboard" icon={<IconDashboard size={20} />} /> */}
+				<SingleNavLink link="/dashboard" text="Dashboard" icon={<IconDashboard size={20} />} />
 				<SingleNavLink link="/medicines" text="Medicines" icon={<IconVaccineBottle size={20} />} />
 				<SingleNavLink link="/g" text="Gallery" icon={<IconBrandGooglePhotos size={20} />} />
 				<SingleNavLink link="/h" text="History" icon={<IconHistory size={20} />} />
