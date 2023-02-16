@@ -3,7 +3,7 @@ import MedicineExcerpt from "../features/medicines/MedicineExcerpt";
 import MedicinesList from "../features/medicines/MedicinesList";
 import Layout from "../layout/Layout";
 import Home from "../pages/Home";
-import NotFound404 from "../pages/NotFound404";
+import NotFound404 from "../pages/NotFound404/NotFound404";
 import Gallery from "../features/gallery/Gallery";
 import Login from "../features/auth/Login";
 import Register from "../features/auth/Register";

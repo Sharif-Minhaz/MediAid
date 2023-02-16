@@ -2,7 +2,7 @@ import { Chip, Divider } from "@mui/material";
 import { IconCircleKey } from "@tabler/icons-react";
 
 const DividerWithIcon = () => {
-  return (
+	return (
 		<Divider sx={{ width: "100%", mt: "20px", mb: "20px" }}>
 			<Chip
 				icon={<IconCircleKey stroke={1} />}
@@ -10,7 +10,7 @@ const DividerWithIcon = () => {
 				variant="outlined"
 			/>
 		</Divider>
-  );
-}
+	);
+};
 
-export default DividerWithIcon
+export default DividerWithIcon;

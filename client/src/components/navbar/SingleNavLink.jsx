@@ -12,7 +12,6 @@ const SingleNavLink = ({ text, icon, link = "/" }) => {
 					mx: leftDrawerOpen ? 2 : "9px",
 					mb: 1,
 					borderRadius: "14px",
-					color: "#5e35b1",
 				}}
 			>
 				<NavLink to={link}>
@@ -28,11 +27,11 @@ const SingleNavLink = ({ text, icon, link = "/" }) => {
 								mr: 2,
 							},
 							"&:hover": {
-								color: "#5e35b1",
+								color: "#5e35b1 !important",
 								background: "#ede7f6",
 							},
 							"&:hover .MuiListItemIcon-root.css-wa5fuu-MuiListItemIcon-root": {
-								color: "#5e35b1",
+								color: "#5e35b1 !important",
 							},
 						}}
 					>
