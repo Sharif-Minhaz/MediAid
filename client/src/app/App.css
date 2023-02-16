@@ -2,11 +2,11 @@
     border-color: #2196f3 !important;
 }
 
-.MuiButton-endIcon.MuiButton-iconSizeMedium.css-1gnd1fd-MuiButton-endIcon {
+.MuiButton-endIcon.MuiButton-iconSizeMedium {
     margin-left: 1px;
 }
 
-.search-floating-md .MuiFormControl-root.css-1x3zuk7-MuiFormControl-root {
+.search-floating-md .MuiFormControl-root {
     padding-inline: 16px;
 }
 
@@ -27,11 +27,11 @@
     /* color: #364152; */
 }
 
-.active .MuiListItemIcon-root.css-wa5fuu-MuiListItemIcon-root {
-    color: #5e35b1;
+.active .MuiListItemIcon-root{
+    color: #5e35b1 !important;
 }
 
-.active :is(.MuiButtonBase-root.MuiListItemButton-root, .MuiListItemIcon-root.css-1ddsiuw-MuiListItemIcon-root) {
+.active :is(.MuiButtonBase-root.MuiListItemButton-root, .MuiListItemIcon-root) {
     background-color: #ede7f6;
-    color: #5e35b1;
+    color: #5e35b1 !important;
 }
