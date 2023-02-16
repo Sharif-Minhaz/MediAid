@@ -30,7 +30,8 @@
 .active .MuiListItemIcon-root.css-wa5fuu-MuiListItemIcon-root {
     color: #5e35b1;
 }
-.active .MuiButtonBase-root.MuiListItemButton-root {
+
+.active :is(.MuiButtonBase-root.MuiListItemButton-root, .MuiListItemIcon-root.css-1ddsiuw-MuiListItemIcon-root) {
     background-color: #ede7f6;
     color: #5e35b1;
 }

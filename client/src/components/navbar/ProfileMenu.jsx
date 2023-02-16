@@ -1,5 +1,6 @@
 import { Avatar, Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
-import { IconLogout as Logout, IconEdit } from "@tabler/icons-react";
+import { IconLogout as Logout, IconEdit, IconUserCircle } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 	return (
@@ -48,6 +49,22 @@ const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 				</ListItemIcon>
 				Edit
 			</MenuItem>
+			<Link to="/register">
+				<MenuItem onClick={handleClose}>
+					<ListItemIcon>
+						<IconUserCircle size={22} />
+					</ListItemIcon>
+					Register
+				</MenuItem>
+			</Link>
+			<Link to="/login">
+				<MenuItem onClick={handleClose}>
+					<ListItemIcon>
+						<IconUserCircle size={22} />
+					</ListItemIcon>
+					Login
+				</MenuItem>
+			</Link>
 			<MenuItem onClick={handleClose}>
 				<ListItemIcon>
 					<Logout size={22} />
