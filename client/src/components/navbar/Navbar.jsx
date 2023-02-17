@@ -80,7 +80,6 @@ const CustomDrawer = styled(Drawer, { shouldForwardProp: (prop) => prop !== "ope
 );
 
 export default function Navbar({ children }) {
-	console.log(children);
 	const isSmallScreen = useMediaQuery("(max-width:899px)");
 	const { leftDrawerOpen, handleLeftDrawerToggle, handleLeftDrawerClose } = useStateContext();
 

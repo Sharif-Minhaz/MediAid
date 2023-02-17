@@ -24,14 +24,15 @@ const SingleNavLink = ({ text, icon, link = "/" }) => {
 							color: "#364152",
 							width: leftDrawerOpen ? "auto" : "47px",
 							"& .MuiListItemIcon-root": {
-								mr: leftDrawerOpen ? 2 : 0 ,
+								mr: leftDrawerOpen ? 2 : 0,
 							},
 							"&:hover": {
 								color: "#5e35b1 !important",
-								background: "#ede7f6",
-							},
-							"&:hover .MuiButtonBase-root .MuiListItemIcon-root": {
-								color: "#5e35b1 !important",
+								backgroundColor: "#ede7f6",
+								"&.MuiButtonBase-root .MuiListItemIcon-root": {
+									color: "#5e35b1 !important",
+									borderColor: "red"
+								},
 							},
 						}}
 					>
