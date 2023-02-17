@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import MedicineExcerpt from "../features/medicines/MedicineExcerpt";
 import MedicinesList from "../features/medicines/MedicinesList";
 import Layout from "../layout/Layout";
-import Home from "../pages/Home";
+import Home from "../pages/home/Home";
 import NotFound404 from "../pages/NotFound404/NotFound404";
 import Gallery from "../features/gallery/Gallery";
 import Login from "../features/auth/Login";
