@@ -23,14 +23,14 @@ const SingleNavLink = ({ text, icon, link = "/" }) => {
 							borderRadius: "14px",
 							color: "#364152",
 							width: leftDrawerOpen ? "auto" : "47px",
-							"& .MuiListItemIcon-root.css-wa5fuu-MuiListItemIcon-root": {
-								mr: 2,
+							"& .MuiListItemIcon-root": {
+								mr: leftDrawerOpen ? 2 : 0 ,
 							},
 							"&:hover": {
 								color: "#5e35b1 !important",
 								background: "#ede7f6",
 							},
-							"&:hover .MuiListItemIcon-root.css-wa5fuu-MuiListItemIcon-root": {
+							"&:hover .MuiButtonBase-root .MuiListItemIcon-root": {
 								color: "#5e35b1 !important",
 							},
 						}}
