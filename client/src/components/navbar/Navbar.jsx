@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { cloneElement, useState } from "react";
 import { styled } from "@mui/material/styles";
 import {
 	Box,
@@ -6,9 +6,9 @@ import {
 	AppBar,
 	Toolbar,
 	CssBaseline,
-	Typography,
 	Stack,
 	useMediaQuery,
+	useScrollTrigger,
 } from "@mui/material";
 import { IconBell as NotificationsNoneIcon } from "@tabler/icons-react";
 import { useStateContext } from "../../contexts/ContextProvider";
@@ -42,6 +42,17 @@ const closedMixin = (theme) => ({
 		width: `calc(${theme.spacing(8)} + 1px)`,
 	},
 });
+
+const ElevationScroll = ({ children }) => {
+	const trigger = useScrollTrigger({
+		disableHysteresis: true,
+		threshold: 0,
+	});
+
+	return cloneElement(children, {
+		elevation: trigger ? 4 : 0,
+	});
+};
 
 const DrawerHeader = styled("div")(({ theme }) => ({
 	display: "flex",
@@ -108,75 +119,78 @@ export default function Navbar({ children }) {
 		<>
 			<Box sx={{ display: "flex" }}>
 				<CssBaseline />
-				<CustomAppBar
-					sx={{ height: "83px", zIndex: { xs: 1200, sm: 1200, md: 1201 } }}
-					elevation={0}
-					color="light"
-					position="fixed"
-					open={leftDrawerOpen}
-				>
-					{/* ============= visible full search ============ */}
-					{showFullSearch && (
-						<SearchBar
-							sm="flex"
-							md="none"
-							lgWidth="100%"
-							mdWidth="100%"
-							smWidth="100%"
-							position="absolute"
-							handleShowFullSearch={handleShowFullSearch}
-						/>
-					)}
-					<Toolbar sx={{ display: "flex", alignItems: "center", height: "100%" }}>
-						<DrawerHeader
-							sx={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: {
-									xs: "flex-start",
-									sm: "flex-start",
-									md: "space-between",
-								},
-								gap: 2,
-								minWidth: 234,
-								pl: { xs: 0, sm: 0 },
-							}}
-						>
-							{/* =========== drawer contents =========== */}
-							<DrawerHeaderContents
-								handleShowFullSearch={handleShowFullSearch}
-								handleLeftDrawerToggle={handleLeftDrawerToggle}
-							/>
-						</DrawerHeader>
-						<Stack
-							direction="row"
-							width="100%"
-							alignItems="center"
-							sx={{
-								justifyContent: {
-									xs: "flex-end",
-									sm: "flex-end",
-									md: "space-between",
-								},
-								ml: 1,
-							}}
-						>
+				<ElevationScroll>
+					<CustomAppBar
+						sx={{ height: "83px", zIndex: { xs: 1200, sm: 1200, md: 1201 } }}
+						elevation={0}
+						color="light"
+						position="fixed"
+						open={leftDrawerOpen}
+					>
+						{/* ============= visible full search ============ */}
+						{showFullSearch && (
 							<SearchBar
-								sm="none"
-								md="flex"
-								lgWidth="430px"
-								mdWidth="250px"
-								smWidth="250px"
+								sm="flex"
+								md="none"
+								lgWidth="100%"
+								mdWidth="100%"
+								smWidth="100%"
+								position="absolute"
+								handleShowFullSearch={handleShowFullSearch}
 							/>
-							<Stack direction="row" alignItems="center" gap={2}>
-								<CustomIconButton onClick={handleNotificationClick}>
-									<NotificationsNoneIcon size={22} />
-								</CustomIconButton>
-								<ProfileBtn handleClick={handleClick} />
+						)}
+						<Toolbar sx={{ display: "flex", alignItems: "center", height: "100%" }}>
+							<DrawerHeader
+								sx={{
+									display: "flex",
+									alignItems: "center",
+									justifyContent: {
+										xs: "flex-start",
+										sm: "flex-start",
+										md: "space-between",
+									},
+									gap: 2,
+									minWidth: 234,
+									pl: { xs: 0, sm: 0 },
+								}}
+							>
+								{/* =========== drawer contents =========== */}
+								<DrawerHeaderContents
+									handleShowFullSearch={handleShowFullSearch}
+									handleLeftDrawerToggle={handleLeftDrawerToggle}
+								/>
+							</DrawerHeader>
+							<Stack
+								direction="row"
+								width="100%"
+								alignItems="center"
+								sx={{
+									justifyContent: {
+										xs: "flex-end",
+										sm: "flex-end",
+										md: "space-between",
+									},
+									ml: 1,
+								}}
+							>
+								<SearchBar
+									sm="none"
+									md="flex"
+									lgWidth="430px"
+									mdWidth="250px"
+									smWidth="250px"
+								/>
+								<Stack direction="row" alignItems="center" gap={2}>
+									<CustomIconButton onClick={handleNotificationClick}>
+										<NotificationsNoneIcon size={22} />
+									</CustomIconButton>
+									<ProfileBtn handleClick={handleClick} />
+								</Stack>
 							</Stack>
-						</Stack>
-					</Toolbar>
-				</CustomAppBar>
+						</Toolbar>
+					</CustomAppBar>
+				</ElevationScroll>
+
 				<Box component="div">
 					{isSmallScreen ? (
 						<Drawer
@@ -205,13 +219,15 @@ export default function Navbar({ children }) {
 				<Box component="main" sx={{ flexGrow: 1, pt: "13px" }}>
 					<DrawerHeader />
 					<Box
-						borderRadius={3}
 						bgcolor="#eef2f6"
-						px="20px"
 						pt="15px"
 						mt="14px"
-						mr="20px"
-						sx={{ ml: { xs: "20px", sm: "20px", md: "0px" } }}
+						sx={{
+							ml: 0,
+							mr: { xs: "0px", md: "20px", lg: "20px" },
+							px: { xs: "16px", md: "20px" },
+							borderRadius: { sm: 0, md: 3 },
+						}}
 					>
 						{/* ============= children here ============= */}
 						{children}
