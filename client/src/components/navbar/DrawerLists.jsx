@@ -25,7 +25,7 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 					<BrandAuthImg height={27} disableMargin={true} />
 				</Box>
 			)}
-			<List sx={{ pt: "3px" }}>
+			<List sx={{ pt: "6px" }}>
 				<SingleNavLink link="/" text="Home" icon={<Home size={20} />} />
 				<SingleNavLink
 					link="/dashboard"
