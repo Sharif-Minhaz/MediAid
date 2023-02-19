@@ -52,7 +52,7 @@
 
 @keyframes mobilize-text-pattern {
     0% {
-        transform: translateY(0px, 0px);
+        transform: translate(0px, 0px);
     }
 
     50% {
@@ -60,7 +60,25 @@
     }
 
     100% {
-        transform: translateY(0px, 0px);
+        transform: translate(0px, 0px);
+    }
+}
+
+.arrow-animation {
+    animation: arrow-move 3s ease-out infinite both;
+}
+
+@keyframes arrow-move {
+    0% {
+        transform: translateX(0px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    100% {
+        transform: translateX(0px);
     }
 }
 

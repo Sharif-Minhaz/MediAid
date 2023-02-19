@@ -1,8 +1,18 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const ServiceCardExcerpt = ({ img }) => {
+const ServiceCardExcerpt = ({ img, heading, type = "medicines" }) => {
+	const navigate = useNavigate();
+
+	const toCapitalize = (str) => {
+		if (typeof str !== "string") {
+			return "";
+		}
+
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	};
+
 	return (
 		<Box
 			width="100%"
@@ -10,6 +20,7 @@ const ServiceCardExcerpt = ({ img }) => {
 			height="180px"
 			sx={{
 				backgroundImage: `url(${img})`,
+				backgroundSize: "cover",
 			}}
 			borderRadius="12px"
 			padding={2}
@@ -23,24 +34,22 @@ const ServiceCardExcerpt = ({ img }) => {
 					justifyContent="space-between"
 				>
 					<Box>
-						<Typography component="h5" variant="h5">
-							A card Heading
-						</Typography>
-						<Typography component="p" variant="body2">
-							A card description belong here
+						<Typography component="h5" variant="h5" fontWeight={500} color="#003f74">
+							{heading}
 						</Typography>
 					</Box>
 					<Typography component="p" variant="body1">
 						<Link
-							to="/medicines"
+							to={`/${type}`}
 							style={{
 								display: "flex",
 								columnGap: "6px",
 								alignItems: "center",
-								color: "black",
+								color: "#46556c",
 							}}
 						>
-							<span>View medicines</span> <IconArrowNarrowRight />
+							<span>View {toCapitalize(type)}</span>
+							<IconArrowNarrowRight className="arrow-animation" />
 						</Link>
 					</Typography>
 				</Grid>
@@ -51,8 +60,9 @@ const ServiceCardExcerpt = ({ img }) => {
 						disableElevation
 						size="small"
 						sx={{ py: 2, color: "white" }}
+						onClick={() => navigate(`/${type}`)}
 					>
-						Apply
+						{type === "medicines" ? "Apply" : type === "donate" ? "Donate" : "View"}
 					</Button>
 				</Grid>
 			</Grid>
