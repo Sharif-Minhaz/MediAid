@@ -9,6 +9,10 @@ a {
   text-decoration: none;
 }
 
+body {
+  min-height: 100vh;
+}
+
 /* -----------------scrollbar------------------ */
 /* width */
 ::-webkit-scrollbar {
