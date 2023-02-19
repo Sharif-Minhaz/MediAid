@@ -121,7 +121,7 @@ export default function Navbar({ children }) {
 				<CssBaseline />
 				<ElevationScroll>
 					<CustomAppBar
-						sx={{ height: "83px", zIndex: { xs: 1200, sm: 1200, md: 1201 } }}
+						sx={{ height: "83px", zIndex: { xs: 1200, md: 1201 } }}
 						elevation={0}
 						color="light"
 						position="fixed"
@@ -150,7 +150,7 @@ export default function Navbar({ children }) {
 										md: "space-between",
 									},
 									gap: 2,
-									minWidth: 234,
+									minWidth: { xs: 105, md: 234 },
 									pl: { xs: 0, sm: 0 },
 								}}
 							>

@@ -30,8 +30,8 @@ const HomeIntro = () => {
 							},
 						}}
 					>
-						A digital platform for medicine and healthcare, providing access to those in
-						need.
+						A Digital Platform For Medicine And Healthcare, Providing Access To Those In
+						Need.
 					</Typography>
 					<Typography variant="body1" className="heading-description" marginY="20px">
 						We help people who can't afford medical care get the help they need by
