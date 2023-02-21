@@ -1,7 +1,15 @@
+import { useEffect } from "react";
 import BrandAuthImg from "./BrandAuthImg";
 import { CssBaseline, Container, Paper } from "@mui/material";
 
 const AuthWrapper = ({ children }) => {
+	useEffect(() => {
+		document.body.style.backgroundColor = "#eef2f6";
+		return () => {
+			document.body.style.backgroundColor = null;
+		};
+	}, []);
+
 	return (
 		<Container component="main" sx={{ width: { xs: "100%", sm: "520px" } }}>
 			<CssBaseline />

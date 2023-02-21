@@ -3,7 +3,7 @@ export const componentsTheme = () => {
 		MuiButton: {
 			styleOverrides: {
 				root: {
-					lineHeight: 0,
+					// lineHeight: 0,
 				},
 			},
 		},

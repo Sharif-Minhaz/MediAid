@@ -1,17 +1,10 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { Link, useNavigate } from "react-router-dom";
+import { toCapitalize } from "../../utils/toCapitalize";
 
 const ServiceCardExcerpt = ({ img, heading, type = "medicines" }) => {
 	const navigate = useNavigate();
-
-	const toCapitalize = (str) => {
-		if (typeof str !== "string") {
-			return "";
-		}
-
-		return str.charAt(0).toUpperCase() + str.slice(1);
-	};
 
 	return (
 		<Box
@@ -43,7 +36,7 @@ const ServiceCardExcerpt = ({ img, heading, type = "medicines" }) => {
 							to={`/${type}`}
 							style={{
 								display: "flex",
-								columnGap: "6px",
+								columnGap: "3px",
 								alignItems: "center",
 								color: "#46556c",
 							}}
@@ -59,7 +52,7 @@ const ServiceCardExcerpt = ({ img, heading, type = "medicines" }) => {
 						variant="contained"
 						disableElevation
 						size="small"
-						sx={{ py: 2, color: "white" }}
+						sx={{ py: "4px", px: "33px", color: "white", fontSize: "12px" }}
 						onClick={() => navigate(`/${type}`)}
 					>
 						{type === "medicines" ? "Apply" : type === "donate" ? "Donate" : "View"}

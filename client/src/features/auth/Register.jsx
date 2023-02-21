@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IconEye as Visibility } from "@tabler/icons-react";
 import { IconEyeOff as VisibilityOff } from "@tabler/icons-react";
 import {
-	Button,
 	FormControlLabel,
 	Checkbox,
 	Grid,
@@ -20,6 +19,7 @@ import { useTheme } from "@emotion/react";
 import { strengthColor, strengthIndicator } from "../../utils/passwordStrength";
 import AuthWrapper from "./AuthWrapper";
 import AuthIntro from "./AuthIntro";
+import AuthSubmitButton from "./AuthSubmitButton";
 
 const initialData = { password: "" };
 
@@ -30,13 +30,6 @@ const Register = () => {
 	const [agreed, setAgreed] = useState(false);
 	const [strength, setStrength] = useState(0);
 	const [level, setLevel] = useState();
-
-	useEffect(() => {
-		document.body.style.backgroundColor = "#eef2f6";
-		return () => {
-			document.body.style.backgroundColor = null;
-		};
-	}, []);
 
 	const handleChange = (e) => {
 		setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -215,22 +208,7 @@ const Register = () => {
 						/>
 					</Grid>
 				</Grid>
-				<Button
-					disableElevation
-					type="submit"
-					fullWidth
-					variant="contained"
-					sx={{
-						mt: 3,
-						mb: 2,
-						p: "20px",
-						color: "white",
-						"&:hover": { backgroundColor: "primary.light" },
-					}}
-					disabled={!agreed}
-				>
-					Register
-				</Button>
+				<AuthSubmitButton disable={!agreed}>Register</AuthSubmitButton>
 				<Divider sx={{ width: "100%", mb: 2 }} />
 				<Typography
 					fontWeight={500}

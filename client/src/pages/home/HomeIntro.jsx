@@ -1,6 +1,7 @@
 import { Button, Grid, Stack, Typography } from "@mui/material";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { useNavigate } from "react-router-dom";
+import { IconMedicineSyrup } from "@tabler/icons-react";
 
 const HomeIntro = () => {
 	const { leftDrawerOpen } = useStateContext();
@@ -38,10 +39,12 @@ const HomeIntro = () => {
 						providing medicine and healthcare services online.
 					</Typography>
 					<Button
-						sx={{ width: "150px", color: "whitesmoke", p: "18px 10px" }}
+						sx={{ width: "200px", color: "whitesmoke", p: "9px", mt: "6px", borderTopLeftRadius: "17px", borderBottomRightRadius: "17px" }}
 						variant="contained"
 						disableElevation
 						onClick={() => navigate("/medicines")}
+						size="large"
+						endIcon={<IconMedicineSyrup size={20} />}
 					>
 						Get Medicine
 					</Button>

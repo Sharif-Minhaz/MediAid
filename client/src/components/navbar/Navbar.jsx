@@ -216,7 +216,7 @@ export default function Navbar({ children }) {
 						</CustomDrawer>
 					)}
 				</Box>
-				<Box component="main" sx={{ flexGrow: 1, pt: "13px" }}>
+				<Box component="main" sx={{ flexGrow: 1, pt: "13px", pb: { xs: 0, md: "20px" } }}>
 					<DrawerHeader />
 					<Box
 						bgcolor="#eef2f6"
@@ -226,6 +226,7 @@ export default function Navbar({ children }) {
 							ml: 0,
 							mr: { xs: "0px", md: "20px", lg: "20px" },
 							px: { xs: "16px", md: "20px" },
+							pb: { xs: "16px", md: "20px" },
 							borderRadius: { sm: 0, md: 3 },
 						}}
 					>

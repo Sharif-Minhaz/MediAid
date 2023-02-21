@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IconEye as Visibility } from "@tabler/icons-react";
 import { IconEyeOff as VisibilityOff } from "@tabler/icons-react";
 import {
-	Button,
 	FormControlLabel,
 	Checkbox,
 	Grid,
@@ -19,22 +18,17 @@ import {
 import { useTheme } from "@emotion/react";
 import AuthWrapper from "./AuthWrapper";
 import AuthIntro from "./AuthIntro";
+import AuthSubmitButton from "./AuthSubmitButton";
 
 const Login = () => {
 	const theme = useTheme();
 	const [showPassword, setShowPassword] = useState(false);
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
+	
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault();
 	};
-
-	useEffect(() => {
-		document.body.style.backgroundColor = "#eef2f6";
-		return () => {
-			document.body.style.backgroundColor = null;
-		};
-	}, []);
 
 	return (
 		<AuthWrapper>
@@ -118,21 +112,7 @@ const Login = () => {
 						</Typography>
 					</Grid>
 				</Grid>
-				<Button
-					disableElevation
-					type="submit"
-					fullWidth
-					variant="contained"
-					sx={{
-						mt: 3,
-						mb: 2,
-						p: "20px",
-						color: "white",
-						"&:hover": { backgroundColor: "primary.light" },
-					}}
-				>
-					Log In
-				</Button>
+				<AuthSubmitButton>Log In</AuthSubmitButton>
 				<Divider sx={{ width: "100%", mb: 2 }} />
 				<Typography
 					fontWeight={500}
