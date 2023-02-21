@@ -1,7 +1,8 @@
 export const paletteTheme = () => {
 	const theme = {
 		primary: {
-			main: "#673ab7",
+			// main: "#673ab7",
+			main: "#8250df",
 			light: "#5e35b1",
 			contrastText: "#697586",
 		},
