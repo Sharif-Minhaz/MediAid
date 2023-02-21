@@ -1,34 +1,46 @@
 import {
 	Button,
 	Card,
+	CardActionArea,
 	CardActions,
 	CardContent,
 	CardMedia,
+	Divider,
 	Stack,
 	Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { IconClipboardHeart, IconStarHalfFilled } from "@tabler/icons-react";
+import { useNavigate } from "react-router-dom";
 
-const RatedMedicineExcerpt = ({}) => {
+const RatedMedicineExcerpt = ({ medicine }) => {
+	const navigate = useNavigate();
+
 	return (
 		<Card variant="outlined">
-			<CardMedia sx={{ height: 140 }} image="/images/esoral-mups.png" title="green iguana" />
-			<CardContent>
-				<Typography gutterBottom variant="h5" component="div">
-					Esoral Mups
-				</Typography>
-				<Typography variant="body2" color="text.secondary">
-					Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion
-					by specific inhibition of the H+/K+ ATPa...
-				</Typography>
-			</CardContent>
+			<CardActionArea onClick={() => navigate(`/medicines/${medicine.id}`)}>
+				<CardMedia sx={{ height: 160 }} image={medicine.image} title={medicine.name} />
+				<Divider />
+				<CardContent>
+					<Typography gutterBottom variant="h5" component="div">
+						{medicine.name}
+					</Typography>
+					<Typography variant="body2" color="text.secondary">
+						{medicine.description}...
+					</Typography>
+				</CardContent>
+			</CardActionArea>
+			<Divider />
 			<CardActions sx={{ display: "flex", justifyContent: "space-between", p: 2 }}>
 				<Stack rowGap="2px">
-					<Typography fontSize="12px">User Rating</Typography>
+					<Typography fontSize="12px" sx={{ color: "primary.contrastText" }}>
+						User Rating
+					</Typography>
 					<Box component="div" display="flex" alignItems="center" columnGap="6px">
 						<IconStarHalfFilled style={{ color: "#5e35b1" }} size={19} />
-						<span style={{ marginBottom: "-4px", color: "#5e35b1" }}>4.8</span>
+						<span style={{ marginBottom: "-4px", color: "#5e35b1" }}>
+							{medicine.rating}
+						</span>
 					</Box>
 				</Stack>
 				<Button
@@ -36,6 +48,8 @@ const RatedMedicineExcerpt = ({}) => {
 					sx={{ color: "whitesmoke" }}
 					variant="contained"
 					size="small"
+					disableElevation
+					onClick={() => navigate(`/apply/${medicine.id}`)}
 				>
 					Apply
 				</Button>

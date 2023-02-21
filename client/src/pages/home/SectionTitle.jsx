@@ -5,7 +5,7 @@ const SectionTitle = (props) => {
 	return (
 		<>
 			<Stack p="20px" direction="row" justifyContent="space-between" alignItems="center">
-				<Typography variant="h6" fontWeight={500}>
+				<Typography variant="h6" fontWeight={500} color="#493e54">
 					{props.text}
 				</Typography>
 				{props.button && (
