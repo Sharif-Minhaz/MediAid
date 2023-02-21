@@ -49,8 +49,6 @@ const RatedMedicines = () => {
 	const { leftDrawerOpen } = useStateContext();
 	const smallScreen = useMediaQuery("(min-width:600px)");
 
-	console.log(smallScreen);
-
 	return (
 		<Box>
 			<SectionTitle
