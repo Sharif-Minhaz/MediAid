@@ -12,9 +12,8 @@ const ServiceCards = () => {
 		<Box component="div" width="100%" p="20px">
 			<Grid container spacing="20px">
 				{serviceCardsData.map((data, i) => (
-					<Grid item xs={12} sm={6} lg={4}>
+					<Grid key={i} item xs={12} sm={6} lg={4}>
 						<ServiceCardExcerpt
-							key={i}
 							img={data.img}
 							heading={data.heading}
 							type={data.type}

@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IconEye as Visibility } from "@tabler/icons-react";
 import { IconEyeOff as VisibilityOff } from "@tabler/icons-react";
 import {
-	Button,
 	Box,
 	Typography,
 	Divider,
@@ -16,18 +15,12 @@ import {
 import { useTheme } from "@emotion/react";
 import AuthWrapper from "./AuthWrapper";
 import AuthIntro from "./AuthIntro";
+import AuthSubmitButton from "./AuthSubmitButton";
 
 const ResetPassword = () => {
 	const theme = useTheme();
 	const [showPassword, setShowPassword] = useState(false);
 	const [matchedPrevPsw, setMatchedPrevPsw] = useState(false);
-
-	useEffect(() => {
-		document.body.style.backgroundColor = "#eef2f6";
-		return () => {
-			document.body.style.backgroundColor = null;
-		};
-	}, []);
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const handleMouseDownPassword = (event) => {
@@ -118,21 +111,7 @@ const ResetPassword = () => {
 							</FormHelperText>
 						)} */}
 				</FormControl>
-				<Button
-					disableElevation
-					type="submit"
-					fullWidth
-					variant="contained"
-					sx={{
-						mt: 3,
-						mb: 2,
-						p: "20px",
-						color: "white",
-						"&:hover": { backgroundColor: "primary.light" },
-					}}
-				>
-					Change Password
-				</Button>
+				<AuthSubmitButton>Change Password</AuthSubmitButton>
 				<Divider sx={{ width: "100%", mb: 2 }} />
 				<Typography
 					fontWeight={500}

@@ -6,7 +6,7 @@ export const paletteTheme = () => {
 			contrastText: "#697586",
 		},
 		secondary: {
-			main: "#11cb5f",
+			main: "#0a92e1",
 			light: "#2196f3",
 			contrastText: "#121926",
 		},
