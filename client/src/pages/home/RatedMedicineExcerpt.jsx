@@ -19,7 +19,7 @@ const RatedMedicineExcerpt = ({ medicine }) => {
 	return (
 		<Card variant="outlined">
 			<CardActionArea onClick={() => navigate(`/medicines/${medicine.id}`)}>
-				<CardMedia sx={{ height: 160 }} image={medicine.image} title={medicine.name} />
+				<CardMedia sx={{ height: 180 }} image={medicine.image} title={medicine.name} />
 				<Divider />
 				<CardContent>
 					<Typography gutterBottom variant="h5" component="div">
