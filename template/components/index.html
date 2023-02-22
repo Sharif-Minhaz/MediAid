@@ -1,66 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MediAid</title>
+        <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> -->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
+        <!-- ================For Icons================ -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediAid</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <h1>hello</h1>
-    <div class="card">
-        <div class="upper">
-            <div class="left">
-                <h1>Healthcare Products</h1>
-            </div>
-            <div class="right">
-                <button class="button">visit</button>
-            </div>
-        </div>
-        <div class="lower">
-            <h3>Rating</h3>
-        </div>
-    </div>
-
-
-
-    <div class="display">
-        <div class="plate">
-            <div class="left_part">
-                <h1>A platform to donate medicine and making available medicine for deprived people in emergency.</h1>
-                <br>
-                <h4>We allow you to donate medicine and to apply for it.</h4>
-                <br>
-                <button class="button">Let's have a visit</button>
-                <br>
-                <div style="text-align:center">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+    <body>
+        <h1 class="chk">hello</h1>
+        <button class="chk1">click</button>
+        
+        
+        <div class="card">
+            <div class="upper">
+                <div class="left">
+                    <h1 id="javascript">Healthcare Products</h1>
+                </div>
+                <div class="right">
+                    <button class="button">visit</button>
                 </div>
             </div>
-            <div class="right_part">
-                <img src="../images/images.jpg" width="400px" height="100%" style="border-radius:0px 0px 35px 0px">
+            <div class="lower">
+                <h2>Rating</h2>
+                <i class="fa fa-star st1"></i>
+                <i class="fa fa-star st1"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
             </div>
         </div>
-    </div>
 
-    <div class="cards">
-        <div class="product_card">
-            <h1>hello</h1>
-            <div class="pic">
-                
-            </div>
-            <div class="info">
-
-            </div>
-            <div class="others">
-
+        <div class="display">
+            <div class="plate">
+                <div class="left_part">
+                    <h1>
+                        A platform to donate medicine and making available medicine for deprived
+                        people in emergency.
+                    </h1>
+                    <br />
+                    <h4>We allow you to donate medicine and to apply for it.</h4>
+                    <br />
+                    <button class="button">Let's have a visit</button>
+                    <br />
+                    <div style="text-align: center">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+                <div class="right_part">
+                    <img
+                        src="../images/images.jpg"
+                        width="400px"
+                        height="100%"
+                        style="border-radius: 0px 0px 35px 0px"
+                    />
+                </div>
             </div>
         </div>
-    </div>
-</body>
+
+        <div class="cards">
+            <div class="product_card">
+                <div class="pic">
+                    <img src="../images/image.jpg" alt="" style="border-radius: 15px" />
+                    <div class="mod-icon">
+                        <i class="fa fa-heart heart1" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="info">
+                    <h1>Sergel 500mg</h1>
+                    <h4>A product of Square health.Used in gastric type disease.</h4>
+                </div>
+                <div class="others">
+                    <div class="rating">
+                        <h1>Rating</h1>
+                        <i class="fa fa-star st1"></i>
+                        <i class="fa fa-star st1"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <button class="button">Apply</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile_container">
+            <div class="cover">
+                <button class="button">Edit</button>
+            </div>
+            <!-- <button class="button">Edit</button> -->
+            <div class="profile"></div>
+            <div class="rest_part">
+                <div class="content">
+                    <h1>Asiful Haque</h1>
+                    <p>
+                        I am a competitive programmer.I am also a programming trainer. I am studying
+                        at the Department of Software Engineering at Daffodil International
+                        University.
+                    </p>
+                    <button class="button">Send Message</button>
+                    <br />
+                    <a><i class="fa fa-facebook fb_icon"></i></a>
+                    <a><i class="fa fa-instagram ig_icon"></i></a>
+                    <a><i class="fa fa-whatsapp wp_icon"></i></a>
+                    <a><i class="fa fa-linkedin linkedin_icon"></i></a>
+                </div>
+
+                <h1 id="design_for_h1">Donated Medicines</h1>
+                <div class="recent_donate">
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <h1 id="design_for_h1">Received Medicines</h1>
+                <div class="recent_donate">
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="upper">
+                            <div class="left">
+                                <h1>Healthcare Products</h1>
+                            </div>
+                            <div class="right">
+                                <button class="button">visit</button>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <h2>Rating</h2>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star st1"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="connection.js"></script>
+    </body>
+</html>
