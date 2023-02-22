@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, useMediaQuery } from "@mui/material";
 import ServiceCardExcerpt from "./ServiceCardExcerpt";
 
 const serviceCardsData = [
@@ -8,9 +8,11 @@ const serviceCardsData = [
 ];
 
 const ServiceCards = () => {
+	const midScreen = useMediaQuery("(min-width:900px)");
+
 	return (
-		<Box component="div" width="100%" p="20px">
-			<Grid container spacing="20px">
+		<Box component="div" width="100%" p={midScreen ? "20px" : "16px"}>
+			<Grid container spacing={midScreen ? "20px" : "16px"}>
 				{serviceCardsData.map((data, i) => (
 					<Grid key={i} item xs={12} sm={6} lg={4}>
 						<ServiceCardExcerpt

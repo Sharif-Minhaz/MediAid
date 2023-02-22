@@ -47,15 +47,20 @@ const medicines = [
 ];
 const RatedMedicines = () => {
 	const { leftDrawerOpen } = useStateContext();
+	const midScreen = useMediaQuery("(min-width:900px)");
 	const smallScreen = useMediaQuery("(min-width:600px)");
 
 	return (
 		<Box>
 			<SectionTitle
-				text="Best Rated Medicines"
+				text="Top Rated Medicines"
 				button={{ text: "View All", link: "/medicines" }}
 			/>
-			<Grid container spacing={"20px"} p="20px">
+			<Grid
+				container
+				spacing={midScreen ? "20px" : "16px"}
+				sx={{ p: { xs: "16px", md: "20px" } }}
+			>
 				{medicines.map((medicine) => (
 					<Grid
 						key={medicine.id}
