@@ -3,7 +3,9 @@ export const componentsTheme = () => {
 		MuiButton: {
 			styleOverrides: {
 				root: {
-					// lineHeight: 0,
+					"&:active": {
+						transform: "scale(0.95)",
+					},
 				},
 			},
 		},
