@@ -1,42 +1,45 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'josefin sans';
-    box-sizing: border-box;
 }
-h1{
+body {
+    font-family: "roboto", Arial, Helvetica, sans-serif;
+}
+h1 {
     color: black;
 }
-.card{
+.card {
     /* height: 400px; */
     width: 400px;
     /* background-color: rgb(219, 13, 13); */
     background-color: white;
     border-radius: 15px;
-    background-image: url('../images/image.jpg');
+    background-image: url("../images/image.jpg");
 }
-.upper{
+.upper {
     /* background-color: white; */
     height: 100px;
     display: flex;
-    justify-content : space-between;
+    justify-content: space-between;
 }
-.lower{
+.lower {
     /* background-color: white; */
     padding-left: 28px;
-    height: 80px;
-    display: flex;
+    /* height: 80px; */
+    /* display: flex; */
+    padding-top: 27px;
     align-items: center;
 }
-.left{
+.left {
     /* background-color: white; */
-    width: 200px;
-    text-align: center;
+    width: 250px;
+    /* text-align: center; */
     display: flex;
     align-items: center;
+    padding-left: 10px;
 }
-.right{
+.right {
     /* background-color: white; */
     display: flex;
     justify-content: center;
@@ -44,37 +47,38 @@ h1{
     padding-bottom: 15px;
     width: 125px;
 }
-.button{
+.button {
     font-size: 15px;
     color: white;
     font-weight: bold;
     background-color: rgb(99, 81, 177);
     padding: 10px 20px;
-    border: 2px solid transparent; 
+    border: 2px solid transparent;
     border-radius: 10px;
-    transition: transform .4s;
+    transition: 0.4s;
 }
-.button:hover{
+.button:hover {
     transform: scale(1.2);
 }
-
-.display{
+.lower .st1 {
+    color: rgb(100, 61, 173);
+}
+.display {
     /* height: 100%; */
     width: 100%;
     display: flex;
     justify-content: center;
     background-color: green;
-
 }
-.plate{
+.plate {
     background-color: white;
     width: 80%;
     display: flex;
 }
-.left_part{
+.left_part {
     width: auto;
     background-color: white;
-    justify-content :flex-end;
+    justify-content: flex-end;
     padding-left: 25px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -88,30 +92,200 @@ h1{
     border-radius: 50%;
     display: inline-block;
 }
-.right_part{
-    background-color:white; 
+.right_part {
+    background-color: white;
     width: auto;
     /* height: 500px; */
 }
 
-.right_part{
+.right_part {
     line-height: 0px;
 }
 /*///////////////////////////////////////////////*/
-.cards{
+.cards {
     background-color: aqua;
     width: 100%;
     height: auto;
     padding: 20px;
-}.product_card{
-    height: 400px;
+}
+.product_card {
+    height: 100%;
     width: 350px;
     background-color: white;
     border-radius: 15px;
 }
-.pic{
-    background-image: url('../images/image.jpg');
-    height: 150px;
-    width: auto;
+.pic {
+    padding-left: 25px;
+    padding-top: 25px;
+    padding-right: 25px;
+    position: relative;
+}
+.mod-icon {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 1px solid black;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 35px;
+    top: 35px;
+}
 
+.pic img {
+    width: 100%;
+    /* object-fit: cover; */
+}
+.pic .heart1 {
+    color: red;
+}
+.info {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.others {
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    position: relative;
+}
+.others .button {
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+    height: 40px;
+    /* width: 70px; */
+    background-color: rgb(100, 61, 173);
+    padding: 10px 20px;
+    justify-content: left;
+    /* border: 2px solid transparent; */
+    /* border-radius: 10px; */
+    transition: transform 0.4s;
+    position: absolute;
+    top: 40px;
+    right: 25px;
+}
+.others .st1 {
+    color: rgb(100, 61, 173);
+}
+/*------------------------profile part--------------------*/
+.profile_container {
+    width: 100%;
+    height: auto;
+    background-color: coral;
+    position: relative;
+}
+.cover {
+    width: 100%;
+    height: 300px;
+    background-image: url("../images/cover.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.cover .button {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+}
+.profile {
+    height: 250px;
+    width: 250px;
+    background-image: url("../images/asif.jpg");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 205px;
+    left: 48px;
+    transition: 0.5s;
+}
+.profile:hover {
+    transform: translateY(-20px);
+}
+.rest_part {
+    background-color: white;
+    width: 100%;
+    height: 500px;
+}
+.content {
+    padding-top: 167px;
+    padding-left: 47px;
+    height: auto;
+    width: 407px;
+    /* background-color: brown; */
+}
+.content h1 {
+    padding-bottom: 10px;
+}
+.content .button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.fb_icon {
+    color: blue;
+    font-size: 45px;
+    padding-right: 5px;
+    transition: 0.2s;
+}
+
+.fb_icon:hover {
+    transform: scale(1.5);
+}
+.ig_icon {
+    color: rgb(246, 123, 28);
+    font-size: 45px;
+    padding-right: 5px;
+    transition: 0.2s;
+}
+.ig_icon:hover {
+    transform: scale(1.5);
+}
+.wp_icon {
+    color: green;
+    font-size: 45px;
+    padding-right: 5px;
+    transition: 0.2s;
+}
+.wp_icon:hover {
+    transform: scale(1.5);
+}
+.linkedin_icon {
+    color: darkblue;
+    font-size: 45px;
+    padding-right: 5px;
+    transition: 0.2s;
+}
+.linkedin_icon:hover {
+    transform: scale(1.5);
+}
+.recent_donate {
+    /* background-color: aquamarine; */
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.recent_donate .card {
+    /* height: 400px; */
+    width: 400px;
+    /* background-color: rgb(219, 13, 13); */
+    background-color: white;
+    border-radius: 15px;
+    background-image: url("../images/image.jpg");
+    margin: 10px;
+    transition: 0.4s;
+}
+.recent_donate .card:hover {
+    transform: translateY(-20px);
+}
+#design_for_h1 {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(100, 61, 173);
 }
