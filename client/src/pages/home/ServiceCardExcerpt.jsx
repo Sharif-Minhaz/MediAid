@@ -14,6 +14,11 @@ const ServiceCardExcerpt = ({ img, heading, type = "medicines" }) => {
 			sx={{
 				backgroundImage: `url(${img})`,
 				backgroundSize: "cover",
+				transition: "all 0.3s",
+				"&:hover": {
+					boxShadow:
+						"rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px",
+				},
 			}}
 			borderRadius="12px"
 			padding={2}
