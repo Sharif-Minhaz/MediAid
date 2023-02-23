@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
-import {
-	Box,
-	CssBaseline,
-} from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import ProfileMenu from "../components/navbar/ProfileMenu";
 import NotificationMenu from "../components/navbar/NotificationMenu";
 import DrawerConfig from "../components/navbar/DrawerConfig";
@@ -55,7 +52,7 @@ export default function CommonLayout({ children }) {
 						mt="14px"
 						sx={{
 							ml: 0,
-							mr: { xs: "0px", sm: "20px"},
+							mr: { xs: "0px", sm: 0, md: "20px" },
 							px: { xs: "16px", sm: "20px" },
 							pb: { xs: "16px", sm: "20px" },
 							borderRadius: { sm: 0, md: 3 },
