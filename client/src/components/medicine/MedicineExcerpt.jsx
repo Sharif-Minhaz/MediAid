@@ -13,13 +13,17 @@ import { Box } from "@mui/system";
 import { IconClipboardHeart, IconStarHalfFilled } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 
-const RatedMedicineExcerpt = ({ medicine }) => {
+const MedicineExcerpt = ({ medicine }) => {
 	const navigate = useNavigate();
 
 	return (
 		<Card variant="outlined">
 			<CardActionArea onClick={() => navigate(`/medicines/${medicine.id}`)}>
-				<CardMedia sx={{ height: 180 }} image={medicine.image} title={medicine.name} />
+				<CardMedia
+					sx={{ height: 200 }}
+					image={medicine.image}
+					title={medicine.name}
+				/>
 				<Divider />
 				<CardContent>
 					<Typography gutterBottom variant="h5" component="div">
@@ -58,4 +62,4 @@ const RatedMedicineExcerpt = ({ medicine }) => {
 	);
 };
 
-export default RatedMedicineExcerpt;
+export default MedicineExcerpt;

@@ -1,6 +1,6 @@
-import RatedMedicineExcerpt from "./RatedMedicineExcerpt";
+import MedicineExcerpt from "../../components/medicine/MedicineExcerpt";
 import { Box, Grid, useMediaQuery } from "@mui/material";
-import SectionTitle from "./SectionTitle";
+import SectionTitle from "../../components/SectionTitle";
 import { useStateContext } from "../../contexts/ContextProvider";
 
 const medicines = [
@@ -70,7 +70,7 @@ const RatedMedicines = () => {
 						sm={smallScreen ? 6 : 4}
 						xs={12}
 					>
-						<RatedMedicineExcerpt medicine={medicine} />
+						<MedicineExcerpt medicine={medicine} />
 					</Grid>
 				))}
 			</Grid>
