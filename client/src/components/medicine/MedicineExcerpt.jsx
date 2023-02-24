@@ -10,20 +10,22 @@ import {
 	Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { IconClipboardHeart, IconStarHalfFilled } from "@tabler/icons-react";
+import { IconClipboardHeart, IconPencil, IconStarHalfFilled, IconTrash } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
+import CustomIconButton from "../../theme/customComponent/CustomIconButton";
 
 const MedicineExcerpt = ({ medicine }) => {
 	const navigate = useNavigate();
+	const isAdmin = true;
+
+	const handleMedicineDelete = (medicineId) => {
+		alert(medicineId + ": Medicine delete request received");
+	};
 
 	return (
 		<Card variant="outlined">
 			<CardActionArea onClick={() => navigate(`/medicines/${medicine.id}`)}>
-				<CardMedia
-					sx={{ height: 200 }}
-					image={medicine.image}
-					title={medicine.name}
-				/>
+				<CardMedia sx={{ height: 200 }} image={medicine.image} title={medicine.name} />
 				<Divider />
 				<CardContent>
 					<Typography gutterBottom variant="h5" component="div">
@@ -47,16 +49,52 @@ const MedicineExcerpt = ({ medicine }) => {
 						</span>
 					</Box>
 				</Stack>
-				<Button
-					endIcon={<IconClipboardHeart size={18} />}
-					sx={{ color: "whitesmoke" }}
-					variant="contained"
-					size="small"
-					disableElevation
-					onClick={() => navigate(`/apply/${medicine.id}`)}
-				>
-					Apply
-				</Button>
+				<Stack direction="row" columnGap={1}>
+					{isAdmin ? (
+						<>
+							<CustomIconButton
+								onClick={() => navigate(`/medicines/edit/${medicine.id}`)}
+								sx={{
+									color: "green",
+									backgroundColor: "#e4f1ef",
+									"&:hover": {
+										backgroundColor: "#6ddf93",
+										color: "white",
+									},
+								}}
+							>
+								<IconPencil />
+							</CustomIconButton>
+							<CustomIconButton
+								onClick={() => handleMedicineDelete(medicine.id)}
+								sx={{
+									color: "red",
+									backgroundColor: "#ffe0e0",
+									"&:hover": {
+										backgroundColor: "#ff5757",
+										color: "white",
+									},
+								}}
+							>
+								<IconTrash />
+							</CustomIconButton>
+							<CustomIconButton onClick={() => navigate(`/apply/${medicine.id}`)}>
+								<IconClipboardHeart />
+							</CustomIconButton>
+						</>
+					) : (
+						<Button
+							endIcon={<IconClipboardHeart size={18} />}
+							sx={{ color: "whitesmoke" }}
+							variant="contained"
+							size="small"
+							disableElevation
+							onClick={() => navigate(`/apply/${medicine.id}`)}
+						>
+							Apply
+						</Button>
+					)}
+				</Stack>
 			</CardActions>
 		</Card>
 	);

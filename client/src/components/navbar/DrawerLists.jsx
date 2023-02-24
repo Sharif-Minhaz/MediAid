@@ -14,6 +14,7 @@ import {
 	IconNotebook,
 	IconDashboard,
 	IconHeartHandshake,
+	IconMedicineSyrup,
 } from "@tabler/icons-react";
 import BrandAuthImg from "../../features/auth/BrandAuthImg";
 import SingleNavLink from "./SingleNavLink";
@@ -37,6 +38,11 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 					link="/medicines"
 					text="Medicines"
 					icon={<IconVaccineBottle size={20} />}
+				/>
+				<SingleNavLink
+					link="/medicine/add"
+					text="Add Medicine"
+					icon={<IconMedicineSyrup size={20} />}
 				/>
 				<SingleNavLink
 					link="/gallery"

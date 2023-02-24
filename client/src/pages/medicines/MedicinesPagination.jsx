@@ -1,4 +1,3 @@
-import "./Pagination.css";
 import { Box, Pagination } from "@mui/material";
 
 const PaginationPage = ({ handlePageChange, page, count }) => {

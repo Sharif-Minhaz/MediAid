@@ -10,6 +10,7 @@ import ResetPassword from "../features/auth/ResetPassword";
 import Dashboard from "../pages/dashboard/Dashboard";
 import MedicinesPage from "../pages/medicines/MedicinesPage";
 import DetailsMedicine from "../components/medicine/DetailsMedicine";
+import AddMedicine from './../pages/AddMedicine';
 
 const Routers = () => {
 	return (
@@ -21,8 +22,10 @@ const Routers = () => {
 				<Route path="medicines">
 					<Route index element={<MedicinesPage />} />
 					<Route path=":medicineId" element={<DetailsMedicine />} />
+					<Route path="edit/:medicineId" element={<AddMedicine />} />
 				</Route>
 
+				<Route path="/medicine/add" element={<AddMedicine />} />
 				{/* <Route path="gallery">
 					<Route index element={<Gallery />} />
 				</Route> */}
