@@ -19,6 +19,11 @@ body {
   width: 6px;
 }
 
+img {
+  pointer-events: none;
+  user-select: none;
+}
+
 /* Track */
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px rgb(157, 149, 231);
