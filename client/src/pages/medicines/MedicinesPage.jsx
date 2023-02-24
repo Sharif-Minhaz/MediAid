@@ -6,138 +6,189 @@ import MedicinesPagination from "./MedicinesPagination";
 const medicines = [
 	{
 		id: "1",
-		name: "Esoral Mups",
-		description:
+		medicineName: "Esoral Mups",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/esoral-mups.png",
+		medicineImage: "/images/esoral-mups.png",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.8,
 	},
 	{
 		id: "2",
-		name: "AstraZeneca",
-		description:
+		medicineName: "AstraZeneca",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/AstraZeneca.avif",
+		medicineImage: "/images/AstraZeneca.avif",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.3,
 	},
 	{
 		id: "3",
-		name: "Brineura",
-		description:
+		medicineName: "Brineura",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/brineura.jpeg",
+		medicineImage: "/images/brineura.jpeg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.6,
 	},
 	{
 		id: "4",
-		name: "Spinraza",
-		description:
+		medicineName: "Spinraza",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/Spinraza.jpg",
+		medicineImage: "/images/Spinraza.jpg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.2,
 	},
 	{
 		id: "5",
-		name: "Esoral Mups",
-		description:
+		medicineName: "Esoral Mups",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/esoral-mups.png",
+		medicineImage: "/images/esoral-mups.png",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.9,
 	},
 	{
 		id: "6",
-		name: "Brineura",
-		description:
+		medicineName: "Brineura",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/brineura.jpeg",
+		medicineImage: "/images/brineura.jpeg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.6,
 	},
 	{
 		id: "7",
-		name: "Spinraza",
-		description:
+		medicineName: "Spinraza",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/Spinraza.jpg",
+		medicineImage: "/images/Spinraza.jpg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.2,
 	},
 	{
 		id: "8",
-		name: "Brineura",
-		description:
+		medicineName: "Brineura",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/brineura.jpeg",
+		medicineImage: "/images/brineura.jpeg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.6,
 	},
 	{
 		id: "9",
-		name: "Brineura",
-		description:
+		medicineName: "Brineura",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/brineura.jpeg",
+		medicineImage: "/images/brineura.jpeg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.6,
 	},
 	{
 		id: "10",
-		name: "Spinraza",
-		description:
+		medicineName: "Spinraza",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/Spinraza.jpg",
+		medicineImage: "/images/Spinraza.jpg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.2,
 	},
 	{
 		id: "11",
-		name: "Esoral Mups",
-		description:
+		medicineName: "Esoral Mups",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/esoral-mups.png",
+		medicineImage: "/images/esoral-mups.png",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.9,
 	},
 	{
 		id: "12",
-		name: "Brineura",
-		description:
+		medicineName: "Brineura",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/brineura.jpeg",
+		medicineImage: "/images/brineura.jpeg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.6,
 	},
 	{
 		id: "13",
-		name: "Spinraza",
-		description:
+		medicineName: "Spinraza",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/Spinraza.jpg",
+		medicineImage: "/images/Spinraza.jpg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.2,
 	},
 	{
 		id: "14",
-		name: "Esoral Mups",
-		description:
+		medicineName: "Esoral Mups",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/esoral-mups.png",
+		medicineImage: "/images/esoral-mups.png",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.9,
 	},
 	{
 		id: "15",
-		name: "Brineura",
-		description:
+		medicineName: "Brineura",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/brineura.jpeg",
+		medicineImage: "/images/brineura.jpeg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.6,
 	},
 	{
 		id: "16",
-		name: "Spinraza",
-		description:
+		medicineName: "Spinraza",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/Spinraza.jpg",
+		medicineImage: "/images/Spinraza.jpg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.2,
 	},
 	{
 		id: "17",
-		name: "Brineura",
-		description:
+		medicineName: "Brineura",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/brineura.jpeg",
+		medicineImage: "/images/brineura.jpeg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact:"01309832862",
+		companyName:"Square",
 		rating: 4.6,
 	},
 ];

@@ -25,14 +25,18 @@ const MedicineExcerpt = ({ medicine }) => {
 	return (
 		<Card variant="outlined">
 			<CardActionArea onClick={() => navigate(`/medicines/${medicine.id}`)}>
-				<CardMedia sx={{ height: 200 }} image={medicine.image} title={medicine.name} />
+				<CardMedia
+					sx={{ height: 200 }}
+					image={medicine.medicineImage}
+					title={medicine.medicineName}
+				/>
 				<Divider />
 				<CardContent>
 					<Typography gutterBottom variant="h5" component="div">
-						{medicine.name}
+						{medicine.medicineName}
 					</Typography>
 					<Typography variant="body2" color="text.secondary">
-						{medicine.description}...
+						{medicine.medicineDescription}...
 					</Typography>
 				</CardContent>
 			</CardActionArea>
@@ -53,7 +57,9 @@ const MedicineExcerpt = ({ medicine }) => {
 					{isAdmin ? (
 						<>
 							<CustomIconButton
-								onClick={() => navigate(`/medicines/edit/${medicine.id}`)}
+								onClick={() =>
+									navigate(`/medicines/edit/${medicine.id}`, { state: medicine })
+								}
 								sx={{
 									color: "green",
 									backgroundColor: "#e4f1ef",

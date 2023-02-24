@@ -6,45 +6,61 @@ import { useStateContext } from "../../contexts/ContextProvider";
 const medicines = [
 	{
 		id: "1",
-		name: "Esoral Mups",
-		description:
+		medicineName: "Esoral Mups",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/esoral-mups.png",
+		medicineImage: "/images/esoral-mups.png",
+		donarName: "Sharif Md. Minhaz",
+		donarContact: "01309832862",
+		companyName: "Square",
 		rating: 4.8,
 	},
 	{
 		id: "2",
-		name: "AstraZeneca",
-		description:
+		medicineName: "AstraZeneca",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/AstraZeneca.avif",
+		medicineImage: "/images/AstraZeneca.avif",
+		donarName: "Sharif Md. Minhaz",
+		donarContact: "01309832862",
+		companyName: "Square",
 		rating: 4.3,
 	},
 	{
 		id: "3",
-		name: "Brineura",
-		description:
+		medicineName: "Brineura",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/brineura.jpeg",
+		medicineImage: "/images/brineura.jpeg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact: "01309832862",
+		companyName: "Square",
 		rating: 4.6,
 	},
 	{
 		id: "4",
-		name: "Spinraza",
-		description:
+		medicineName: "Spinraza",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/Spinraza.jpg",
+		medicineImage: "/images/Spinraza.jpg",
+		donarName: "Sharif Md. Minhaz",
+		donarContact: "01309832862",
+		companyName: "Square",
 		rating: 4.2,
 	},
 	{
 		id: "5",
-		name: "Esoral Mups",
-		description:
+		medicineName: "Esoral Mups",
+		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		image: "/images/esoral-mups.png",
+		medicineImage: "/images/esoral-mups.png",
+		donarName: "Sharif Md. Minhaz",
+		donarContact: "01309832862",
+		companyName: "Square",
 		rating: 4.9,
 	},
 ];
+
 const RatedMedicines = () => {
 	const { leftDrawerOpen } = useStateContext();
 	const midScreen = useMediaQuery("(min-width:900px)");

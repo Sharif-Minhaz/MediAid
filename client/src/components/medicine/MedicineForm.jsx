@@ -1,20 +1,37 @@
 import { Box, Button, FormControl, Grid, InputLabel, OutlinedInput, useTheme } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { IconHeartPlus } from "@tabler/icons-react";
-import { useState } from "react";
+import { IconHeartPlus, IconEdit } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
 import ImageDropZone from "../ImageDropZone";
+import { useLocation } from "react-router-dom";
 
-const MedicineForm = () => {
+const MedicineForm = ({ isUpdateCase, setIsUpdateCase }) => {
 	const theme = useTheme();
+	const { state } = useLocation();
 
 	const {
 		register,
 		handleSubmit,
-		watch,
 		formState: { errors },
-	} = useForm();
+	} = useForm({
+		defaultValues: {
+			medicineName: state?.medicineName || "",
+			medicineDescription: state?.medicineDescription || "",
+			companyName: state?.companyName || "",
+			donarName: state?.donarName || "",
+			donarContact: state?.donarContact || "",
+		},
+	});
 
-	const onSubmit = (data) => console.log(data);
+	useEffect(() => {
+		if (Boolean(state)) {
+			setIsUpdateCase(true);
+		}
+	}, []);
+
+	const onSubmit = (data) => {
+		console.log(data);
+	};
 
 	return (
 		<Box component="form" p="20px" onSubmit={handleSubmit(onSubmit)}>
@@ -63,14 +80,14 @@ const MedicineForm = () => {
 				</Grid>
 			</Grid>
 			<Button
-				startIcon={<IconHeartPlus size={20} />}
+				startIcon={isUpdateCase ? <IconEdit size={20} /> : <IconHeartPlus size={20} />}
 				type="submit"
 				size="large"
 				variant="contained"
 				disableElevation
 				sx={{ color: "whitesmoke", borderRadius: "10px" }}
 			>
-				ADD Medicine
+				{isUpdateCase ? "Update Medicine" : "ADD Medicine"}
 			</Button>
 		</Box>
 	);
