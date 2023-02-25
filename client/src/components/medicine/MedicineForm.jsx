@@ -1,5 +1,5 @@
 import { Box, Button, FormControl, Grid, InputLabel, OutlinedInput, useTheme } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { IconHeartPlus, IconEdit } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import ImageDropZone from "../ImageDropZone";
@@ -10,9 +10,11 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase }) => {
 	const { state } = useLocation();
 
 	const {
+		control,
 		register,
 		handleSubmit,
 		formState: { errors },
+		setValue,
 	} = useForm({
 		defaultValues: {
 			medicineName: state?.medicineName || "",
@@ -31,6 +33,10 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase }) => {
 
 	const onSubmit = (data) => {
 		console.log(data);
+	};
+
+	const onFileSelect = (file) => {
+		setValue("medicineImage", file);
 	};
 
 	return (
@@ -76,7 +82,18 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase }) => {
 					</FormControl>
 				</Grid>
 				<Grid item xs={12} sm={6}>
-					<ImageDropZone {...register("medicineImage", { required: true })} />
+					<Controller
+						name="medicineImage"
+						control={control}
+						render={() => (
+							<>
+								<ImageDropZone
+									image={state?.medicineImage}
+									onFileSelect={onFileSelect}
+								/>
+							</>
+						)}
+					/>
 				</Grid>
 			</Grid>
 			<Button
