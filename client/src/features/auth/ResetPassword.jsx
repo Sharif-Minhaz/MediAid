@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { IconEye as Visibility } from "@tabler/icons-react";
 import { IconEyeOff as VisibilityOff } from "@tabler/icons-react";
 import {
@@ -11,8 +14,9 @@ import {
 	OutlinedInput,
 	InputAdornment,
 	IconButton,
+	useTheme,
+	FormHelperText,
 } from "@mui/material";
-import { useTheme } from "@emotion/react";
 import AuthWrapper from "./AuthWrapper";
 import AuthIntro from "./AuthIntro";
 import AuthSubmitButton from "./AuthSubmitButton";
@@ -22,9 +26,33 @@ const ResetPassword = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [matchedPrevPsw, setMatchedPrevPsw] = useState(false);
 
+	const schema = yup
+		.object({
+			prevPassword: yup.string().required("Old password is required"),
+			newPassword: yup.string().required("New password is required"),
+		})
+		.required();
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
+
+	const onSubmit = (data) => {
+		toast.success("Successfully get the form data");
+		console.log(data);
+	};
+
+	const handleCheckOldPsw = (e) => {
+		setMatchedPrevPsw(e.target.value ? true : false);
+	};
+
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const handleMouseDownPassword = (event) => {
-		event.preventDefault();
+		event.preventDefault(true);
 	};
 
 	return (
@@ -34,24 +62,21 @@ const ResetPassword = () => {
 				des2="Enter your previous password & reset"
 				des3="Reset with previous password"
 			/>
-			<Box component="form" noValidate sx={{ mt: 1 }}>
+			<Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
 				<FormControl
 					fullWidth
-					// error={Boolean(errors.email)}
-					// error={true}
-					sx={{ ...theme.customInput }}
+					error={Boolean(errors.prevPassword)}
+					sx={{ ...theme.customInput, mb: "13px" }}
 				>
 					<InputLabel htmlFor="outlined-adornment-password-login">
 						Previous Password
 					</InputLabel>
 					<OutlinedInput
 						id="outlined-adornment-password-login"
-						// value={"values.password"}
-						name="prevPassword"
-						// onBlur={"handleBlur"}
-						// onChange={"handleChange"}
+						{...register("prevPassword")}
 						label="Previous Password"
 						type={showPassword ? "text" : "password"}
+						onChange={handleCheckOldPsw}
 						endAdornment={
 							<InputAdornment sx={{ mb: "6px" }} position="end">
 								<IconButton
@@ -66,16 +91,19 @@ const ResetPassword = () => {
 							</InputAdornment>
 						}
 					/>
-					{/* {errors.password && (
-							<FormHelperText error id="standard-weight-helper-text-password-login">
-								{errors.password}
-							</FormHelperText>
-						)} */}
+					{errors.prevPassword && (
+						<FormHelperText
+							sx={{ mt: 1, mb: 0 }}
+							error
+							id="standard-weight-helper-text-prevPassword-login"
+						>
+							{errors.prevPassword?.message}
+						</FormHelperText>
+					)}
 				</FormControl>
 				<FormControl
 					fullWidth
-					// error={Boolean(errors.email)}
-					// error={true}
+					error={Boolean(errors.newPassword)}
 					sx={{ ...theme.customInput }}
 					disabled={!matchedPrevPsw}
 				>
@@ -84,10 +112,7 @@ const ResetPassword = () => {
 					</InputLabel>
 					<OutlinedInput
 						id="outlined-adornment-new-password-login"
-						// value={"values.password"}
-						name="password"
-						// onBlur={"handleBlur"}
-						// onChange={"handleChange"}
+						{...register("newPassword")}
 						label="New Password"
 						type={showPassword ? "text" : "password"}
 						endAdornment={
@@ -105,11 +130,15 @@ const ResetPassword = () => {
 							</InputAdornment>
 						}
 					/>
-					{/* {errors.password && (
-							<FormHelperText error id="standard-weight-helper-text-password-login">
-								{errors.password}
-							</FormHelperText>
-						)} */}
+					{errors.newPassword && (
+						<FormHelperText
+							sx={{ mt: 1, mb: 0 }}
+							error
+							id="standard-weight-helper-text-newPassword-login"
+						>
+							{errors.newPassword?.message}
+						</FormHelperText>
+					)}
 				</FormControl>
 				<AuthSubmitButton>Change Password</AuthSubmitButton>
 				<Divider sx={{ width: "100%", mb: 2 }} />

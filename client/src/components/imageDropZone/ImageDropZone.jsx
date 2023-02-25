@@ -1,39 +1,8 @@
-import { Box, Stack, Typography } from "@mui/material";
-import { IconCloudUpload } from "@tabler/icons-react";
+import "./ImageDropZone.css";
+import { Box, Stack } from "@mui/material";
+import { IconCloudUpload, IconPhotoSearch, IconX } from "@tabler/icons-react";
 import { forwardRef, useEffect, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
-
-const thumbsContainer = {
-	display: "flex",
-	flexDirection: "row",
-	flexWrap: "wrap",
-	marginTop: "10px",
-};
-
-const thumb = {
-	position: "relative",
-	display: "inline-flex",
-	borderRadius: 2,
-	border: "1px solid #eaeaea",
-	marginBottom: 8,
-	marginRight: 8,
-	height: 108,
-	padding: "3.2px",
-	boxSizing: "border-box",
-};
-
-const thumbInner = {
-	display: "flex",
-	minWidth: 0,
-	overflow: "hidden",
-};
-
-const img = {
-	display: "block",
-	width: "auto",
-	borderRadius: 4,
-	height: 100,
-};
 
 const baseStyle = {
 	flex: 1,
@@ -51,6 +20,7 @@ const baseStyle = {
 	backgroundColor: "#fafafa",
 	color: "#bdbdbd",
 	outline: "none",
+	userSelect: "none",
 	transition: "border .24s ease-in-out",
 };
 
@@ -66,8 +36,35 @@ const rejectStyle = {
 	borderColor: "#ff1744",
 };
 
+const PreviewImgStyle = ({ files, handleRemoveImage }) => {
+	return (
+		<Box component="div" className="floating-msg">
+			<Box component="div" sx={{ display: "flex", alignItems: "center", gap: 0.4 }}>
+				{files?.length ? (
+					<Box component="div" sx={{ position: "absolute", top: "7px", right: "7px" }}>
+						<IconX
+							onClick={handleRemoveImage}
+							color="#fff"
+							style={{ cursor: "pointer" }}
+							size={20}
+						/>
+					</Box>
+				) : (
+					""
+				)}
+				<IconPhotoSearch size={20} />
+				Preview
+			</Box>
+		</Box>
+	);
+};
+
 const ImageDropZone = forwardRef(({ image, onFileSelect }, ref) => {
 	const [files, setFiles] = useState([]);
+
+	const handleRemoveImage = () => {
+		setFiles([]);
+	};
 
 	const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } = useDropzone({
 		accept: {
@@ -97,11 +94,12 @@ const ImageDropZone = forwardRef(({ image, onFileSelect }, ref) => {
 
 	const thumbs = files.length ? (
 		files.map((file) => (
-			<Box component="div" sx={thumb} key={file.name}>
-				<Box sx={thumbInner}>
+			<Box component="div" className="thumb" key={file.name}>
+				<PreviewImgStyle files={files} handleRemoveImage={handleRemoveImage} />
+				<Box className="thumb-inner">
 					<img
 						src={file.preview}
-						style={img}
+						className="img"
 						// Revoke data uri after image is loaded
 						onLoad={() => {
 							URL.revokeObjectURL(file.preview);
@@ -111,9 +109,10 @@ const ImageDropZone = forwardRef(({ image, onFileSelect }, ref) => {
 			</Box>
 		))
 	) : (
-		<Box component="div" sx={thumb}>
-			<Box sx={thumbInner}>
-				<img style={img} src={image} />
+		<Box component="div" className="thumb">
+			<PreviewImgStyle files={files} handleRemoveImage={handleRemoveImage} />
+			<Box className="thumb-inner">
+				<img className="img" src={image} />
 			</Box>
 		</Box>
 	);
@@ -142,11 +141,13 @@ const ImageDropZone = forwardRef(({ image, onFileSelect }, ref) => {
 							<IconCloudUpload size={22} />
 						</Box>
 					)}
-					Upload medicine img, Drop here or click to select img
+					{files.length
+						? files[0].name
+						: "Upload medicine img, Drop here or click to select img"}
 				</Stack>
 			</Box>
 			{(files.length || image) && (
-				<Box component="aside" sx={thumbsContainer}>
+				<Box component="aside" className="thumbs-container">
 					{thumbs}
 				</Box>
 			)}
