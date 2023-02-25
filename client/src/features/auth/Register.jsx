@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { toast } from "react-toastify";
 import { IconEye as Visibility } from "@tabler/icons-react";
 import { IconEyeOff as VisibilityOff } from "@tabler/icons-react";
 import {
@@ -14,28 +18,44 @@ import {
 	OutlinedInput,
 	InputAdornment,
 	IconButton,
+	FormHelperText,
+	useTheme,
 } from "@mui/material";
-import { useTheme } from "@emotion/react";
 import { strengthColor, strengthIndicator } from "../../utils/passwordStrength";
 import AuthWrapper from "./AuthWrapper";
 import AuthIntro from "./AuthIntro";
 import AuthSubmitButton from "./AuthSubmitButton";
 
-const initialData = { password: "" };
-
 const Register = () => {
 	const theme = useTheme();
-	const [formData, setFormData] = useState(initialData);
+
 	const [showPassword, setShowPassword] = useState(false);
 	const [agreed, setAgreed] = useState(false);
 	const [strength, setStrength] = useState(0);
 	const [level, setLevel] = useState();
 
-	const handleChange = (e) => {
-		setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-		if (e.target.name === "password") {
-			handlePswIndicator(e.target.value);
-		}
+	const schema = yup
+		.object({
+			firstName: yup.string().required("Firstname is required"),
+			lastName: yup.string().required("Lastname is required"),
+			email: yup.string().email("Invalid email address").required("Email is required"),
+			password: yup
+				.string()
+				.min(8, "Password must be at least 8 characters long")
+				.required("Password is required"),
+		})
+		.required();
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
+
+	const handleStrengthChange = (e) => {
+		handlePswIndicator(e.target.value);
 	};
 
 	const handlePswIndicator = (value) => {
@@ -49,6 +69,11 @@ const Register = () => {
 		event.preventDefault();
 	};
 
+	const onSubmit = (data) => {
+		toast.success("Successfully get the form data");
+		console.log(data);
+	};
+
 	const handleAgree = () => setAgreed((prev) => !prev);
 
 	return (
@@ -58,15 +83,14 @@ const Register = () => {
 				des2="Enter your credentials to continue"
 				des3="Register with Email address"
 			/>
-			<Box component="form" noValidate sx={{ mt: 1 }}>
+			<Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
 				{/* grid for first and last name */}
 				<Grid container columnSpacing={2}>
 					<Grid item sm={6} xs={12}>
 						{/* input element - first name */}
 						<FormControl
 							fullWidth
-							// error={Boolean(errors.firstName)}
-							// error={true}
+							error={Boolean(errors.firstName)}
 							sx={{ ...theme.customInput, mb: "13px" }}
 						>
 							<InputLabel htmlFor="outlined-adornment-firstName-login">
@@ -75,25 +99,21 @@ const Register = () => {
 							<OutlinedInput
 								id="outlined-adornment-firstName-login"
 								type="text"
-								// value={"values.firstName"}
-								name="firstName"
-								// onBlur={"handleBlur"}
-								// onChange={"handleChange"}
 								label="First Name"
+								{...register("firstName")}
 							/>
-							{/* {errors.firstName && (
-							<FormHelperText error id="standard-weight-helper-text-firstName-login">
-								{errors.firstName}
-							</FormHelperText>
-						)} */}
+							{errors.firstName && (
+								<FormHelperText sx={{ mb: 0, mt: 1 }} error>
+									{errors.firstName?.message}
+								</FormHelperText>
+							)}
 						</FormControl>
 					</Grid>
 					<Grid item sm={6} xs={12}>
 						{/* input element - last name */}
 						<FormControl
 							fullWidth
-							// error={Boolean(errors.lastName)}
-							// error={true}
+							error={Boolean(errors.lastName)}
 							sx={{ ...theme.customInput, mb: "13px" }}
 						>
 							<InputLabel htmlFor="outlined-adornment-lastName-login">
@@ -102,24 +122,24 @@ const Register = () => {
 							<OutlinedInput
 								id="outlined-adornment-lastName-login"
 								type="text"
-								// value={"values.lastName"}
-								name="lastName"
-								// onBlur={"handleBlur"}
-								// onChange={"handleChange"}
+								{...register("lastName")}
 								label="Last Name"
 							/>
-							{/* {errors.lastName && (
-							<FormHelperText error id="standard-weight-helper-text-lastName-login">
-								{errors.lastName}
-							</FormHelperText>
-						)} */}
+							{errors.lastName && (
+								<FormHelperText
+									sx={{ mb: 0, mt: 1 }}
+									error={Boolean(errors.lastName)}
+									id="standard-weight-helper-text-lastName-login"
+								>
+									{errors.lastName?.message}
+								</FormHelperText>
+							)}
 						</FormControl>
 					</Grid>
 				</Grid>
 				<FormControl
 					fullWidth
-					// error={Boolean(errors.email)}
-					// error={true}
+					error={Boolean(errors.email)}
 					sx={{ ...theme.customInput, mb: "13px" }}
 				>
 					<InputLabel htmlFor="outlined-adornment-email-login">
@@ -128,32 +148,31 @@ const Register = () => {
 					<OutlinedInput
 						id="outlined-adornment-email-login"
 						type="email"
-						// value={"values.email"}
-						name="email"
-						// onBlur={"handleBlur"}
-						// onChange={"handleChange"}
+						{...register("email")}
 						label="Email Address / Username"
 					/>
-					{/* {errors.email && (
-							<FormHelperText error id="standard-weight-helper-text-email-login">
-								{errors.email}
-							</FormHelperText>
-						)} */}
+					{errors.email && (
+						<FormHelperText
+							sx={{ mb: 0, mt: 1 }}
+							error
+							id="standard-weight-helper-text-email-login"
+						>
+							{errors.email?.message}
+						</FormHelperText>
+					)}
 				</FormControl>
 				<FormControl
 					fullWidth
-					// error={Boolean(errors.email)}
-					// error={true}
+					error={Boolean(errors.password)}
 					sx={{ ...theme.customInput }}
 				>
 					<InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
 					<OutlinedInput
 						id="outlined-adornment-password-login"
-						value={formData.password}
-						name="password"
-						onChange={handleChange}
+						{...register("password")}
 						label="Password"
 						type={showPassword ? "text" : "password"}
+						onChange={handleStrengthChange}
 						endAdornment={
 							<InputAdornment sx={{ mb: "6px" }} position="end">
 								<IconButton
@@ -168,11 +187,15 @@ const Register = () => {
 							</InputAdornment>
 						}
 					/>
-					{/* {errors.password && (
-							<FormHelperText error id="standard-weight-helper-text-password-login">
-								{errors.password}
-							</FormHelperText>
-						)} */}
+					{errors.password && (
+						<FormHelperText
+							sx={{ mb: 0, mt: 1 }}
+							error
+							id="standard-weight-helper-text-password-login"
+						>
+							{errors.password?.message}
+						</FormHelperText>
+					)}
 				</FormControl>
 				{strength !== 0 && (
 					<FormControl fullWidth>

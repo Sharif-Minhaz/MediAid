@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { IconEye as Visibility } from "@tabler/icons-react";
 import { IconEyeOff as VisibilityOff } from "@tabler/icons-react";
 import {
@@ -14,20 +17,42 @@ import {
 	OutlinedInput,
 	InputAdornment,
 	IconButton,
+	useTheme,
+	FormHelperText,
 } from "@mui/material";
-import { useTheme } from "@emotion/react";
 import AuthWrapper from "./AuthWrapper";
 import AuthIntro from "./AuthIntro";
 import AuthSubmitButton from "./AuthSubmitButton";
+import { toast } from "react-toastify";
 
 const Login = () => {
 	const theme = useTheme();
 	const [showPassword, setShowPassword] = useState(false);
 
+	const schema = yup
+		.object({
+			email: yup.string().email("Invalid email address").required("Email is required"),
+			password: yup.string().required("Password is required"),
+		})
+		.required();
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
+
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
-	
+
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault();
+	};
+
+	const onSubmit = (data) => {
+		toast.success("Successfully get the form data");
+		console.log(data);
 	};
 
 	return (
@@ -37,11 +62,10 @@ const Login = () => {
 				des2="Enter your credentials to continue"
 				des3="Log in with Email address"
 			/>
-			<Box component="form" noValidate sx={{ mt: 1 }}>
+			<Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
 				<FormControl
 					fullWidth
-					// error={Boolean(errors.email)}
-					// error={true}
+					error={Boolean(errors.email)}
 					sx={{ ...theme.customInput, mb: "13px" }}
 				>
 					<InputLabel htmlFor="outlined-adornment-email-login">
@@ -50,31 +74,28 @@ const Login = () => {
 					<OutlinedInput
 						id="outlined-adornment-email-login"
 						type="email"
-						// value={"values.email"}
-						name="email"
-						// onBlur={"handleBlur"}
-						// onChange={"handleChange"}
+						{...register("email")}
 						label="Email Address / Username"
 					/>
-					{/* {errors.email && (
-							<FormHelperText error id="standard-weight-helper-text-email-login">
-								{errors.email}
-							</FormHelperText>
-						)} */}
+					{errors.email && (
+						<FormHelperText
+							sx={{ mb: 0, mt: 1 }}
+							error
+							id="standard-weight-helper-text-email-login"
+						>
+							{errors.email?.message}
+						</FormHelperText>
+					)}
 				</FormControl>
 				<FormControl
 					fullWidth
-					// error={Boolean(errors.email)}
-					// error={true}
+					error={Boolean(errors.password)}
 					sx={{ ...theme.customInput }}
 				>
 					<InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
 					<OutlinedInput
 						id="outlined-adornment-password-login"
-						// value={"values.password"}
-						name="password"
-						// onBlur={"handleBlur"}
-						// onChange={"handleChange"}
+						{...register("password")}
 						label="Password"
 						type={showPassword ? "text" : "password"}
 						endAdornment={
@@ -91,11 +112,15 @@ const Login = () => {
 							</InputAdornment>
 						}
 					/>
-					{/* {errors.password && (
-							<FormHelperText error id="standard-weight-helper-text-password-login">
-								{errors.password}
-							</FormHelperText>
-						)} */}
+					{errors.password && (
+						<FormHelperText
+							sx={{ mb: 0, mt: 1 }}
+							error
+							id="standard-weight-helper-text-password-login"
+						>
+							{errors.password?.message}
+						</FormHelperText>
+					)}
 				</FormControl>
 				<Grid container>
 					<Grid item xs alignItems="center">

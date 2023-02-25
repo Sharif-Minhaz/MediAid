@@ -29,6 +29,14 @@ export const componentsTheme = () => {
 				},
 			},
 		},
+		MuiFormHelperText: {
+			styleOverrides: {
+				root: {
+					marginTop: "0px",
+					marginBottom: "5px"
+				},
+			},
+		},
 		MuiInputLabel: {
 			styleOverrides: {
 				root: {
