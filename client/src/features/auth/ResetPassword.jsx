@@ -92,11 +92,7 @@ const ResetPassword = () => {
 						}
 					/>
 					{errors.prevPassword && (
-						<FormHelperText
-							sx={{ mt: 1, mb: 0 }}
-							error
-							id="standard-weight-helper-text-prevPassword-login"
-						>
+						<FormHelperText error id="standard-weight-helper-text-prevPassword-login">
 							{errors.prevPassword?.message}
 						</FormHelperText>
 					)}
@@ -131,11 +127,7 @@ const ResetPassword = () => {
 						}
 					/>
 					{errors.newPassword && (
-						<FormHelperText
-							sx={{ mt: 1, mb: 0 }}
-							error
-							id="standard-weight-helper-text-newPassword-login"
-						>
+						<FormHelperText error id="standard-weight-helper-text-newPassword-login">
 							{errors.newPassword?.message}
 						</FormHelperText>
 					)}

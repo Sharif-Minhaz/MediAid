@@ -32,8 +32,9 @@ export const componentsTheme = () => {
 		MuiFormHelperText: {
 			styleOverrides: {
 				root: {
-					marginTop: "0px",
-					marginBottom: "5px"
+					marginTop: "8px",
+					marginBottom: "0px",
+					fontSize: "14px",
 				},
 			},
 		},
