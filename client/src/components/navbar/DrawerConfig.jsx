@@ -1,6 +1,7 @@
 import { Box, Drawer, useMediaQuery } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useStateContext } from "../../contexts/ContextProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { close, drawerStatus } from "../../features/drawer/drawerSlice";
 import DrawerLists from "./DrawerLists";
 
 const openedMixin = (theme) => ({
@@ -44,16 +45,18 @@ const CustomDrawer = styled(Drawer, { shouldForwardProp: (prop) => prop !== "ope
 const drawerWidth = 260;
 
 const DrawerConfig = () => {
-	const { leftDrawerOpen, handleLeftDrawerClose } = useStateContext();
 	const isSmallScreen = useMediaQuery("(max-width:899px)");
+	const drawerOpen = useSelector(drawerStatus);
+
+	const dispatch = useDispatch();
 
 	return (
 		<Box component="div">
 			{isSmallScreen ? (
 				<Drawer
 					variant="temporary"
-					open={leftDrawerOpen}
-					onClose={handleLeftDrawerClose}
+					open={drawerOpen}
+					onClose={() => dispatch(close())}
 					sx={{
 						display: { xs: "block", sm: "block", md: "none" },
 					}}
@@ -66,7 +69,7 @@ const DrawerConfig = () => {
 						display: { xs: "none", sm: "none", md: "block" },
 					}}
 					variant="permanent"
-					open={leftDrawerOpen}
+					open={drawerOpen}
 					className="down-list"
 				>
 					<DrawerLists isSmallScreen={isSmallScreen} drawerWidth={drawerWidth} />
