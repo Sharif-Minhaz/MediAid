@@ -3,16 +3,27 @@ import { IconInfoCircleFilled } from "@tabler/icons-react";
 
 const GalleryPhotoExcerpt = ({ item }) => {
 	return (
-		<ImageListItem>
+		<ImageListItem
+			sx={{
+				overflow: "hidden",
+				borderRadius: "4px",
+				"&:hover img": { transform: "scale(1.1)" },
+			}}
+		>
 			<img
-				src={`${item.img}?w=248&fit=crop&auto=format`}
-				srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+				src={item.img}
+				srcSet={item.img}
 				alt={item.title}
 				loading="lazy"
-				style={{ borderRadius: 4 }}
+				style={{ borderRadius: 4, transition: "0.4s all" }}
 			/>
 			<ImageListItemBar
-				sx={{ borderBottomLeftRadius: 4, borderBottomRightRadius: 4 }}
+				className="description-bar"
+				sx={{
+					borderBottomLeftRadius: 4,
+					borderBottomRightRadius: 4,
+					transition: "0.4s all",
+				}}
 				title={item.title}
 				subtitle={item.author}
 				actionIcon={
