@@ -78,11 +78,7 @@ const Login = () => {
 						label="Email Address / Username"
 					/>
 					{errors.email && (
-						<FormHelperText
-							sx={{ mb: 0, mt: 1 }}
-							error
-							id="standard-weight-helper-text-email-login"
-						>
+						<FormHelperText error id="standard-weight-helper-text-email-login">
 							{errors.email?.message}
 						</FormHelperText>
 					)}
@@ -113,11 +109,7 @@ const Login = () => {
 						}
 					/>
 					{errors.password && (
-						<FormHelperText
-							sx={{ mb: 0, mt: 1 }}
-							error
-							id="standard-weight-helper-text-password-login"
-						>
+						<FormHelperText error id="standard-weight-helper-text-password-login">
 							{errors.password?.message}
 						</FormHelperText>
 					)}

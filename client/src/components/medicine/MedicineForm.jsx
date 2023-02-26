@@ -81,10 +81,10 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase }) => {
 					>
 						<InputLabel htmlFor="medicineName">Full Medicine Name</InputLabel>
 						<OutlinedInput {...register("medicineName")} />
+						{errors.medicineName && (
+							<FormHelperText error>{errors.medicineName?.message}</FormHelperText>
+						)}
 					</FormControl>
-					{errors.medicineName && (
-						<FormHelperText error>{errors.medicineName?.message}</FormHelperText>
-					)}
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<FormControl
@@ -94,10 +94,10 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase }) => {
 					>
 						<InputLabel htmlFor="companyName">Company Name</InputLabel>
 						<OutlinedInput {...register("companyName")} />
+						{errors.companyName && (
+							<FormHelperText error>{errors.companyName?.message}</FormHelperText>
+						)}
 					</FormControl>
-					{errors.companyName && (
-						<FormHelperText error>{errors.companyName?.message}</FormHelperText>
-					)}
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<FormControl
@@ -107,10 +107,10 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase }) => {
 					>
 						<InputLabel htmlFor="donarName">Donar's Full Name</InputLabel>
 						<OutlinedInput {...register("donarName")} />
+						{errors.donarName && (
+							<FormHelperText error>{errors.donarName?.message}</FormHelperText>
+						)}
 					</FormControl>
-					{errors.donarName && (
-						<FormHelperText error>{errors.donarName?.message}</FormHelperText>
-					)}
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<FormControl
@@ -120,10 +120,10 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase }) => {
 					>
 						<InputLabel htmlFor="donarContact">Donar's Contact Number</InputLabel>
 						<OutlinedInput {...register("donarContact")} />
+						{errors.donarContact && (
+							<FormHelperText error>{errors.donarContact?.message}</FormHelperText>
+						)}
 					</FormControl>
-					{errors.donarContact && (
-						<FormHelperText error>{errors.donarContact?.message}</FormHelperText>
-					)}
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<FormControl
@@ -135,10 +135,12 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase }) => {
 							Provide Necessary Information
 						</InputLabel>
 						<OutlinedInput multiline rows={7} {...register("medicineDescription")} />
+						{errors.medicineDescription && (
+							<FormHelperText error>
+								{errors.medicineDescription?.message}
+							</FormHelperText>
+						)}
 					</FormControl>
-					{errors.medicineDescription && (
-						<FormHelperText error>{errors.medicineDescription?.message}</FormHelperText>
-					)}
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Controller

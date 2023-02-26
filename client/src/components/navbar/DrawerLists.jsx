@@ -15,6 +15,7 @@ import {
 	IconDashboard,
 	IconHeartHandshake,
 	IconMedicineSyrup,
+	IconPhotoPlus,
 } from "@tabler/icons-react";
 import BrandAuthImg from "../../features/auth/BrandAuthImg";
 import SingleNavLink from "./SingleNavLink";
@@ -48,6 +49,11 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 					link="/gallery"
 					text="Gallery"
 					icon={<IconBrandGooglePhotos size={20} />}
+				/>
+				<SingleNavLink
+					link="/gallery-photo/add"
+					text="Add Photo"
+					icon={<IconPhotoPlus size={20} />}
 				/>
 				<SingleNavLink
 					link="/donate"

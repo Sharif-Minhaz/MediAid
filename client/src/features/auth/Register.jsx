@@ -103,9 +103,7 @@ const Register = () => {
 								{...register("firstName")}
 							/>
 							{errors.firstName && (
-								<FormHelperText sx={{ mb: 0, mt: 1 }} error>
-									{errors.firstName?.message}
-								</FormHelperText>
+								<FormHelperText error>{errors.firstName?.message}</FormHelperText>
 							)}
 						</FormControl>
 					</Grid>
@@ -127,7 +125,6 @@ const Register = () => {
 							/>
 							{errors.lastName && (
 								<FormHelperText
-									sx={{ mb: 0, mt: 1 }}
 									error={Boolean(errors.lastName)}
 									id="standard-weight-helper-text-lastName-login"
 								>
@@ -152,11 +149,7 @@ const Register = () => {
 						label="Email Address / Username"
 					/>
 					{errors.email && (
-						<FormHelperText
-							sx={{ mb: 0, mt: 1 }}
-							error
-							id="standard-weight-helper-text-email-login"
-						>
+						<FormHelperText error id="standard-weight-helper-text-email-login">
 							{errors.email?.message}
 						</FormHelperText>
 					)}
@@ -188,11 +181,7 @@ const Register = () => {
 						}
 					/>
 					{errors.password && (
-						<FormHelperText
-							sx={{ mb: 0, mt: 1 }}
-							error
-							id="standard-weight-helper-text-password-login"
-						>
+						<FormHelperText error id="standard-weight-helper-text-password-login">
 							{errors.password?.message}
 						</FormHelperText>
 					)}
