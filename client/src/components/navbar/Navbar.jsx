@@ -2,11 +2,13 @@ import { cloneElement, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { AppBar, Toolbar, Stack, useScrollTrigger } from "@mui/material";
 import { IconBell as NotificationsNoneIcon } from "@tabler/icons-react";
-import { useStateContext } from "../../contexts/ContextProvider";
+// import { useStateContext } from "../../contexts/ContextProvider";
 import CustomIconButton from "../../theme/customComponent/CustomIconButton";
 import SearchBar from "../SearchBar";
 import ProfileBtn from "../navbar/ProfileBtn";
 import DrawerHeaderContents from "../navbar/DrawerHeaderContents";
+import { useDispatch, useSelector } from "react-redux";
+import { toggle, drawerStatus } from "../../features/drawer/drawerSlice";
 
 const ElevationScroll = ({ children }) => {
 	const trigger = useScrollTrigger({
@@ -39,7 +41,9 @@ const CustomAppBar = styled(AppBar, {
 }));
 
 const Navbar = ({ handleNotificationClick, handleClick }) => {
-	const { leftDrawerOpen, handleLeftDrawerToggle } = useStateContext();
+	const drawerOpen = useSelector(drawerStatus);
+
+	const dispatch = useDispatch();
 
 	const [showFullSearch, setShowFullSearch] = useState(false);
 
@@ -53,7 +57,7 @@ const Navbar = ({ handleNotificationClick, handleClick }) => {
 				elevation={0}
 				color="light"
 				position="fixed"
-				open={leftDrawerOpen}
+				open={drawerOpen}
 			>
 				{/* ============= visible full search ============ */}
 				{showFullSearch && (
@@ -85,7 +89,7 @@ const Navbar = ({ handleNotificationClick, handleClick }) => {
 						{/* =========== drawer contents =========== */}
 						<DrawerHeaderContents
 							handleShowFullSearch={handleShowFullSearch}
-							handleLeftDrawerToggle={handleLeftDrawerToggle}
+							handleLeftDrawerToggle={() => dispatch(toggle())}
 						/>
 					</DrawerHeader>
 					<Stack

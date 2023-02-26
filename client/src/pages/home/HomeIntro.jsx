@@ -1,10 +1,12 @@
 import { Button, Grid, Stack, Typography } from "@mui/material";
-import { useStateContext } from "../../contexts/ContextProvider";
 import { useNavigate } from "react-router-dom";
 import { IconMedicineSyrup } from "@tabler/icons-react";
+import { useSelector } from "react-redux";
+import { drawerStatus } from "../../features/drawer/drawerSlice";
 
 const HomeIntro = () => {
-	const { leftDrawerOpen } = useStateContext();
+	const drawerOpen = useSelector(drawerStatus);
+
 	const navigate = useNavigate();
 
 	return (
@@ -21,7 +23,7 @@ const HomeIntro = () => {
 							color: "#442281",
 							fontSize: {
 								lg: "2.125rem",
-								md: leftDrawerOpen ? "1.7rem" : "2.125",
+								md: drawerOpen ? "1.7rem" : "2.125",
 								sm: "1.6rem",
 								xs: "1.8rem",
 							},
@@ -39,7 +41,14 @@ const HomeIntro = () => {
 						providing medicine and healthcare services online.
 					</Typography>
 					<Button
-						sx={{ width: "200px", color: "whitesmoke", p: "9px", mt: "6px", borderTopLeftRadius: "17px", borderBottomRightRadius: "17px" }}
+						sx={{
+							width: "200px",
+							color: "whitesmoke",
+							p: "9px",
+							mt: "6px",
+							borderTopLeftRadius: "17px",
+							borderBottomRightRadius: "17px",
+						}}
 						variant="contained"
 						disableElevation
 						onClick={() => navigate("/medicines")}

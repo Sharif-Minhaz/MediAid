@@ -12,7 +12,7 @@ import GalleryPhotoExcerpt from "./GalleryPhotoExcerpt";
 const itemData = [
 	{
 		img: "images/gallery/gallery-6.jpg",
-		title: "The relief of COVID-19",
+		title: "The relief from COVID-19",
 		author: "@asiful-haque",
 	},
 	{

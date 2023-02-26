@@ -1,7 +1,8 @@
 import MedicineExcerpt from "../../components/medicine/MedicineExcerpt";
 import { Box, Grid, useMediaQuery } from "@mui/material";
 import SectionTitle from "../../components/SectionTitle";
-import { useStateContext } from "../../contexts/ContextProvider";
+import { useSelector } from "react-redux";
+import { drawerStatus } from "../../features/drawer/drawerSlice";
 
 const medicines = [
 	{
@@ -62,7 +63,8 @@ const medicines = [
 ];
 
 const RatedMedicines = () => {
-	const { leftDrawerOpen } = useStateContext();
+	const drawerOpen = useSelector(drawerStatus);
+
 	const midScreen = useMediaQuery("(min-width:900px)");
 	const smallScreen = useMediaQuery("(min-width:600px)");
 
@@ -82,7 +84,7 @@ const RatedMedicines = () => {
 						key={medicine.id}
 						item
 						lg={4}
-						md={leftDrawerOpen ? 6 : 4}
+						md={drawerOpen ? 6 : 4}
 						sm={smallScreen ? 6 : 4}
 						xs={12}
 					>
