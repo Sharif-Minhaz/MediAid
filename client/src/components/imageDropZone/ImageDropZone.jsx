@@ -59,7 +59,7 @@ const PreviewImgStyle = ({ files, handleRemoveImage }) => {
 	);
 };
 
-const ImageDropZone = forwardRef(({ image, onFileSelect }, ref) => {
+const ImageDropZone = forwardRef(({ image = "", onFileSelect }, ref) => {
 	const [files, setFiles] = useState([]);
 
 	const handleRemoveImage = () => {
@@ -67,6 +67,7 @@ const ImageDropZone = forwardRef(({ image, onFileSelect }, ref) => {
 	};
 
 	const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } = useDropzone({
+		multiple: false,
 		accept: {
 			"image/*": [],
 		},
@@ -127,7 +128,7 @@ const ImageDropZone = forwardRef(({ image, onFileSelect }, ref) => {
 			<Box
 				component="div"
 				{...getRootProps({ style, className: "dropzone" })}
-				sx={{ height: files.length || image ? "auto" : 205 }}
+				sx={{ height: files.length || image ? "auto" : 208 }}
 			>
 				<input {...getInputProps()} />
 				{!(files.length || image) && (
@@ -143,7 +144,7 @@ const ImageDropZone = forwardRef(({ image, onFileSelect }, ref) => {
 					)}
 					{files.length
 						? files[0].name
-						: "Upload medicine img, Drop here or click to select img"}
+						: "Upload image: Drop here or click to select"}
 				</Stack>
 			</Box>
 			{(files.length || image) && (

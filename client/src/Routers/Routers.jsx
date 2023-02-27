@@ -11,6 +11,8 @@ import DetailsMedicine from "../components/medicine/DetailsMedicine";
 import AddMedicine from "./../pages/AddMedicine";
 import GalleryPage from "../pages/gallery/GalleryPage";
 import AddPhotoPage from "../features/gallery/AddPhotoPage";
+import Profile from "../pages/profile/Profile";
+import EditProfile from "../pages/profile/EditProfile";
 
 const Routers = () => {
 	return (
@@ -23,6 +25,11 @@ const Routers = () => {
 					<Route index element={<MedicinesPage />} />
 					<Route path=":medicineId" element={<DetailsMedicine />} />
 					<Route path="edit/:medicineId" element={<AddMedicine />} />
+				</Route>
+
+				<Route path="profile">
+					<Route index element={<Profile />} />
+					<Route path="edit" element={<EditProfile />} />
 				</Route>
 
 				<Route path="/medicine/add" element={<AddMedicine />} />
