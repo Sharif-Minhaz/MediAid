@@ -1,15 +1,35 @@
-import { IconButton, ImageListItem, ImageListItemBar } from "@mui/material";
+import { Box, IconButton, ImageListItem, ImageListItemBar } from "@mui/material";
 import { IconInfoCircleFilled } from "@tabler/icons-react";
 
 const GalleryPhotoExcerpt = ({ item }) => {
+	// TODO: description work on pending
 	return (
 		<ImageListItem
 			sx={{
 				overflow: "hidden",
 				borderRadius: "4px",
 				"&:hover img": { transform: "scale(1.1)" },
+				"&:hover .img-description-popover": { top: 0 },
 			}}
 		>
+			<Box
+				className="img-description-popover"
+				component="div"
+				sx={{
+					position: "absolute",
+					width: "100%",
+					color: "#ffffffd9",
+					fontSize: "16px",
+					background: "rgb(0 0 0 / 30%)",
+					zIndex: 999,
+					transition: "0.5s all",
+					p: "17px 20px",
+					height: "calc(100% - 60px)",
+					top: "-300px",
+				}}
+			>
+				{item.description}
+			</Box>
 			<img
 				src={item.img}
 				srcSet={item.img}

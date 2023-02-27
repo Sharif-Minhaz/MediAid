@@ -39,16 +39,20 @@ const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 			transformOrigin={{ horizontal: "right", vertical: "top" }}
 			anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
 		>
-			<MenuItem onClick={handleClose}>
-				<Avatar src="https://mui.com/static/images/avatar/1.jpg" /> View Profile
-			</MenuItem>
+			<Link to="/profile">
+				<MenuItem onClick={handleClose}>
+					<Avatar src="https://mui.com/static/images/avatar/1.jpg" /> View Profile
+				</MenuItem>
+			</Link>
 			<Divider />
-			<MenuItem onClick={handleClose}>
-				<ListItemIcon>
-					<IconEdit size={22} />
-				</ListItemIcon>
-				Edit
-			</MenuItem>
+			<Link to="/profile/edit">
+				<MenuItem onClick={handleClose}>
+					<ListItemIcon>
+						<IconEdit size={22} />
+					</ListItemIcon>
+					Edit
+				</MenuItem>
+			</Link>
 			<Link to="/register">
 				<MenuItem onClick={handleClose}>
 					<ListItemIcon>
