@@ -21,7 +21,7 @@ const ProfileBtn = ({ handleClick }) => {
 			startIcon={
 				<Avatar
 					alt="John Doe"
-					src="https://mui.com/static/images/avatar/1.jpg"
+					src="/images/default-profile-pic.jpg"
 					sx={{ width: 36, height: 36, ml: "2px" }}
 				/>
 			}

@@ -1,4 +1,4 @@
-import { Avatar, Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
+import { Avatar, Box, Divider, ListItemIcon, Menu, MenuItem, Stack } from "@mui/material";
 import { IconLogout as Logout, IconEdit, IconUserCircle } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
@@ -17,8 +17,8 @@ const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 					filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
 					mt: 1.5,
 					"& .MuiAvatar-root": {
-						width: 32,
-						height: 32,
+						width: 60,
+						height: 60,
 						ml: -0.5,
 						mr: 1,
 					},
@@ -40,8 +40,16 @@ const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 			anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
 		>
 			<Link to="/profile">
-				<MenuItem onClick={handleClose}>
-					<Avatar src="https://mui.com/static/images/avatar/1.jpg" /> View Profile
+				<MenuItem onClick={handleClose} sx={{ mb: "8px" }}>
+					<Avatar src="/images/default-profile-pic.jpg" />{" "}
+					<Stack>
+						<Box component="span" color="#364152" fontSize={18}>
+							John Doe
+						</Box>
+						<Box component="span" color="#364152" fontSize={14}>
+							Profile
+						</Box>
+					</Stack>
 				</MenuItem>
 			</Link>
 			<Divider />

@@ -35,3 +35,8 @@
     background-color: #ede7f6;
     color: #5e35b1 !important;
 }
+
+.bold-titles {
+    color: #5e5873;
+    font-weight: 500;
+}

@@ -7,13 +7,13 @@ import RatedMedicines from "./RatedMedicines";
 const Home = () => {
 	return (
 		<>
-			<Paper sx={{ mt: "20px" }}>
+			<Paper component="section" sx={{ mt: "20px" }}>
 				<HomeIntro />
 			</Paper>
-			<Paper sx={{ mt: "20px" }}>
+			<Paper component="section" sx={{ mt: "20px" }}>
 				<ServiceCards />
 			</Paper>
-			<Paper sx={{ mt: "20px" }}>
+			<Paper component="section" sx={{ mt: "20px" }}>
 				<RatedMedicines />
 			</Paper>
 		</>

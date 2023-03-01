@@ -9,7 +9,11 @@ const GalleryPhotoExcerpt = ({ item }) => {
 				overflow: "hidden",
 				borderRadius: "4px",
 				"&:hover img": { transform: "scale(1.1)" },
-				"&:hover .img-description-popover": { top: 0 },
+				"&:hover .img-description-popover": {
+					top: 0,
+					borderBottomLeftRadius: 0,
+					borderBottomRightRadius: 0,
+				},
 			}}
 		>
 			<Box
@@ -26,6 +30,8 @@ const GalleryPhotoExcerpt = ({ item }) => {
 					p: "17px 20px",
 					height: "calc(100% - 60px)",
 					top: "-300px",
+					borderBottomLeftRadius: "50%",
+					borderBottomRightRadius: "50%",
 				}}
 			>
 				{item.description}
