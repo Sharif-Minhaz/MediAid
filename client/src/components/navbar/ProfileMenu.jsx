@@ -53,14 +53,6 @@ const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 				</MenuItem>
 			</Link>
 			<Divider />
-			<Link to="/profile/edit">
-				<MenuItem onClick={handleClose}>
-					<ListItemIcon>
-						<IconEdit size={22} />
-					</ListItemIcon>
-					Edit
-				</MenuItem>
-			</Link>
 			<Link to="/register">
 				<MenuItem onClick={handleClose}>
 					<ListItemIcon>
