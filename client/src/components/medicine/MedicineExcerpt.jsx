@@ -23,7 +23,12 @@ const MedicineExcerpt = ({ medicine }) => {
 	};
 
 	return (
-		<Card variant="outlined">
+		<Card
+			// variant="outlined"
+			sx={{
+				boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
+			}}
+		>
 			<CardActionArea onClick={() => navigate(`/medicines/${medicine.id}`)}>
 				<CardMedia
 					sx={{ height: 200 }}

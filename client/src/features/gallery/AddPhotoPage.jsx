@@ -4,7 +4,7 @@ import AddPhotoForm from "./AddPhotoForm";
 
 const AddPhotoPage = () => {
 	return (
-		<Paper sx={{ mt: "5px" }}>
+		<Paper component="section" sx={{ mt: "5px" }}>
 			<SectionTitle text="Add Photo to Gallery" />
 			<AddPhotoForm />
 		</Paper>
