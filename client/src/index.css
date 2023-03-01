@@ -13,15 +13,15 @@ body {
   min-height: 100vh;
 }
 
+img {
+  pointer-events: none;
+  user-select: none;
+}
+
 /* -----------------scrollbar------------------ */
 /* width */
 ::-webkit-scrollbar {
   width: 6px;
-}
-
-img {
-  pointer-events: none;
-  user-select: none;
 }
 
 /* Track */
