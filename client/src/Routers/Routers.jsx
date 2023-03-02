@@ -15,6 +15,7 @@ import Profile from "../pages/profile/Profile";
 import EditProfile from "../pages/profile/EditProfile";
 import FAQ from "../pages/faq/FAQ";
 import Contact from "../pages/contact/Contact";
+import About from "../pages/about/About";
 
 const Routers = () => {
 	return (
@@ -40,6 +41,7 @@ const Routers = () => {
 				<Route path="/gallery-photo/add" element={<AddPhotoPage />} />
 				<Route path="/faq" element={<FAQ />} />
 				<Route path="/contact" element={<Contact />} />
+				<Route path="/about" element={<About />} />
 			</Route>
 
 			<Route path="/login" element={<Login />} />

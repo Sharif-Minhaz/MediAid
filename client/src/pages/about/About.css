@@ -1,0 +1,22 @@
+.short-heading {
+    color: #001b66;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+.main-heading {
+    font-weight: 500 !important;
+    color: #001b66;
+    font-size: 25px !important;
+}
+
+.about-body {
+    color: #768491;
+    font-size: 17px !important;
+}
+
+.about-learn-more {
+    color: #232b91;
+    font-weight: 500 !important;
+    font-size: 17px !important;
+}
