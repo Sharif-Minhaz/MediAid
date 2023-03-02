@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig({
 	plugins: [react()],
 	devOptions: {
-    errorOverlay: true,
-  },
-  server: { port: 3000 },
+		errorOverlay: true,
+	},
+	server: { port: 3000 },
 });
