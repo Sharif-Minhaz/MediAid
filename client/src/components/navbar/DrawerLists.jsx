@@ -82,7 +82,7 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 					icon={<IconLockOpen size={20} />}
 				/>
 				<SingleNavLink link="/faq" text="FAQ" icon={<IconMessage size={20} />} />
-				<SingleNavLink link="/c" text="Contact" icon={<IconAddressBook size={20} />} />
+				<SingleNavLink link="/contact" text="Contact" icon={<IconAddressBook size={20} />} />
 				<SingleNavLink link="/ab" text="About" icon={<IconNotebook size={20} />} />
 			</List>
 		</Box>

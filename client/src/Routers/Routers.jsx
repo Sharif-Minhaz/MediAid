@@ -14,6 +14,7 @@ import AddPhotoPage from "../features/gallery/AddPhotoPage";
 import Profile from "../pages/profile/Profile";
 import EditProfile from "../pages/profile/EditProfile";
 import FAQ from "../pages/faq/FAQ";
+import Contact from "../pages/contact/Contact";
 
 const Routers = () => {
 	return (
@@ -38,6 +39,7 @@ const Routers = () => {
 				<Route path="/gallery" element={<GalleryPage />} />
 				<Route path="/gallery-photo/add" element={<AddPhotoPage />} />
 				<Route path="/faq" element={<FAQ />} />
+				<Route path="/contact" element={<Contact />} />
 			</Route>
 
 			<Route path="/login" element={<Login />} />
