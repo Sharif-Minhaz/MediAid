@@ -35,6 +35,7 @@ const ContactForm = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
@@ -43,6 +44,7 @@ const ContactForm = () => {
 		handleMailSend(e)
 			.then(() => {
 				toast.success("Successfully sent the mail");
+				reset();
 			})
 			.catch((err) => {
 				toast.error("Couldn't sent the mail");
@@ -66,6 +68,7 @@ const ContactForm = () => {
 					id="outlined-adornment-name-login"
 					{...register("name")}
 					label="Name"
+					disabled={state.submitting}
 				/>
 				{errors.name && (
 					<FormHelperText error id="standard-weight-helper-text-name-login">
@@ -80,6 +83,7 @@ const ContactForm = () => {
 					{...register("email")}
 					label="Email Address"
 					type="email"
+					disabled={state.submitting}
 				/>
 				{errors.email && (
 					<FormHelperText error id="standard-weight-helper-text-email-login">
@@ -93,7 +97,13 @@ const ContactForm = () => {
 				sx={{ ...theme.customInput, mt: "13px" }}
 			>
 				<InputLabel htmlFor="description">Write about your needs</InputLabel>
-				<OutlinedInput multiline rows={6} {...register("description")} />
+
+				<OutlinedInput
+					multiline
+					rows={6}
+					{...register("description")}
+					disabled={state.submitting}
+				/>
 				{errors.description && (
 					<FormHelperText error>{errors.description?.message}</FormHelperText>
 				)}

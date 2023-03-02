@@ -40,3 +40,7 @@
     color: #5e5873;
     font-weight: 500;
 }
+
+.drop-shadow-img {
+    filter: drop-shadow(2px 1px 5px #666666);
+}
