@@ -1,6 +1,6 @@
 import "./About.css";
 import { Fragment } from "react";
-import { Divider, Grid, Paper } from "@mui/material";
+import { Grid, Paper, Divider } from "@mui/material";
 import SectionTitle from "../../components/SectionTitle";
 import AboutSection from "./AboutSection";
 import Team from "./Team";
@@ -34,17 +34,23 @@ const About = () => {
 		<>
 			<Paper component="section" sx={{ mt: "5px" }}>
 				<SectionTitle text="About Us" />
-				<Grid container columnSpacing="20px" rowGap={5}>
+				<Grid container columnSpacing="20px" sx={{ rowGap: { xs: 1, sm: 5 } }}>
 					{aboutData.map((data, i) => (
 						<Fragment key={i}>
-							<AboutSection data={data} direction={i % 2 === 0 ? "left" : "right"} />
-							{/* <Divider sx={{width: "100%", borderWidth: "3px"}} /> */}
+							<AboutSection
+								index={i}
+								data={data}
+								direction={i % 2 === 0 ? "left" : "right"}
+							/>
+							<Divider
+								sx={{ width: "100%", borderWidth: "1px", borderColor: "#eef2f6" }}
+							/>
 						</Fragment>
 					))}
 				</Grid>
 			</Paper>
 			<Paper component="section" sx={{ mt: "15px" }}>
-				<SectionTitle text="Our Team" />
+				<SectionTitle text="Meet Our Team" />
 				<Team />
 			</Paper>
 		</>

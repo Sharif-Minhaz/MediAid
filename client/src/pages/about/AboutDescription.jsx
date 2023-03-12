@@ -2,7 +2,7 @@ import { Box, Chip, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { IconPlus, IconTargetArrow } from "@tabler/icons-react";
 
-const AboutDescription = ({ description, shortHeading, heading }) => {
+const AboutDescription = ({ index, description, shortHeading, heading }) => {
 	return (
 		<Grid item xs={12} sm={7} sx={{ display: "flex", alignItems: "center" }}>
 			<Box component="div" sx={{ p: { xs: 2, sm: 3 } }}>
