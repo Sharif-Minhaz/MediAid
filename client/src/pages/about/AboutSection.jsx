@@ -1,16 +1,16 @@
-import { Grid } from "@mui/material";
 import AboutDescription from "./AboutDescription";
 import AboutImg from "./AboutImg";
 
-const AboutSection = ({ data, direction }) => {
+const AboutSection = ({ index, data, direction }) => {
 	const isRight = direction === "right";
 
 	return (
 		<>
 			{isRight ? (
 				<>
-					<AboutImg image={data.image} />
+					<AboutImg index={index} image={data.image} />
 					<AboutDescription
+						index={index}
 						heading={data.heading}
 						shortHeading={data.shortHeading}
 						description={data.description}
@@ -19,11 +19,12 @@ const AboutSection = ({ data, direction }) => {
 			) : (
 				<>
 					<AboutDescription
+						index={index}
 						heading={data.heading}
 						shortHeading={data.shortHeading}
 						description={data.description}
 					/>
-					<AboutImg image={data.image} />
+					<AboutImg index={index} image={data.image} />
 				</>
 			)}
 		</>

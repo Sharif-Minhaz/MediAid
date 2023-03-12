@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 
-const AboutImg = ({ image }) => {
+const AboutImg = ({index, image }) => {
 	return (
 		<Grid
 			item
