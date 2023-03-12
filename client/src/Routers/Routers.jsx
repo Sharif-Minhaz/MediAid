@@ -16,6 +16,7 @@ import EditProfile from "../pages/profile/EditProfile";
 import FAQ from "../pages/faq/FAQ";
 import Contact from "../pages/contact/Contact";
 import About from "../pages/about/About";
+import HealthTips from "../pages/healthTips/HealthTips";
 
 const Routers = () => {
 	return (
@@ -39,6 +40,7 @@ const Routers = () => {
 
 				<Route path="/gallery" element={<GalleryPage />} />
 				<Route path="/gallery-photo/add" element={<AddPhotoPage />} />
+				<Route path="/health-tips" element={<HealthTips />} />
 				<Route path="/faq" element={<FAQ />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/about" element={<About />} />

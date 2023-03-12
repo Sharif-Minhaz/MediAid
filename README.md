@@ -24,4 +24,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-If you have any questions or suggestions, please feel free to reach out to us at sharif35-3001@diu.edu.bd. Thank you for your interest in donating medicines and helping to improve access to healthcare for all.
+If you have any questions or suggestions, please feel free to reach out to us at sharif35-3001@diu.edu.bd or asiful35-2961@diu.edu.bd. Thank you for your interest in donating medicines and helping to improve access to healthcare for all.

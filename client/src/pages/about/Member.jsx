@@ -15,7 +15,9 @@ const Member = ({ data }) => {
 					<p className="card-text">{data.bio}</p>
 					{/* social media section - facebook, github and whatsapp */}
 					<SocialMediaSection fb={data.fb} gh={data.gh} wp={data.wp} />
-					<button className="card-btn">Hire Me</button>
+					<a href={`mailto:${data.email}`}>
+						<button className="card-btn">Hire Me</button>
+					</a>
 				</Box>
 			</Box>
 		</Grid>

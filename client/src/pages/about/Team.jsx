@@ -10,6 +10,7 @@ const teamData = [
 		fb: "https://www.facebook.com/sharif.mdminhaz",
 		wp: "whatsapp://send?phone=+8801308673831",
 		gh: "https://github.com/Sharif-Minhaz",
+		email: "sharif35-3001@diu.edu.bd"
 	},
 	{
 		name: "Asiful Haque",
@@ -19,6 +20,7 @@ const teamData = [
 		fb: "https://www.facebook.com/asifiul.haque",
 		wp: "whatsapp://send?phone=+8801879205152",
 		gh: "https://github.com/Asiful-Haque",
+		email: "asiful35-2961@diu.edu.bd"
 	},
 ];
 
