@@ -55,7 +55,7 @@ const healthTips = [
 
 const HealthTips = () => {
 	return (
-		<Paper component="section" sx={{ mt: "3px" }}>
+		<Paper component="section" sx={{ mt: "5px" }}>
 			<SectionTitle text="Health Tips for You" button={{text: "ADD", link: "/health-tips/add"}} />
 			<Box>
 				{healthTips.map((healthTip) => (
