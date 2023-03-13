@@ -17,6 +17,7 @@ import FAQ from "../pages/faq/FAQ";
 import Contact from "../pages/contact/Contact";
 import About from "../pages/about/About";
 import HealthTips from "../pages/healthTips/HealthTips";
+import AddHealthTip from "../pages/healthTips/AddHealthTip";
 
 const Routers = () => {
 	return (
@@ -36,14 +37,20 @@ const Routers = () => {
 					<Route path="edit" element={<EditProfile />} />
 				</Route>
 
-				<Route path="/medicine/add" element={<AddMedicine />} />
+				<Route path="medicine/add" element={<AddMedicine />} />
 
-				<Route path="/gallery" element={<GalleryPage />} />
-				<Route path="/gallery-photo/add" element={<AddPhotoPage />} />
-				<Route path="/health-tips" element={<HealthTips />} />
-				<Route path="/faq" element={<FAQ />} />
-				<Route path="/contact" element={<Contact />} />
-				<Route path="/about" element={<About />} />
+				<Route path="gallery" element={<GalleryPage />} />
+				<Route path="gallery-photo/add" element={<AddPhotoPage />} />
+
+				<Route path="health-tips">
+					<Route index element={<HealthTips />} />
+					<Route path="add" element={<AddHealthTip />} />
+					<Route path="edit" element={<AddHealthTip />} />
+				</Route>
+
+				<Route path="faq" element={<FAQ />} />
+				<Route path="contact" element={<Contact />} />
+				<Route path="about" element={<About />} />
 			</Route>
 
 			<Route path="/login" element={<Login />} />

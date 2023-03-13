@@ -1,8 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import { IconPencilMinus } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HealthTipExcerpt = ({ healthTip }) => {
+	const navigate = useNavigate();
+
 	return (
 		<Box sx={{ px: 3, py: 2, "&:hover .edit-icon": { display: "inline-block" } }}>
 			<Typography
@@ -17,9 +19,10 @@ const HealthTipExcerpt = ({ healthTip }) => {
 					className="edit-icon"
 					sx={{ display: "none", cursor: "pointer" }}
 				>
-					<Link to="/health-tips/edit">
-						<IconPencilMinus size={20} />
-					</Link>
+					<IconPencilMinus
+						onClick={() => navigate("/health-tips/edit", { state: healthTip })}
+						size={20}
+					/>
 				</Typography>
 			</Typography>
 			<Typography variant="body1" sx={{ color: "#000000e3" }}>
