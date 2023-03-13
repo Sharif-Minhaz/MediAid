@@ -15,6 +15,7 @@
     "@hookform/resolvers": "^2.9.11",
     "@mui/material": "^5.11.8",
     "@reduxjs/toolkit": "^1.9.2",
+    "@rollup/plugin-commonjs": "^24.0.1",
     "@tabler/icons-react": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
