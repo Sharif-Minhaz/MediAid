@@ -44,3 +44,15 @@
 .drop-shadow-img {
     filter: drop-shadow(2px 1px 5px #666666);
 }
+
+/* Jodit editor styles start here */
+
+.jodit-wysiwyg a {
+    text-decoration: underline;
+    color: blue;
+    font-style: italic;
+}
+
+.jodit-wysiwyg :is(ol, ul) {
+    margin: 20px;
+}
