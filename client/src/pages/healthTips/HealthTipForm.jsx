@@ -15,35 +15,10 @@ import { IconPencilPlus, IconReportMedical } from "@tabler/icons-react";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import RichTextEditor from "../../components/RichTextEditor";
-import { useQuill } from "react-quilljs";
-
-const options = {
-	toolbar: [
-		["bold", "italic", "underline", "strike"],
-		[{ align: [] }],
-
-		[{ list: "ordered" }, { list: "bullet" }],
-		[{ indent: "-1" }, { indent: "+1" }],
-
-		[{ size: ["small", false, "large", "huge"] }],
-		[{ header: [1, 2, 3, 4, 5, 6, false] }],
-		["link"],
-		[{ color: [] }, { background: [] }],
-
-		["clean"],
-	],
-	clipboard: {
-		matchVisual: false,
-	},
-};
 
 const HealthTipForm = ({ isUpdateCase, setIsUpdateCase }) => {
 	const theme = useTheme();
 	const { state } = useLocation();
-	const { quill, quillRef } = useQuill({
-		modules: options,
-		placeholder: "Write about the health tip...",
-	});
 
 	const schema = yup
 		.object({
@@ -61,6 +36,7 @@ const HealthTipForm = ({ isUpdateCase, setIsUpdateCase }) => {
 		formState: { errors },
 		reset,
 		setValue,
+		getValues,
 	} = useForm({
 		resolver: yupResolver(schema),
 		defaultValues: {
@@ -72,8 +48,9 @@ const HealthTipForm = ({ isUpdateCase, setIsUpdateCase }) => {
 	const onSubmit = (data) => {
 		toast.success("Successfully get the data");
 		console.log(data);
-		reset();
-		quill.clipboard.dangerouslyPasteHTML("");
+		if (!isUpdateCase) {
+			reset();
+		}
 	};
 
 	useEffect(() => {
@@ -81,18 +58,6 @@ const HealthTipForm = ({ isUpdateCase, setIsUpdateCase }) => {
 			setIsUpdateCase(true);
 		}
 	}, []);
-
-	useEffect(() => {
-		if (quill) {
-			if (state?.description) {
-				quill.clipboard.dangerouslyPasteHTML(state?.description);
-			}
-
-			quill.on("text-change", (delta, oldDelta, source) => {
-				setValue("description", quillRef.current.firstChild.innerHTML);
-			});
-		}
-	}, [quill]);
 
 	return (
 		<Box
@@ -123,7 +88,8 @@ const HealthTipForm = ({ isUpdateCase, setIsUpdateCase }) => {
 			<RichTextEditor
 				data={state?.description}
 				error={Boolean(errors.description?.message)}
-				quillRef={quillRef}
+				setValue={setValue}
+				getValues={getValues}
 			/>
 
 			{errors.description && (
