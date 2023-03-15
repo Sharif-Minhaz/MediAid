@@ -13,6 +13,7 @@ import { Box } from "@mui/system";
 import { IconClipboardHeart, IconPencil, IconStarHalfFilled, IconTrash } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import CustomIconButton from "../../theme/customComponent/CustomIconButton";
+import { truncate } from "../../utils/truncate";
 
 const MedicineExcerpt = ({ medicine }) => {
 	const navigate = useNavigate();
@@ -24,7 +25,6 @@ const MedicineExcerpt = ({ medicine }) => {
 
 	return (
 		<Card
-			// variant="outlined"
 			sx={{
 				boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
 			}}
@@ -43,7 +43,7 @@ const MedicineExcerpt = ({ medicine }) => {
 						{medicine.medicineName}
 					</Typography>
 					<Typography variant="body2" color="text.secondary">
-						{medicine.medicineDescription}...
+						{truncate(medicine?.medicineDescription, 118)}
 					</Typography>
 				</CardContent>
 			</CardActionArea>
@@ -91,7 +91,11 @@ const MedicineExcerpt = ({ medicine }) => {
 							>
 								<IconTrash />
 							</CustomIconButton>
-							<CustomIconButton onClick={() => navigate(`/apply/${medicine.id}`)}>
+							<CustomIconButton
+								onClick={() =>
+									navigate(`/medicines/apply/${medicine.id}`, { state: medicine })
+								}
+							>
 								<IconClipboardHeart />
 							</CustomIconButton>
 						</>
@@ -102,7 +106,9 @@ const MedicineExcerpt = ({ medicine }) => {
 							variant="contained"
 							size="small"
 							disableElevation
-							onClick={() => navigate(`/apply/${medicine.id}`)}
+							onClick={() =>
+								navigate(`/medicines/apply/${medicine.id}`, { state: medicine })
+							}
 						>
 							Apply
 						</Button>

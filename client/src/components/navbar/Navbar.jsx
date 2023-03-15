@@ -108,7 +108,7 @@ const Navbar = ({ handleNotificationClick, handleClick }) => {
 						<SearchBar
 							sm="none"
 							md="flex"
-							lgWidth="430px"
+							lgWidth="410px"
 							mdWidth="250px"
 							smWidth="250px"
 						/>
