@@ -1,10 +1,17 @@
 import { Box, IconButton, ImageListItem, ImageListItemBar } from "@mui/material";
 import { IconInfoCircleFilled } from "@tabler/icons-react";
+import { useInView } from "react-intersection-observer";
 
 const GalleryPhotoExcerpt = ({ item }) => {
-	// TODO: description work on pending
+	const { ref, inView } = useInView({
+		threshold: 0.25,
+		triggerOnce: false,
+	});
+
 	return (
 		<ImageListItem
+			className={`${inView ? "fade-in visible" : "fade-in"}`}
+			ref={ref}
 			sx={{
 				overflow: "hidden",
 				borderRadius: "4px",

@@ -1,3 +1,4 @@
+import { useInView } from "react-intersection-observer";
 import {
 	Button,
 	Card,
@@ -17,6 +18,11 @@ import { truncate } from "../../utils/truncate";
 
 const MedicineExcerpt = ({ medicine }) => {
 	const navigate = useNavigate();
+	const { ref, inView } = useInView({
+		threshold: 0.3,
+		triggerOnce: false,
+	});
+
 	const isAdmin = true;
 
 	const handleMedicineDelete = (medicineId) => {
@@ -25,6 +31,8 @@ const MedicineExcerpt = ({ medicine }) => {
 
 	return (
 		<Card
+			className={`${inView ? "fade-in visible" : "fade-in"}`}
+			ref={ref}
 			sx={{
 				boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
 			}}
