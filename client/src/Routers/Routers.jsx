@@ -18,7 +18,8 @@ import Contact from "../pages/contact/Contact";
 import About from "../pages/about/About";
 import HealthTips from "../pages/healthTips/HealthTips";
 import AddHealthTip from "../pages/healthTips/AddHealthTip";
-import MedicineApplyForm from "../components/medicine/MedicineApplyForm";
+import MedicineApply from "../components/medicine/MedicineApply";
+import SearchResultPage from "../pages/SearchResultPage";
 
 const Routers = () => {
 	return (
@@ -31,7 +32,7 @@ const Routers = () => {
 					<Route index element={<MedicinesPage />} />
 					<Route path=":medicineId" element={<DetailsMedicine />} />
 					<Route path="edit/:medicineId" element={<AddMedicine />} />
-					<Route path="apply/:medicineId" element={<MedicineApplyForm />} />
+					<Route path="apply/:medicineId" element={<MedicineApply />} />
 				</Route>
 
 				<Route path="profile">
@@ -53,6 +54,7 @@ const Routers = () => {
 				<Route path="faq" element={<FAQ />} />
 				<Route path="contact" element={<Contact />} />
 				<Route path="about" element={<About />} />
+				<Route path="search" element={<SearchResultPage />} />
 			</Route>
 
 			<Route path="/login" element={<Login />} />

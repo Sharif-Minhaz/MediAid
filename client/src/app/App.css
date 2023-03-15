@@ -7,7 +7,7 @@
 }
 
 .search-floating-md .MuiFormControl-root {
-    padding-inline: 16px;
+    padding-inline: 0;
 }
 
 .down-list>.MuiPaper-root {
@@ -55,4 +55,24 @@
 
 .jodit-wysiwyg :is(ol, ul) {
     margin: 20px;
+}
+
+/* search configuration */
+[name='searchText'] .search-body .MuiInputBase-root.MuiOutlinedInput-root {
+    padding-inline: 14px;
+}
+
+div[role='presentation'].MuiAutocomplete-popper {
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+    border-radius: 16px;
+}
+
+@media (max-width: 899px) {
+    .search-floating-md .MuiFormControl-root {
+        padding-inline: 0;
+    }
+
+    [name=searchText] {
+        padding-inline: 16px;
+    }
 }

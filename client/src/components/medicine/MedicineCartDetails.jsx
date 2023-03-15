@@ -56,7 +56,14 @@ const MedicineCartDetails = ({ medicine }) => {
 					>
 						<IconMinus size={14} />
 					</Button>
-					<span style={{ display: "inline-block", width: "40px", textAlign: "center" }}>
+					<span
+						style={{
+							display: "inline-block",
+							width: "40px",
+							textAlign: "center",
+							userSelect: "none",
+						}}
+					>
 						{count}
 					</span>
 					<Button
@@ -77,7 +84,11 @@ const MedicineCartDetails = ({ medicine }) => {
 				</Box>
 				<Button
 					fullWidth
-					onClick={() => navigate(`/medicines/apply/${medicine.id}`)}
+					onClick={() =>
+						navigate(`/medicines/apply/${medicine.id}`, {
+							state: { ...medicine, count },
+						})
+					}
 					sx={{
 						background: "rgb(15 23 42)",
 						color: "rgb(248 250 252)",
