@@ -1,9 +1,15 @@
+import { useInView } from "react-intersection-observer";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { Link, useNavigate } from "react-router-dom";
 import { toCapitalize } from "../../utils/toCapitalize";
 
 const ServiceCardExcerpt = ({ img, heading, type = "medicines" }) => {
+	const { ref, inView } = useInView({
+		threshold: 0.3,
+		triggerOnce: false,
+	});
+
 	const navigate = useNavigate();
 
 	return (
@@ -11,6 +17,8 @@ const ServiceCardExcerpt = ({ img, heading, type = "medicines" }) => {
 			width="100%"
 			component="article"
 			height="180px"
+			className={`${inView ? "fade-in visible" : "fade-in"}`}
+			ref={ref}
 			sx={{
 				backgroundImage: `url(${img})`,
 				backgroundSize: "cover",

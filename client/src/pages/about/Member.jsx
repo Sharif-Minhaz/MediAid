@@ -1,9 +1,15 @@
 import { Box, Grid } from "@mui/material";
 import SocialMediaSection from "./SocialMediaSection";
+import { useInView } from "react-intersection-observer";
 
 const Member = ({ data }) => {
+	const { ref, inView } = useInView({
+		threshold: 0.3,
+		triggerOnce: false,
+	});
+
 	return (
-		<Grid item xs={12} sm={6}>
+		<Grid item xs={12} sm={6} className={`${inView ? "fade-in visible" : "fade-in"}`} ref={ref}>
 			<Box className="card">
 				<Box className="card-image">
 					<img src={data.image} alt="card image" />

@@ -2,7 +2,7 @@ import { Box, Grid, useMediaQuery } from "@mui/material";
 import ServiceCardExcerpt from "./ServiceCardExcerpt";
 
 const serviceCardsData = [
-	{ img: "/images/card-img-3.png", heading: "Your Trusted Medi Provider!", type: "medicine" },
+	{ img: "/images/card-img-3.png", heading: "Your Trusted Medi Provider!", type: "medicines" },
 	{ img: "/images/card-img-1.png", heading: "Donate Medicine, Save Lives", type: "donate" },
 	{ img: "/images/card-img-2.png", heading: "Expert Health Tips for You", type: "health-tips" },
 ];

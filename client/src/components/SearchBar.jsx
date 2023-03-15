@@ -36,7 +36,7 @@ const SearchBar = ({
 	};
 
 	const handleAutoSelectSearch = (medicineName) => {
-		navigate(`/search?medicine=${medicineName}`);
+		if (medicineName?.length > 0) navigate(`/search?medicine=${medicineName}`);
 	};
 
 	return (
