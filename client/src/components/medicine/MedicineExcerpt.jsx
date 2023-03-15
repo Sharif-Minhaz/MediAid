@@ -29,7 +29,9 @@ const MedicineExcerpt = ({ medicine }) => {
 				boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
 			}}
 		>
-			<CardActionArea onClick={() => navigate(`/medicines/${medicine.id}`)}>
+			<CardActionArea
+				onClick={() => navigate(`/medicines/${medicine.id}`, { state: medicine })}
+			>
 				<CardMedia
 					sx={{ height: 200 }}
 					image={medicine.medicineImage}

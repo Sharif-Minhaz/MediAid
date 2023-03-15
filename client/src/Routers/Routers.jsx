@@ -18,6 +18,7 @@ import Contact from "../pages/contact/Contact";
 import About from "../pages/about/About";
 import HealthTips from "../pages/healthTips/HealthTips";
 import AddHealthTip from "../pages/healthTips/AddHealthTip";
+import MedicineApplyForm from "../components/medicine/MedicineApplyForm";
 
 const Routers = () => {
 	return (
@@ -30,6 +31,7 @@ const Routers = () => {
 					<Route index element={<MedicinesPage />} />
 					<Route path=":medicineId" element={<DetailsMedicine />} />
 					<Route path="edit/:medicineId" element={<AddMedicine />} />
+					<Route path="apply/:medicineId" element={<MedicineApplyForm />} />
 				</Route>
 
 				<Route path="profile">
