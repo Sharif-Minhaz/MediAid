@@ -4,8 +4,8 @@ import { useInView } from "react-intersection-observer";
 
 const GalleryPhotoExcerpt = ({ item }) => {
 	const { ref, inView } = useInView({
-		threshold: 0.25,
-		triggerOnce: false,
+		threshold: 0.2,
+		triggerOnce: true,
 	});
 
 	return (
@@ -30,11 +30,11 @@ const GalleryPhotoExcerpt = ({ item }) => {
 					position: "absolute",
 					width: "100%",
 					color: "#ffffffd9",
-					fontSize: "16px",
+					fontSize: { xs: "12px", sm: "16px" },
 					background: "rgb(0 0 0 / 30%)",
 					zIndex: 999,
 					transition: "0.5s all",
-					p: "17px 20px",
+					p: { xs: "10px", sm: "17px 20px" },
 					height: "calc(100% - 60px)",
 					top: "-300px",
 					borderBottomLeftRadius: "50%",

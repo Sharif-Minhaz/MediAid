@@ -67,7 +67,10 @@ const Gallery = () => {
 	return (
 		<Box component="div">
 			<SectionTitle text="Our Gallery" />
-			<ImageList sx={{ p: 2, overflow: "hidden" }} cols={smallScreen ? 1 : 2}>
+			<ImageList
+				sx={{ p: 2, overflow: "hidden", minHeight: "600px" }}
+				cols={smallScreen ? 1 : 2}
+			>
 				{itemData.map((item) => (
 					<GalleryPhotoExcerpt key={item.title} item={item} />
 				))}
