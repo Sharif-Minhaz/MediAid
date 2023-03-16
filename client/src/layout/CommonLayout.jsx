@@ -5,6 +5,7 @@ import ProfileMenu from "../components/navbar/ProfileMenu";
 import NotificationMenu from "../components/navbar/NotificationMenu";
 import DrawerConfig from "../components/navbar/DrawerConfig";
 import Navbar from "../components/navbar/Navbar";
+import CartMedicineSidebar from "../components/navbar/CartMedicineSidebar";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
 	display: "flex",
@@ -63,6 +64,7 @@ export default function CommonLayout({ children }) {
 					</Box>
 				</Box>
 			</Box>
+			<CartMedicineSidebar />
 			<NotificationMenu
 				anchorEl={anchorEl.notification}
 				open={openNotification}
