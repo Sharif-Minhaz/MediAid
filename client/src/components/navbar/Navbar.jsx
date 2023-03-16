@@ -1,14 +1,14 @@
 import { cloneElement, useState } from "react";
 import { styled } from "@mui/material/styles";
-import { AppBar, Toolbar, Stack, useScrollTrigger } from "@mui/material";
-import { IconBell as NotificationsNoneIcon } from "@tabler/icons-react";
-// import { useStateContext } from "../../contexts/ContextProvider";
+import { AppBar, Toolbar, Stack, useScrollTrigger, Badge } from "@mui/material";
+import { IconBell as NotificationsNoneIcon, IconShoppingBag } from "@tabler/icons-react";
 import CustomIconButton from "../../theme/customComponent/CustomIconButton";
 import SearchBar from "../SearchBar";
 import ProfileBtn from "../navbar/ProfileBtn";
 import DrawerHeaderContents from "../navbar/DrawerHeaderContents";
 import { useDispatch, useSelector } from "react-redux";
-import { toggle, drawerStatus } from "../../features/drawer/drawerSlice";
+import { toggle, drawerStatus, openCart } from "../../features/drawer/drawerSlice";
+import { cartItemStatus } from "../../features/cart/cartSlice";
 
 const ElevationScroll = ({ children }) => {
 	const trigger = useScrollTrigger({
@@ -41,15 +41,16 @@ const CustomAppBar = styled(AppBar, {
 }));
 
 const Navbar = ({ handleNotificationClick, handleClick }) => {
-	const drawerOpen = useSelector(drawerStatus);
-
 	const dispatch = useDispatch();
+	const drawerOpen = useSelector(drawerStatus);
+	const cartMedicines = useSelector(cartItemStatus);
 
 	const [showFullSearch, setShowFullSearch] = useState(false);
 
 	const handleShowFullSearch = () => {
 		setShowFullSearch((prev) => !prev);
 	};
+
 	return (
 		<ElevationScroll>
 			<CustomAppBar
@@ -113,6 +114,18 @@ const Navbar = ({ handleNotificationClick, handleClick }) => {
 							smWidth="250px"
 						/>
 						<Stack direction="row" alignItems="center" gap={2}>
+							{cartMedicines.length > 0 && (
+								<Badge
+									badgeContent={cartMedicines.length}
+									color="primary"
+									sx={{ color: "white" }}
+									className="badge-item"
+								>
+									<CustomIconButton onClick={() => dispatch(openCart())}>
+										<IconShoppingBag size={22} />
+									</CustomIconButton>
+								</Badge>
+							)}
 							<CustomIconButton onClick={handleNotificationClick}>
 								<NotificationsNoneIcon size={22} />
 							</CustomIconButton>

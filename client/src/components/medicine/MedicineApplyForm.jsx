@@ -17,10 +17,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import MedicineExcerpt from "./MedicineExcerpt";
+import { useDispatch } from "react-redux";
+import { add } from "../../features/cart/cartSlice";
+import { openCart } from "../../features/drawer/drawerSlice";
 
 const MedicineApplyForm = () => {
-	const navigate = useNavigate();
 	const theme = useTheme();
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { state } = useLocation();
 
 	const schema = yup
@@ -54,6 +58,9 @@ const MedicineApplyForm = () => {
 
 	const onSubmit = (data) => {
 		toast.success("Successfully get the form data");
+		dispatch(add({ ...state, ...data }));
+		dispatch(openCart());
+		navigate("/medicines");
 		console.log(data);
 	};
 

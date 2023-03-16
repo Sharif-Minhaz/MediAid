@@ -41,3 +41,13 @@ img {
 ::-webkit-scrollbar-thumb:hover {
   background: #a8aed6;
 }
+
+.warning-message-no-js {
+  font-size: 20px;
+  padding: 12px;
+}
+
+.badge-item .MuiBadge-badge.MuiBadge-standard {
+  color: white;
+  background: #72df94;
+}
