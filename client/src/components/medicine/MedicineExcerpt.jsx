@@ -20,7 +20,7 @@ const MedicineExcerpt = ({ medicine }) => {
 	const navigate = useNavigate();
 	const { ref, inView } = useInView({
 		threshold: 0.3,
-		triggerOnce: false,
+		triggerOnce: true,
 	});
 
 	const isAdmin = true;
