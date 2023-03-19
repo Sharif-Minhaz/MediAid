@@ -1,5 +1,5 @@
 import "./ImageDropZone.css";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { IconCloudUpload, IconPhotoSearch, IconX } from "@tabler/icons-react";
 import { forwardRef, useEffect, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
@@ -142,9 +142,17 @@ const ImageDropZone = forwardRef(({ image = "", onFileSelect }, ref) => {
 							<IconCloudUpload size={22} />
 						</Box>
 					)}
-					{files.length
-						? files[0].name
-						: "Upload image: Drop here or click to select"}
+					{files.length ? (
+						<Typography title={files[0]?.name}>
+							{files[0]?.name.length > 19
+								? `${files[0]?.name?.substring(0, 10)}...${files[0].name.substring(
+										files[0].name?.length - 6
+								  )}`
+								: files[0]?.name}
+						</Typography>
+					) : (
+						"Upload image: Drop here or click to select"
+					)}
 				</Stack>
 			</Box>
 			{(files.length || image) && (

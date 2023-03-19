@@ -1,5 +1,5 @@
 import { Box, Divider, Drawer, Typography } from "@mui/material";
-import { IconShoppingCart } from "@tabler/icons-react";
+import { IconShoppingCart, IconX } from "@tabler/icons-react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartDrawerStatus, closeCart } from "../../features/drawer/drawerSlice";
 import { cartItemStatus } from "../../features/cart/cartSlice";
@@ -17,12 +17,7 @@ export default function CartMedicineSidebar() {
 			open={drawerOpen}
 			onClose={() => dispatch(closeCart())}
 		>
-			<Box
-				sx={{ width: 300, p: "16px" }}
-				role="presentation"
-				onClick={() => dispatch(closeCart())}
-				onKeyDown={() => dispatch(closeCart())}
-			>
+			<Box sx={{ width: 300, p: "16px" }} role="presentation">
 				<Typography
 					color="#2c145c"
 					display="flex"
@@ -32,12 +27,23 @@ export default function CartMedicineSidebar() {
 					mb={2}
 				>
 					<IconShoppingCart /> Cart Information
+					<IconX
+						style={{ marginLeft: "auto", cursor: "pointer" }}
+						onClick={() => dispatch(closeCart())}
+					/>
 				</Typography>
 				<Divider />
 				<Box>
-					{cartItems.map((item, i) => (
-						<CartItem cartItem={item.payload} key={i} />
-					))}
+					{cartItems.length === 0 ? (
+						<Typography
+							variant="body2"
+							sx={{ textAlign: "center", my: 2.5, fontStyle: "italic" }}
+						>
+							No item available to show.
+						</Typography>
+					) : (
+						cartItems.map((item, i) => <CartItem cartItem={item} key={i} />)
+					)}
 				</Box>
 			</Box>
 		</Drawer>
