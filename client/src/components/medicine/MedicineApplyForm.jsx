@@ -39,9 +39,9 @@ const MedicineApplyForm = () => {
 				.required("Contact number is required"),
 			reason: yup
 				.string()
-				.min(25, "Reason for this medicine must be at least 25 characters")
-				.max(500, "Reason for this medicine must be at most 500 characters")
-				.required("Reason for this medicine is required"),
+				// .min(25, "Reason for this medicine must be at least 25 characters")
+				.max(500, "Reason for this medicine must be at most 500 characters"),
+			// .required("Reason for this medicine is required"),
 		})
 		.required();
 
@@ -58,10 +58,10 @@ const MedicineApplyForm = () => {
 
 	const onSubmit = (data) => {
 		toast.success("Successfully get the form data");
-		dispatch(add({ ...state, ...data }));
+		dispatch(add({ ...state, ...data, status: "pending", id: Date.now() }));
 		dispatch(openCart());
-		navigate("/medicines");
-		console.log(data);
+
+		navigate("/medicines", { replace: true });
 	};
 
 	return (
@@ -164,7 +164,7 @@ const MedicineApplyForm = () => {
 					Apply
 				</Button>
 				<Button
-					onClick={() => navigate("/medicines")}
+					onClick={() => navigate("/medicines", { replace: true })}
 					startIcon={<IconX size={20} />}
 					type="button"
 					size="large"

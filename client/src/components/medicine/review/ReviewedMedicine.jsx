@@ -32,7 +32,7 @@ const ReviewedMedicine = () => {
 	return (
 		<Box sx={{ p: 2 }}>
 			<Typography variant="h5" mb={2} gutterBottom>
-				Peoples Ratings & Reviews
+				People's Ratings & Reviews
 			</Typography>
 			<Grid container>
 				{reviews.map((review) => (
