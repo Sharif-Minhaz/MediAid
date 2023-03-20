@@ -17,7 +17,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 
-const MedicineForm = ({ isUpdateCase, setIsUpdateCase }) => {
+const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 	const theme = useTheme();
 	const { state } = useLocation();
 
@@ -166,7 +166,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase }) => {
 				disableElevation
 				sx={{ color: "whitesmoke", borderRadius: "10px" }}
 			>
-				{isUpdateCase ? "Update Medicine" : "ADD Medicine"}
+				{isUpdateCase ? "Update Medicine" : donation ? "Donate" : "ADD Medicine"}
 			</Button>
 		</Box>
 	);
