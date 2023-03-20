@@ -16,6 +16,7 @@ import {
 	IconHeartHandshake,
 	IconMedicineSyrup,
 	IconPhotoPlus,
+	IconLoader,
 } from "@tabler/icons-react";
 import BrandAuthImg from "../../features/auth/BrandAuthImg";
 import SingleNavLink from "./SingleNavLink";
@@ -60,6 +61,7 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 					text="Donate"
 					icon={<IconHeartHandshake size={20} />}
 				/>
+				<SingleNavLink link="/pending" text="Pending" icon={<IconLoader size={20} />} />
 				<SingleNavLink link="/h" text="History" icon={<IconHistory size={20} />} />
 				<SingleNavLink link="/d" text="Donor List" icon={<IconClipboardList size={20} />} />
 				<SingleNavLink
@@ -82,7 +84,11 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 					icon={<IconLockOpen size={20} />}
 				/>
 				<SingleNavLink link="/faq" text="FAQ" icon={<IconMessage size={20} />} />
-				<SingleNavLink link="/contact" text="Contact" icon={<IconAddressBook size={20} />} />
+				<SingleNavLink
+					link="/contact"
+					text="Contact"
+					icon={<IconAddressBook size={20} />}
+				/>
 				<SingleNavLink link="/about" text="About" icon={<IconNotebook size={20} />} />
 			</List>
 		</Box>

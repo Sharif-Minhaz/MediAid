@@ -20,6 +20,8 @@ import HealthTips from "../pages/healthTips/HealthTips";
 import AddHealthTip from "../pages/healthTips/AddHealthTip";
 import MedicineApply from "../components/medicine/MedicineApply";
 import SearchResultPage from "../pages/SearchResultPage";
+import Donate from "../pages/Donate";
+import Pending from "../pages/pending/Pending";
 
 const Routers = () => {
 	return (
@@ -51,6 +53,8 @@ const Routers = () => {
 					<Route path="edit" element={<AddHealthTip />} />
 				</Route>
 
+				<Route path="donate" element={<Donate />} />
+				<Route path="pending" element={<Pending />} />
 				<Route path="faq" element={<FAQ />} />
 				<Route path="contact" element={<Contact />} />
 				<Route path="about" element={<About />} />

@@ -39,9 +39,9 @@ const MedicineApplyForm = () => {
 				.required("Contact number is required"),
 			reason: yup
 				.string()
-				// .min(25, "Reason for this medicine must be at least 25 characters")
-				.max(500, "Reason for this medicine must be at most 500 characters"),
-			// .required("Reason for this medicine is required"),
+				.min(25, "Reason for this medicine must be at least 25 characters")
+				.max(500, "Reason for this medicine must be at most 500 characters")
+				.required("Reason for this medicine is required"),
 		})
 		.required();
 
