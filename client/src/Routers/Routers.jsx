@@ -23,7 +23,9 @@ import SearchResultPage from "../pages/SearchResultPage";
 import Donate from "../pages/Donate";
 import Pending from "../pages/pending/Pending";
 import BestDonors from "../pages/bestDonors/BestDonors";
-import History from "../pages/history/History";
+import History from "../pages/History";
+import ReceiverList from "../pages/ReceiverList";
+import DonorList from "../pages/DonorList";
 
 const Routers = () => {
 	return (
@@ -58,6 +60,8 @@ const Routers = () => {
 
 				<Route path="donate" element={<Donate />} />
 				<Route path="history" element={<History />} />
+				<Route path="donor-list" element={<DonorList />} />
+				<Route path="receiver-list" element={<ReceiverList />} />
 				<Route path="best-donors" element={<BestDonors />} />
 				<Route path="pending" element={<Pending />} />
 				<Route path="faq" element={<FAQ />} />
