@@ -1,6 +1,6 @@
-import { Box, Paper } from "@mui/material";
-import SectionTitle from "./../../components/SectionTitle";
-import HistoryTable from "./HistoryTable";
+import { Paper } from "@mui/material";
+import SectionTitle from "../components/SectionTitle";
+import ListTable from "../components/listTable/ListTable";
 
 const historyData = [
 	{
@@ -60,29 +60,24 @@ const historyData = [
 	},
 ];
 
+const tableFormat = {
+	tableHeaders: [
+		{ align: "left", heading: "Avatar" },
+		{ align: "left", heading: "Username" },
+		{ align: "center", heading: "Role" },
+		{ align: "right", heading: "Medicine" },
+		{ align: "right", heading: "Action" },
+		{ align: "right", heading: "Date" },
+	],
+};
+
 const sortedHistoryData = historyData.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
 const History = () => {
 	return (
 		<Paper component="div" sx={{ mt: "5px", pb: "20px" }}>
 			<SectionTitle text="Action History" />
-			<Box
-				sx={{
-					overflow: "auto",
-					mt: { xs: "16px", sm: "20px" },
-					mx: { xs: "16px", sm: "20px" },
-				}}
-			>
-				<Box
-					sx={{
-						width: "100%",
-						display: "table",
-						tableLayout: "fixed",
-					}}
-				>
-					<HistoryTable history={sortedHistoryData} />
-				</Box>
-			</Box>
+			<ListTable tableFormat={tableFormat} listData={sortedHistoryData} tableName="history" />
 		</Paper>
 	);
 };
