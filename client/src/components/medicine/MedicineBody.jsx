@@ -8,9 +8,9 @@ const MedicineBody = ({ medicine }) => {
 		<Grid container rowSpacing={2} columnSpacing={3} sx={{ p: { xs: 2, sm: 2.5 } }}>
 			<Grid item xs={12} md={6}>
 				<LazyLoadImage
+					height="100%"
+					width="100%"
 					style={{
-						width: "100%",
-						height: "100%",
 						boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
 						borderRadius: "14px",
 						objectFit: "cover",

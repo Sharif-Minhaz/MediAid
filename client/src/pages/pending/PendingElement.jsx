@@ -127,6 +127,7 @@ const PendingElement = ({ type, request }) => {
 									background: "red",
 									fontSize: "11px",
 									"&:hover": { background: "#db1818" },
+									borderRadius: { xs: "6px", sm: "50px" },
 								}}
 								variant="contained"
 								onClick={() => rejectRequest(type)}
@@ -142,6 +143,7 @@ const PendingElement = ({ type, request }) => {
 									background: "green",
 									fontSize: "11px",
 									"&:hover": { background: "#2e7a31" },
+									borderRadius: { xs: "6px", sm: "50px" },
 								}}
 								variant="contained"
 								onClick={() => approveRequest(type)}
