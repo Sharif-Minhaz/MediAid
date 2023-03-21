@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import { useInView } from "react-intersection-observer";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const AboutImg = ({ index, image }) => {
 	const { ref, inView } = useInView({
@@ -22,7 +23,13 @@ const AboutImg = ({ index, image }) => {
 				justifyContent: "center",
 			}}
 		>
-			<img className="drop-shadow-img" width="100%" src={image} alt={`about-${image}`} />
+			<LazyLoadImage
+				className="drop-shadow-img"
+				width="100%"
+				src={image}
+				alt={`about-${image}`}
+				effect="blur"
+			/>
 		</Grid>
 	);
 };

@@ -22,6 +22,8 @@ import MedicineApply from "../components/medicine/MedicineApply";
 import SearchResultPage from "../pages/SearchResultPage";
 import Donate from "../pages/Donate";
 import Pending from "../pages/pending/Pending";
+import BestDonors from "../pages/bestDonors/BestDonors";
+import History from "../pages/history/History";
 
 const Routers = () => {
 	return (
@@ -35,6 +37,7 @@ const Routers = () => {
 					<Route path=":medicineId" element={<DetailsMedicine />} />
 					<Route path="edit/:medicineId" element={<AddMedicine />} />
 					<Route path="apply/:medicineId" element={<MedicineApply />} />
+					<Route path="search" element={<SearchResultPage />} />
 				</Route>
 
 				<Route path="profile">
@@ -54,11 +57,12 @@ const Routers = () => {
 				</Route>
 
 				<Route path="donate" element={<Donate />} />
+				<Route path="history" element={<History />} />
+				<Route path="best-donors" element={<BestDonors />} />
 				<Route path="pending" element={<Pending />} />
 				<Route path="faq" element={<FAQ />} />
 				<Route path="contact" element={<Contact />} />
 				<Route path="about" element={<About />} />
-				<Route path="search" element={<SearchResultPage />} />
 			</Route>
 
 			<Route path="/login" element={<Login />} />

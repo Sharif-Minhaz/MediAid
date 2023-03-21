@@ -43,6 +43,7 @@ const PendingElement = ({ type, request }) => {
 							borderRadius: "8px",
 							border: "1px solid #d1d1d1",
 						}}
+						loading="lazy"
 						src={request.medicineImage}
 						alt={request.medicineName}
 					/>
