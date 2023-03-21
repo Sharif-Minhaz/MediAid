@@ -31,12 +31,12 @@ const SearchBar = ({
 
 	const handleSearch = (e) => {
 		if (e.key === "Enter" && inputValue.length > 0) {
-			navigate(`/search?medicine=${inputValue}`);
+			navigate(`/medicines/search?medicine=${inputValue}`);
 		}
 	};
 
 	const handleAutoSelectSearch = (medicineName) => {
-		if (medicineName?.length > 0) navigate(`/search?medicine=${medicineName}`);
+		if (medicineName?.length > 0) navigate(`/medicines/search?medicine=${medicineName}`);
 	};
 
 	return (

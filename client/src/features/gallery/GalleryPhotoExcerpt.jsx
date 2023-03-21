@@ -1,6 +1,7 @@
 import { Box, IconButton, ImageListItem, ImageListItemBar } from "@mui/material";
 import { IconInfoCircleFilled } from "@tabler/icons-react";
 import { useInView } from "react-intersection-observer";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const GalleryPhotoExcerpt = ({ item }) => {
 	const { ref, inView } = useInView({
@@ -18,8 +19,6 @@ const GalleryPhotoExcerpt = ({ item }) => {
 				"&:hover img": { transform: "scale(1.1)" },
 				"&:hover .img-description-popover": {
 					top: 0,
-					borderBottomLeftRadius: 0,
-					borderBottomRightRadius: 0,
 				},
 			}}
 		>
@@ -37,26 +36,22 @@ const GalleryPhotoExcerpt = ({ item }) => {
 					p: { xs: "10px", sm: "17px 20px" },
 					height: "calc(100% - 60px)",
 					top: "-300px",
-					borderBottomLeftRadius: "50%",
-					borderBottomRightRadius: "50%",
 				}}
 			>
 				{item.description}
 			</Box>
-			<img
+			<LazyLoadImage
+				style={{ borderRadius: 4, transition: "0.4s all" }}
+				height="100%"
+				width="100%"
+				effect="blur"
 				src={item.img}
 				srcSet={item.img}
 				alt={item.title}
-				loading="lazy"
-				style={{ borderRadius: 4, transition: "0.4s all" }}
 			/>
 			<ImageListItemBar
 				className="description-bar"
-				sx={{
-					borderBottomLeftRadius: 4,
-					borderBottomRightRadius: 4,
-					transition: "0.4s all",
-				}}
+				sx={{ transition: "0.4s all" }}
 				title={item.title}
 				subtitle={item.author}
 				actionIcon={

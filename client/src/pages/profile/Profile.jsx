@@ -124,6 +124,7 @@ const Profile = () => {
 									}}
 								>
 									<img
+										loading="lazy"
 										src={profileData.profilePicture}
 										style={{ width: "100%", borderRadius: "5px" }}
 									/>

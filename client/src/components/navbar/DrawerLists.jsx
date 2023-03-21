@@ -62,14 +62,14 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 					icon={<IconHeartHandshake size={20} />}
 				/>
 				<SingleNavLink link="/pending" text="Pending" icon={<IconLoader size={20} />} />
-				<SingleNavLink link="/h" text="History" icon={<IconHistory size={20} />} />
+				<SingleNavLink link="/history" text="History" icon={<IconHistory size={20} />} />
 				<SingleNavLink link="/d" text="Donor List" icon={<IconClipboardList size={20} />} />
 				<SingleNavLink
 					link="/r"
 					text="Receiver List"
 					icon={<IconCheckupList size={20} />}
 				/>
-				<SingleNavLink link="/b" text="Best Donor" icon={<IconAward size={20} />} />
+				<SingleNavLink link="/best-donors" text="Best Donor" icon={<IconAward size={20} />} />
 				<SingleNavLink
 					link="/health-tips"
 					text="Health Tips"
