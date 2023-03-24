@@ -25,7 +25,7 @@ const SearchResultPage = () => {
 	}, [queryParams]);
 
 	return (
-		<Paper component="div" sx={{ mt: "5px" }}>
+		<Paper component="section">
 			<SectionTitle text={`Search result for - ${queryParams.get("medicine") || ""}`} />
 			<Grid container spacing="20px" sx={{ p: { xs: 2, sm: "20px" } }}>
 				{searchedMedicines.length === 0 && (

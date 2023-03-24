@@ -43,7 +43,7 @@ const faqData = [
 
 const FAQ = () => {
 	return (
-		<Paper component="section" sx={{ mt: "5px" }}>
+		<Paper component="section">
 			<SectionTitle text="FAQ" />
 			<FaqAccordions faqData={faqData} />
 		</Paper>

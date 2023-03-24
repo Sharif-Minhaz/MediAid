@@ -32,7 +32,7 @@ const aboutData = [
 const About = () => {
 	return (
 		<>
-			<Paper component="section" sx={{ mt: "5px" }}>
+			<Paper component="section">
 				<SectionTitle text="About Us" />
 				<Grid container columnSpacing="20px" sx={{ rowGap: { xs: 1, sm: 5 } }}>
 					{aboutData.map((data, i) => (

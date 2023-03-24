@@ -55,8 +55,11 @@ const healthTips = [
 
 const HealthTips = () => {
 	return (
-		<Paper component="section" sx={{ mt: "5px" }}>
-			<SectionTitle text="Health Tips for You" button={{text: "ADD", link: "/health-tips/add"}} />
+		<Paper component="section">
+			<SectionTitle
+				text="Health Tips for You"
+				button={{ text: "ADD", link: "/health-tips/add" }}
+			/>
 			<Box>
 				{healthTips.map((healthTip) => (
 					<HealthTipExcerpt key={healthTip.id} healthTip={healthTip} />

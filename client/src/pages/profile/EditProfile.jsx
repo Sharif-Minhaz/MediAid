@@ -4,7 +4,7 @@ import ProfileForm from "./ProfileForm";
 
 const EditProfile = () => {
 	return (
-		<Paper component="section" sx={{ mt: "5px" }}>
+		<Paper component="section">
 			<SectionTitle text="Update Profile" />
 			<ProfileForm />
 		</Paper>

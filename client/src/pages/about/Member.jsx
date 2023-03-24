@@ -1,7 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import SocialMediaSection from "./SocialMediaSection";
 import { useInView } from "react-intersection-observer";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Member = ({ data }) => {
 	const { ref, inView } = useInView({
@@ -13,7 +12,7 @@ const Member = ({ data }) => {
 		<Grid item xs={12} sm={6} className={`${inView ? "fade-in visible" : "fade-in"}`} ref={ref}>
 			<Box className="card">
 				<Box className="card-image">
-					<LazyLoadImage loading="lazy" effect="blur" src={data.image} alt="card image" />
+					<img loading="lazy" effect="blur" src={data.image} alt="card image" />
 				</Box>
 
 				<Box className="card-content">

@@ -95,7 +95,7 @@ const Profile = () => {
 
 	return (
 		<>
-			<Paper component="section" sx={{ mt: "5px" }}>
+			<Paper component="section">
 				<Box component="div" sx={{ height: { xs: 370, sm: 340 } }}>
 					<Box
 						component="div"

@@ -3,7 +3,7 @@ import Gallery from "../../features/gallery/Gallery";
 
 const GalleryPage = () => {
 	return (
-		<Paper component="section" sx={{ mt: "5px" }}>
+		<Paper component="section">
 			<Gallery />
 		</Paper>
 	);

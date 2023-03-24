@@ -6,6 +6,7 @@ import NotificationMenu from "../components/navbar/NotificationMenu";
 import DrawerConfig from "../components/navbar/DrawerConfig";
 import Navbar from "../components/navbar/Navbar";
 import CartMedicineSidebar from "../components/navbar/CartMedicineSidebar";
+import ScrollToTop from "../components/ScrollToTop";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
 	display: "flex",
@@ -48,19 +49,24 @@ export default function CommonLayout({ children }) {
 				<Box component="main" sx={{ flexGrow: 1, pt: "13px", pb: { xs: 0, md: "20px" } }}>
 					<DrawerHeader />
 					<Box
+						component='div'
+						className="holder"
 						bgcolor="#eef2f6"
 						pt="15px"
 						mt="14px"
 						sx={{
 							ml: 0,
 							mr: { xs: "0px", sm: 0, md: "20px" },
+							mt: "5px",
 							px: { xs: "16px", sm: "20px" },
 							pb: { xs: "16px", sm: "20px" },
 							borderRadius: { sm: 0, md: 3 },
 						}}
 					>
 						{/* ============= children here ============= */}
-						{children}
+						<ScrollToTop>
+							<>{children}</>
+						</ScrollToTop>
 					</Box>
 				</Box>
 			</Box>

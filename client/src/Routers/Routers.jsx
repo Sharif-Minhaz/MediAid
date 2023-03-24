@@ -26,54 +26,56 @@ import BestDonors from "../pages/bestDonors/BestDonors";
 import History from "../pages/History";
 import ReceiverList from "../pages/ReceiverList";
 import DonorList from "../pages/DonorList";
+import PathName from "../components/PathName";
 
 const Routers = () => {
 	return (
-		<Routes>
-			<Route path="/" element={<Layout />}>
-				<Route index element={<Home />} />
-				{/* <Route path="dashboard" element={<Dashboard />} /> */}
+		<PathName>
+			<Routes>
+				<Route path="/" element={<Layout />}>
+					<Route index element={<Home />} />
+					<Route path="dashboard" element={<Dashboard />} />
+					<Route path="medicines">
+						<Route index element={<MedicinesPage />} />
+						<Route path=":medicineId" element={<DetailsMedicine />} />
+						<Route path="edit/:medicineId" element={<AddMedicine />} />
+						<Route path="apply/:medicineId" element={<MedicineApply />} />
+						<Route path="search" element={<SearchResultPage />} />
+					</Route>
 
-				<Route path="medicines">
-					<Route index element={<MedicinesPage />} />
-					<Route path=":medicineId" element={<DetailsMedicine />} />
-					<Route path="edit/:medicineId" element={<AddMedicine />} />
-					<Route path="apply/:medicineId" element={<MedicineApply />} />
-					<Route path="search" element={<SearchResultPage />} />
+					<Route path="profile">
+						<Route index element={<Profile />} />
+						<Route path="edit" element={<EditProfile />} />
+					</Route>
+
+					<Route path="medicine/add" element={<AddMedicine />} />
+
+					<Route path="gallery" element={<GalleryPage />} />
+					<Route path="gallery-photo/add" element={<AddPhotoPage />} />
+
+					<Route path="health-tips">
+						<Route index element={<HealthTips />} />
+						<Route path="add" element={<AddHealthTip />} />
+						<Route path="edit" element={<AddHealthTip />} />
+					</Route>
+
+					<Route path="donate" element={<Donate />} />
+					<Route path="history" element={<History />} />
+					<Route path="donor-list" element={<DonorList />} />
+					<Route path="receiver-list" element={<ReceiverList />} />
+					<Route path="best-donors" element={<BestDonors />} />
+					<Route path="pending" element={<Pending />} />
+					<Route path="faq" element={<FAQ />} />
+					<Route path="contact" element={<Contact />} />
+					<Route path="about" element={<About />} />
 				</Route>
 
-				<Route path="profile">
-					<Route index element={<Profile />} />
-					<Route path="edit" element={<EditProfile />} />
-				</Route>
-
-				<Route path="medicine/add" element={<AddMedicine />} />
-
-				<Route path="gallery" element={<GalleryPage />} />
-				<Route path="gallery-photo/add" element={<AddPhotoPage />} />
-
-				<Route path="health-tips">
-					<Route index element={<HealthTips />} />
-					<Route path="add" element={<AddHealthTip />} />
-					<Route path="edit" element={<AddHealthTip />} />
-				</Route>
-
-				<Route path="donate" element={<Donate />} />
-				<Route path="history" element={<History />} />
-				<Route path="donor-list" element={<DonorList />} />
-				<Route path="receiver-list" element={<ReceiverList />} />
-				<Route path="best-donors" element={<BestDonors />} />
-				<Route path="pending" element={<Pending />} />
-				<Route path="faq" element={<FAQ />} />
-				<Route path="contact" element={<Contact />} />
-				<Route path="about" element={<About />} />
-			</Route>
-
-			<Route path="/login" element={<Login />} />
-			<Route path="/register" element={<Register />} />
-			<Route path="/reset-password" element={<ResetPassword />} />
-			<Route path="*" element={<NotFound404 />} />
-		</Routes>
+				<Route path="/login" element={<Login />} />
+				<Route path="/register" element={<Register />} />
+				<Route path="/reset-password" element={<ResetPassword />} />
+				<Route path="*" element={<NotFound404 />} />
+			</Routes>
+		</PathName>
 	);
 };
 

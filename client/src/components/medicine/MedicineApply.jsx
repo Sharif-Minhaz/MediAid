@@ -4,7 +4,7 @@ import MedicineApplyForm from "./MedicineApplyForm";
 
 const MedicineApply = () => {
 	return (
-		<Paper component="section" sx={{ mt: "5px" }}>
+		<Paper component="section">
 			<SectionTitle text="Apply for the medicine" />
 			<MedicineApplyForm />
 		</Paper>

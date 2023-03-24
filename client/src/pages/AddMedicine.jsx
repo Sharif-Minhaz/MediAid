@@ -7,7 +7,7 @@ const AddMedicine = () => {
 	const [isUpdateCase, setIsUpdateCase] = useState(false);
 
 	return (
-		<Paper component="section" sx={{ mt: "5px" }}>
+		<Paper component="section">
 			<SectionTitle text={isUpdateCase ? "Update Medicine" : "Add New Medicine"} />
 			<MedicineForm isUpdateCase={isUpdateCase} setIsUpdateCase={setIsUpdateCase} />
 		</Paper>
