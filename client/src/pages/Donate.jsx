@@ -4,7 +4,7 @@ import SectionTitle from "../components/SectionTitle";
 
 const Donate = () => {
 	return (
-		<Paper component="section" sx={{ mt: "5px" }}>
+		<Paper component="section">
 			<SectionTitle text="Donate Medicine" />
 			<MedicineForm isUpdateCase={false} donation={true} />
 		</Paper>

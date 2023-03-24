@@ -5,7 +5,7 @@ import ContactMap from "./ContactMap";
 
 const Contact = () => {
 	return (
-		<Paper component="section" sx={{ mt: "5px" }}>
+		<Paper component="section">
 			<SectionTitle text="Contact Us" />
 			<Grid container columnSpacing="20px">
 				<Grid item xs={12} sm={6}>

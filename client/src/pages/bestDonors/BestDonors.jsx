@@ -45,7 +45,7 @@ const dados = [
 
 const BestDonors = () => {
 	return (
-		<Paper component="section" sx={{ mt: "5px" }}>
+		<Paper component="section">
 			<SectionTitle text="Best Donor" button={{ text: "Donate Now", link: "/donate" }} />
 			<Box sx={{ p: { xs: "16px", sm: "20px" } }}>
 				<LeaderBoard data={dados} />

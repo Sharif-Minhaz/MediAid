@@ -8,7 +8,7 @@ const PlayerList = ({ data }) => {
 			<Box className="table">
 				<Box>#</Box>
 				<Box>Avatar</Box>
-				<Box>Name</Box>
+				<Box sx={{ textAlign: "right" }}>Name</Box>
 				<Box sx={{ textAlign: "right", pr: "25px" }}>
 					{smallScreen ? "Donation" : "Total Donation"}
 				</Box>
@@ -25,8 +25,7 @@ const PlayerList = ({ data }) => {
 								paddingLeft: "20px",
 							}}
 						>
-							{" "}
-							{leader.name}{" "}
+							{leader.name}
 						</span>
 						<span
 							style={{
@@ -35,7 +34,7 @@ const PlayerList = ({ data }) => {
 								paddingRight: "25px",
 							}}
 						>
-							{leader.totalDonations}{" "}
+							{leader.totalDonations}
 						</span>
 					</Box>
 				))}

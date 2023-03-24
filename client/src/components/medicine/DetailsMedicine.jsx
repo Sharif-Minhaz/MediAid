@@ -9,7 +9,7 @@ const DetailsMedicine = () => {
 
 	return (
 		<>
-			<Paper component="section" sx={{ mt: "5px" }}>
+			<Paper component="section">
 				<SectionTitle
 					text="Medicine Details"
 					button={{ link: "/medicines", text: "Find More" }}
