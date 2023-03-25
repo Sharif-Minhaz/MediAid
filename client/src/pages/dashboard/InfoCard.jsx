@@ -1,9 +1,20 @@
 import { Box, Typography } from "@mui/material";
 import { IconInfoCircle } from "@tabler/icons-react";
+import { useInView } from "react-intersection-observer";
 
-const InfoCard = ({ data }) => {
+const InfoCard = ({ data, index }) => {
+	const { ref, inView } = useInView({
+		threshold: (index + 1) / 6,
+		triggerOnce: false,
+	});
+
 	return (
-		<Box className={`dashboard-card card-img-holder ${data.bg}`}>
+		<Box
+			ref={ref}
+			className={`${
+				inView ? "fade-in visible" : "fade-in"
+			}${` dashboard-card card-img-holder ${data.bg}`}`}
+		>
 			<img src="/images/circle.png" className="card-img-absolute" alt="circle-image" />
 			<Typography
 				sx={{

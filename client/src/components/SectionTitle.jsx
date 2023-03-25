@@ -1,4 +1,4 @@
-import SectionTitleButton from "../pages/home/SectionTitleButton";
+import SectionTitleButton from "../components/SectionTitleButton";
 import { Divider, Stack, Typography } from "@mui/material";
 
 const SectionTitle = (props) => {

@@ -38,9 +38,9 @@ const CardBase = () => {
 			spacing={midScreen ? "20px" : "16px"}
 			sx={{ p: { xs: "16px", sm: "20px" } }}
 		>
-			{data.map((data) => (
+			{data.map((data, index) => (
 				<Grid key={data.id} item xs={12} md={6} lg={4}>
-					<InfoCard data={data} />
+					<InfoCard index={index} data={data} />
 				</Grid>
 			))}
 		</Grid>
