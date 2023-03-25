@@ -58,7 +58,12 @@ export const data = {
 
 const DonationBarChart = () => {
 	return (
-		<Card sx={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;", p: 2 }}>
+		<Card
+			sx={{
+				boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
+				p: 2,
+			}}
+		>
 			<Stack direction="row" justifyContent="space-between" alignItems="center">
 				<Chip
 					icon={<IconPill size={18} />}
@@ -73,6 +78,7 @@ const DonationBarChart = () => {
 					height: "calc(100% - 40px)",
 					display: "flex",
 					alignItems: "center",
+					mt: { xs: "12px", sm: "auto" },
 				}}
 			>
 				<Bar options={options} data={data} />
