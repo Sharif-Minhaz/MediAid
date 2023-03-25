@@ -7,6 +7,7 @@ const PathName = (props) => {
 	const pathname = location.pathname
 		?.substring(1)
 		.split("/")
+		.slice(0,1)
 		.join(" | ")
 		.split(" ")
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
