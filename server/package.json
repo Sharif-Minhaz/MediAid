@@ -11,7 +11,7 @@
   "author": "Sharif Md. Minhaz",
   "license": "ISC",
   "dependencies": {
-    "cloudinary": "^1.33.0",
+    "cloudinary": "^1.35.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
