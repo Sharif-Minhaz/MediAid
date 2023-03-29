@@ -1,9 +1,14 @@
 const authHandler = require("./authRoute");
+const medicineHandler = require("./medicineRoute");
 
 const routes = [
 	{
-		path: "/auth",
+		path: "/api/auth",
 		handler: authHandler,
+	},
+	{
+		path: "/api/medicine",
+		handler: medicineHandler,
 	},
 ];
 

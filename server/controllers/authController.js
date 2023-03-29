@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/UserModel");
 
-exports.loginController = asyncHandler(async (req, res) => {
+exports.registerController = asyncHandler(async (req, res) => {
 	const { body } = req;
 
 	const addNewUser = await new User(body).save();
