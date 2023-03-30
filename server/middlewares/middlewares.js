@@ -5,7 +5,11 @@ const cookieParser = require("cookie-parser");
 const middlewares = [
 	cors({
 		credentials: true,
-		origin: ["http://localhost:8080", "https://mediAid.onrendered.com"],
+		origin: [
+			"http://localhost:3000",
+			"http://127.0.0.1:3000",
+			"https://mediaid-online-platform.netlify.app",
+		],
 	}),
 	cookieParser(),
 	express.static("public"),

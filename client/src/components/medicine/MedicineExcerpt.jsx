@@ -18,6 +18,7 @@ import { truncate } from "../../utils/truncate";
 
 const MedicineExcerpt = ({ medicine }) => {
 	const navigate = useNavigate();
+
 	const { ref, inView } = useInView({
 		threshold: 0.3,
 		triggerOnce: true,
@@ -38,11 +39,11 @@ const MedicineExcerpt = ({ medicine }) => {
 			}}
 		>
 			<CardActionArea
-				onClick={() => navigate(`/medicines/${medicine.id}`, { state: medicine })}
+				onClick={() => navigate(`/medicines/${medicine._id}`, { state: medicine })}
 			>
 				<CardMedia
 					sx={{ height: 200 }}
-					image={medicine.medicineImage}
+					image={medicine.medicineImage || defaultMedicine}
 					title={medicine.medicineName}
 				/>
 				<Divider />
@@ -64,7 +65,7 @@ const MedicineExcerpt = ({ medicine }) => {
 					<Box component="div" display="flex" alignItems="center" columnGap="6px">
 						<IconStarHalfFilled style={{ color: "#5e35b1" }} size={19} />
 						<span style={{ marginBottom: "-4px", color: "#5e35b1" }}>
-							{medicine.rating}
+							{medicine.rating || 0}
 						</span>
 					</Box>
 				</Stack>
@@ -73,7 +74,7 @@ const MedicineExcerpt = ({ medicine }) => {
 						<>
 							<CustomIconButton
 								onClick={() =>
-									navigate(`/medicines/edit/${medicine.id}`, { state: medicine })
+									navigate(`/medicines/edit/${medicine._id}`, { state: medicine })
 								}
 								sx={{
 									color: "green",
@@ -87,7 +88,7 @@ const MedicineExcerpt = ({ medicine }) => {
 								<IconPencil />
 							</CustomIconButton>
 							<CustomIconButton
-								onClick={() => handleMedicineDelete(medicine.id)}
+								onClick={() => handleMedicineDelete(medicine._id)}
 								sx={{
 									color: "red",
 									backgroundColor: "#ffe0e0",
@@ -101,7 +102,9 @@ const MedicineExcerpt = ({ medicine }) => {
 							</CustomIconButton>
 							<CustomIconButton
 								onClick={() =>
-									navigate(`/medicines/apply/${medicine.id}`, { state: medicine })
+									navigate(`/medicines/apply/${medicine._id}`, {
+										state: medicine,
+									})
 								}
 							>
 								<IconClipboardHeart />
@@ -115,7 +118,7 @@ const MedicineExcerpt = ({ medicine }) => {
 							size="small"
 							disableElevation
 							onClick={() =>
-								navigate(`/medicines/apply/${medicine.id}`, { state: medicine })
+								navigate(`/medicines/apply/${medicine._id}`, { state: medicine })
 							}
 						>
 							Apply

@@ -6,7 +6,7 @@ const PaginationPage = ({ handlePageChange, page, count }) => {
 			<Pagination
 				onChange={handlePageChange}
 				page={page}
-				count={count}
+				count={count || 0}
 				variant="outlined"
 				color="primary"
 				sx={{ p: 3, "& .MuiPagination-ul": { justifyContent: "center" } }}

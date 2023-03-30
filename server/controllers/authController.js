@@ -8,13 +8,13 @@ exports.registerController = asyncHandler(async (req, res) => {
 
 	if (addNewUser) {
 		return res.status(201).json({
-			key: "user_added",
-			data: addNewUser,
+			msg: "user_added",
+			newUser: addNewUser,
 		});
 	}
 
 	res.status(500).json({
-		key: "user_not_added",
-		data: null,
+		msg: "user_not_added",
+		newUser: null,
 	});
 });

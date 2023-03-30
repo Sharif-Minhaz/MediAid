@@ -1,28 +1,31 @@
 import { useState, useEffect } from "react";
 import { Paper } from "@mui/material";
-import MedicinesList from "../../features/medicines/MedicinesList";
+import MedicinesList from "./MedicinesList";
 import MedicinesPagination from "./MedicinesPagination";
-import medicines from "../../../data/medicines.json";
+import { useViewAllMedicinesQuery } from "../../features/medicines/medicinesSlice";
 
 const MedicinesPage = () => {
-	const [data, setData] = useState([]); // Your array of data
+	const responseInfo = useViewAllMedicinesQuery();
+	const [data, setData] = useState([]); // Array of data
 	const dataPerPage = 6; // The number of data to show per page
 	const [currentPage, setCurrentPage] = useState(1); // The current page number
 	const [totalPages, setTotalPages] = useState(0);
 
 	// for asynchronous operations
 	useEffect(() => {
-		setData([...medicines]);
-	}, []);
+		if (responseInfo.isSuccess) {
+			setData(responseInfo.data.medicines);
+		}
+	}, [responseInfo]);
 
 	useEffect(() => {
-		setTotalPages(Math.ceil(data.length / dataPerPage));
+		setTotalPages(Math.ceil(data?.length / dataPerPage));
 	}, [data]);
 
 	// Get the current data based on the current page
 	const indexOfLastData = currentPage * dataPerPage;
 	const indexOfFirstData = indexOfLastData - dataPerPage;
-	const currentData = data.slice(indexOfFirstData, indexOfLastData);
+	const currentData = data?.slice(indexOfFirstData, indexOfLastData);
 
 	const handlePageChange = (_, value) => {
 		setCurrentPage(value);
@@ -35,7 +38,7 @@ const MedicinesPage = () => {
 				component="section"
 				sx={{ mt: "5px", borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }}
 			>
-				<MedicinesList medicines={currentData} />
+				<MedicinesList responseInfo={responseInfo} medicines={currentData} />
 			</Paper>
 			<Paper
 				component="section"

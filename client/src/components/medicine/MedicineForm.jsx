@@ -12,14 +12,21 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { IconHeartPlus, IconEdit } from "@tabler/icons-react";
 import ImageDropZone from "../imageDropZone/ImageDropZone";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
+import {
+	useAddMedicineMutation,
+	useUpdateMedicineMutation,
+} from "../../features/medicines/medicinesSlice";
 
 const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 	const theme = useTheme();
+	const navigate = useNavigate();
 	const { state } = useLocation();
+	const [addMedicine, responseInfo] = useAddMedicineMutation();
+	const [updateMedicine, updateResponseInfo] = useUpdateMedicineMutation();
 
 	const schema = yup
 		.object({
@@ -44,6 +51,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 		handleSubmit,
 		formState: { errors },
 		setValue,
+		reset,
 	} = useForm({
 		resolver: yupResolver(schema),
 		defaultValues: {
@@ -62,8 +70,33 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 	}, []);
 
 	const onSubmit = (data) => {
-		toast.success("Successfully get the form data");
-		console.log(data);
+		if (isUpdateCase) {
+			updateMedicine({ body: data, medicineId: state._id })
+				.unwrap()
+				.then((response) => {
+					if (response.msg === "medicine_updated") {
+						toast.success("Medicine updated successfully");
+						return navigate(`/medicines/${response?.updatedMedicine?._id}`, {
+							state: response?.updatedMedicine,
+							replace: true,
+						});
+					}
+					toast.error("Something went wrong!");
+				})
+				.catch((err) => console.error(err.message));
+		} else {
+			addMedicine(data)
+				.unwrap()
+				.then((response) => {
+					if (response.msg === "medicine_added") {
+						toast.success("New Medicine added");
+						reset();
+					} else if (response.msg === "already_exist") {
+						toast.warning("Medicine already in list");
+					}
+				})
+				.catch((err) => console.error(err.message));
+		}
 	};
 
 	const onFileSelect = (file) => {
@@ -80,7 +113,10 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="medicineName">Full Medicine Name</InputLabel>
-						<OutlinedInput {...register("medicineName")} />
+						<OutlinedInput
+							disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
+							{...register("medicineName")}
+						/>
 						{errors.medicineName && (
 							<FormHelperText error>{errors.medicineName?.message}</FormHelperText>
 						)}
@@ -93,7 +129,10 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="companyName">Company Name</InputLabel>
-						<OutlinedInput {...register("companyName")} />
+						<OutlinedInput
+							disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
+							{...register("companyName")}
+						/>
 						{errors.companyName && (
 							<FormHelperText error>{errors.companyName?.message}</FormHelperText>
 						)}
@@ -106,7 +145,10 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="donarName">Donar's Full Name</InputLabel>
-						<OutlinedInput {...register("donarName")} />
+						<OutlinedInput
+							disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
+							{...register("donarName")}
+						/>
 						{errors.donarName && (
 							<FormHelperText error>{errors.donarName?.message}</FormHelperText>
 						)}
@@ -119,7 +161,10 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="donarContact">Donar's Contact Number</InputLabel>
-						<OutlinedInput {...register("donarContact")} />
+						<OutlinedInput
+							disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
+							{...register("donarContact")}
+						/>
 						{errors.donarContact && (
 							<FormHelperText error>{errors.donarContact?.message}</FormHelperText>
 						)}
@@ -134,7 +179,12 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 						<InputLabel htmlFor="medicineDescription">
 							Provide Necessary Information
 						</InputLabel>
-						<OutlinedInput multiline rows={7} {...register("medicineDescription")} />
+						<OutlinedInput
+							disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
+							multiline
+							rows={7}
+							{...register("medicineDescription")}
+						/>
 						{errors.medicineDescription && (
 							<FormHelperText error>
 								{errors.medicineDescription?.message}
@@ -164,6 +214,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 				size="large"
 				variant="contained"
 				disableElevation
+				disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
 				sx={{ color: "whitesmoke", borderRadius: "10px" }}
 			>
 				{isUpdateCase ? "Update Medicine" : donation ? "Donate" : "ADD Medicine"}

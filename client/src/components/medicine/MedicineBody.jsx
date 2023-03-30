@@ -15,6 +15,7 @@ const MedicineBody = ({ medicine }) => {
 						borderRadius: "14px",
 						objectFit: "cover",
 					}}
+					loading="lazy"
 					effect="blur"
 					src={medicine?.medicineImage}
 					alt={medicine?.medicineName}
