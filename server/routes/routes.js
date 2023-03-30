@@ -7,7 +7,7 @@ const routes = [
 		handler: authHandler,
 	},
 	{
-		path: "/api/medicine",
+		path: "/api/medicines",
 		handler: medicineHandler,
 	},
 ];

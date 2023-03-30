@@ -5,7 +5,7 @@ const medicineSchema = new Schema(
 		medicineName: {
 			type: String,
 			trim: true,
-			unique: true,
+			unique: [true, "Medicine already in the list"],
 			required: true,
 		},
 		medicineDescription: {
@@ -17,7 +17,9 @@ const medicineSchema = new Schema(
 			type: String,
 			default:
 				"https://res.cloudinary.com/hostingimagesservice/image/upload/v1680115118/mediAid/default-medi_bktubv.png",
+			required: true,
 		},
+		cloudinaryId: String,
 		donarName: {
 			type: String,
 			trim: true,

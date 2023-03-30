@@ -3,8 +3,9 @@ import { Box, Grid, useMediaQuery } from "@mui/material";
 import SectionTitle from "../../components/SectionTitle";
 import { useSelector } from "react-redux";
 import { drawerStatus } from "../../features/drawer/drawerSlice";
+import MedicineLoading from "./MedicineLoading";
 
-const MedicinesList = ({ medicines }) => {
+const MedicinesList = ({ responseInfo, medicines }) => {
 	const drawerOpen = useSelector(drawerStatus);
 
 	const midScreen = useMediaQuery("(min-width:900px)");
@@ -18,18 +19,24 @@ const MedicinesList = ({ medicines }) => {
 				spacing={midScreen ? "20px" : "16px"}
 				sx={{ p: { xs: "16px", md: "20px" } }}
 			>
-				{medicines?.map((medicine) => (
-					<Grid
-						key={medicine.id}
-						item
-						lg={4}
-						md={drawerOpen ? 6 : 4}
-						sm={smallScreen ? 6 : 4}
-						xs={12}
-					>
-						<MedicineExcerpt medicine={medicine} />
-					</Grid>
-				))}
+				{responseInfo.isLoading ? (
+					<MedicineLoading drawerOpen={drawerOpen} smallScreen={smallScreen} />
+				) : (
+					<>
+						{medicines?.map((medicine) => (
+							<Grid
+								key={medicine._id}
+								item
+								lg={4}
+								md={drawerOpen ? 6 : 4}
+								sm={smallScreen ? 6 : 4}
+								xs={12}
+							>
+								<MedicineExcerpt medicine={medicine} />
+							</Grid>
+						))}
+					</>
+				)}
 			</Grid>
 		</Box>
 	);
