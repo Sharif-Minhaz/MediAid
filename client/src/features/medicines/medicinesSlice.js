@@ -38,8 +38,21 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 			},
 			invalidatesTags: ["Medicine"],
 		}),
+		deleteMedicine: builder.mutation({
+			query: (medicineId) => {
+				return {
+					url: `/medicines/delete/${medicineId}`,
+					method: "DELETE",
+				};
+			},
+			invalidatesTags: ["Medicine"],
+		}),
 	}),
 });
 
-export const { useViewAllMedicinesQuery, useAddMedicineMutation, useUpdateMedicineMutation } =
-	extendedApiSlice;
+export const {
+	useViewAllMedicinesQuery,
+	useAddMedicineMutation,
+	useUpdateMedicineMutation,
+useDeleteMedicineMutation,
+} = extendedApiSlice;
