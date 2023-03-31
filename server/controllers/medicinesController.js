@@ -117,3 +117,26 @@ exports.updateMedicineController = asyncHandler(async (req, res) => {
 		updateMedicine: null,
 	});
 });
+
+exports.deleteMedicineController = asyncHandler(async (req, res) => {
+	const { medicineId } = req.params;
+
+	const targetedMedicine = await Medicine.findById(medicineId);
+
+	if (targetedMedicine) {
+		if(targetedMedicine.cloudinaryId) {
+			await cloudinary.uploader.destroy(targetedMedicine.cloudinaryId);
+		}
+		const deletedMedicineInfo = await targetedMedicine.remove();
+
+		return res.status(200).json({
+			msg: "medicine_deleted",
+			deletedMedicineInfo,
+		});
+	}
+
+	res.status(500).json({
+		msg: "medicine_not_deleted",
+		deletedMedicineInfo: null,
+	});
+});
