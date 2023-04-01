@@ -6,6 +6,7 @@ import { useViewAllMedicinesQuery } from "../../features/medicines/medicinesSlic
 
 const MedicinesPage = () => {
 	const responseInfo = useViewAllMedicinesQuery();
+
 	const [data, setData] = useState([]); // Array of data
 	const dataPerPage = 6; // The number of data to show per page
 	const [currentPage, setCurrentPage] = useState(1); // The current page number

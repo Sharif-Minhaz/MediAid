@@ -1,4 +1,4 @@
-import { Box, Button, Typography, Modal, Stack } from "@mui/material";
+import { Box, Button, Typography, Modal, Stack, Divider } from "@mui/material";
 import { useDeleteMedicineMutation } from "../../features/medicines/medicinesSlice";
 import { toast } from "react-toastify";
 
@@ -16,6 +16,7 @@ const style = {
 	borderRadius: "14px",
 	boxShadow: 24,
 	p: 4,
+	pb: "18px",
 };
 
 export default function MedicineDeleteConfirmationModal({ open, handleClose, medicineId }) {
@@ -49,6 +50,7 @@ export default function MedicineDeleteConfirmationModal({ open, handleClose, med
 					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 						Want to delete this medicine from the system? The action is irreversible.
 					</Typography>
+					<Divider sx={{ mt: 4 }} />
 					<Stack direction="row" gap={1.2} mt={2}>
 						<Button
 							onClick={handleMedicineDeletion}

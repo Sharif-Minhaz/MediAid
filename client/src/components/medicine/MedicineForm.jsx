@@ -30,6 +30,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 	const { data: { medicine } = {}, isLoading } = useViewSingleMedicineQuery(medicineId);
 	const [addMedicine, responseInfo] = useAddMedicineMutation();
 	const [updateMedicine, updateResponseInfo] = useUpdateMedicineMutation();
+	const [resetKey, setResetKey] = useState(Date.now());
 
 	const [defaultData, setDefaultData] = useState({
 		medicineName: state?.medicineName || "",
@@ -116,6 +117,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 				.then((response) => {
 					if (response.msg === "medicine_added") {
 						toast.success("New Medicine added");
+						setResetKey(Date.now()); // re-render with key -> ImageDropZone component
 						reset();
 					} else if (response.msg === "already_exist") {
 						toast.warning("Medicine already in list");
@@ -228,6 +230,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 									{...field}
 									image={state?.medicineImage || medicine?.medicineImage}
 									onFileSelect={onFileSelect}
+									key={resetKey}
 								/>
 							</>
 						)}

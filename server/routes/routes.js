@@ -1,5 +1,6 @@
 const authHandler = require("./authRoute");
 const medicineHandler = require("./medicineRoute");
+const galleryHandler = require("./galleryRoute");
 
 const routes = [
 	{
@@ -9,6 +10,10 @@ const routes = [
 	{
 		path: "/api/medicines",
 		handler: medicineHandler,
+	},
+	{
+		path: "/api/gallery",
+		handler: galleryHandler,
 	},
 ];
 

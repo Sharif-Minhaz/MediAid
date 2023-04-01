@@ -14,9 +14,13 @@ import ImageDropZone from "../../components/imageDropZone/ImageDropZone";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
+import { useAddGalleryImgMutation } from "./gallerySlice";
+import { useState } from "react";
 
 const AddPhotoForm = () => {
 	const theme = useTheme();
+	const [resetKey, setResetKey] = useState(Date.now());
+	const [addGalleryImg, responseInfo] = useAddGalleryImgMutation();
 
 	const schema = yup
 		.object({
@@ -35,17 +39,29 @@ const AddPhotoForm = () => {
 		handleSubmit,
 		formState: { errors },
 		setValue,
+		reset,
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
 
 	const onSubmit = (data) => {
-		toast.success("Successfully get the form data");
-		console.log(data);
+		addGalleryImg(data)
+			.unwrap()
+			.then((response) => {
+				if (response.msg === "gallery_img_added") {
+					toast.success("New Image added");
+					setResetKey(Date.now()); // re-render with key -> ImageDropZone component
+					reset();
+				} else {
+					console.log(response);
+					toast.error("Something went wrong!");
+				}
+			})
+			.catch((err) => console.error(err));
 	};
 
 	const onFileSelect = (file) => {
-		setValue("galleyImage", file);
+		setValue("galleryImage", file);
 	};
 
 	return (
@@ -58,7 +74,10 @@ const AddPhotoForm = () => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="galleryImageTitle">Gallery Image Title</InputLabel>
-						<OutlinedInput {...register("galleryImageTitle")} />
+						<OutlinedInput
+							disabled={responseInfo.isLoading}
+							{...register("galleryImageTitle")}
+						/>
 						{errors.galleryImageTitle && (
 							<FormHelperText error>
 								{errors.galleryImageTitle?.message}
@@ -73,7 +92,10 @@ const AddPhotoForm = () => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="authorName">Author Name</InputLabel>
-						<OutlinedInput {...register("authorName")} />
+						<OutlinedInput
+							disabled={responseInfo.isLoading}
+							{...register("authorName")}
+						/>
 						{errors.authorName && (
 							<FormHelperText error>{errors.authorName?.message}</FormHelperText>
 						)}
@@ -86,7 +108,12 @@ const AddPhotoForm = () => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="description">Provide Necessary Information</InputLabel>
-						<OutlinedInput multiline rows={7} {...register("description")} />
+						<OutlinedInput
+							disabled={responseInfo.isLoading}
+							multiline
+							rows={7}
+							{...register("description")}
+						/>
 						{errors.description && (
 							<FormHelperText error>{errors.description?.message}</FormHelperText>
 						)}
@@ -94,10 +121,14 @@ const AddPhotoForm = () => {
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Controller
-						name="galleyImage"
+						name="galleryImage"
 						control={control}
 						render={({ field }) => (
-							<ImageDropZone {...field} onFileSelect={onFileSelect} />
+							<ImageDropZone
+								{...field}
+								onFileSelect={onFileSelect}
+								key={resetKey}
+							/>
 						)}
 					/>
 				</Grid>
@@ -108,6 +139,7 @@ const AddPhotoForm = () => {
 				size="large"
 				variant="contained"
 				disableElevation
+				disabled={responseInfo.isLoading}
 				sx={{ color: "whitesmoke", borderRadius: "10px" }}
 			>
 				Add Photo
