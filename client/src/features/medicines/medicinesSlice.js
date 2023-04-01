@@ -6,6 +6,12 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 			query: () => "/medicines",
 			providesTags: ["Medicine"],
 		}),
+
+		viewSingleMedicine: builder.query({
+			query: (medicineId) => `/medicines/${medicineId}`,
+			providesTags: ["Medicine"],
+		}),
+
 		addMedicine: builder.mutation({
 			query: (body) => {
 				const payload = new FormData();
@@ -22,6 +28,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 			},
 			invalidatesTags: ["Medicine"],
 		}),
+
 		updateMedicine: builder.mutation({
 			query: ({ body, medicineId }) => {
 				const payload = new FormData();
@@ -38,6 +45,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 			},
 			invalidatesTags: ["Medicine"],
 		}),
+
 		deleteMedicine: builder.mutation({
 			query: (medicineId) => {
 				return {
@@ -52,7 +60,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
 export const {
 	useViewAllMedicinesQuery,
+	useViewSingleMedicineQuery,
 	useAddMedicineMutation,
 	useUpdateMedicineMutation,
-useDeleteMedicineMutation,
+	useDeleteMedicineMutation,
 } = extendedApiSlice;

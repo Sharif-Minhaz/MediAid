@@ -92,7 +92,8 @@ exports.updateMedicineController = asyncHandler(async (req, res) => {
 			folder: "mediAid/medicines",
 		});
 
-		await cloudinary.uploader.destroy(medicinesDetails.cloudinaryId);
+		if (medicinesDetails.cloudinaryId)
+			await cloudinary.uploader.destroy(medicinesDetails.cloudinaryId);
 	}
 
 	const updateMedicine = await Medicine.findByIdAndUpdate(
@@ -124,7 +125,7 @@ exports.deleteMedicineController = asyncHandler(async (req, res) => {
 	const targetedMedicine = await Medicine.findById(medicineId);
 
 	if (targetedMedicine) {
-		if(targetedMedicine.cloudinaryId) {
+		if (targetedMedicine.cloudinaryId) {
 			await cloudinary.uploader.destroy(targetedMedicine.cloudinaryId);
 		}
 		const deletedMedicineInfo = await targetedMedicine.remove();
