@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
 	Box,
 	Button,
@@ -12,21 +12,32 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { IconHeartPlus, IconEdit } from "@tabler/icons-react";
 import ImageDropZone from "../imageDropZone/ImageDropZone";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import {
 	useAddMedicineMutation,
 	useUpdateMedicineMutation,
+	useViewSingleMedicineQuery,
 } from "../../features/medicines/medicinesSlice";
 
 const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 	const theme = useTheme();
 	const navigate = useNavigate();
+	const { medicineId } = useParams();
 	const { state } = useLocation();
+	const { data: { medicine } = {}, isLoading } = useViewSingleMedicineQuery(medicineId);
 	const [addMedicine, responseInfo] = useAddMedicineMutation();
 	const [updateMedicine, updateResponseInfo] = useUpdateMedicineMutation();
+
+	const [defaultData, setDefaultData] = useState({
+		medicineName: state?.medicineName || "",
+		medicineDescription: state?.medicineDescription || "",
+		companyName: state?.companyName || "",
+		donarName: state?.donarName || "",
+		donarContact: state?.donarContact || "",
+	});
 
 	const schema = yup
 		.object({
@@ -54,24 +65,39 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 		reset,
 	} = useForm({
 		resolver: yupResolver(schema),
-		defaultValues: {
-			medicineName: state?.medicineName || "",
-			medicineDescription: state?.medicineDescription || "",
-			companyName: state?.companyName || "",
-			donarName: state?.donarName || "",
-			donarContact: state?.donarContact || "",
-		},
+		defaultValues: defaultData,
 	});
 
 	useEffect(() => {
-		if (Boolean(state)) {
+		Object.keys(defaultData).forEach((key) => {
+			setValue(key, defaultData[key]);
+		});
+	}, [defaultData, setValue]);
+
+	useEffect(() => {
+		if (Boolean(state) || Boolean(medicineId)) {
 			setIsUpdateCase(true);
 		}
 	}, []);
 
+	useEffect(() => {
+		if (isUpdateCase) {
+			setDefaultData({
+				medicineName: medicine?.medicineName,
+				medicineDescription: medicine?.medicineDescription,
+				companyName: medicine?.companyName,
+				donarName: medicine?.donarName,
+				donarContact: medicine?.donarContact,
+			});
+		}
+	}, [medicine, isUpdateCase]);
+
 	const onSubmit = (data) => {
 		if (isUpdateCase) {
-			updateMedicine({ body: data, medicineId: state._id })
+			updateMedicine({
+				body: data,
+				medicineId: state?._id || medicine?._id,
+			})
 				.unwrap()
 				.then((response) => {
 					if (response.msg === "medicine_updated") {
@@ -200,7 +226,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 							<>
 								<ImageDropZone
 									{...field}
-									image={state?.medicineImage}
+									image={state?.medicineImage || medicine?.medicineImage}
 									onFileSelect={onFileSelect}
 								/>
 							</>

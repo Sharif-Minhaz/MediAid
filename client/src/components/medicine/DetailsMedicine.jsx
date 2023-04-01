@@ -1,11 +1,15 @@
 import { Paper } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import SectionTitle from "../SectionTitle";
 import MedicineBody from "./MedicineBody";
 import Review from "./review/Review";
+import { useViewSingleMedicineQuery } from "../../features/medicines/medicinesSlice";
+import SkeletonCartPage from "./SkeletonCartPage";
 
 const DetailsMedicine = () => {
+	const { medicineId } = useParams();
 	const { state } = useLocation();
+	const responseInfo = useViewSingleMedicineQuery(medicineId);
 
 	return (
 		<>
@@ -14,7 +18,11 @@ const DetailsMedicine = () => {
 					text="Medicine Details"
 					button={{ link: "/medicines", text: "Find More" }}
 				/>
-				<MedicineBody medicine={state} />
+				{responseInfo.isLoading ? (
+					<SkeletonCartPage />
+				) : (
+					<MedicineBody medicine={state ? state : responseInfo?.data?.medicine} />
+				)}
 			</Paper>
 			<Review />
 		</>
