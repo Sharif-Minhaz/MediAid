@@ -45,19 +45,19 @@ const GalleryPhotoExcerpt = ({ item }) => {
 				height="100%"
 				width="100%"
 				effect="blur"
-				src={item.img}
-				srcSet={item.img}
-				alt={item.title}
+				src={item.galleryImage}
+				srcSet={item.galleryImage}
+				alt={item.galleryImageTitle}
 			/>
 			<ImageListItemBar
 				className="description-bar"
 				sx={{ transition: "0.4s all" }}
-				title={item.title}
-				subtitle={item.author}
+				title={item.galleryImageTitle}
+				subtitle={item.authorName}
 				actionIcon={
 					<IconButton
 						sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-						aria-label={`info about ${item.title}`}
+						aria-label={`info about ${item.galleryImageTitle}`}
 					>
 						<IconInfoCircleFilled />
 					</IconButton>

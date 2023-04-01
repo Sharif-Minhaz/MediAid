@@ -59,7 +59,7 @@ const PreviewImgStyle = ({ files, handleRemoveImage }) => {
 	);
 };
 
-const ImageDropZone = forwardRef(({ image = "", onFileSelect }, ref) => {
+const ImageDropZone = forwardRef(({ image = "", onFileSelect, key }, ref) => {
 	const [files, setFiles] = useState([]);
 
 	const handleRemoveImage = () => {
@@ -124,7 +124,7 @@ const ImageDropZone = forwardRef(({ image = "", onFileSelect }, ref) => {
 	}, []);
 
 	return (
-		<Box component="section" borderRadius={1.5} ref={ref}>
+		<Box key={key} component="section" borderRadius={1.5} ref={ref}>
 			<Box
 				component="div"
 				{...getRootProps({ style, className: "dropzone" })}
