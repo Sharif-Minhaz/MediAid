@@ -13,12 +13,19 @@ import {
 } from "@mui/material";
 import { IconPencilPlus, IconReportMedical } from "@tabler/icons-react";
 import { toast } from "react-toastify";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import RichTextEditor from "../../components/RichTextEditor";
+import {
+	useAddHealthTipMutation,
+	useUpdateHealthTipMutation,
+} from "../../features/healthTipsSlice/healthTipsSlice";
 
 const HealthTipForm = ({ isUpdateCase, setIsUpdateCase }) => {
 	const theme = useTheme();
+	const navigate = useNavigate();
 	const { state } = useLocation();
+	const [addHealthTip, responseInfo] = useAddHealthTipMutation();
+	const [updateHealthTip, updateResponseInfo] = useUpdateHealthTipMutation();
 
 	const schema = yup
 		.object({
@@ -46,10 +53,28 @@ const HealthTipForm = ({ isUpdateCase, setIsUpdateCase }) => {
 	});
 
 	const onSubmit = (data) => {
-		toast.success("Successfully get the data");
-		console.log(data);
-		if (!isUpdateCase) {
-			reset();
+		if (isUpdateCase) {
+			updateHealthTip({ body: data, healthTipId: state._id })
+				.unwrap()
+				.then((response) => {
+					if (response.msg === "health_tip_updated") {
+						toast.success("Health Tip updated");
+						return navigate("/health-tips", { replace: true });
+					}
+					toast.error("Health Tip is not updated");
+				})
+				.catch((err) => toast.error("Something went wrong!"));
+		} else {
+			addHealthTip(data)
+				.unwrap()
+				.then((response) => {
+					if (response.msg === "health_tip_added") {
+						toast.success("New Health Tip added");
+						return reset();
+					}
+					toast.error("Health Tip is not added");
+				})
+				.catch((err) => toast.error("Something went wrong!"));
 		}
 	};
 
@@ -76,7 +101,7 @@ const HealthTipForm = ({ isUpdateCase, setIsUpdateCase }) => {
 					id="outlined-adornment-title"
 					{...register("title")}
 					label="title"
-					// disabled={state.submitting}
+					disabled={responseInfo.isLoading}
 				/>
 				{errors.title && (
 					<FormHelperText error id="standard-weight-helper-text-title">
@@ -107,7 +132,7 @@ const HealthTipForm = ({ isUpdateCase, setIsUpdateCase }) => {
 				}
 				variant="contained"
 				type="submit"
-				// disabled={state.submitting}
+				disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
 			>
 				{isUpdateCase ? "Update" : "Add"}
 			</Button>

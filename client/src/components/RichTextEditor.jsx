@@ -36,7 +36,7 @@ const RichTextEditor = forwardRef(({ error, setValue, getValues }, ref) => {
 			<JoditEditor
 				ref={editor}
 				value={getValues("description")}
-				config={config}
+				config={config}				
 				tabIndex={1}
 				onBlur={(content) => setValue("description", content)}
 				onChange={(content) => setValue("description", content)}

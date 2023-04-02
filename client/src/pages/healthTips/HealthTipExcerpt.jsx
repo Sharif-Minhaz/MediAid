@@ -3,7 +3,7 @@ import { IconPencilMinus } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 
-const HealthTipExcerpt = ({ healthTip }) => {
+const HealthTipExcerpt = ({ healthTip, index }) => {
 	const navigate = useNavigate();
 	const { ref, inView } = useInView({
 		threshold: 0.3,
@@ -21,7 +21,7 @@ const HealthTipExcerpt = ({ healthTip }) => {
 				component="h1"
 				sx={{ mb: 1.5, fontWeight: 500, color: "#4d3e60" }}
 			>
-				{healthTip.id}. {healthTip.title}{" "}
+				{index + 1}. {healthTip.title}{" "}
 				<Typography
 					component="span"
 					title="Edit"
@@ -29,14 +29,28 @@ const HealthTipExcerpt = ({ healthTip }) => {
 					sx={{ display: "none", cursor: "pointer" }}
 				>
 					<IconPencilMinus
-						onClick={() => navigate("/health-tips/edit", { state: healthTip })}
+						onClick={() =>
+							navigate(`/health-tips/edit/${healthTip._id}`, { state: healthTip })
+						}
 						size={20}
 					/>
 				</Typography>
 			</Typography>
-			<Typography variant="body1" sx={{ color: "#000000e3" }}>
-				{healthTip.description}
-			</Typography>
+			<Typography
+				component="div"
+				variant="body1"
+				sx={{
+					color: "#000000e3",
+					"& :is(ul, ol)": {
+						mx: 3,
+						my: 2,
+					},
+					"& img": {
+						borderRadius: "14px",
+					},
+				}}
+				dangerouslySetInnerHTML={{ __html: healthTip.description }}
+			/>
 		</Box>
 	);
 };

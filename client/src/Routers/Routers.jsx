@@ -56,7 +56,7 @@ const Routers = () => {
 					<Route path="health-tips">
 						<Route index element={<HealthTips />} />
 						<Route path="add" element={<AddHealthTip />} />
-						<Route path="edit" element={<AddHealthTip />} />
+						<Route path="edit/:healthTipId" element={<AddHealthTip />} />
 					</Route>
 
 					<Route path="donate" element={<Donate />} />
