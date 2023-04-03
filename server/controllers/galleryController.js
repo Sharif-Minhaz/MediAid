@@ -5,12 +5,11 @@ const cloudinary = require("../utils/cloudinaryHandler");
 exports.viewGalleryImagesController = asyncHandler(async (req, res) => {
 	const galleryImage = await Gallery.find();
 
-	if (galleryImage.length) {
+	if (galleryImage.length)
 		return res.status(200).json({
 			msg: "gallery_img_found",
 			galleryImage,
 		});
-	}
 
 	res.status(200).json({
 		msg: "gallery_img_not_found",
@@ -34,12 +33,11 @@ exports.addGalleryImageController = asyncHandler(async (req, res) => {
 		galleryImage: uploadImage.secure_url,
 	}).save();
 
-	if (newGalleryImage) {
+	if (newGalleryImage)
 		return res.status(200).json({
 			msg: "gallery_img_added",
 			newGalleryImage,
 		});
-	}
 
 	res.status(500).json({
 		msg: "gallery_img_not_added",

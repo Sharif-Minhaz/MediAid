@@ -24,8 +24,8 @@ const userSchema = new Schema(
 		},
 		user_type: {
 			type: String,
-			enum: ["receiver", "donor", "admin"],
-			required: true,
+			enum: ["user", "admin"],
+			default: "user",
 		},
 	},
 	{ timestamps: true }

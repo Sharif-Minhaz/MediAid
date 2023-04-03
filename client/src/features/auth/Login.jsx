@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -24,10 +24,17 @@ import AuthWrapper from "./AuthWrapper";
 import AuthIntro from "./AuthIntro";
 import AuthSubmitButton from "./AuthSubmitButton";
 import { toast } from "react-toastify";
+import { setToCookie } from "../../utils/setToCookie";
+import { useLoginMutation } from "./authSlice";
+// import Cookies from "js-cookie";
+// import { decryptCookie } from "../../utils/decryptCookie";
 
 const Login = () => {
 	const theme = useTheme();
+	const navigate = useNavigate();
+	const [login, responseInfo] = useLoginMutation();
 	const [showPassword, setShowPassword] = useState(false);
+	const [serverResError, setServerResError] = useState({ email: "", password: "" });
 
 	const schema = yup
 		.object({
@@ -40,6 +47,7 @@ const Login = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
@@ -51,8 +59,31 @@ const Login = () => {
 	};
 
 	const onSubmit = (data) => {
-		toast.success("Successfully get the form data");
-		console.log(data);
+		setServerResError({ email: "", password: "" });
+		login(data)
+			.unwrap()
+			.then((response) => {
+				if (response.msg === "login_successful") {
+					setToCookie(response.user);
+					toast.success("Login successful");
+					// decryptCookie(Cookies.get("uinfo"));
+					return navigate("/", { replace: true });
+				}
+				reset({ password: "" });
+				toast.error("Login failed");
+			})
+			.catch((err) => {
+				reset({ password: "" });
+				if (err.status === 401) {
+					return setServerResError((prev) => ({
+						...prev,
+						email: "Wrong credentials",
+						password: "Wrong credentials",
+					}));
+				}
+				console.error(err);
+				toast.error("Something went wrong");
+			});
 	};
 
 	return (
@@ -65,17 +96,16 @@ const Login = () => {
 			<Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
 				<FormControl
 					fullWidth
-					error={Boolean(errors.email)}
+					error={Boolean(errors.email || serverResError.email)}
 					sx={{ ...theme.customInput, mb: "13px" }}
 				>
-					<InputLabel htmlFor="outlined-adornment-email-login">
-						Email Address / Username
-					</InputLabel>
+					<InputLabel htmlFor="outlined-adornment-email-login">Email Address</InputLabel>
 					<OutlinedInput
 						id="outlined-adornment-email-login"
 						type="email"
 						{...register("email")}
-						label="Email Address / Username"
+						label="Email Address"
+						disabled={responseInfo.isLoading}
 					/>
 					{errors.email && (
 						<FormHelperText error id="standard-weight-helper-text-email-login">
@@ -85,7 +115,7 @@ const Login = () => {
 				</FormControl>
 				<FormControl
 					fullWidth
-					error={Boolean(errors.password)}
+					error={Boolean(errors.password || serverResError.password)}
 					sx={{ ...theme.customInput }}
 				>
 					<InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
@@ -94,6 +124,7 @@ const Login = () => {
 						{...register("password")}
 						label="Password"
 						type={showPassword ? "text" : "password"}
+						disabled={responseInfo.isLoading}
 						endAdornment={
 							<InputAdornment sx={{ mb: "6px" }} position="end">
 								<IconButton
@@ -113,6 +144,11 @@ const Login = () => {
 							{errors.password?.message}
 						</FormHelperText>
 					)}
+					{(serverResError.email || serverResError.password) && (
+						<FormHelperText error id="standard-helper-text-email-login">
+							{serverResError.email || serverResError.password}
+						</FormHelperText>
+					)}
 				</FormControl>
 				<Grid container>
 					<Grid item xs alignItems="center">
@@ -129,7 +165,7 @@ const Login = () => {
 						</Typography>
 					</Grid>
 				</Grid>
-				<AuthSubmitButton>Log In</AuthSubmitButton>
+				<AuthSubmitButton disable={responseInfo.isLoading}>Log In</AuthSubmitButton>
 				<Divider sx={{ width: "100%", mb: 2 }} />
 				<Typography
 					fontWeight={500}

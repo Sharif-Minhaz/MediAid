@@ -1,6 +1,6 @@
 const jwtController = require("../controllers/jwtController");
 
-exports.verifyToken = (req, res, next) => {
+exports.verifyJWT = (req, res, next) => {
 	const token = req.headers?.authorization || req.cookies?.auth;
 
 	if (token) {
