@@ -124,7 +124,7 @@ const PendingElement = ({ type, request }) => {
 								sx={{
 									width: "70px",
 									color: "white",
-									background: "red",
+									background: "#ff4e4e",
 									fontSize: "11px",
 									"&:hover": { background: "#db1818" },
 									borderRadius: { xs: "6px", sm: "50px" },
@@ -140,7 +140,7 @@ const PendingElement = ({ type, request }) => {
 								sx={{
 									width: "70px",
 									color: "white",
-									background: "green",
+									background: "#4ed590",
 									fontSize: "11px",
 									"&:hover": { background: "#2e7a31" },
 									borderRadius: { xs: "6px", sm: "50px" },

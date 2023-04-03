@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -25,14 +25,17 @@ import { strengthColor, strengthIndicator } from "../../utils/passwordStrength";
 import AuthWrapper from "./AuthWrapper";
 import AuthIntro from "./AuthIntro";
 import AuthSubmitButton from "./AuthSubmitButton";
+import { useRegisterMutation } from "./authSlice";
 
 const Register = () => {
 	const theme = useTheme();
-
+	const navigate = useNavigate();
+	const [registerUser, responseInfo] = useRegisterMutation();
 	const [showPassword, setShowPassword] = useState(false);
 	const [agreed, setAgreed] = useState(false);
 	const [strength, setStrength] = useState(0);
-	const [level, setLevel] = useState();
+	const [level, setLevel] = useState("");
+	const [serverResError, setServerResError] = useState({ email: "" });
 
 	const schema = yup
 		.object({
@@ -50,6 +53,7 @@ const Register = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
@@ -69,9 +73,30 @@ const Register = () => {
 		event.preventDefault();
 	};
 
+	const onError = (err) => {
+		if (err.email) setServerResError({ email: "" });
+	};
+
 	const onSubmit = (data) => {
-		toast.success("Successfully get the form data");
-		console.log(data);
+		registerUser(data)
+			.unwrap()
+			.then((response) => {
+				if (response.msg === "registration_successful") {
+					toast.success("Registration successful");
+					return navigate("/login", { replace: true });
+				}
+				reset({ password: "" });
+				toast.error("Registration failed");
+			})
+			.catch((err) => {
+				reset({ password: "" });
+				setStrength(0);
+				if (err.status === 409) {
+					setServerResError((prev) => ({ ...prev, email: "Email is already in use" }));
+					return;
+				}
+				toast.error("Something went wrong");
+			});
 	};
 
 	const handleAgree = () => setAgreed((prev) => !prev);
@@ -83,7 +108,12 @@ const Register = () => {
 				des2="Enter your credentials to continue"
 				des3="Register with Email address"
 			/>
-			<Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
+			<Box
+				component="form"
+				noValidate
+				sx={{ mt: 1 }}
+				onSubmit={handleSubmit(onSubmit, onError)}
+			>
 				{/* grid for first and last name */}
 				<Grid container columnSpacing={2}>
 					<Grid item sm={6} xs={12}>
@@ -101,6 +131,7 @@ const Register = () => {
 								type="text"
 								label="First Name"
 								{...register("firstName")}
+								disabled={responseInfo.isLoading}
 							/>
 							{errors.firstName && (
 								<FormHelperText error>{errors.firstName?.message}</FormHelperText>
@@ -122,6 +153,7 @@ const Register = () => {
 								type="text"
 								{...register("lastName")}
 								label="Last Name"
+								disabled={responseInfo.isLoading}
 							/>
 							{errors.lastName && (
 								<FormHelperText
@@ -136,21 +168,25 @@ const Register = () => {
 				</Grid>
 				<FormControl
 					fullWidth
-					error={Boolean(errors.email)}
+					error={Boolean(errors.email || serverResError.email)}
 					sx={{ ...theme.customInput, mb: "13px" }}
 				>
-					<InputLabel htmlFor="outlined-adornment-email-login">
-						Email Address / Username
-					</InputLabel>
+					<InputLabel htmlFor="outlined-adornment-email-login">Email Address</InputLabel>
 					<OutlinedInput
 						id="outlined-adornment-email-login"
 						type="email"
 						{...register("email")}
-						label="Email Address / Username"
+						label="Email Address"
+						disabled={responseInfo.isLoading}
 					/>
 					{errors.email && (
 						<FormHelperText error id="standard-weight-helper-text-email-login">
 							{errors.email?.message}
+						</FormHelperText>
+					)}
+					{serverResError.email && (
+						<FormHelperText error id="standard-helper-text-email-login">
+							{serverResError.email}
 						</FormHelperText>
 					)}
 				</FormControl>
@@ -166,6 +202,7 @@ const Register = () => {
 						label="Password"
 						type={showPassword ? "text" : "password"}
 						onChange={handleStrengthChange}
+						disabled={responseInfo.isLoading}
 						endAdornment={
 							<InputAdornment sx={{ mb: "6px" }} position="end">
 								<IconButton
@@ -220,7 +257,9 @@ const Register = () => {
 						/>
 					</Grid>
 				</Grid>
-				<AuthSubmitButton disable={!agreed}>Register</AuthSubmitButton>
+				<AuthSubmitButton disable={!agreed || responseInfo.isLoading}>
+					Register
+				</AuthSubmitButton>
 				<Divider sx={{ width: "100%", mb: 2 }} />
 				<Typography
 					fontWeight={500}

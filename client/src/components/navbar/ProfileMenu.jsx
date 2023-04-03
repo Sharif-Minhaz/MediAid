@@ -1,8 +1,23 @@
 import { Avatar, Box, Divider, ListItemIcon, Menu, MenuItem, Stack } from "@mui/material";
-import { IconLogout as Logout, IconEdit, IconUserCircle } from "@tabler/icons-react";
+import { IconLogout as Logout, IconUserCircle } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
+import { useLogoutMutation } from "../../features/auth/authSlice";
+import { toast } from "react-toastify";
 
 const ProfileMenu = ({ anchorEl, open, handleClose }) => {
+	const [logout, responseInfo] = useLogoutMutation();
+
+	const handleLogout = () => {
+		logout()
+			.unwrap()
+			.then((response) => {
+				if (response.msg === "logout_successful") {
+					toast.success("Logout successful");
+				}
+			})
+			.catch((err) => toast.error("Something went wrong"));
+	};
+
 	return (
 		<Menu
 			anchorEl={anchorEl}
@@ -69,7 +84,12 @@ const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 					Login
 				</MenuItem>
 			</Link>
-			<MenuItem onClick={handleClose}>
+			<MenuItem
+				onClick={() => {
+					handleClose();
+					handleLogout();
+				}}
+			>
 				<ListItemIcon>
 					<Logout size={22} />
 				</ListItemIcon>
