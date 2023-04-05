@@ -7,6 +7,7 @@ import DrawerConfig from "../components/navbar/DrawerConfig";
 import Navbar from "../components/navbar/Navbar";
 import CartMedicineSidebar from "../components/navbar/CartMedicineSidebar";
 import ScrollToTop from "../components/ScrollToTop";
+import { useViewProfileQuery } from "../features/profile/profileSlice";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
 	display: "flex",
@@ -21,6 +22,7 @@ export default function CommonLayout({ children }) {
 	const [anchorEl, setAnchorEl] = useState({ profile: null, notification: null });
 	const openProfile = Boolean(anchorEl.profile);
 	const openNotification = Boolean(anchorEl.notification);
+	const profileInfo = useViewProfileQuery();
 
 	const handleClick = (event) => {
 		setAnchorEl((prev) => ({ ...prev, profile: event.currentTarget }));
@@ -41,6 +43,7 @@ export default function CommonLayout({ children }) {
 				{/* ====== Navbar here ======== */}
 				<Navbar
 					anchorEl={anchorEl}
+					profileInfo={profileInfo}
 					handleClick={handleClick}
 					handleNotificationClick={handleNotificationClick}
 				/>
@@ -49,7 +52,7 @@ export default function CommonLayout({ children }) {
 				<Box component="main" sx={{ flexGrow: 1, pt: "13px", pb: { xs: 0, md: "20px" } }}>
 					<DrawerHeader />
 					<Box
-						component='div'
+						component="div"
 						className="holder"
 						bgcolor="#eef2f6"
 						pt="15px"
@@ -76,7 +79,12 @@ export default function CommonLayout({ children }) {
 				open={openNotification}
 				handleClose={handleClose}
 			/>
-			<ProfileMenu anchorEl={anchorEl.profile} open={openProfile} handleClose={handleClose} />
+			<ProfileMenu
+				profileInfo={profileInfo}
+				anchorEl={anchorEl.profile}
+				open={openProfile}
+				handleClose={handleClose}
+			/>
 		</>
 	);
 }

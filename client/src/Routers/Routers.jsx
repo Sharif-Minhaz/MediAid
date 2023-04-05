@@ -27,6 +27,8 @@ import History from "../pages/History";
 import ReceiverList from "../pages/ReceiverList";
 import DonorList from "../pages/DonorList";
 import PathName from "../components/PathName";
+import Protected from "./Protected";
+import Admin from "./Admin";
 
 const Routers = () => {
 	return (
@@ -39,32 +41,132 @@ const Routers = () => {
 						<Route index element={<MedicinesPage />} />
 						<Route path=":medicineId" element={<DetailsMedicine />} />
 						<Route path="edit/:medicineId" element={<AddMedicine />} />
-						<Route path="apply/:medicineId" element={<MedicineApply />} />
+						<Route
+							path="apply/:medicineId"
+							element={
+								<Protected>
+									<MedicineApply />
+								</Protected>
+							}
+						/>
 						<Route path="search" element={<SearchResultPage />} />
 					</Route>
 
 					<Route path="profile">
-						<Route index element={<Profile />} />
-						<Route path="edit" element={<EditProfile />} />
+						<Route
+							index
+							element={
+								<Protected>
+									<Profile />
+								</Protected>
+							}
+						/>
+						<Route
+							path="edit"
+							element={
+								<Protected>
+									<EditProfile />
+								</Protected>
+							}
+						/>
 					</Route>
 
-					<Route path="medicine/add" element={<AddMedicine />} />
+					<Route
+						path="medicine/add"
+						element={
+							<Protected>
+								<Admin>
+									<AddMedicine />
+								</Admin>
+							</Protected>
+						}
+					/>
 
 					<Route path="gallery" element={<GalleryPage />} />
-					<Route path="gallery-photo/add" element={<AddPhotoPage />} />
+					<Route
+						path="gallery-photo/add"
+						element={
+							<Protected>
+								<Admin>
+									<AddPhotoPage />
+								</Admin>
+							</Protected>
+						}
+					/>
 
 					<Route path="health-tips">
 						<Route index element={<HealthTips />} />
-						<Route path="add" element={<AddHealthTip />} />
-						<Route path="edit/:healthTipId" element={<AddHealthTip />} />
+						<Route
+							path="add"
+							element={
+								<Protected>
+									<Admin>
+										<AddHealthTip />
+									</Admin>
+								</Protected>
+							}
+						/>
+						<Route
+							path="edit/:healthTipId"
+							element={
+								<Protected>
+									<Admin>
+										<AddHealthTip />
+									</Admin>
+								</Protected>
+							}
+						/>
 					</Route>
 
-					<Route path="donate" element={<Donate />} />
-					<Route path="history" element={<History />} />
-					<Route path="donor-list" element={<DonorList />} />
-					<Route path="receiver-list" element={<ReceiverList />} />
+					<Route
+						path="donate"
+						element={
+							<Protected>
+								<Donate />
+							</Protected>
+						}
+					/>
+					<Route
+						path="history"
+						element={
+							<Protected>
+								<Admin>
+									<History />
+								</Admin>
+							</Protected>
+						}
+					/>
+					<Route
+						path="donor-list"
+						element={
+							<Protected>
+								<Admin>
+									<DonorList />
+								</Admin>
+							</Protected>
+						}
+					/>
+					<Route
+						path="receiver-list"
+						element={
+							<Protected>
+								<Admin>
+									<ReceiverList />
+								</Admin>
+							</Protected>
+						}
+					/>
 					<Route path="best-donors" element={<BestDonors />} />
-					<Route path="pending" element={<Pending />} />
+					<Route
+						path="pending"
+						element={
+							<Protected>
+								<Admin>
+									<Pending />
+								</Admin>
+							</Protected>
+						}
+					/>
 					<Route path="faq" element={<FAQ />} />
 					<Route path="contact" element={<Contact />} />
 					<Route path="about" element={<About />} />
@@ -72,7 +174,14 @@ const Routers = () => {
 
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
-				<Route path="/reset-password" element={<ResetPassword />} />
+				<Route
+					path="/reset-password"
+					element={
+						<Protected>
+							<ResetPassword />
+						</Protected>
+					}
+				/>
 				<Route path="*" element={<NotFound404 />} />
 			</Routes>
 		</PathName>

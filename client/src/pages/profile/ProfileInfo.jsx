@@ -7,16 +7,19 @@ const ProfileInfo = ({ profileData }) => {
 		<Paper component="section" sx={{ mt: "15px" }}>
 			<SectionTitle text="Profile Information" />
 			<Box sx={{ p: "20px" }}>
-				<Typography mb={3} color="#545454" fontSize={17}>
-					{profileData.description}
-				</Typography>
+				{profileData?.profile.description && (
+					<Typography mb={3} color="#545454" fontSize={17}>
+						{profileData?.profile.description}
+					</Typography>
+				)}
 				<Stack rowGap={0.6}>
 					<Typography fontSize={15.5} color="#484848">
 						<span className="bold-titles">Organization:</span>{" "}
-						{profileData.organization}
+						{profileData?.profile.organization || <i>info not provided yet</i>}
 					</Typography>
 					<Typography fontSize={15.5} color="#484848">
-						<span className="bold-titles">Address:</span> {profileData.address}
+						<span className="bold-titles">Address:</span>{" "}
+						{profileData?.profile.address || <i>info not provided yet</i>}
 					</Typography>
 					<Typography
 						fontSize={15.5}
@@ -24,8 +27,11 @@ const ProfileInfo = ({ profileData }) => {
 						sx={{ "&:hover": { textDecoration: "underline" } }}
 					>
 						<span className="bold-titles">Email: </span>
-						<a href={`mailto:${profileData.email}`} style={{ color: "inherit" }}>
-							{profileData.email}
+						<a
+							href={`mailto:${profileData?.profile.email}`}
+							style={{ color: "inherit" }}
+						>
+							{profileData?.profile.email}
 						</a>
 					</Typography>
 					<Typography
@@ -35,27 +41,38 @@ const ProfileInfo = ({ profileData }) => {
 					>
 						<span className="bold-titles">Contact: </span>
 						<a
-							href={`whatsapp://send?phone=${profileData.contact}`}
+							href={`whatsapp://send?phone=${profileData?.profile.contact}`}
 							style={{ color: "inherit" }}
 						>
-							{profileData.contact}
+							{profileData?.profile.contact || <i>info not provided yet</i>}
 						</a>
 					</Typography>
 
 					<Stack direction="row" columnGap={0.5} mt={1}>
-						<span className="bold-titles">Socials: </span>
-						{profileData.socials.facebook && (
-							<a href={profileData.socials.facebook}>
+						<span className="bold-titles">
+							Socials:{" "}
+							{!(
+								profileData?.profile.facebook ||
+								profileData?.profile.instagram ||
+								profileData?.profile.twitter
+							) ? (
+								<i>info not provided yet</i>
+							) : (
+								""
+							)}
+						</span>
+						{profileData?.profile.facebook && (
+							<a href={profileData?.profile.facebook}>
 								<IconBrandFacebook size={19} />
 							</a>
 						)}
-						{profileData.socials.instagram && (
-							<a href={profileData.socials.instagram}>
+						{profileData?.profile.instagram && (
+							<a href={profileData?.profile.instagram}>
 								<IconBrandInstagram size={19} />
 							</a>
 						)}
-						{profileData.socials.twitter && (
-							<a href={profileData.socials.twitter}>
+						{profileData?.profile.twitter && (
+							<a href={profileData?.profile.twitter}>
 								<IconBrandTwitter size={19} />
 							</a>
 						)}

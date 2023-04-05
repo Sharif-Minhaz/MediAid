@@ -14,14 +14,14 @@ const RoundedButton = styled(Button)(({ theme }) => ({
 	},
 }));
 
-const ProfileBtn = ({ handleClick }) => {
+const ProfileBtn = ({ profileInfo, handleClick }) => {
 	return (
 		<RoundedButton
 			onClick={handleClick}
 			startIcon={
 				<Avatar
-					alt="John Doe"
-					src="/images/default-profile-pic.jpg"
+					alt={profileInfo.fullName}
+					src={profileInfo.profilePicture}
 					sx={{ width: 36, height: 36, ml: "2px" }}
 				/>
 			}

@@ -26,8 +26,6 @@ import AuthSubmitButton from "./AuthSubmitButton";
 import { toast } from "react-toastify";
 import { setToCookie } from "../../utils/setToCookie";
 import { useLoginMutation } from "./authSlice";
-// import Cookies from "js-cookie";
-// import { decryptCookie } from "../../utils/decryptCookie";
 
 const Login = () => {
 	const theme = useTheme();
@@ -66,7 +64,6 @@ const Login = () => {
 				if (response.msg === "login_successful") {
 					setToCookie(response.user);
 					toast.success("Login successful");
-					// decryptCookie(Cookies.get("uinfo"));
 					return navigate("/", { replace: true });
 				}
 				reset({ password: "" });

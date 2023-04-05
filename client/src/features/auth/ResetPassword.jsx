@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -20,11 +20,16 @@ import {
 import AuthWrapper from "./AuthWrapper";
 import AuthIntro from "./AuthIntro";
 import AuthSubmitButton from "./AuthSubmitButton";
+import { useResetPasswordMutation } from "./authSlice";
+import { toast } from "react-toastify";
 
 const ResetPassword = () => {
 	const theme = useTheme();
+	const navigate = useNavigate();
+	const [resetPassword, responseInfo] = useResetPasswordMutation();
 	const [showPassword, setShowPassword] = useState(false);
 	const [matchedPrevPsw, setMatchedPrevPsw] = useState(false);
+	const [serverSideError, setServerSideError] = useState("");
 
 	const schema = yup
 		.object({
@@ -37,13 +42,31 @@ const ResetPassword = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
 
 	const onSubmit = (data) => {
-		toast.success("Successfully get the form data");
-		console.log(data);
+		setServerSideError("");
+		resetPassword(data)
+			.unwrap()
+			.then((response) => {
+				if (response.msg === "pass_reset") {
+					toast.success("Password reset completed");
+					return navigate("/login", { replace: true });
+				} else if (response.msg === "same_pass") {
+					return toast.error("New password can't be the old one");
+				}
+				setServerSideError("Wrong credential");
+			})
+			.catch((err) => {
+				toast.error("Something went wrong!");
+				setServerSideError("Wrong credential");
+			})
+			.finally(() => {
+				reset({ newPassword: "" });
+			});
 	};
 
 	const handleCheckOldPsw = (e) => {
@@ -65,7 +88,7 @@ const ResetPassword = () => {
 			<Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
 				<FormControl
 					fullWidth
-					error={Boolean(errors.prevPassword)}
+					error={Boolean(errors.prevPassword || serverSideError)}
 					sx={{ ...theme.customInput, mb: "13px" }}
 				>
 					<InputLabel htmlFor="outlined-adornment-password-login">
@@ -77,6 +100,7 @@ const ResetPassword = () => {
 						label="Previous Password"
 						type={showPassword ? "text" : "password"}
 						onChange={handleCheckOldPsw}
+						disabled={responseInfo.isLoading}
 						endAdornment={
 							<InputAdornment sx={{ mb: "6px" }} position="end">
 								<IconButton
@@ -99,7 +123,7 @@ const ResetPassword = () => {
 				</FormControl>
 				<FormControl
 					fullWidth
-					error={Boolean(errors.newPassword)}
+					error={Boolean(errors.newPassword || serverSideError)}
 					sx={{ ...theme.customInput }}
 					disabled={!matchedPrevPsw}
 				>
@@ -111,6 +135,7 @@ const ResetPassword = () => {
 						{...register("newPassword")}
 						label="New Password"
 						type={showPassword ? "text" : "password"}
+						disabled={responseInfo.isLoading}
 						endAdornment={
 							<InputAdornment sx={{ mb: "6px" }} position="end">
 								<IconButton
@@ -131,8 +156,16 @@ const ResetPassword = () => {
 							{errors.newPassword?.message}
 						</FormHelperText>
 					)}
+
+					{serverSideError && (
+						<FormHelperText error id="standard-helper-text-newPassword-login">
+							{serverSideError}
+						</FormHelperText>
+					)}
 				</FormControl>
-				<AuthSubmitButton>Change Password</AuthSubmitButton>
+				<AuthSubmitButton disable={responseInfo.isLoading}>
+					Change Password
+				</AuthSubmitButton>
 				<Divider sx={{ width: "100%", mb: 2 }} />
 				<Typography
 					fontWeight={500}

@@ -9,6 +9,8 @@ import {
 	IconClipboardHeart,
 	IconPencil,
 } from "@tabler/icons-react";
+import { useViewProfileQuery } from "../../features/profile/profileSlice";
+import { toCapitalize } from "../../utils/toCapitalize";
 
 const medicines = [
 	{
@@ -71,25 +73,9 @@ const medicine2 = [
 	},
 ];
 
-const profileData = {
-	fullName: "John Doe",
-	designation: "UI/UX designer",
-	profilePicture: "/images/default-profile-pic.jpg",
-	description:
-		"Hi, I am John. Medicine donation is the act of giving medications to those in	need, either directly or through a charitable organization. The donation of medication can help individuals who cannot afford or do not have access to necessary medications due to financial or other barriers.",
-	email: "john@gmail.com",
-	contact: "+8801308673831",
-	organization: "Daffodil International University",
-	socials: {
-		facebook: "https://www.facebook.com/",
-		instagram: "https://www.instagram.com/",
-		twitter: "https://twitter.com/?lang=en",
-	},
-	address: "Savar, Dhaka",
-};
-
 const Profile = () => {
 	const navigate = useNavigate();
+	const responseInfo = useViewProfileQuery();
 	const smallScreen = useMediaQuery("(max-width: 550px)");
 	const [currentTab, setCurrentTab] = useState("About");
 
@@ -125,16 +111,21 @@ const Profile = () => {
 								>
 									<img
 										loading="lazy"
-										src={profileData.profilePicture}
-										style={{ width: "100%", borderRadius: "5px" }}
+										src={responseInfo?.data?.profile?.profilePicture}
+										style={{
+											width: "100%",
+											borderRadius: "5px",
+											height: "100%",
+											objectFit: "cover",
+										}}
 									/>
 								</Box>
 								<Stack color="white" rowGap={0.3}>
 									<Typography fontSize="1.71rem">
-										{profileData.fullName}
+										{responseInfo?.data?.profile.fullName}
 									</Typography>
 									<Typography fontSize="0.95rem" color="whitesmoke">
-										{profileData.designation}
+										{toCapitalize(responseInfo?.data?.profile.user.user_type)}
 									</Typography>
 								</Stack>
 							</Stack>
@@ -178,7 +169,9 @@ const Profile = () => {
 								padding: smallScreen ? "4px 0" : "4px 10px",
 							}}
 							variant="contained"
-							onClick={() => navigate("/profile/edit", { state: profileData })}
+							onClick={() =>
+								navigate("/profile/edit", { state: responseInfo?.data.profile })
+							}
 						>
 							{smallScreen ? <IconPencil /> : "Edit"}
 						</Button>
@@ -186,7 +179,7 @@ const Profile = () => {
 				</Box>
 			</Paper>
 
-			{currentTab === "About" && <ProfileInfo profileData={profileData} />}
+			{currentTab === "About" && <ProfileInfo profileData={responseInfo.data} />}
 			{currentTab === "Donated" && (
 				<ProfileMedicines medicines={medicines} titleText="Donated Medicines" />
 			)}

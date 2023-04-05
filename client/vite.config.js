@@ -8,9 +8,13 @@ export default defineConfig({
 	plugins: [
 		react(),
 		nodePolyfills({ protocolImports: true }),
-		VitePWA(),
+		VitePWA({
+			workbox: {
+				maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+			},
+		}),
 	],
-	build: { chunkSizeWarningLimit: 1000 },
+	build: { chunkSizeWarningLimit: 3000 },
 	devOptions: {
 		errorOverlay: true,
 	},
