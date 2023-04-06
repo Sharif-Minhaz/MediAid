@@ -20,16 +20,11 @@ import {
 } from "@tabler/icons-react";
 import BrandAuthImg from "../../features/auth/BrandAuthImg";
 import SingleNavLink from "./SingleNavLink";
-import { useEffect, useState } from "react";
-import { getUserInfo } from "../../utils/getUserInfo";
+import { userInfoStatus as userInfo } from "../../features/auth/userInfoSlice";
+import { useSelector } from "react-redux";
 
 const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
-	const [userInfo, setUserInfo] = useState({});
-
-	useEffect(() => {
-		setUserInfo(getUserInfo());
-	}, []);
-
+	const userInfoStatus = useSelector(userInfo);
 	return (
 		<Box component="div" sx={{ width: drawerWidth }}>
 			{isSmallScreen && (
@@ -38,7 +33,7 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 				</Box>
 			)}
 			<List sx={{ pt: "6px" }}>
-				{userInfo?.user_type === "admin" ? (
+				{userInfoStatus?.user_type === "admin" ? (
 					<SingleNavLink
 						link="/dashboard"
 						text="Dashboard"
@@ -52,7 +47,7 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 					text="Medicines"
 					icon={<IconVaccineBottle size={20} />}
 				/>
-				{userInfo?.user_type === "admin" && (
+				{userInfoStatus?.user_type === "admin" && (
 					<SingleNavLink
 						link="/medicine/add"
 						text="Add Medicine"
@@ -64,7 +59,7 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 					text="Gallery"
 					icon={<IconBrandGooglePhotos size={20} />}
 				/>
-				{userInfo?.user_type === "admin" && (
+				{userInfoStatus?.user_type === "admin" && (
 					<SingleNavLink
 						link="/gallery-photo/add"
 						text="Add Photo"
@@ -76,7 +71,7 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 					text="Donate"
 					icon={<IconHeartHandshake size={20} />}
 				/>
-				{userInfo?.user_type === "admin" && (
+				{userInfoStatus?.user_type === "admin" && (
 					<>
 						<SingleNavLink
 							link="/pending"
@@ -113,14 +108,15 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 			</List>
 			<Divider />
 			<List>
-				{(userInfo?.user_type === "user" || userInfo?.user_type === "admin") && (
+				{(userInfoStatus?.user_type === "user" ||
+					userInfoStatus?.user_type === "admin") && (
 					<SingleNavLink
 						link="/reset-password"
 						text="Reset Password"
 						icon={<IconLockOpen size={20} />}
 					/>
 				)}
-				{!(userInfo?.user_type === "admin") && (
+				{!(userInfoStatus?.user_type === "admin") && (
 					<>
 						<SingleNavLink link="/faq" text="FAQ" icon={<IconMessage size={20} />} />
 						<SingleNavLink

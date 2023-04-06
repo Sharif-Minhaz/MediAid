@@ -1,12 +1,15 @@
 import { Avatar, Box, Divider, ListItemIcon, Menu, MenuItem, Stack } from "@mui/material";
-import { IconLogout as Logout, IconUserCircle } from "@tabler/icons-react";
+import { IconLogout as Logout } from "@tabler/icons-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../features/auth/authSlice";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { set } from "../../features/auth/userInfoSlice";
 import { toCapitalize } from "../../utils/toCapitalize";
 
 const ProfileMenu = ({ profileInfo, anchorEl, open, handleClose }) => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [logout, responseInfo] = useLogoutMutation();
 
 	const handleLogout = () => {
@@ -15,10 +18,14 @@ const ProfileMenu = ({ profileInfo, anchorEl, open, handleClose }) => {
 			.then((response) => {
 				if (response.msg === "logout_successful") {
 					toast.success("Logout successful");
+					dispatch(set());
 					navigate("/", { replace: true });
 				}
 			})
-			.catch((err) => toast.error("Something went wrong"));
+			.catch((err) => {
+				console.log(err);
+				toast.error("Something went wrong");
+			});
 	};
 
 	return (

@@ -8,7 +8,6 @@ export const getUserInfo = () => {
 
 	if (uinfo) {
 		user = decryptCookie(uinfo);
-
 		return user;
 	} else {
 		return null;

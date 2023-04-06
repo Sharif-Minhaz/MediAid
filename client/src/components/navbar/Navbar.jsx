@@ -52,8 +52,6 @@ const Navbar = ({ profileInfo, handleNotificationClick, handleClick }) => {
 		setShowFullSearch((prev) => !prev);
 	};
 
-	console.log(profileInfo);
-
 	return (
 		<ElevationScroll>
 			<CustomAppBar

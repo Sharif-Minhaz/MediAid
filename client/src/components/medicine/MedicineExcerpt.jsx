@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 import {
 	Button,
@@ -11,15 +12,18 @@ import {
 	Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { userInfoStatus as userInfo } from "../../features/auth/userInfoSlice";
 import { IconClipboardHeart, IconPencil, IconStarHalfFilled, IconTrash } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import CustomIconButton from "../../theme/customComponent/CustomIconButton";
 import { truncate } from "../../utils/truncate";
-import { useState } from "react";
 import MedicineDeleteConfirmationModal from "./MedicineDeleteConfirmationModal";
+import { useSelector } from "react-redux";
 
 const MedicineExcerpt = ({ medicine }) => {
 	const navigate = useNavigate();
+	const userInfoStatus = useSelector(userInfo);
+	const isAdmin = Boolean(userInfoStatus?.user_type === "admin");
 
 	const [medicineId, setMedicineId] = useState("");
 	const [open, setOpen] = useState(false);
@@ -31,7 +35,6 @@ const MedicineExcerpt = ({ medicine }) => {
 		triggerOnce: true,
 	});
 
-	const isAdmin = true;
 
 	const handleMedicineDelete = (medicineId) => {
 		handleOpen();

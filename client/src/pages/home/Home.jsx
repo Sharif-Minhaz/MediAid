@@ -3,14 +3,14 @@ import { Paper } from "@mui/material";
 import HomeIntro from "./HomeIntro";
 import ServiceCards from "./ServiceCards";
 import RatedMedicines from "./RatedMedicines";
-import { useState } from "react";
-import { getUserInfo } from "../../utils/getUserInfo";
 import { Navigate } from "react-router-dom";
+import { userInfoStatus as userInfo } from "../../features/auth/userInfoSlice";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-	const [userInfo, setUserInfo] = useState(getUserInfo());
+	const userInfoStatus = useSelector(userInfo);
 
-	if (userInfo?.user_type === "admin") {
+	if (userInfoStatus?.user_type === "admin") {
 		return <Navigate to="/dashboard" replace />;
 	}
 

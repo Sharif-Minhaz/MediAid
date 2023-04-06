@@ -40,7 +40,16 @@ const Routers = () => {
 					<Route path="medicines">
 						<Route index element={<MedicinesPage />} />
 						<Route path=":medicineId" element={<DetailsMedicine />} />
-						<Route path="edit/:medicineId" element={<AddMedicine />} />
+						<Route
+							path="edit/:medicineId"
+							element={
+								<Protected>
+									<Admin>
+										<AddMedicine />
+									</Admin>
+								</Protected>
+							}
+						/>
 						<Route
 							path="apply/:medicineId"
 							element={

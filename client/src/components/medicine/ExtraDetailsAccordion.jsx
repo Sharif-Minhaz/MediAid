@@ -34,16 +34,16 @@ const ExtraDetailsAccordion = ({ medicine }) => {
 			</Box>
 			{descriptionOpen && (
 				<Box sx={{ mt: 2, px: 1 }}>
-					<Typography>{medicine.medicineDescription}</Typography>
+					<Typography>{medicine?.medicineDescription}</Typography>
 					<Box mt={2}>
 						<Typography fontSize={15} color="#425b74" variant="body1">
-							<strong>Brand:</strong> {medicine.companyName}
+							<strong>Brand:</strong> {medicine?.companyName}
 						</Typography>
 						<Typography fontSize={15} color="#425b74" variant="body1">
-							<strong>Donated By:</strong> {medicine.donarName}
+							<strong>Donated By:</strong> {medicine?.donarName}
 						</Typography>
 						<Typography fontSize={15} color="#425b74" variant="body1">
-							<strong>Donar contact:</strong> {medicine.donarContact}
+							<strong>Donar contact:</strong> {medicine?.donarContact}
 						</Typography>
 					</Box>
 				</Box>

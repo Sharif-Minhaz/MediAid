@@ -23,6 +23,8 @@ import {
 import AuthWrapper from "./AuthWrapper";
 import AuthIntro from "./AuthIntro";
 import AuthSubmitButton from "./AuthSubmitButton";
+import { useDispatch } from "react-redux";
+import { set } from "../../features/auth/userInfoSlice";
 import { toast } from "react-toastify";
 import { setToCookie } from "../../utils/setToCookie";
 import { useLoginMutation } from "./authSlice";
@@ -30,6 +32,7 @@ import { useLoginMutation } from "./authSlice";
 const Login = () => {
 	const theme = useTheme();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [login, responseInfo] = useLoginMutation();
 	const [showPassword, setShowPassword] = useState(false);
 	const [serverResError, setServerResError] = useState({ email: "", password: "" });
@@ -63,6 +66,7 @@ const Login = () => {
 			.then((response) => {
 				if (response.msg === "login_successful") {
 					setToCookie(response.user);
+					dispatch(set());
 					toast.success("Login successful");
 					return navigate("/", { replace: true });
 				}
