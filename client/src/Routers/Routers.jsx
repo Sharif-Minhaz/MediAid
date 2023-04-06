@@ -36,7 +36,14 @@ const Routers = () => {
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Home />} />
-					<Route path="dashboard" element={<Dashboard />} />
+					<Route
+						path="dashboard"
+						element={
+							<Admin>
+								<Dashboard />
+							</Admin>
+						}
+					/>
 					<Route path="medicines">
 						<Route index element={<MedicinesPage />} />
 						<Route path=":medicineId" element={<DetailsMedicine />} />
