@@ -56,7 +56,10 @@ const AddPhotoForm = () => {
 					toast.error("Something went wrong!");
 				}
 			})
-			.catch((err) => console.error(err));
+			.catch((err) => {
+				toast.error("Something went wrong");
+				console.error(err.message);
+			});
 	};
 
 	const onFileSelect = (file) => {

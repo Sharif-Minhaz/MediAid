@@ -139,8 +139,13 @@ const Navbar = ({ profileInfo, handleNotificationClick, handleClick }) => {
 								</>
 							) : (
 								<Typography sx={{ color: "#8250df", whiteSpace: "nowrap" }}>
-									<Link to="/login">Login</Link> /{" "}
-									<Link to="/register">Register</Link>
+									<Link style={{ color: "#512e91",fontWeight: 500 }} to="/login">
+										Login
+									</Link>{" "}
+									/{" "}
+									<Link style={{ color: "#512e91",fontWeight: 500 }} to="/register">
+										Register
+									</Link>
 								</Typography>
 							)}
 						</Stack>
