@@ -1,6 +1,6 @@
 import { cloneElement, useState } from "react";
 import { styled } from "@mui/material/styles";
-import { AppBar, Toolbar, Stack, useScrollTrigger, Badge } from "@mui/material";
+import { AppBar, Toolbar, Stack, useScrollTrigger, Badge, Typography } from "@mui/material";
 import { IconBell as NotificationsNoneIcon, IconShoppingBag } from "@tabler/icons-react";
 import CustomIconButton from "../../theme/customComponent/CustomIconButton";
 import SearchBar from "../SearchBar";
@@ -9,6 +9,7 @@ import DrawerHeaderContents from "../navbar/DrawerHeaderContents";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle, drawerStatus, openCart } from "../../features/drawer/drawerSlice";
 import { cartItemStatus } from "../../features/cart/cartSlice";
+import { Link } from "react-router-dom";
 
 const ElevationScroll = ({ children }) => {
 	const trigger = useScrollTrigger({
@@ -40,7 +41,7 @@ const CustomAppBar = styled(AppBar, {
 	}),
 }));
 
-const Navbar = ({ handleNotificationClick, handleClick }) => {
+const Navbar = ({ profileInfo, handleNotificationClick, handleClick }) => {
 	const dispatch = useDispatch();
 	const drawerOpen = useSelector(drawerStatus);
 	const cartMedicines = useSelector(cartItemStatus);
@@ -54,7 +55,7 @@ const Navbar = ({ handleNotificationClick, handleClick }) => {
 	return (
 		<ElevationScroll>
 			<CustomAppBar
-				sx={{ height: "83px", zIndex: { xs: 1200, md: 1201 } }}
+				sx={{ height: "83px", zIndex: { xs: 1200, md: 1205 } }}
 				elevation={0}
 				color="light"
 				position="fixed"
@@ -126,10 +127,22 @@ const Navbar = ({ handleNotificationClick, handleClick }) => {
 									</CustomIconButton>
 								</Badge>
 							)}
-							<CustomIconButton onClick={handleNotificationClick}>
-								<NotificationsNoneIcon size={22} />
-							</CustomIconButton>
-							<ProfileBtn handleClick={handleClick} />
+							{profileInfo.isSuccess && profileInfo.data?.profile ? (
+								<>
+									<CustomIconButton onClick={handleNotificationClick}>
+										<NotificationsNoneIcon size={22} />
+									</CustomIconButton>
+									<ProfileBtn
+										profileInfo={profileInfo.data?.profile}
+										handleClick={handleClick}
+									/>
+								</>
+							) : (
+								<Typography sx={{ color: "#8250df", whiteSpace: "nowrap" }}>
+									<Link to="/login">Login</Link> /{" "}
+									<Link to="/register">Register</Link>
+								</Typography>
+							)}
 						</Stack>
 					</Stack>
 				</Toolbar>

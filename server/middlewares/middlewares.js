@@ -7,10 +7,10 @@ const middlewares = [
 		credentials: true,
 		origin: [
 			"http://localhost:3000",
-			"http://127.0.0.1:3000",
 			"http://localhost:5000",
 			"https://mediaid-online-platform.netlify.app",
 		],
+		exposedHeaders: ["set-cookie"],
 	}),
 	cookieParser(),
 	express.static("public"),

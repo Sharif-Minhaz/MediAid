@@ -20,8 +20,11 @@ import {
 } from "@tabler/icons-react";
 import BrandAuthImg from "../../features/auth/BrandAuthImg";
 import SingleNavLink from "./SingleNavLink";
+import { userInfoStatus as userInfo } from "../../features/auth/userInfoSlice";
+import { useSelector } from "react-redux";
 
 const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
+	const userInfoStatus = useSelector(userInfo);
 	return (
 		<Box component="div" sx={{ width: drawerWidth }}>
 			{isSmallScreen && (
@@ -30,49 +33,68 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 				</Box>
 			)}
 			<List sx={{ pt: "6px" }}>
-				<SingleNavLink link="/" text="Home" icon={<Home size={20} />} />
-				<SingleNavLink
-					link="/dashboard"
-					text="Dashboard"
-					icon={<IconDashboard size={20} />}
-				/>
+				{userInfoStatus?.user_type === "admin" ? (
+					<SingleNavLink
+						link="/dashboard"
+						text="Dashboard"
+						icon={<IconDashboard size={20} />}
+					/>
+				) : (
+					<SingleNavLink link="/" text="Home" icon={<Home size={20} />} />
+				)}
 				<SingleNavLink
 					link="/medicines"
 					text="Medicines"
 					icon={<IconVaccineBottle size={20} />}
 				/>
-				<SingleNavLink
-					link="/medicine/add"
-					text="Add Medicine"
-					icon={<IconMedicineSyrup size={20} />}
-				/>
+				{userInfoStatus?.user_type === "admin" && (
+					<SingleNavLink
+						link="/medicine/add"
+						text="Add Medicine"
+						icon={<IconMedicineSyrup size={20} />}
+					/>
+				)}
 				<SingleNavLink
 					link="/gallery"
 					text="Gallery"
 					icon={<IconBrandGooglePhotos size={20} />}
 				/>
-				<SingleNavLink
-					link="/gallery-photo/add"
-					text="Add Photo"
-					icon={<IconPhotoPlus size={20} />}
-				/>
+				{userInfoStatus?.user_type === "admin" && (
+					<SingleNavLink
+						link="/gallery-photo/add"
+						text="Add Photo"
+						icon={<IconPhotoPlus size={20} />}
+					/>
+				)}
 				<SingleNavLink
 					link="/donate"
 					text="Donate"
 					icon={<IconHeartHandshake size={20} />}
 				/>
-				<SingleNavLink link="/pending" text="Pending" icon={<IconLoader size={20} />} />
-				<SingleNavLink link="/history" text="History" icon={<IconHistory size={20} />} />
-				<SingleNavLink
-					link="/donor-list"
-					text="Donor List"
-					icon={<IconClipboardList size={20} />}
-				/>
-				<SingleNavLink
-					link="/receiver-list"
-					text="Receiver List"
-					icon={<IconCheckupList size={20} />}
-				/>
+				{userInfoStatus?.user_type === "admin" && (
+					<>
+						<SingleNavLink
+							link="/pending"
+							text="Pending"
+							icon={<IconLoader size={20} />}
+						/>
+						<SingleNavLink
+							link="/history"
+							text="History"
+							icon={<IconHistory size={20} />}
+						/>
+						<SingleNavLink
+							link="/donor-list"
+							text="Donor List"
+							icon={<IconClipboardList size={20} />}
+						/>
+						<SingleNavLink
+							link="/receiver-list"
+							text="Receiver List"
+							icon={<IconCheckupList size={20} />}
+						/>
+					</>
+				)}
 				<SingleNavLink
 					link="/best-donors"
 					text="Best Donor"
@@ -86,18 +108,29 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 			</List>
 			<Divider />
 			<List>
-				<SingleNavLink
-					link="/reset-password"
-					text="Reset Password"
-					icon={<IconLockOpen size={20} />}
-				/>
-				<SingleNavLink link="/faq" text="FAQ" icon={<IconMessage size={20} />} />
-				<SingleNavLink
-					link="/contact"
-					text="Contact"
-					icon={<IconAddressBook size={20} />}
-				/>
-				<SingleNavLink link="/about" text="About" icon={<IconNotebook size={20} />} />
+				{(userInfoStatus?.user_type === "user" ||
+					userInfoStatus?.user_type === "admin") && (
+					<SingleNavLink
+						link="/reset-password"
+						text="Reset Password"
+						icon={<IconLockOpen size={20} />}
+					/>
+				)}
+				{!(userInfoStatus?.user_type === "admin") && (
+					<>
+						<SingleNavLink link="/faq" text="FAQ" icon={<IconMessage size={20} />} />
+						<SingleNavLink
+							link="/contact"
+							text="Contact"
+							icon={<IconAddressBook size={20} />}
+						/>
+						<SingleNavLink
+							link="/about"
+							text="About"
+							icon={<IconNotebook size={20} />}
+						/>
+					</>
+				)}
 			</List>
 		</Box>
 	);

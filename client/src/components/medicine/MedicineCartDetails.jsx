@@ -27,7 +27,7 @@ const MedicineCartDetails = ({ medicine }) => {
 					size={16}
 					style={{ color: "#facc15", marginRight: "5px", marginBottom: "3px" }}
 				/>{" "}
-				{medicine.rating || 0} <span style={{ marginInline: "10px" }}>|</span>
+				{medicine?.rating || 0} <span style={{ marginInline: "10px" }}>|</span>
 				<span style={{ color: "#727272" }}>{142} reviews</span>
 			</Typography>
 			<Stack direction="row" gap={1.5} marginY={2.5}>

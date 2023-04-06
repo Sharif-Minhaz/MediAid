@@ -53,7 +53,6 @@ const AddPhotoForm = () => {
 					setResetKey(Date.now()); // re-render with key -> ImageDropZone component
 					reset();
 				} else {
-					console.log(response);
 					toast.error("Something went wrong!");
 				}
 			})

@@ -20,11 +20,14 @@ import ImageDropZone from "../../components/imageDropZone/ImageDropZone";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useUpdateProfileMutation } from "../../features/profile/profileSlice";
 
 const ProfileForm = () => {
 	const theme = useTheme();
+	const navigate = useNavigate();
 	const { state } = useLocation();
+	const [updateProfile, responseInfo] = useUpdateProfileMutation();
 
 	const schema = yup
 		.object({
@@ -33,10 +36,7 @@ const ProfileForm = () => {
 			contact: yup
 				.string()
 				.matches(/^[0-9,+]{9,}$/, "Contact number must be 9 digits or more"),
-			description: yup
-				.string()
-				.min(25, "Description must be at least 25 characters")
-				.max(500, "Description must be at most 500 characters"),
+			description: yup.string().max(500, "Description must be at most 500 characters"),
 			facebook: yup.string().url("Facebook profile link must be a url").nullable(),
 			instagram: yup.string().url("Instagram profile link must be a url").nullable(),
 			twitter: yup.string().url("Twitter profile link must be a url").nullable(),
@@ -59,19 +59,29 @@ const ProfileForm = () => {
 			email: state?.email || "",
 			address: state?.address || "",
 			profilePicture: state?.profilePicture || "",
-			facebook: state?.socials?.facebook || "",
-			instagram: state?.socials?.instagram || "",
-			twitter: state?.socials?.twitter || "",
+			facebook: state?.facebook || "",
+			instagram: state?.instagram || "",
+			twitter: state?.twitter || "",
 		},
 	});
 
 	const onSubmit = (data) => {
-		toast.success("Successfully get the form data");
-		console.log(data);
+		updateProfile(data)
+			.then((response) => {
+				if (response.data?.msg === "profile_updated") {
+					toast.success("Profile updated successfully");
+					return navigate("/profile", { replace: true });
+				}
+				toast.error("Something went wrong!");
+			})
+			.catch((err) => {
+				toast.error("Something went wrong!");
+				console.error(err);
+			});
 	};
 
 	const onFileSelect = (file) => {
-		setValue("medicineImage", file);
+		setValue("profilePicture", file);
 	};
 
 	return (
@@ -84,7 +94,10 @@ const ProfileForm = () => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="fullName">Full Name</InputLabel>
-						<OutlinedInput {...register("fullName")} />
+						<OutlinedInput
+							disabled={responseInfo.isLoading}
+							{...register("fullName")}
+						/>
 						{errors.fullName && (
 							<FormHelperText error>{errors.fullName?.message}</FormHelperText>
 						)}
@@ -97,7 +110,7 @@ const ProfileForm = () => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="address">Address</InputLabel>
-						<OutlinedInput {...register("address")} />
+						<OutlinedInput disabled={responseInfo.isLoading} {...register("address")} />
 						{errors.address && (
 							<FormHelperText error>{errors.address?.message}</FormHelperText>
 						)}
@@ -110,7 +123,7 @@ const ProfileForm = () => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="email">Email</InputLabel>
-						<OutlinedInput {...register("email")} type="email" />
+						<OutlinedInput disabled={true} {...register("email")} type="email" />
 						{errors.email && (
 							<FormHelperText error>{errors.email?.message}</FormHelperText>
 						)}
@@ -123,7 +136,7 @@ const ProfileForm = () => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="contact">Contact Number</InputLabel>
-						<OutlinedInput {...register("contact")} />
+						<OutlinedInput disabled={responseInfo.isLoading} {...register("contact")} />
 						{errors.contact && (
 							<FormHelperText error>{errors.contact?.message}</FormHelperText>
 						)}
@@ -136,7 +149,12 @@ const ProfileForm = () => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="description">Write about yourself</InputLabel>
-						<OutlinedInput multiline rows={7} {...register("description")} />
+						<OutlinedInput
+							disabled={responseInfo.isLoading}
+							multiline
+							rows={7}
+							{...register("description")}
+						/>
 						{errors.description && (
 							<FormHelperText error>{errors.description?.message}</FormHelperText>
 						)}
@@ -164,7 +182,10 @@ const ProfileForm = () => {
 						sx={{ ...theme.customInput }}
 					>
 						<InputLabel htmlFor="organization">Organization</InputLabel>
-						<OutlinedInput {...register("organization")} />
+						<OutlinedInput
+							disabled={responseInfo.isLoading}
+							{...register("organization")}
+						/>
 						{errors.organization && (
 							<FormHelperText error>{errors.organization?.message}</FormHelperText>
 						)}
@@ -178,6 +199,7 @@ const ProfileForm = () => {
 					>
 						<InputLabel htmlFor="facebook">Facebook Profile</InputLabel>
 						<OutlinedInput
+							disabled={responseInfo.isLoading}
 							{...register("facebook")}
 							endAdornment={
 								<InputAdornment sx={{ mb: "4px" }} position="end">
@@ -198,6 +220,7 @@ const ProfileForm = () => {
 					>
 						<InputLabel htmlFor="instagram">Instagram Profile</InputLabel>
 						<OutlinedInput
+							disabled={responseInfo.isLoading}
 							{...register("instagram")}
 							endAdornment={
 								<InputAdornment sx={{ mb: "4px" }} position="end">
@@ -218,6 +241,7 @@ const ProfileForm = () => {
 					>
 						<InputLabel htmlFor="twitter">Twitter Profile</InputLabel>
 						<OutlinedInput
+							disabled={responseInfo.isLoading}
 							{...register("twitter")}
 							endAdornment={
 								<InputAdornment sx={{ mb: "4px" }} position="end">
@@ -236,6 +260,7 @@ const ProfileForm = () => {
 				type="submit"
 				size="large"
 				variant="contained"
+				disabled={responseInfo.isLoading}
 				disableElevation
 				sx={{ color: "whitesmoke", borderRadius: "10px" }}
 			>

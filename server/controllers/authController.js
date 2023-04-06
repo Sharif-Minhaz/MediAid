@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const User = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("./jwtController");
+const { createProfileController } = require("./profileController");
 
 exports.registerController = asyncHandler(async (req, res) => {
 	const { body } = req;
@@ -18,11 +19,16 @@ exports.registerController = asyncHandler(async (req, res) => {
 
 	const addNewUser = await new User({ ...body, password: hashedPassword }).save();
 
-	if (addNewUser)
+	if (addNewUser) {
+		req.profileInfo = addNewUser;
+		createProfileController(req, res);
+		
 		return res.status(201).json({
 			msg: "registration_successful",
 			newUser: addNewUser,
 		});
+	}
+		
 
 	res.status(500).json({
 		msg: "registration_failed",
@@ -72,5 +78,38 @@ exports.logoutController = asyncHandler((req, res) => {
 
 	res.status(200).json({
 		msg: "logout_successful",
+	});
+});
+
+exports.resetPasswordController = asyncHandler(async (req, res) => {
+	const { prevPassword, newPassword } = req.body;
+	const { id } = req.decoded;
+
+	if (prevPassword === newPassword) return res.status(200).json({ msg: "same_pass" });
+
+	const user = await User.findById(id).select("+password");
+
+	let isMatch;
+	if (user) {
+		isMatch = await bcrypt.compare(prevPassword, user.password);
+	} else {
+		return res.status(404).json({
+			msg: "pass_not_reset",
+		});
+	}
+
+	if (isMatch) {
+		const encryptedPass = await bcrypt.hash(newPassword, 12);
+		user.password = encryptedPass;
+		await user.save();
+		res.clearCookie("auth");
+		res.clearCookie("uinfo");
+		return res.status(201).json({
+			msg: "pass_reset",
+		});
+	}
+
+	res.status(401).json({
+		msg: "pass_not_reset",
 	});
 });

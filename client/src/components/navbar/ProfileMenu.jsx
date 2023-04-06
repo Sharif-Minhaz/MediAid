@@ -1,10 +1,15 @@
 import { Avatar, Box, Divider, ListItemIcon, Menu, MenuItem, Stack } from "@mui/material";
-import { IconLogout as Logout, IconUserCircle } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { IconLogout as Logout } from "@tabler/icons-react";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../features/auth/authSlice";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { set } from "../../features/auth/userInfoSlice";
+import { toCapitalize } from "../../utils/toCapitalize";
 
-const ProfileMenu = ({ anchorEl, open, handleClose }) => {
+const ProfileMenu = ({ profileInfo, anchorEl, open, handleClose }) => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [logout, responseInfo] = useLogoutMutation();
 
 	const handleLogout = () => {
@@ -13,9 +18,14 @@ const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 			.then((response) => {
 				if (response.msg === "logout_successful") {
 					toast.success("Logout successful");
+					dispatch(set());
+					navigate("/", { replace: true });
 				}
 			})
-			.catch((err) => toast.error("Something went wrong"));
+			.catch((err) => {
+				console.log(err);
+				toast.error("Something went wrong");
+			});
 	};
 
 	return (
@@ -56,34 +66,18 @@ const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 		>
 			<Link to="/profile">
 				<MenuItem onClick={handleClose} sx={{ mb: "8px" }}>
-					<Avatar src="/images/default-profile-pic.jpg" />{" "}
+					<Avatar src={profileInfo.data?.profile.profilePicture} />{" "}
 					<Stack>
 						<Box component="span" color="#364152" fontSize={18}>
-							John Doe
+							{profileInfo.data?.profile.fullName}
 						</Box>
 						<Box component="span" color="#364152" fontSize={14}>
-							Profile
+							{toCapitalize(profileInfo.data?.profile.user.user_type)} profile
 						</Box>
 					</Stack>
 				</MenuItem>
 			</Link>
 			<Divider />
-			<Link to="/register">
-				<MenuItem onClick={handleClose}>
-					<ListItemIcon>
-						<IconUserCircle size={22} />
-					</ListItemIcon>
-					Register
-				</MenuItem>
-			</Link>
-			<Link to="/login">
-				<MenuItem onClick={handleClose}>
-					<ListItemIcon>
-						<IconUserCircle size={22} />
-					</ListItemIcon>
-					Login
-				</MenuItem>
-			</Link>
 			<MenuItem
 				onClick={() => {
 					handleClose();
