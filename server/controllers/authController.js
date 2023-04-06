@@ -48,7 +48,7 @@ exports.loginController = asyncHandler(async (req, res) => {
 			const token = generateToken(user);
 
 			res.cookie("auth", token, {
-				// httpOnly: true,
+				httpOnly: true,
 				maxAge: 6 * 60 * 60 * 1000,
 			});
 

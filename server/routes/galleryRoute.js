@@ -4,8 +4,9 @@ const {
 	addGalleryImageController,
 } = require("../controllers/galleryController");
 const upload = require("../middlewares/upload");
+const { verifyJWT } = require("../middlewares/jwtMiddleware");
 
 router.get("/", viewGalleryImagesController);
-router.post("/add", upload.single("galleryImage"), addGalleryImageController);
+router.post("/add", verifyJWT, upload.single("galleryImage"), addGalleryImageController);
 
 module.exports = router;

@@ -110,7 +110,10 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 					}
 					toast.error("Something went wrong!");
 				})
-				.catch((err) => console.error(err.message));
+				.catch((err) => {
+					toast.error("Something went wrong");
+					console.error(err.message);
+				});
 		} else {
 			addMedicine(data)
 				.unwrap()
@@ -123,7 +126,10 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 						toast.warning("Medicine already in list");
 					}
 				})
-				.catch((err) => console.error(err.message));
+				.catch((err) => {
+					toast.error("Something went wrong");
+					console.error(err.message);
+				});
 		}
 	};
 

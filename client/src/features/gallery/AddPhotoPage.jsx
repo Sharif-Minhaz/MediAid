@@ -1,4 +1,4 @@
-import { Grid, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 import SectionTitle from "../../components/SectionTitle";
 import AddPhotoForm from "./AddPhotoForm";
 

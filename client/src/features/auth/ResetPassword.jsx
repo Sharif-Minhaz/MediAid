@@ -22,10 +22,13 @@ import AuthIntro from "./AuthIntro";
 import AuthSubmitButton from "./AuthSubmitButton";
 import { useResetPasswordMutation } from "./authSlice";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { set } from "../auth/userInfoSlice";
 
 const ResetPassword = () => {
 	const theme = useTheme();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [resetPassword, responseInfo] = useResetPasswordMutation();
 	const [showPassword, setShowPassword] = useState(false);
 	const [matchedPrevPsw, setMatchedPrevPsw] = useState(false);
@@ -54,6 +57,7 @@ const ResetPassword = () => {
 			.then((response) => {
 				if (response.msg === "pass_reset") {
 					toast.success("Password reset completed");
+					dispatch(set());
 					return navigate("/login", { replace: true });
 				} else if (response.msg === "same_pass") {
 					return toast.error("New password can't be the old one");

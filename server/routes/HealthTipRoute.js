@@ -5,10 +5,11 @@ const {
 	viewSingleHealthTipController,
 	addHealthTipController,
 } = require("../controllers/healthTipController");
+const { verifyJWT } = require("../middlewares/jwtMiddleware");
 
 router.get("/", viewHealthTipsController);
 router.get("/:healthTipId", viewSingleHealthTipController);
-router.post("/add", addHealthTipController);
-router.patch("/update/:healthTipId", updateHealthTipController);
+router.post("/add", verifyJWT, addHealthTipController);
+router.patch("/update/:healthTipId", verifyJWT, updateHealthTipController);
 
 module.exports = router;
