@@ -50,12 +50,6 @@ exports.loginController = asyncHandler(async (req, res) => {
 			res.cookie("auth", token, {
 				// httpOnly: true,
 				maxAge: 6 * 60 * 60 * 1000,
-				domain: [
-					"http://localhost:3000",
-					"http://localhost:5000",
-					"http://localhost:8080",
-					"https://mediaid.onrender.com",
-				],
 			});
 
 			return res.status(200).json({
