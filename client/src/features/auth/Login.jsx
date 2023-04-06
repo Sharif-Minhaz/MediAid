@@ -24,7 +24,7 @@ import AuthWrapper from "./AuthWrapper";
 import AuthIntro from "./AuthIntro";
 import AuthSubmitButton from "./AuthSubmitButton";
 import { useDispatch } from "react-redux";
-import { set } from "../../features/auth/userInfoSlice";
+import { set } from "./userInfoSlice";
 import { toast } from "react-toastify";
 import { setToCookie } from "../../utils/setToCookie";
 import { useLoginMutation } from "./authSlice";
