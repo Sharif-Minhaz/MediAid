@@ -8,5 +8,4 @@ export const setToCookie = (key, content) => {
 	const encryptedContent = CryptoJS.AES.encrypt(contentJson, secretKey).toString();
 
 	Cookies.set(key, encryptedContent, { expires: 0.25 });
-	console.log(Cookies.get("auth"));
 };
