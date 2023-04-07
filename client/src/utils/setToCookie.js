@@ -1,11 +1,12 @@
 import Cookies from "js-cookie";
 import CryptoJS from "crypto-js";
 
-export const setToCookie = (content) => {
-	const key = import.meta.env.VITE_CRYPTO_KEY;
+export const setToCookie = (key, content) => {
+	const secretKey = import.meta.env.VITE_CRYPTO_KEY;
 
 	const contentJson = JSON.stringify(content);
-	const encryptedContent = CryptoJS.AES.encrypt(contentJson, key).toString();
+	const encryptedContent = CryptoJS.AES.encrypt(contentJson, secretKey).toString();
 
-	Cookies.set("uinfo", encryptedContent, { expires: 0.25 });
+	Cookies.set(key, encryptedContent, { expires: 0.25 });
+	console.log(Cookies.get("auth"));
 };
