@@ -3,6 +3,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const middlewares = [
+	cookieParser(),
 	cors({
 		credentials: true,
 		origin: [
@@ -10,9 +11,7 @@ const middlewares = [
 			"http://localhost:5000",
 			"https://mediaid-online-platform.netlify.app",
 		],
-		exposedHeaders: ["set-cookie"],
 	}),
-	cookieParser(),
 	express.static("public"),
 	express.json({ limit: "500mb" }),
 	express.urlencoded({ extended: true, limit: "500mb" }),

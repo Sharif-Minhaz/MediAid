@@ -47,20 +47,22 @@ exports.loginController = asyncHandler(async (req, res) => {
 		if (isMatched) {
 			const token = generateToken(user);
 
-			res.cookie("auth", token, {
-				httpOnly: true,
-				maxAge: 6 * 60 * 60 * 1000,
-			});
+			// res.cookie("auth", token, {
+			// 	httpOnly: true,
+			// 	maxAge: 6 * 60 * 60 * 1000,
+			// });
 
 			return res.status(200).json({
 				msg: "login_successful",
 				user: user,
+				token,
 			});
 		}
 
 		res.status(401).json({
 			msg: "login_failed",
 			user: null,
+			token: null,
 		});
 
 		return;

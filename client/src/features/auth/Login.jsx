@@ -29,6 +29,11 @@ import { toast } from "react-toastify";
 import { setToCookie } from "../../utils/setToCookie";
 import { useLoginMutation } from "./authSlice";
 
+let now = new Date();
+let time = now.getTime();
+let expireTime = time + 1000 * 60 * 60 * 6;
+now.setTime(expireTime);
+
 const Login = () => {
 	const theme = useTheme();
 	const navigate = useNavigate();
@@ -65,7 +70,10 @@ const Login = () => {
 			.unwrap()
 			.then((response) => {
 				if (response.msg === "login_successful") {
-					setToCookie(response.user);
+					document.cookie = `auth=${
+						response.token
+					}; expires=${now.toUTCString()}; path=/;`;
+					setToCookie("uinfo", response.user);
 					dispatch(set());
 					toast.success("Login successful");
 					return navigate("/", { replace: true });
