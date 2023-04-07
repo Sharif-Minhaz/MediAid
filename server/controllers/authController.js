@@ -47,6 +47,7 @@ exports.loginController = asyncHandler(async (req, res) => {
 		if (isMatched) {
 			const token = generateToken(user);
 
+			// TODO: must restore the techniques to set http only cookie
 			// res.cookie("auth", token, {
 			// 	httpOnly: true,
 			// 	maxAge: 6 * 60 * 60 * 1000,
