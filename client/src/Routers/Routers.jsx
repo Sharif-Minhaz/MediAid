@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "../layout/Layout";
 import Home from "../pages/home/Home";
 import NotFound404 from "../pages/NotFound404/NotFound404";
@@ -29,6 +29,7 @@ import DonorList from "../pages/DonorList";
 import PathName from "../components/PathName";
 import Protected from "./Protected";
 import Admin from "./Admin";
+import AlreadyLoggedIn from "./AlreadyLoggedIn";
 
 const Routers = () => {
 	return (
@@ -188,8 +189,23 @@ const Routers = () => {
 					<Route path="about" element={<About />} />
 				</Route>
 
-				<Route path="/login" element={<Login />} />
-				<Route path="/register" element={<Register />} />
+				<Route
+					path="/login"
+					element={
+						<AlreadyLoggedIn>
+							<Login />
+						</AlreadyLoggedIn>
+					}
+				/>
+				<Route
+					path="/register"
+					element={
+						<AlreadyLoggedIn>
+							<Register />
+						</AlreadyLoggedIn>
+					}
+				/>
+
 				<Route
 					path="/reset-password"
 					element={
