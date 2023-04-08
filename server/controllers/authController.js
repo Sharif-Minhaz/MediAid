@@ -47,11 +47,15 @@ exports.loginController = asyncHandler(async (req, res) => {
 		if (isMatched) {
 			const token = generateToken(user);
 
-			// TODO: must restore the techniques to set http only cookie
-			// res.cookie("auth", token, {
-			// 	httpOnly: true,
-			// 	maxAge: 6 * 60 * 60 * 1000,
-			// });
+			res.set("Access-Control-Expose-Headers", "Set-Cookie");
+			res.cookie("auth", token, {
+				maxAge: 6 * 60 * 60 * 1000,
+				secure: process.env.NODE_ENV === "production" ? true : false,
+				httpOnly: process.env.NODE_ENV === "production" ? true : false,
+				sameSite: process.env.NODE_ENV === "production" ? "none" : false,
+				// domain: ".onrender.com",
+			});
+
 
 			return res.status(200).json({
 				msg: "login_successful",

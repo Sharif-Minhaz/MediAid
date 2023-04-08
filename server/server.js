@@ -7,6 +7,8 @@ const { errorHandler } = require("./middlewares/errorHandler");
 const setMiddlewares = require("./middlewares/middlewares");
 const setRoutes = require("./routes/routes");
 
+app.enable("trust proxy");
+
 //set middlewares and routes
 setMiddlewares(app);
 setRoutes(app);
