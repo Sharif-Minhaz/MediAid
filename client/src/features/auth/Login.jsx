@@ -70,10 +70,6 @@ const Login = () => {
 			.unwrap()
 			.then((response) => {
 				if (response.msg === "login_successful") {
-					//TODO: must remove the code later.
-					document.cookie = `auth=${
-						response.token
-					}; expires=${now.toUTCString()}; path=/;`;
 					setToCookie("uinfo", response.user);
 					dispatch(set());
 					toast.success("Login successful");
