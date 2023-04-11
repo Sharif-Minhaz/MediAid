@@ -3,6 +3,7 @@ const medicineHandler = require("./medicineRoute");
 const galleryHandler = require("./galleryRoute");
 const healthTipHandler = require("./HealthTipRoute");
 const profileHandler = require("./profileRoute");
+const historyHandler = require("./historyRoute");
 
 const routes = [
 	{
@@ -24,6 +25,10 @@ const routes = [
 	{
 		path: "/api/profile",
 		handler: profileHandler,
+	},
+	{
+		path: "/api/history",
+		handler: historyHandler,
 	},
 ];
 

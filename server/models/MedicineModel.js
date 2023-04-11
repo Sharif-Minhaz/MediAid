@@ -31,12 +31,16 @@ const medicineSchema = new Schema(
 			type: Schema.Types.ObjectId,
 			ref: "review",
 		},
+		status: {
+			type: String,
+			enum: ["pending", "accepted"],
+		}
 	},
 	{
 		timestamps: true,
 	}
 );
 
-const Medicine = model("medicine", medicineSchema);
+const Medicine = model("Medicine", medicineSchema);
 
 module.exports = Medicine;
