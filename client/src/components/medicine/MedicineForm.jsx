@@ -18,6 +18,7 @@ import * as yup from "yup";
 import { toast } from "react-toastify";
 import {
 	useAddMedicineMutation,
+	useDonateMedicineMutation,
 	useUpdateMedicineMutation,
 	useViewSingleMedicineQuery,
 } from "../../features/medicines/medicinesSlice";
@@ -29,6 +30,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 	const { state } = useLocation();
 	const { data: { medicine } = {}, isLoading } = useViewSingleMedicineQuery(medicineId);
 	const [addMedicine, responseInfo] = useAddMedicineMutation();
+	const [donateMedicine, donateResponseInfo] = useDonateMedicineMutation();
 	const [updateMedicine, updateResponseInfo] = useUpdateMedicineMutation();
 	const [resetKey, setResetKey] = useState(Date.now());
 
@@ -114,6 +116,22 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 					toast.error("Something went wrong");
 					console.error(err.message);
 				});
+		} else if (donation) {
+			donateMedicine(data)
+				.unwrap()
+				.then((response) => {
+					if (response.msg === "medicine_added_queue") {
+						toast.success("Donated info sent");
+						setResetKey(Date.now()); // re-render with key -> ImageDropZone component
+						reset();
+					} else if (response.msg === "already_exist") {
+						toast.warning("Medicine already in the list");
+					}
+				})
+				.catch((err) => {
+					toast.error("Something went wrong");
+					console.error(err.message);
+				});
 		} else {
 			addMedicine(data)
 				.unwrap()
@@ -123,7 +141,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 						setResetKey(Date.now()); // re-render with key -> ImageDropZone component
 						reset();
 					} else if (response.msg === "already_exist") {
-						toast.warning("Medicine already in list");
+						toast.warning("Medicine already in the list");
 					}
 				})
 				.catch((err) => {
@@ -148,7 +166,11 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 					>
 						<InputLabel htmlFor="medicineName">Full Medicine Name</InputLabel>
 						<OutlinedInput
-							disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
+							disabled={
+								responseInfo.isLoading ||
+								updateResponseInfo.isLoading ||
+								donateResponseInfo.isLoading
+							}
 							{...register("medicineName")}
 						/>
 						{errors.medicineName && (
@@ -164,7 +186,11 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 					>
 						<InputLabel htmlFor="companyName">Company Name</InputLabel>
 						<OutlinedInput
-							disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
+							disabled={
+								responseInfo.isLoading ||
+								updateResponseInfo.isLoading ||
+								donateResponseInfo.isLoading
+							}
 							{...register("companyName")}
 						/>
 						{errors.companyName && (
@@ -180,7 +206,11 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 					>
 						<InputLabel htmlFor="donarName">Donar's Full Name</InputLabel>
 						<OutlinedInput
-							disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
+							disabled={
+								responseInfo.isLoading ||
+								updateResponseInfo.isLoading ||
+								donateResponseInfo.isLoading
+							}
 							{...register("donarName")}
 						/>
 						{errors.donarName && (
@@ -196,7 +226,11 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 					>
 						<InputLabel htmlFor="donarContact">Donar's Contact Number</InputLabel>
 						<OutlinedInput
-							disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
+							disabled={
+								responseInfo.isLoading ||
+								updateResponseInfo.isLoading ||
+								donateResponseInfo.isLoading
+							}
 							{...register("donarContact")}
 						/>
 						{errors.donarContact && (
@@ -214,7 +248,11 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 							Provide Necessary Information
 						</InputLabel>
 						<OutlinedInput
-							disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
+							disabled={
+								responseInfo.isLoading ||
+								updateResponseInfo.isLoading ||
+								donateResponseInfo.isLoading
+							}
 							multiline
 							rows={7}
 							{...register("medicineDescription")}
@@ -249,7 +287,11 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 				size="large"
 				variant="contained"
 				disableElevation
-				disabled={responseInfo.isLoading || updateResponseInfo.isLoading}
+				disabled={
+					responseInfo.isLoading ||
+					updateResponseInfo.isLoading ||
+					donateResponseInfo.isLoading
+				}
 				sx={{ color: "whitesmoke", borderRadius: "10px" }}
 			>
 				{isUpdateCase ? "Update Medicine" : donation ? "Donate" : "ADD Medicine"}

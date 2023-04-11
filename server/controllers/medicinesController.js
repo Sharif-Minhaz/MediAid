@@ -2,9 +2,13 @@ const asyncHandler = require("express-async-handler");
 const Medicine = require("../models/MedicineModel");
 const cloudinary = require("../utils/cloudinaryHandler");
 const { defaultMedicineImage } = require("../constants/imagesConst");
+const { uploadImageHandler } = require("../utils/uploadImage");
+const { addHistoryController } = require("./historyController");
 
 exports.viewAllMedicinesController = asyncHandler(async (req, res) => {
-	const medicines = await Medicine.find();
+	const medicines = await Medicine.find({
+		$or: [{ status: { $ne: "pending" } }, { status: { $exists: false } }],
+	});
 
 	if (medicines.length) {
 		return res.status(200).json({
@@ -139,5 +143,46 @@ exports.deleteMedicineController = asyncHandler(async (req, res) => {
 	res.status(500).json({
 		msg: "medicine_not_deleted",
 		deletedMedicineInfo: null,
+	});
+});
+
+exports.donateMedicineController = asyncHandler(async (req, res) => {
+	const { file, body } = req;
+
+	const isExist = await Medicine.exists({ medicineName: body.medicineName });
+
+	if (isExist) {
+		return res.status(200).json({
+			msg: "already_exist",
+			medicine: null,
+		});
+	}
+
+	let uploadImage = await uploadImageHandler(file, "mediAid/medicines");
+
+	const addMedicine = await new Medicine({
+		...body,
+		status: "pending",
+		medicineImage: uploadImage.secure_url || defaultMedicineImage,
+		cloudinaryId: uploadImage.public_id || "",
+	}).save();
+
+	if (addMedicine) {
+		req.historyInfo = {
+			medicine: addMedicine._id,
+			action: "apply-donate",
+		};
+
+		addHistoryController(req, res);
+
+		return res.status(201).json({
+			msg: "medicine_added_queue",
+			medicine: addMedicine,
+		});
+	}
+
+	res.status(500).json({
+		msg: "medicine_not_added",
+		medicine: null,
 	});
 });
