@@ -15,7 +15,8 @@ export const apiSlice = createApi({
 		"HealthTip",
 		"Profile",
 		"History",
-		"Pending",
+		"PendingDonation",
+		"PendingReceive",
 	],
 	endpoints: (builder) => ({}),
 });

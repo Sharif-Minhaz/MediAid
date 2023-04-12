@@ -1,18 +1,35 @@
 import { Box, Button, Card, Chip, Grid, Stack, Typography, useMediaQuery } from "@mui/material";
 import { toast } from "react-toastify";
 import { useInView } from "react-intersection-observer";
+import {
+	usePendingDonationAcceptMutation,
+	usePendingDonationRejectMutation,
+} from "../../features/pending/pendingSlice";
 
 const PendingElement = ({ type, request }) => {
 	const isExtraSmall = useMediaQuery("(max-width: 440px)");
+	const [acceptDonation, acceptDonationInfo] = usePendingDonationAcceptMutation();
+	const [rejectDonation, rejectDonationInfo] = usePendingDonationRejectMutation();
 
 	const { ref, inView } = useInView({
 		threshold: 0.3,
 		triggerOnce: true,
 	});
 
-	const approveRequest = (type) => {
+	const approveRequest = (type, request) => {
 		if (type === "donation") {
-			toast.success("Donation request accepted");
+			acceptDonation(request?._id)
+				.unwrap()
+				.then((response) => {
+					if (response.msg === "donation_accepted") {
+						return toast.success("Donation request accepted");
+					}
+					toast.error("something went wrong!");
+				})
+				.catch((err) => {
+					console.error(err);
+					toast.error("something went wrong!");
+				});
 		} else {
 			toast.success("Receiver's request accepted");
 		}
@@ -20,7 +37,18 @@ const PendingElement = ({ type, request }) => {
 
 	const rejectRequest = (type) => {
 		if (type === "donation") {
-			toast.error("Donation request rejected");
+			rejectDonation(request?._id)
+				.unwrap()
+				.then((response) => {
+					if (response.msg === "donation_rejected") {
+						return toast.success("Donation request rejected");
+					}
+					toast.error("something went wrong!");
+				})
+				.catch((err) => {
+					console.error(err);
+					toast.error("something went wrong!");
+				});
 		} else {
 			toast.error("Receiver's request rejected");
 		}
@@ -62,16 +90,16 @@ const PendingElement = ({ type, request }) => {
 							}}
 						>
 							<Typography variant="body1" fontSize={14}>
-								Medicine: {request.medicineName}
+								<strong>Medicine:</strong> {request.medicineName}
 							</Typography>
 							<Typography variant="body1" fontSize={14}>
-								Order: {request.name}
+								<strong>Order:</strong> {request.donarName}
 							</Typography>
 							<Typography variant="body1" fontSize={14}>
-								Date: {request.date}
+								<strong>Date:</strong> {Date(request?.createdAt)}
 							</Typography>
 							<Typography variant="body1" fontSize={14}>
-								Dosages: {request.dosages}
+								<strong>Dosages:</strong> {request.dosages}
 							</Typography>
 							<Typography component="div" variant="body1" fontSize={14}>
 								<Chip
@@ -80,7 +108,7 @@ const PendingElement = ({ type, request }) => {
 										fontSize: "11px",
 										mt: "5px",
 										background:
-											request?.status === "pending" ? "#72df94" : "#8250df",
+											request?.status === "pending" ? "#8250df" : "#72df94",
 									}}
 									label={request?.status}
 									size="small"
@@ -90,6 +118,7 @@ const PendingElement = ({ type, request }) => {
 					</Stack>
 				</Grid>
 				<Grid
+					item
 					xs={12}
 					sm={2}
 					sx={{
@@ -121,6 +150,9 @@ const PendingElement = ({ type, request }) => {
 							<Button
 								size="small"
 								disableElevation
+								disabled={Boolean(
+									acceptDonationInfo.isLoading || rejectDonationInfo.isLoading
+								)}
 								sx={{
 									width: "70px",
 									color: "white",
@@ -137,6 +169,9 @@ const PendingElement = ({ type, request }) => {
 							<Button
 								size="small"
 								disableElevation
+								disabled={Boolean(
+									acceptDonationInfo.isLoading || rejectDonationInfo.isLoading
+								)}
 								sx={{
 									width: "70px",
 									color: "white",
@@ -146,7 +181,7 @@ const PendingElement = ({ type, request }) => {
 									borderRadius: { xs: "6px", sm: "50px" },
 								}}
 								variant="contained"
-								onClick={() => approveRequest(type)}
+								onClick={() => approveRequest(type, request)}
 							>
 								Approve
 							</Button>

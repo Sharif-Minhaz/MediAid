@@ -81,5 +81,5 @@ export const {
 	useAddMedicineMutation,
 	useUpdateMedicineMutation,
 	useDeleteMedicineMutation,
-	useDonateMedicineMutation
+	useDonateMedicineMutation,
 } = extendedApiSlice;

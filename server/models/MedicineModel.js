@@ -27,6 +27,7 @@ const medicineSchema = new Schema(
 		},
 		donarContact: String,
 		companyName: { type: String, trim: true },
+		dosages: { type: Number, required: true, min: 1 },
 		rating: {
 			type: Schema.Types.ObjectId,
 			ref: "review",
@@ -34,7 +35,7 @@ const medicineSchema = new Schema(
 		status: {
 			type: String,
 			enum: ["pending", "accepted"],
-		}
+		},
 	},
 	{
 		timestamps: true,
