@@ -4,6 +4,9 @@ Welcome to the MediAid project repository! This project aims to provide a platfo
 
 ## Getting Started
 
+Admin email: mediaid-admin@gmail.com
+Admin password: 123456789
+
 To get started with donating medicines, please follow these steps:
 
 1. Check the expiration date: Make sure that the medicines you wish to donate have not expired or are close to expiring.

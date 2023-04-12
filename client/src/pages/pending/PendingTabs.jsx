@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
-import { Tabs, Tab, Box, Grid, Card } from "@mui/material";
+import { Tabs, Tab, Box, Grid, Card, Typography } from "@mui/material";
 import { useState } from "react";
 import PendingElement from "./PendingElement";
+import { usePendingDonationsQuery } from "../../features/pending/pendingSlice";
 
 const donations = [
 	{
@@ -140,6 +141,8 @@ const PendingTabs = () => {
 		setValue(newValue);
 	};
 
+	const donationInfo = usePendingDonationsQuery();
+
 	return (
 		<Box sx={{ width: "100%" }}>
 			<Box
@@ -156,8 +159,13 @@ const PendingTabs = () => {
 				</Tabs>
 			</Box>
 			<TabPanel value={value} index={0}>
-				{donations.map((donation) => (
-					<PendingElement key={donation.id} type="donation" request={donation} />
+				{!donationInfo.data?.pendingDonations && (
+					<Typography color="#8d8d8d" textAlign="center" fontStyle="italic" p={2}>
+						Currently, no requests are available
+					</Typography>
+				)}
+				{donationInfo.data?.pendingDonations?.map((donation) => (
+					<PendingElement key={donation._id} type="donation" request={donation} />
 				))}
 			</TabPanel>
 			<TabPanel value={value} index={1}>

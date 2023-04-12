@@ -4,6 +4,7 @@ const galleryHandler = require("./galleryRoute");
 const healthTipHandler = require("./HealthTipRoute");
 const profileHandler = require("./profileRoute");
 const historyHandler = require("./historyRoute");
+const pendingHandler = require("./pendingRoute");
 
 const routes = [
 	{
@@ -29,6 +30,10 @@ const routes = [
 	{
 		path: "/api/history",
 		handler: historyHandler,
+	},
+	{
+		path: "/api/pending",
+		handler: pendingHandler,
 	},
 ];
 

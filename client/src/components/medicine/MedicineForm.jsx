@@ -40,6 +40,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 		companyName: state?.companyName || "",
 		donarName: state?.donarName || "",
 		donarContact: state?.donarContact || "",
+		dosages: state?.dosages || 1,
 	});
 
 	const schema = yup
@@ -56,6 +57,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 				.min(25, "Description must be at least 25 characters")
 				.max(500, "Description must be at most 500 characters")
 				.required("Description is required"),
+			dosages: yup.number().required("Number of dosages is required"),
 		})
 		.required();
 
@@ -91,6 +93,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 				companyName: medicine?.companyName,
 				donarName: medicine?.donarName,
 				donarContact: medicine?.donarContact,
+				dosages: medicine?.dosages,
 			});
 		}
 	}, [medicine, isUpdateCase]);
@@ -279,6 +282,28 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 							</>
 						)}
 					/>
+				</Grid>
+				<Grid item xs={12} sm={6}>
+					<FormControl
+						error={Boolean(errors.dosages)}
+						fullWidth
+						sx={{ ...theme.customInput }}
+					>
+						<InputLabel htmlFor="dosages">Number of Dosages</InputLabel>
+						<OutlinedInput
+							type="number"
+							inputProps={{min: 1}}
+							disabled={
+								responseInfo.isLoading ||
+								updateResponseInfo.isLoading ||
+								donateResponseInfo.isLoading
+							}
+							{...register("dosages")}
+						/>
+						{errors.dosages && (
+							<FormHelperText error>{errors.dosages?.message}</FormHelperText>
+						)}
+					</FormControl>
 				</Grid>
 			</Grid>
 			<Button
