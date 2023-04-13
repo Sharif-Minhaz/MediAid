@@ -7,9 +7,8 @@ const historySchema = new Schema(
 			ref: "User",
 			required: true,
 		},
-		medicine: {
-			type: Schema.Types.ObjectId,
-			ref: "Medicine",
+		medicineName: {
+			type: String,
 			required: true,
 		},
 		action: {

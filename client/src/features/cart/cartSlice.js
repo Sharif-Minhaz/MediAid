@@ -17,7 +17,7 @@ export const cartSlice = createSlice({
 			const item = action.payload;
 
 			state.cartItems = state.cartItems.filter((existedItem) => {
-				return existedItem.id !== item.id;
+				return existedItem._id !== item._id;
 			});
 
 			secureStorage.setItem("cartItems", state.cartItems);

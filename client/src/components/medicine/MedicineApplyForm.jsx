@@ -20,12 +20,14 @@ import MedicineExcerpt from "./MedicineExcerpt";
 import { useDispatch } from "react-redux";
 import { add } from "../../features/cart/cartSlice";
 import { openCart } from "../../features/drawer/drawerSlice";
+import { useApplyMedicineMutation } from "../../features/medicines/medicinesSlice";
 
 const MedicineApplyForm = () => {
 	const theme = useTheme();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { state } = useLocation();
+	const [applyMedicine, applyInfo] = useApplyMedicineMutation();
 
 	const schema = yup
 		.object({
@@ -57,11 +59,19 @@ const MedicineApplyForm = () => {
 	});
 
 	const onSubmit = (data) => {
-		toast.success("Successfully get the form data");
-		dispatch(add({ ...state, ...data, status: "pending", id: Date.now() }));
-		dispatch(openCart());
-
-		navigate("/medicines", { replace: true });
+		applyMedicine({ medicine: state._id, ...data, status: "pending" })
+			.unwrap()
+			.then((response) => {
+				if (response.msg === "apply_successful") {
+					dispatch(add({ ...state, ...data, status: "pending", _id: Date.now() }));
+					toast.success("Successfully get the form data");
+					dispatch(openCart());
+					return navigate("/medicines", { replace: true });
+				}
+				console.log(response);
+				toast.error("Something went wrong!");
+			})
+			.catch((err) => toast.error("Something went wrong!"));
 	};
 
 	return (
@@ -143,7 +153,7 @@ const MedicineApplyForm = () => {
 						>
 							<InputLabel htmlFor="count">Number of Dosage</InputLabel>
 							<OutlinedInput
-								inputProps={{ min: 1, max: 100 }}
+								inputProps={{ min: 1, max: state?.dosages }}
 								type="number"
 								{...register("count")}
 							/>
@@ -159,6 +169,7 @@ const MedicineApplyForm = () => {
 					size="large"
 					variant="contained"
 					disableElevation
+					disabled={applyInfo.isLoading}
 					sx={{ color: "whitesmoke", borderRadius: "10px", mr: 1.5 }}
 				>
 					Apply

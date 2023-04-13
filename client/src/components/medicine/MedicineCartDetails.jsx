@@ -10,7 +10,7 @@ const MedicineCartDetails = ({ medicine }) => {
 	const smallScreenLg = useMediaQuery("(max-width: 1082px)");
 
 	const handleCount = (type) => {
-		if (type === "inc" && count <= 99) {
+		if (type === "inc" && count < medicine?.dosages) {
 			setCount((prev) => prev + 1);
 		} else if (type === "dec" && count >= 2) {
 			setCount((prev) => prev - 1);
