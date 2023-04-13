@@ -43,7 +43,19 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 					body: payload,
 				};
 			},
-			invalidatesTags: ["Pending", "History"],
+			invalidatesTags: ["PendingDonation", "History"],
+		}),
+
+		applyMedicine: builder.mutation({
+			query: (body) => {
+				console.log("Api: ", body)
+				return {
+					url: "/medicines/apply",
+					method: "POST",
+					body,
+				};
+			},
+			invalidatesTags: ["PendingReceive", "History"],
 		}),
 
 		updateMedicine: builder.mutation({
@@ -82,4 +94,5 @@ export const {
 	useUpdateMedicineMutation,
 	useDeleteMedicineMutation,
 	useDonateMedicineMutation,
+	useApplyMedicineMutation
 } = extendedApiSlice;

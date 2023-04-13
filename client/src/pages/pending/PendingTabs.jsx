@@ -2,55 +2,10 @@ import PropTypes from "prop-types";
 import { Tabs, Tab, Box, Grid, Card, Typography } from "@mui/material";
 import { useState } from "react";
 import PendingElement from "./PendingElement";
-import { usePendingDonationsQuery } from "../../features/pending/pendingSlice";
-
-const donations = [
-	{
-		id: "1",
-		medicineName: "Esoral Mups",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/esoral-mups.png",
-		donarName: "Sharif Md. Minhaz",
-		donarContact: "01309832862",
-		companyName: "Square",
-		rating: 4.8,
-		name: "Md. Minhaz",
-		status: "Pending",
-		date: "01-10-2023",
-		dosages: 12,
-	},
-	{
-		id: "2",
-		medicineName: "AstraZeneca",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/AstraZeneca.avif",
-		donarName: "Sharif Md. Minhaz",
-		donarContact: "01309832862",
-		companyName: "Square",
-		rating: 4.3,
-		name: "Md. Minhaz",
-		status: "Pending",
-		date: "01-10-2023",
-		dosages: 12,
-	},
-	{
-		id: "3",
-		medicineName: "Brineura",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/brineura.jpeg",
-		donarName: "Sharif Md. Minhaz",
-		donarContact: "01309832862",
-		companyName: "Square",
-		rating: 4.6,
-		name: "Md. Minhaz",
-		status: "Pending",
-		date: "01-10-2023",
-		dosages: 12,
-	},
-];
+import {
+	usePendingApplicationQuery,
+	usePendingDonationsQuery,
+} from "../../features/pending/pendingSlice";
 
 const receives = [
 	{
@@ -142,6 +97,7 @@ const PendingTabs = () => {
 	};
 
 	const donationInfo = usePendingDonationsQuery();
+	const receiverInfo = usePendingApplicationQuery();
 
 	return (
 		<Box sx={{ width: "100%" }}>
@@ -169,8 +125,13 @@ const PendingTabs = () => {
 				))}
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				{receives.map((donation) => (
-					<PendingElement key={donation.id} type="receiver" request={donation} />
+				{!receiverInfo.data?.applications && (
+					<Typography color="#8d8d8d" textAlign="center" fontStyle="italic" p={2}>
+						Currently, no requests are available
+					</Typography>
+				)}
+				{receiverInfo.data?.applications?.map((application) => (
+					<PendingElement key={application._id} type="receiver" request={application} />
 				))}
 			</TabPanel>
 		</Box>

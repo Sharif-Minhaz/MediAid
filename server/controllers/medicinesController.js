@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Medicine = require("../models/MedicineModel");
+const ReceiverApplication = require("../models/ReceiverApplicationModel");
 const cloudinary = require("../utils/cloudinaryHandler");
 const { defaultMedicineImage } = require("../constants/imagesConst");
 const { uploadImageHandler } = require("../utils/uploadImage");
@@ -169,7 +170,7 @@ exports.donateMedicineController = asyncHandler(async (req, res) => {
 
 	if (addMedicine) {
 		req.historyInfo = {
-			medicine: addMedicine._id,
+			medicineName: addMedicine.medicineName,
 			action: "apply-donate",
 		};
 
@@ -184,5 +185,27 @@ exports.donateMedicineController = asyncHandler(async (req, res) => {
 	res.status(500).json({
 		msg: "medicine_not_added",
 		medicine: null,
+	});
+});
+
+exports.applyMedicineController = asyncHandler(async (req, res) => {
+	const { decoded, body } = req;
+
+	const applyMedicine = await new ReceiverApplication({
+		...body,
+		fullName: body.name,
+		user: decoded.id,
+	}).save();
+
+	if (applyMedicine) {
+		return res.status(201).json({
+			msg: "apply_successful",
+			applyMedicine,
+		});
+	}
+
+	res.status(500).json({
+		msg: "apply_not_successful",
+		applyMedicine: null,
 	});
 });

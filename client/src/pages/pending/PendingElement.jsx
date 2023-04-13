@@ -24,6 +24,7 @@ const PendingElement = ({ type, request }) => {
 					if (response.msg === "donation_accepted") {
 						return toast.success("Donation request accepted");
 					}
+					console.log(response);
 					toast.error("something went wrong!");
 				})
 				.catch((err) => {
@@ -72,8 +73,8 @@ const PendingElement = ({ type, request }) => {
 							border: "1px solid #d1d1d1",
 						}}
 						loading="lazy"
-						src={request.medicineImage}
-						alt={request.medicineName}
+						src={request.medicineImage || request.medicine?.medicineImage}
+						alt={request.medicineName || request.medicine?.medicineName}
 					/>
 				</Grid>
 				<Grid item xs={isExtraSmall ? 12 : 7} sm={7} md={7} lg={7.5} xl={8}>
@@ -90,16 +91,17 @@ const PendingElement = ({ type, request }) => {
 							}}
 						>
 							<Typography variant="body1" fontSize={14}>
-								<strong>Medicine:</strong> {request.medicineName}
+								<strong>Medicine:</strong>{" "}
+								{request.medicineName || request.medicine?.medicineName}
 							</Typography>
 							<Typography variant="body1" fontSize={14}>
-								<strong>Order:</strong> {request.donarName}
+								<strong>Order:</strong> {request.donarName || request.fullName}
 							</Typography>
 							<Typography variant="body1" fontSize={14}>
-								<strong>Date:</strong> {Date(request?.createdAt)}
+								<strong>Date:</strong> {request?.createdAt}
 							</Typography>
 							<Typography variant="body1" fontSize={14}>
-								<strong>Dosages:</strong> {request.dosages}
+								<strong>Dosages:</strong> {request.dosages || request.count}
 							</Typography>
 							<Typography component="div" variant="body1" fontSize={14}>
 								<Chip

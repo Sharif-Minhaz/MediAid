@@ -4,7 +4,6 @@ const History = require("../models/HistoryModel");
 exports.viewAllHistoryController = asyncHandler(async (req, res) => {
 	const history = await History.find()
 		.populate("user")
-		.populate("medicine")
 		.sort({ createdAt: "desc" });
 
 	if (history.length) {
@@ -25,7 +24,7 @@ exports.addHistoryController = asyncHandler(async (req, res) => {
 
 	const newHistory = await new History({
 		user: decoded.id,
-		medicine: historyInfo.medicine,
+		medicineName: historyInfo.medicineName,
 		action: historyInfo.action,
 	}).save();
 

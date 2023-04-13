@@ -22,6 +22,11 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ["PendingDonation"],
 		}),
+
+		pendingApplication: builder.query({
+			query: () => "/pending/receive",
+			providesTags: ["PendingReceive"],
+		}),
 	}),
 });
 
@@ -29,4 +34,5 @@ export const {
 	usePendingDonationsQuery,
 	usePendingDonationAcceptMutation,
 	usePendingDonationRejectMutation,
+	usePendingApplicationQuery
 } = extendedApiSlice;
