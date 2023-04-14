@@ -5,7 +5,17 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 		viewProfile: builder.query({
 			query: () => {
 				return {
-					url: "/profile",
+					url: `/profile`,
+					method: "GET",
+				};
+			},
+			providesTags: ["Profile"],
+		}),
+
+		findProfile: builder.query({
+			query: (id) => {
+				return {
+					url: `/profile/find/${id}`,
 					method: "GET",
 				};
 			},
@@ -27,4 +37,5 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 	}),
 });
 
-export const { useViewProfileQuery, useUpdateProfileMutation } = extendedApiSlice;
+export const { useViewProfileQuery, useUpdateProfileMutation, useFindProfileQuery } =
+	extendedApiSlice;

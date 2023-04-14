@@ -28,6 +28,11 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 			providesTags: ["PendingReceive"],
 		}),
 
+		acceptedApplication: builder.query({
+			query: () => "/pending/receive/accepted",
+			providesTags: ["PendingReceive"],
+		}),
+
 		userCartItem: builder.query({
 			query: () => "/pending/receive/cart",
 			providesTags: ["PendingReceive"],
@@ -59,4 +64,5 @@ export const {
 	usePendingApplyAcceptMutation,
 	usePendingApplyRejectMutation,
 	useUserCartItemQuery,
+	useAcceptedApplicationQuery,
 } = extendedApiSlice;

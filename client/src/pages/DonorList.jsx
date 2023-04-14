@@ -55,6 +55,7 @@ const tableFormat = {
 		{ align: "left", heading: "Avatar" },
 		{ align: "left", heading: "Username" },
 		{ align: "center", heading: "Role" },
+		{ align: "center", heading: "Medicine" },
 		{ align: "center", heading: "Total Donated" },
 		{ align: "right", heading: "Action" },
 	],

@@ -20,6 +20,24 @@ exports.viewProfileController = asyncHandler(async (req, res) => {
 	});
 });
 
+exports.findProfileController = asyncHandler(async (req, res) => {
+	const { id } = req.params;
+
+	const profile = await Profile.findOne({ user: id });
+
+	if (profile) {
+		return res.status(200).json({
+			msg: "profile_found",
+			profile,
+		});
+	}
+
+	res.status(404).json({
+		msg: "profile_not_found",
+		profile: null,
+	});
+});
+
 exports.createProfileController = asyncHandler(async (req, res) => {
 	const { profileInfo } = req;
 

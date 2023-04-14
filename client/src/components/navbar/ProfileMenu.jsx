@@ -66,13 +66,13 @@ const ProfileMenu = ({ profileInfo, anchorEl, open, handleClose }) => {
 		>
 			<Link to="/profile">
 				<MenuItem onClick={handleClose} sx={{ mb: "8px" }}>
-					<Avatar src={profileInfo.data?.profile.profilePicture} />{" "}
+					<Avatar src={profileInfo.data?.profile?.profilePicture} />{" "}
 					<Stack>
 						<Box component="span" color="#364152" fontSize={18}>
-							{profileInfo.data?.profile.fullName}
+							{profileInfo.data?.profile?.fullName}
 						</Box>
 						<Box component="span" color="#364152" fontSize={14}>
-							{toCapitalize(profileInfo.data?.profile.user.user_type)} profile
+							{toCapitalize(profileInfo.data?.profile?.user.user_type)} profile
 						</Box>
 					</Stack>
 				</MenuItem>
