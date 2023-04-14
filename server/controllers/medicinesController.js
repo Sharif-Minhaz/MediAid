@@ -191,13 +191,23 @@ exports.donateMedicineController = asyncHandler(async (req, res) => {
 exports.applyMedicineController = asyncHandler(async (req, res) => {
 	const { decoded, body } = req;
 
-	const applyMedicine = await new ReceiverApplication({
+	const apply = new ReceiverApplication({
 		...body,
 		fullName: body.name,
 		user: decoded.id,
-	}).save();
+	});
+
+	const applyMedicine = await apply.save();
+	await applyMedicine.populate("medicine");
 
 	if (applyMedicine) {
+		req.historyInfo = {
+			medicineName: applyMedicine.medicine?.medicineName,
+			action: "apply-receive",
+		};
+
+		addHistoryController(req, res);
+
 		return res.status(201).json({
 			msg: "apply_successful",
 			applyMedicine,

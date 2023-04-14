@@ -1,32 +1,34 @@
-import { createSlice } from "@reduxjs/toolkit";
-import secureStorage from "react-secure-storage";
+// TODO: untracked from main stores, only for learning purpose.
 
-const initialState = {
-	cartItems: secureStorage.getItem("cartItems") || [],
-};
+// import { createSlice } from "@reduxjs/toolkit";
+// import secureStorage from "react-secure-storage";
 
-export const cartSlice = createSlice({
-	name: "cart",
-	initialState,
-	reducers: {
-		add: (state, action) => {
-			state.cartItems.push(action.payload);
-			secureStorage.setItem("cartItems", state.cartItems);
-		},
-		cancel: (state, action) => {
-			const item = action.payload;
+// const initialState = {
+// 	cartItems: secureStorage.getItem("cartItems") || [],
+// };
 
-			state.cartItems = state.cartItems.filter((existedItem) => {
-				return existedItem._id !== item._id;
-			});
+// export const cartSlice = createSlice({
+// 	name: "cart",
+// 	initialState,
+// 	reducers: {
+// 		add: (state, action) => {
+// 			state.cartItems.push(action.payload);
+// 			secureStorage.setItem("cartItems", state.cartItems);
+// 		},
+// 		cancel: (state, action) => {
+// 			const item = action.payload;
 
-			secureStorage.setItem("cartItems", state.cartItems);
-		},
-	},
-});
+// 			state.cartItems = state.cartItems.filter((existedItem) => {
+// 				return existedItem._id !== item._id;
+// 			});
 
-export const cartItemStatus = (state) => state.cart.cartItems;
+// 			secureStorage.setItem("cartItems", state.cartItems);
+// 		},
+// 	},
+// });
 
-export const { add, cancel } = cartSlice.actions;
+// export const cartItemStatus = (state) => state.cart.cartItems;
 
-export default cartSlice.reducer;
+// export const { add, cancel } = cartSlice.actions;
+
+// export default cartSlice.reducer;

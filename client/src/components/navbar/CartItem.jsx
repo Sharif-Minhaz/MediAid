@@ -1,13 +1,24 @@
 import { Box, Chip, Divider, Stack, Typography } from "@mui/material";
 import { IconX } from "@tabler/icons-react";
-import { useDispatch } from "react-redux";
-import { cancel } from "../../features/cart/cartSlice";
+import { usePendingApplyRejectMutation } from "../../features/pending/pendingSlice";
+import { toast } from "react-toastify";
 
 const CartItem = ({ cartItem }) => {
-	const dispatch = useDispatch();
+	const [rejectApplication, rejectApplyInfo] = usePendingApplyRejectMutation();
 
-	const cancelApplication = (cartItem) => {
-		dispatch(cancel(cartItem));
+	const cancelApplication = () => {
+		rejectApplication(cartItem?.medicine._id)
+			.unwrap()
+			.then((response) => {
+				if (response.msg === "application_rejected") {
+					return toast.success("Application canceled");
+				}
+				toast.error("something went wrong!");
+			})
+			.catch((err) => {
+				console.error(err);
+				toast.error("something went wrong!");
+			});
 	};
 
 	return (
@@ -22,37 +33,39 @@ const CartItem = ({ cartItem }) => {
 							boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
 							objectFit: "cover",
 						}}
-						loading='lazy'
-						src={cartItem?.medicineImage}
-						alt={cartItem?.medicineName}
+						loading="lazy"
+						src={cartItem?.medicine?.medicineImage}
+						alt={cartItem?.medicine?.medicineName}
 					/>
-					<Box
-						component="div"
-						sx={{
-							position: "absolute",
-							height: "20px",
-							width: "20px",
-							borderRadius: "50%",
-							background: "whitesmoke",
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-							top: "-6px",
-							left: "-6px",
-							borderColor: "1px solid black",
-							cursor: "pointer",
-							userSelect: "none",
-						}}
-						title="Cancel application"
-						onClick={() => cancelApplication(cartItem)}
-					>
-						<IconX size={14} />
-					</Box>
+					{cartItem?.status === "pending" && (
+						<Box
+							component="div"
+							sx={{
+								position: "absolute",
+								height: "20px",
+								width: "20px",
+								borderRadius: "50%",
+								background: "whitesmoke",
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "center",
+								top: "-6px",
+								left: "-6px",
+								borderColor: "1px solid black",
+								cursor: "pointer",
+								userSelect: "none",
+							}}
+							title="Cancel application"
+							onClick={cancelApplication}
+						>
+							<IconX size={14} />
+						</Box>
+					)}
 				</Box>
 				<Box>
-					<Typography mb={0.4}>{cartItem?.medicineName}</Typography>
+					<Typography mb={0.4}>{cartItem?.medicine?.medicineName}</Typography>
 					<Typography variant="body2" fontSize={13}>
-						Order: {cartItem?.name}
+						Order: {cartItem?.fullName}
 					</Typography>
 					<Typography variant="body2">Dosages: {cartItem?.count}</Typography>
 					<Typography component="div" fontSize={12} variant="body2" mt={0.3}>
