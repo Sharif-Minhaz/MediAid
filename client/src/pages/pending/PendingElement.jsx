@@ -2,6 +2,8 @@ import { Box, Button, Card, Chip, Grid, Stack, Typography, useMediaQuery } from 
 import { toast } from "react-toastify";
 import { useInView } from "react-intersection-observer";
 import {
+	usePendingApplyAcceptMutation,
+	usePendingApplyRejectMutation,
 	usePendingDonationAcceptMutation,
 	usePendingDonationRejectMutation,
 } from "../../features/pending/pendingSlice";
@@ -10,6 +12,9 @@ const PendingElement = ({ type, request }) => {
 	const isExtraSmall = useMediaQuery("(max-width: 440px)");
 	const [acceptDonation, acceptDonationInfo] = usePendingDonationAcceptMutation();
 	const [rejectDonation, rejectDonationInfo] = usePendingDonationRejectMutation();
+
+	const [acceptApplication, acceptApplyInfo] = usePendingApplyAcceptMutation();
+	const [rejectApplication, rejectApplyInfo] = usePendingApplyRejectMutation();
 
 	const { ref, inView } = useInView({
 		threshold: 0.3,
@@ -24,7 +29,6 @@ const PendingElement = ({ type, request }) => {
 					if (response.msg === "donation_accepted") {
 						return toast.success("Donation request accepted");
 					}
-					console.log(response);
 					toast.error("something went wrong!");
 				})
 				.catch((err) => {
@@ -32,7 +36,18 @@ const PendingElement = ({ type, request }) => {
 					toast.error("something went wrong!");
 				});
 		} else {
-			toast.success("Receiver's request accepted");
+			acceptApplication(request?.medicine._id)
+				.unwrap()
+				.then((response) => {
+					if (response.msg === "application_accepted") {
+						return toast.success("Application accepted");
+					}
+					toast.error("something went wrong!");
+				})
+				.catch((err) => {
+					console.error(err);
+					toast.error("something went wrong!");
+				});
 		}
 	};
 
@@ -51,7 +66,18 @@ const PendingElement = ({ type, request }) => {
 					toast.error("something went wrong!");
 				});
 		} else {
-			toast.error("Receiver's request rejected");
+			rejectApplication(request?.medicine._id)
+				.unwrap()
+				.then((response) => {
+					if (response.msg === "application_rejected") {
+						return toast.success("Application rejected");
+					}
+					toast.error("something went wrong!");
+				})
+				.catch((err) => {
+					console.error(err);
+					toast.error("something went wrong!");
+				});
 		}
 	};
 
@@ -153,7 +179,10 @@ const PendingElement = ({ type, request }) => {
 								size="small"
 								disableElevation
 								disabled={Boolean(
-									acceptDonationInfo.isLoading || rejectDonationInfo.isLoading
+									acceptDonationInfo.isLoading ||
+										rejectDonationInfo.isLoading ||
+										acceptApplyInfo.isLoading ||
+										rejectApplyInfo.isLoading
 								)}
 								sx={{
 									width: "70px",
@@ -172,7 +201,10 @@ const PendingElement = ({ type, request }) => {
 								size="small"
 								disableElevation
 								disabled={Boolean(
-									acceptDonationInfo.isLoading || rejectDonationInfo.isLoading
+									acceptDonationInfo.isLoading ||
+										rejectDonationInfo.isLoading ||
+										acceptApplyInfo.isLoading ||
+										rejectApplyInfo.isLoading
 								)}
 								sx={{
 									width: "70px",

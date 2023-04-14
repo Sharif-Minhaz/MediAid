@@ -19,7 +19,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 				method: "POST",
 				body,
 			}),
-			invalidatesTags: ["Profile"],
+			invalidatesTags: ["Profile", "PendingReceive"],
 		}),
 
 		logout: builder.mutation({

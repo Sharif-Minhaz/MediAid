@@ -8,8 +8,8 @@ import ProfileBtn from "../navbar/ProfileBtn";
 import DrawerHeaderContents from "../navbar/DrawerHeaderContents";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle, drawerStatus, openCart } from "../../features/drawer/drawerSlice";
-import { cartItemStatus } from "../../features/cart/cartSlice";
 import { Link } from "react-router-dom";
+import { useUserCartItemQuery } from "../../features/pending/pendingSlice";
 
 const ElevationScroll = ({ children }) => {
 	const trigger = useScrollTrigger({
@@ -44,7 +44,7 @@ const CustomAppBar = styled(AppBar, {
 const Navbar = ({ profileInfo, handleNotificationClick, handleClick }) => {
 	const dispatch = useDispatch();
 	const drawerOpen = useSelector(drawerStatus);
-	const cartMedicines = useSelector(cartItemStatus);
+	const cartMedicinesInfo = useUserCartItemQuery();
 
 	const [showFullSearch, setShowFullSearch] = useState(false);
 
@@ -115,20 +115,22 @@ const Navbar = ({ profileInfo, handleNotificationClick, handleClick }) => {
 							smWidth="250px"
 						/>
 						<Stack direction="row" alignItems="center" gap={2}>
-							{cartMedicines.length > 0 && (
-								<Badge
-									badgeContent={cartMedicines.length}
-									color="primary"
-									sx={{ color: "white" }}
-									className="badge-item"
-								>
-									<CustomIconButton onClick={() => dispatch(openCart())}>
-										<IconShoppingBag size={22} />
-									</CustomIconButton>
-								</Badge>
-							)}
 							{profileInfo.isSuccess && profileInfo.data?.profile ? (
 								<>
+									{cartMedicinesInfo?.data?.applications?.length && (
+										<Badge
+											badgeContent={
+												cartMedicinesInfo?.data?.applications?.length
+											}
+											color="primary"
+											sx={{ color: "white" }}
+											className="badge-item"
+										>
+											<CustomIconButton onClick={() => dispatch(openCart())}>
+												<IconShoppingBag size={22} />
+											</CustomIconButton>
+										</Badge>
+									)}
 									<CustomIconButton onClick={handleNotificationClick}>
 										<NotificationsNoneIcon size={22} />
 									</CustomIconButton>
@@ -139,11 +141,14 @@ const Navbar = ({ profileInfo, handleNotificationClick, handleClick }) => {
 								</>
 							) : (
 								<Typography sx={{ color: "#8250df", whiteSpace: "nowrap" }}>
-									<Link style={{ color: "#512e91",fontWeight: 500 }} to="/login">
+									<Link style={{ color: "#512e91", fontWeight: 500 }} to="/login">
 										Login
 									</Link>{" "}
 									/{" "}
-									<Link style={{ color: "#512e91",fontWeight: 500 }} to="/register">
+									<Link
+										style={{ color: "#512e91", fontWeight: 500 }}
+										to="/register"
+									>
 										Register
 									</Link>
 								</Typography>

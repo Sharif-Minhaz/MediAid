@@ -2,13 +2,13 @@ import { Box, Divider, Drawer, Typography } from "@mui/material";
 import { IconShoppingCart, IconX } from "@tabler/icons-react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartDrawerStatus, closeCart } from "../../features/drawer/drawerSlice";
-import { cartItemStatus } from "../../features/cart/cartSlice";
 import CartItem from "./CartItem";
+import { useUserCartItemQuery } from "../../features/pending/pendingSlice";
 
 export default function CartMedicineSidebar() {
 	const dispatch = useDispatch();
 	const drawerOpen = useSelector(cartDrawerStatus);
-	const cartItems = useSelector(cartItemStatus);
+	const cartItemsInfo = useUserCartItemQuery();
 
 	return (
 		<Drawer
@@ -34,7 +34,7 @@ export default function CartMedicineSidebar() {
 				</Typography>
 				<Divider />
 				<Box>
-					{cartItems.length === 0 ? (
+					{cartItemsInfo?.data?.applications.length === 0 ? (
 						<Typography
 							variant="body2"
 							sx={{ textAlign: "center", my: 2.5, fontStyle: "italic" }}
@@ -42,7 +42,9 @@ export default function CartMedicineSidebar() {
 							No item available to show.
 						</Typography>
 					) : (
-						cartItems.map((item, i) => <CartItem cartItem={item} key={i} />)
+						cartItemsInfo?.data?.applications.map((item, i) => (
+							<CartItem cartItem={item} key={i} />
+						))
 					)}
 				</Box>
 			</Box>

@@ -75,7 +75,30 @@ exports.rejectDonationController = asyncHandler(async (req, res) => {
 });
 
 exports.allRecipientController = asyncHandler(async (req, res) => {
-	const pendingReceiverApplication = await ReceiverApplication.find()
+	const pendingReceiverApplication = await ReceiverApplication.find({ status: "pending" })
+		.sort({
+			createdAt: "desc",
+		})
+		.populate("user medicine");
+
+	if (pendingReceiverApplication.length) {
+		return res.status(200).json({
+			msg: "pending_application_found",
+			applications: pendingReceiverApplication,
+		});
+	}
+
+	res.status(200).json({
+		msg: "pending_applications_not_found",
+		applications: null,
+	});
+});
+
+// only for logged in user's cart info
+exports.userCartItemsController = asyncHandler(async (req, res) => {
+	const { decoded } = req;
+
+	const pendingReceiverApplication = await ReceiverApplication.find({ user: decoded.id })
 		.sort({
 			createdAt: "desc",
 		})
@@ -97,6 +120,8 @@ exports.allRecipientController = asyncHandler(async (req, res) => {
 exports.acceptReceiverApplicationController = asyncHandler(async (req, res) => {
 	const { medicineId } = req.params;
 	const { decoded } = req;
+
+	// TODO: keep in mind about the requested amount and the available amount.
 
 	const acceptApplication = await ReceiverApplication.findOneAndUpdate(
 		{ medicine: medicineId },
@@ -124,6 +149,8 @@ exports.acceptReceiverApplicationController = asyncHandler(async (req, res) => {
 		});
 	}
 
+	console.log(acceptApplication, medicineId);
+
 	res.status(500).json({
 		msg: "application_not_accepted",
 		acceptedDonation: null,
@@ -150,6 +177,8 @@ exports.rejectReceiverApplicationController = asyncHandler(async (req, res) => {
 			deletedApplication: deleteApplication,
 		});
 	}
+
+	console.log(deleteApplication, medicineId);
 
 	res.status(500).json({
 		msg: "application_not_rejected",

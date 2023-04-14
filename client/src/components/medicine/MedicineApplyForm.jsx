@@ -18,7 +18,6 @@ import * as yup from "yup";
 import { toast } from "react-toastify";
 import MedicineExcerpt from "./MedicineExcerpt";
 import { useDispatch } from "react-redux";
-import { add } from "../../features/cart/cartSlice";
 import { openCart } from "../../features/drawer/drawerSlice";
 import { useApplyMedicineMutation } from "../../features/medicines/medicinesSlice";
 
@@ -34,7 +33,7 @@ const MedicineApplyForm = () => {
 			name: yup.string().required("Full name is required"),
 			email: yup.string().email("Provide valid email address"),
 			address: yup.string().required("Address is required"),
-			count: yup.number().required().positive().integer().max(100).min(1),
+			count: yup.number().required().positive().integer().min(1),
 			contact: yup
 				.string()
 				.matches(/^[0-9]{11}$/, "Contact number must be 11 digits")
@@ -63,12 +62,10 @@ const MedicineApplyForm = () => {
 			.unwrap()
 			.then((response) => {
 				if (response.msg === "apply_successful") {
-					dispatch(add({ ...state, ...data, status: "pending", _id: Date.now() }));
 					toast.success("Successfully get the form data");
 					dispatch(openCart());
 					return navigate("/medicines", { replace: true });
 				}
-				console.log(response);
 				toast.error("Something went wrong!");
 			})
 			.catch((err) => toast.error("Something went wrong!"));

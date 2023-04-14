@@ -27,6 +27,27 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 			query: () => "/pending/receive",
 			providesTags: ["PendingReceive"],
 		}),
+
+		userCartItem: builder.query({
+			query: () => "/pending/receive/cart",
+			providesTags: ["PendingReceive"],
+		}),
+
+		pendingApplyAccept: builder.mutation({
+			query: (medicineId) => ({
+				url: `/pending/receive/accept/${medicineId}`,
+				method: "PATCH",
+			}),
+			invalidatesTags: ["PendingReceive"],
+		}),
+
+		pendingApplyReject: builder.mutation({
+			query: (medicineId) => ({
+				url: `/pending/receive/reject/${medicineId}`,
+				method: "DELETE",
+			}),
+			invalidatesTags: ["PendingReceive"],
+		}),
 	}),
 });
 
@@ -34,5 +55,8 @@ export const {
 	usePendingDonationsQuery,
 	usePendingDonationAcceptMutation,
 	usePendingDonationRejectMutation,
-	usePendingApplicationQuery
+	usePendingApplicationQuery,
+	usePendingApplyAcceptMutation,
+	usePendingApplyRejectMutation,
+	useUserCartItemQuery,
 } = extendedApiSlice;

@@ -48,7 +48,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
 		applyMedicine: builder.mutation({
 			query: (body) => {
-				console.log("Api: ", body)
 				return {
 					url: "/medicines/apply",
 					method: "POST",
