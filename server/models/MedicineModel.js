@@ -30,7 +30,7 @@ const medicineSchema = new Schema(
 		dosages: { type: Number, required: true, min: 1 },
 		rating: {
 			type: Schema.Types.ObjectId,
-			ref: "review",
+			ref: "Review",
 		},
 		status: {
 			type: String,

@@ -94,6 +94,26 @@ exports.allRecipientController = asyncHandler(async (req, res) => {
 	});
 });
 
+exports.allAcceptedReceiverController = asyncHandler(async (req, res) => {
+	const pendingReceiverApplication = await ReceiverApplication.find({ status: "accepted" })
+		.sort({
+			createdAt: "desc",
+		})
+		.populate("user medicine");
+
+	if (pendingReceiverApplication.length) {
+		return res.status(200).json({
+			msg: "pending_application_found",
+			applications: pendingReceiverApplication,
+		});
+	}
+
+	res.status(200).json({
+		msg: "pending_applications_not_found",
+		applications: null,
+	});
+});
+
 // only for logged in user's cart info
 exports.userCartItemsController = asyncHandler(async (req, res) => {
 	const { decoded } = req;

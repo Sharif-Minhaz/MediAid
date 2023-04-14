@@ -34,7 +34,7 @@ export default function CartMedicineSidebar() {
 				</Typography>
 				<Divider />
 				<Box>
-					{cartItemsInfo?.data?.applications.length === 0 ? (
+					{cartItemsInfo?.data?.applications?.length === 0 ? (
 						<Typography
 							variant="body2"
 							sx={{ textAlign: "center", my: 2.5, fontStyle: "italic" }}
@@ -42,7 +42,7 @@ export default function CartMedicineSidebar() {
 							No item available to show.
 						</Typography>
 					) : (
-						cartItemsInfo?.data?.applications.map((item, i) => (
+						cartItemsInfo?.data?.applications?.map((item, i) => (
 							<CartItem cartItem={item} key={i} />
 						))
 					)}
