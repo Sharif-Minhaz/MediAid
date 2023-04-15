@@ -5,6 +5,7 @@ const healthTipHandler = require("./HealthTipRoute");
 const profileHandler = require("./profileRoute");
 const historyHandler = require("./historyRoute");
 const pendingHandler = require("./pendingRoute");
+const bestDonorHandler = require("./bestDonorRouter");
 
 const routes = [
 	{
@@ -34,6 +35,10 @@ const routes = [
 	{
 		path: "/api/pending",
 		handler: pendingHandler,
+	},
+	{
+		path: "/api/best-donors",
+		handler: bestDonorHandler,
 	},
 ];
 

@@ -26,7 +26,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 					body: payload,
 				};
 			},
-			invalidatesTags: ["Medicine"],
+			invalidatesTags: ["Medicine", "BestDonors"],
 		}),
 
 		donateMedicine: builder.mutation({
@@ -43,7 +43,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 					body: payload,
 				};
 			},
-			invalidatesTags: ["PendingDonation", "History"],
+			invalidatesTags: ["PendingDonation", "History", "BestDonors"],
 		}),
 
 		applyMedicine: builder.mutation({
@@ -93,5 +93,5 @@ export const {
 	useUpdateMedicineMutation,
 	useDeleteMedicineMutation,
 	useDonateMedicineMutation,
-	useApplyMedicineMutation
+	useApplyMedicineMutation,
 } = extendedApiSlice;
