@@ -38,8 +38,8 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 		medicineName: state?.medicineName || "",
 		medicineDescription: state?.medicineDescription || "",
 		companyName: state?.companyName || "",
-		donarName: state?.donarName || "",
-		donarContact: state?.donarContact || "",
+		donorName: state?.donorName || "",
+		donorContact: state?.donorContact || "",
 		dosages: state?.dosages || 1,
 	});
 
@@ -47,8 +47,8 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 		.object({
 			medicineName: yup.string().required("Medicine name is required"),
 			companyName: yup.string().required("Company name is required"),
-			donarName: yup.string().required("Donar name is required"),
-			donarContact: yup
+			donorName: yup.string().required("Donor name is required"),
+			donorContact: yup
 				.string()
 				.matches(/^[0-9]{11}$/, "Contact number must be 11 digits")
 				.required("Contact number is required"),
@@ -91,8 +91,8 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 				medicineName: medicine?.medicineName,
 				medicineDescription: medicine?.medicineDescription,
 				companyName: medicine?.companyName,
-				donarName: medicine?.donarName,
-				donarContact: medicine?.donarContact,
+				donorName: medicine?.donorName,
+				donorContact: medicine?.donorContact,
 				dosages: medicine?.dosages,
 			});
 		}
@@ -127,8 +127,6 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 						toast.success("Donated info sent");
 						setResetKey(Date.now()); // re-render with key -> ImageDropZone component
 						reset();
-					} else if (response.msg === "already_exist") {
-						toast.warning("Medicine already in the list");
 					}
 				})
 				.catch((err) => {
@@ -143,8 +141,6 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 						toast.success("New Medicine added");
 						setResetKey(Date.now()); // re-render with key -> ImageDropZone component
 						reset();
-					} else if (response.msg === "already_exist") {
-						toast.warning("Medicine already in the list");
 					}
 				})
 				.catch((err) => {
@@ -203,41 +199,41 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<FormControl
-						error={Boolean(errors.donarName)}
+						error={Boolean(errors.donorName)}
 						fullWidth
 						sx={{ ...theme.customInput }}
 					>
-						<InputLabel htmlFor="donarName">Donar's Full Name</InputLabel>
+						<InputLabel htmlFor="donorName">Donor's Full Name</InputLabel>
 						<OutlinedInput
 							disabled={
 								responseInfo.isLoading ||
 								updateResponseInfo.isLoading ||
 								donateResponseInfo.isLoading
 							}
-							{...register("donarName")}
+							{...register("donorName")}
 						/>
-						{errors.donarName && (
-							<FormHelperText error>{errors.donarName?.message}</FormHelperText>
+						{errors.donorName && (
+							<FormHelperText error>{errors.donorName?.message}</FormHelperText>
 						)}
 					</FormControl>
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<FormControl
-						error={Boolean(errors.donarContact)}
+						error={Boolean(errors.donorContact)}
 						fullWidth
 						sx={{ ...theme.customInput }}
 					>
-						<InputLabel htmlFor="donarContact">Donar's Contact Number</InputLabel>
+						<InputLabel htmlFor="donorContact">Donor's Contact Number</InputLabel>
 						<OutlinedInput
 							disabled={
 								responseInfo.isLoading ||
 								updateResponseInfo.isLoading ||
 								donateResponseInfo.isLoading
 							}
-							{...register("donarContact")}
+							{...register("donorContact")}
 						/>
-						{errors.donarContact && (
-							<FormHelperText error>{errors.donarContact?.message}</FormHelperText>
+						{errors.donorContact && (
+							<FormHelperText error>{errors.donorContact?.message}</FormHelperText>
 						)}
 					</FormControl>
 				</Grid>
@@ -292,7 +288,7 @@ const MedicineForm = ({ isUpdateCase, setIsUpdateCase, donation }) => {
 						<InputLabel htmlFor="dosages">Number of Dosages</InputLabel>
 						<OutlinedInput
 							type="number"
-							inputProps={{min: 1}}
+							inputProps={{ min: 1 }}
 							disabled={
 								responseInfo.isLoading ||
 								updateResponseInfo.isLoading ||

@@ -40,10 +40,10 @@ const ExtraDetailsAccordion = ({ medicine }) => {
 							<strong>Brand:</strong> {medicine?.companyName}
 						</Typography>
 						<Typography fontSize={15} color="#425b74" variant="body1">
-							<strong>Donated By:</strong> {medicine?.donarName}
+							<strong>Donated By:</strong> {medicine?.donorName}
 						</Typography>
 						<Typography fontSize={15} color="#425b74" variant="body1">
-							<strong>Donar contact:</strong> {medicine?.donarContact}
+							<strong>Donor contact:</strong> {medicine?.donorContact}
 						</Typography>
 					</Box>
 				</Box>

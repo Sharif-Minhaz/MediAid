@@ -14,8 +14,8 @@ const receives = [
 		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
 		medicineImage: "/images/Spinraza.jpg",
-		donarName: "Sharif Md. Minhaz",
-		donarContact: "01309832862",
+		donorName: "Sharif Md. Minhaz",
+		donorContact: "01309832862",
 		companyName: "Square",
 		rating: 4.2,
 		name: "Md. Minhaz",
@@ -29,8 +29,8 @@ const receives = [
 		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
 		medicineImage: "/images/esoral-mups.png",
-		donarName: "Sharif Md. Minhaz",
-		donarContact: "01309832862",
+		donorName: "Sharif Md. Minhaz",
+		donorContact: "01309832862",
 		companyName: "Square",
 		rating: 4.9,
 		name: "Md. Minhaz",
@@ -44,8 +44,8 @@ const receives = [
 		medicineDescription:
 			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
 		medicineImage: "/images/brineura.jpeg",
-		donarName: "Sharif Md. Minhaz",
-		donarContact: "01309832862",
+		donorName: "Sharif Md. Minhaz",
+		donorContact: "01309832862",
 		companyName: "Square",
 		rating: 4.6,
 		name: "Md. Minhaz",

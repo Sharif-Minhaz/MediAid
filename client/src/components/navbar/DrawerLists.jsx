@@ -85,7 +85,7 @@ const DrawerLists = ({ drawerWidth = 260, isSmallScreen }) => {
 						/>
 						<SingleNavLink
 							link="/donor-list"
-							text="Donor List"
+							text="Donation List"
 							icon={<IconClipboardList size={20} />}
 						/>
 						<SingleNavLink

@@ -20,7 +20,7 @@ const ReceiverList = () => {
 	return (
 		<Paper component="div" sx={{ mt: "5px", pb: "20px" }}>
 			<SectionTitle text="Receiver List" />
-			<ListTable tableFormat={tableFormat} listData={receiverList} />
+			<ListTable tableName='receiver' tableFormat={tableFormat} listData={receiverList} />
 		</Paper>
 	);
 };
