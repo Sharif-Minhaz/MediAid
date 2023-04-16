@@ -153,6 +153,7 @@
     left: 50%;
     transform: translateX(-50%);
     font-size: 22px;
+    white-space: nowrap;
 }
 
 .container .player {

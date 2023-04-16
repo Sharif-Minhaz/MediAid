@@ -121,7 +121,7 @@ const PendingElement = ({ type, request }) => {
 								{request.medicineName || request.medicine?.medicineName}
 							</Typography>
 							<Typography variant="body1" fontSize={14}>
-								<strong>Order:</strong> {request.donarName || request.fullName}
+								<strong>Order:</strong> {request.donorName || request.fullName}
 							</Typography>
 							<Typography variant="body1" fontSize={14}>
 								<strong>Date:</strong> {request?.createdAt}

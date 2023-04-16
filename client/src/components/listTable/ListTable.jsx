@@ -58,7 +58,11 @@ const ListTable = ({ tableFormat, listData, tableName }) => {
 						) : (
 							<TableBody>
 								{listData.data?.[
-									tableName === "history" ? "history" : "applications"
+									tableName === "history"
+										? "history"
+										: tableName === "donor"
+										? "medicines"
+										: "applications"
 								]?.map((data) => (
 									<TableRowContent
 										key={data._id}

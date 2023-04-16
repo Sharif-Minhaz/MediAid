@@ -34,8 +34,21 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 			},
 			invalidatesTags: ["Profile"],
 		}),
+
+		bestDonors: builder.query({
+			query: () => {
+				return {
+					url: "/best-donors",
+				};
+			},
+			providesTags: ["BestDonors"],
+		}),
 	}),
 });
 
-export const { useViewProfileQuery, useUpdateProfileMutation, useFindProfileQuery } =
-	extendedApiSlice;
+export const {
+	useViewProfileQuery,
+	useUpdateProfileMutation,
+	useFindProfileQuery,
+	useBestDonorsQuery,
+} = extendedApiSlice;

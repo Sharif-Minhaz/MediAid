@@ -4,11 +4,13 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import medicines from "../../data/medicines.json";
 import { useEffect, useState } from "react";
 import MedicineExcerpt from "../components/medicine/MedicineExcerpt";
+import { useViewAllMedicinesQuery } from "../features/medicines/medicinesSlice";
 
 const SearchResultPage = () => {
 	const navigate = useNavigate();
 	const [queryParams, setQueryParams] = useSearchParams();
 	const [searchedMedicines, setSearchedMedicines] = useState([]);
+	const medicineInfo = useViewAllMedicinesQuery();
 
 	const filterMedicinesByName = (medicines, name) => {
 		const lowerCaseName = name.toLowerCase();
@@ -21,7 +23,9 @@ const SearchResultPage = () => {
 	};
 
 	useEffect(() => {
-		setSearchedMedicines(filterMedicinesByName(medicines, queryParams.get("medicine")));
+		setSearchedMedicines(
+			filterMedicinesByName(medicineInfo?.data?.medicines, queryParams.get("medicine"))
+		);
 	}, [queryParams]);
 
 	return (

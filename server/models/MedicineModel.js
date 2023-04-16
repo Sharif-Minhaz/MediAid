@@ -20,14 +20,24 @@ const medicineSchema = new Schema(
 			required: true,
 		},
 		cloudinaryId: String,
-		donarName: {
+		donorAccount: {
+			type: Schema.Types.ObjectId,
+			ref: "User",
+		},
+		donorName: {
 			type: String,
 			trim: true,
 			default: "Anonymous",
 		},
-		donarContact: String,
+		donorContact: String,
 		companyName: { type: String, trim: true },
 		dosages: { type: Number, required: true, min: 1 },
+		storedDosages: {
+			type: Number,
+			required: true,
+			immutable: true,
+			min: 1,
+		},
 		rating: {
 			type: Schema.Types.ObjectId,
 			ref: "Review",

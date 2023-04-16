@@ -7,7 +7,7 @@ import StyledTableCell from "./StyledTableCell";
 import StyledTableRow from "./StyledTableRow";
 
 const TableRowContent = ({ data, tableFormat, tableName }) => {
-	const profileInfo = useFindProfileQuery(data.user?._id);
+	const profileInfo = useFindProfileQuery(data.user?._id || data?.donorAccount?._id);
 
 	const handleUserRequest = () => {
 		toast.warn(`Feature under development!`);
@@ -22,14 +22,28 @@ const TableRowContent = ({ data, tableFormat, tableName }) => {
 				/>
 			</StyledTableCell>
 			<StyledTableCell align={tableFormat.tableHeaders[1].align}>
-				{`${data.user?.firstName} ${data.user?.lastName}`}
+				{tableName === "donor"
+					? profileInfo?.data?.profile?.fullName || "Anonymous"
+					: `${data.user?.firstName} ${data.user?.lastName}`}
 			</StyledTableCell>
-			<StyledTableCell align={tableFormat.tableHeaders[2].align}>
-				{toCapitalize(data.user?.user_type)}
-			</StyledTableCell>
+			{tableName !== "donor" && (
+				<StyledTableCell align={tableFormat.tableHeaders[2].align}>
+					{toCapitalize(data.user?.user_type)}
+				</StyledTableCell>
+			)}
 			<StyledTableCell align={tableFormat.tableHeaders[3].align}>
-				{data.medicineName || data.medicine.medicineName}
+				{data.medicineName || data.medicine?.medicineName}
 			</StyledTableCell>
+			{tableName === "donor" && (
+				<>
+					<StyledTableCell align={tableFormat.tableHeaders[3].align}>
+						{data.companyName}
+					</StyledTableCell>
+					<StyledTableCell align={tableFormat.tableHeaders[3].align}>
+						{data.storedDosages}
+					</StyledTableCell>
+				</>
+			)}
 			{tableName === "history" ? (
 				<>
 					<StyledTableCell align={tableFormat.tableHeaders[4].align}>
@@ -43,9 +57,11 @@ const TableRowContent = ({ data, tableFormat, tableName }) => {
 				</>
 			) : (
 				<>
-					<StyledTableCell align={tableFormat.tableHeaders[4].align}>
-						{data.count}
-					</StyledTableCell>
+					{tableName === "receiver" && (
+						<StyledTableCell align={tableFormat.tableHeaders[4].align}>
+							{data.count}
+						</StyledTableCell>
+					)}
 					<StyledTableCell align={tableFormat.tableHeaders[5].align}>
 						<Button
 							disableElevation

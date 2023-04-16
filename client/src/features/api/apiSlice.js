@@ -17,6 +17,7 @@ export const apiSlice = createApi({
 		"History",
 		"PendingDonation",
 		"PendingReceive",
+		"BestDonors",
 	],
 	endpoints: (builder) => ({}),
 });
