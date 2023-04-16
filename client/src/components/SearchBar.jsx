@@ -4,8 +4,9 @@ import { IconSearch as SearchIcon } from "@tabler/icons-react";
 import { IconAdjustmentsHorizontal as TuneIcon } from "@tabler/icons-react";
 import { IconX as CloseIcon } from "@tabler/icons-react";
 import CustomIconButton from "../theme/customComponent/CustomIconButton";
-import medicines from "../../data/medicines.json";
+// import medicines from ../../data/medicines.json";
 import { useNavigate } from "react-router-dom";
+import { useViewAllMedicinesQuery } from "../features/medicines/medicinesSlice";
 
 const absoluteStyle = {
 	zIndex: 999,
@@ -28,6 +29,7 @@ const SearchBar = ({
 	const theme = useTheme();
 	const [value, setValue] = useState(null);
 	const [inputValue, setInputValue] = useState("");
+	const medicineInfo = useViewAllMedicinesQuery();
 
 	const handleSearch = (e) => {
 		if (e.key === "Enter" && inputValue.length > 0) {
@@ -75,7 +77,7 @@ const SearchBar = ({
 					onKeyDown={handleSearch}
 					name="searchText"
 					freeSolo={true}
-					options={medicines.map((option) => option.medicineName)}
+					options={medicineInfo.data?.medicines?.map((option) => option.medicineName)}
 					renderInput={(params) => (
 						<TextField
 							className="search-body"
