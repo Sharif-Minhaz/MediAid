@@ -83,6 +83,16 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 			},
 			invalidatesTags: ["Medicine"],
 		}),
+
+		getDonatedMedicines: builder.query({
+			query: () => "/medicines/donated/all",
+			providesTags: ["DonatedMedicines"],
+		}),
+
+		getReceivedMedicines: builder.query({
+			query: () => "/medicines/received/all",
+			providesTags: ["ReceivedMedicines"],
+		}),
 	}),
 });
 
@@ -94,4 +104,6 @@ export const {
 	useDeleteMedicineMutation,
 	useDonateMedicineMutation,
 	useApplyMedicineMutation,
+	useGetDonatedMedicinesQuery,
+	useGetReceivedMedicinesQuery,
 } = extendedApiSlice;

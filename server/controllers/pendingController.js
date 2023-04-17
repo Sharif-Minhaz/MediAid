@@ -138,11 +138,11 @@ exports.userCartItemsController = asyncHandler(async (req, res) => {
 });
 
 exports.acceptReceiverApplicationController = asyncHandler(async (req, res) => {
-	const { medicineId } = req.params;
+	const { medicineId, applicationId } = req.params;
 	const { decoded } = req;
 
 	const [application, getAvailableMedicine] = await Promise.all([
-		ReceiverApplication.findOne({ medicine: medicineId }),
+		ReceiverApplication.findById(applicationId),
 		Medicine.findById(medicineId).select("dosages"),
 	]);
 
@@ -153,12 +153,10 @@ exports.acceptReceiverApplicationController = asyncHandler(async (req, res) => {
 		});
 	}
 
-	const acceptApplication = await ReceiverApplication.updateOne(
-		{ medicine: medicineId },
+	const acceptApplication = await ReceiverApplication.findByIdAndUpdate(
+		applicationId,
 		{
-			$set: {
-				status: "accepted",
-			},
+			status: "accepted",
 		},
 		{ new: true }
 	).populate("medicine");
@@ -189,12 +187,12 @@ exports.acceptReceiverApplicationController = asyncHandler(async (req, res) => {
 });
 
 exports.rejectReceiverApplicationController = asyncHandler(async (req, res) => {
-	const { medicineId } = req.params;
+	const { applicationId } = req.params;
 	const { decoded } = req;
 
-	const deleteApplication = await ReceiverApplication.findOneAndDelete({
-		medicine: medicineId,
-	}).populate("medicine");
+	const deleteApplication = await ReceiverApplication.findByIdAndDelete(applicationId).populate(
+		"medicine"
+	);
 
 	if (deleteApplication) {
 		await new History({
@@ -208,8 +206,6 @@ exports.rejectReceiverApplicationController = asyncHandler(async (req, res) => {
 			deletedApplication: deleteApplication,
 		});
 	}
-
-	console.log(deleteApplication, medicineId);
 
 	res.status(500).json({
 		msg: "application_not_rejected",

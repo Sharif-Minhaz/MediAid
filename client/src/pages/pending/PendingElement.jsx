@@ -36,7 +36,7 @@ const PendingElement = ({ type, request }) => {
 					toast.error("something went wrong!");
 				});
 		} else {
-			acceptApplication(request?.medicine._id)
+			acceptApplication({ medicineId: request?.medicine?._id, applicationId: request?._id })
 				.unwrap()
 				.then((response) => {
 					if (response.msg === "application_accepted") {
@@ -66,7 +66,7 @@ const PendingElement = ({ type, request }) => {
 					toast.error("something went wrong!");
 				});
 		} else {
-			rejectApplication(request?.medicine._id)
+			rejectApplication(request?._id)
 				.unwrap()
 				.then((response) => {
 					if (response.msg === "application_rejected") {

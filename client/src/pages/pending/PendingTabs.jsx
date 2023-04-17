@@ -7,54 +7,6 @@ import {
 	usePendingDonationsQuery,
 } from "../../features/pending/pendingSlice";
 
-const receives = [
-	{
-		id: "4",
-		medicineName: "Spinraza",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/Spinraza.jpg",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.2,
-		name: "Md. Minhaz",
-		status: "Pending",
-		date: "01-10-2023",
-		dosages: 12,
-	},
-	{
-		id: "5",
-		medicineName: "Esoral Mups - 2",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/esoral-mups.png",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.9,
-		name: "Md. Minhaz",
-		status: "Pending",
-		date: "01-10-2023",
-		dosages: 12,
-	},
-	{
-		id: "6",
-		medicineName: "Brineura - 2",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/brineura.jpeg",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.6,
-		name: "Md. Minhaz",
-		status: "Pending",
-		date: "01-10-2023",
-		dosages: 12,
-	},
-];
-
 const TabPanel = (props) => {
 	const { children, value, index, ...other } = props;
 

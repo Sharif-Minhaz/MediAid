@@ -16,9 +16,11 @@ import {
 import { IconSend } from "@tabler/icons-react";
 import { toast } from "react-toastify";
 import { useAddReviewMutation } from "../../../features/medicines/reviewSlice";
+import { useNavigate } from "react-router-dom";
 
 const MedicineReviewForm = ({ medicineId }) => {
 	const theme = useTheme();
+	const navigate = useNavigate();
 	const [addReview, reviewInfo] = useAddReviewMutation();
 
 	const schema = yup
@@ -50,11 +52,13 @@ const MedicineReviewForm = ({ medicineId }) => {
 					toast.success("Thanks for your response");
 					return reset();
 				}
-				console.log(response);
 				toast.error("Something went wrong");
 			})
 			.catch((err) => {
-				console.error(err);
+				if (err.status === 401) {
+					navigate("/login");
+					return toast.error("Login required for this action");
+				}
 				toast.error("Something went wrong");
 			});
 	};

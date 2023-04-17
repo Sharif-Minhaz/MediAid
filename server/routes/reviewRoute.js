@@ -7,7 +7,7 @@ const {
 } = require("../controllers/reviewController");
 const { verifyJWT } = require("../middlewares/jwtMiddleware");
 
-router.get("/:medicineId", verifyJWT, getAllReviewsController);
+router.get("/:medicineId", getAllReviewsController);
 router.get("/medicine/:medicineId", getMedicineRatingController);
 router.get("/user/:medicineId", verifyJWT, getUserReviewController);
 router.post("/add", verifyJWT, addReviewController);

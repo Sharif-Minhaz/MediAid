@@ -20,6 +20,8 @@ export const apiSlice = createApi({
 		"PendingDonation",
 		"PendingReceive",
 		"BestDonors",
+		"DonatedMedicines",
+		"ReceivedMedicines",
 	],
 	endpoints: (builder) => ({}),
 });

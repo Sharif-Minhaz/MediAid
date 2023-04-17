@@ -11,42 +11,10 @@ import {
 } from "@tabler/icons-react";
 import { useViewProfileQuery } from "../../features/profile/profileSlice";
 import { toCapitalize } from "../../utils/toCapitalize";
-
-const medicines = [
-	{
-		id: "1",
-		medicineName: "Esoral Mups",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/esoral-mups.png",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.8,
-	},
-	{
-		id: "2",
-		medicineName: "AstraZeneca",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/AstraZeneca.avif",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.3,
-	},
-	{
-		id: "3",
-		medicineName: "Brineura",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/brineura.jpeg",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.6,
-	},
-];
+import {
+	useGetDonatedMedicinesQuery,
+	useGetReceivedMedicinesQuery,
+} from "../../features/medicines/medicinesSlice";
 
 const medicine2 = [
 	{
@@ -76,6 +44,8 @@ const medicine2 = [
 const Profile = () => {
 	const navigate = useNavigate();
 	const responseInfo = useViewProfileQuery();
+	const donatedMedicinesInfo = useGetDonatedMedicinesQuery();
+	const receiverMedicinesInfo = useGetReceivedMedicinesQuery();
 	const smallScreen = useMediaQuery("(max-width: 550px)");
 	const [currentTab, setCurrentTab] = useState("About");
 
@@ -181,10 +151,16 @@ const Profile = () => {
 
 			{currentTab === "About" && <ProfileInfo profileData={responseInfo.data} />}
 			{currentTab === "Donated" && (
-				<ProfileMedicines medicines={medicines} titleText="Donated Medicines" />
+				<ProfileMedicines
+					medicines={donatedMedicinesInfo.data?.medicines}
+					titleText="Donated Medicines"
+				/>
 			)}
 			{currentTab === "Received" && (
-				<ProfileMedicines medicines={medicine2} titleText="Received Medicines" />
+				<ProfileMedicines
+					medicines={receiverMedicinesInfo.data?.medicines}
+					titleText="Received Medicines"
+				/>
 			)}
 		</>
 	);

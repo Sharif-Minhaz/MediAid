@@ -7,9 +7,11 @@ const {
 	deleteMedicineController,
 	donateMedicineController,
 	applyMedicineController,
+	getUserDonatedMedicineController,
+	getReceivedMedicineController,
 } = require("../controllers/medicinesController");
-const upload = require("../middlewares/upload");
 const { verifyJWT } = require("../middlewares/jwtMiddleware");
+const upload = require("../middlewares/upload");
 
 router.get("/", viewAllMedicinesController);
 router.get("/:medicineId", viewSingleMedicineController);
@@ -23,5 +25,8 @@ router.patch(
 	upload.single("medicineImage"),
 	updateMedicineController
 );
+
+router.get("/donated/all", verifyJWT, getUserDonatedMedicineController);
+router.get("/received/all", verifyJWT, getReceivedMedicineController);
 
 module.exports = router;
