@@ -7,8 +7,15 @@ const reviewSchema = new Schema(
 			ref: "User",
 			required: true,
 		},
+		medicine: {
+			type: Schema.Types.ObjectId,
+			ref: "Medicine",
+			required: true,
+		},
 		rating: {
 			type: Number,
+			min: 1,
+			max: 5,
 			required: true,
 		},
 		review: String,
@@ -18,6 +25,6 @@ const reviewSchema = new Schema(
 	}
 );
 
-const Review = model("review", reviewSchema);
+const Review = model("Review", reviewSchema);
 
 module.exports = Review;

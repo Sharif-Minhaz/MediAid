@@ -20,7 +20,7 @@ exports.viewAllMedicinesController = asyncHandler(async (req, res) => {
 
 	res.status(200).json({
 		msg: "medicines_not_found",
-		medicines: null,
+		medicines: [],
 	});
 });
 

@@ -11,6 +11,8 @@ export const apiSlice = createApi({
 	tagTypes: [
 		"User",
 		"Medicine",
+		"Review",
+		"Rating",
 		"Gallery",
 		"HealthTip",
 		"Profile",

@@ -19,10 +19,12 @@ import CustomIconButton from "../../theme/customComponent/CustomIconButton";
 import { truncate } from "../../utils/truncate";
 import MedicineDeleteConfirmationModal from "./MedicineDeleteConfirmationModal";
 import { useSelector } from "react-redux";
+import { useGetMedicineRatingQuery } from "../../features/medicines/reviewSlice";
 
 const MedicineExcerpt = ({ medicine }) => {
 	const navigate = useNavigate();
 	const userInfoStatus = useSelector(userInfo);
+	const medicineRatingInfo = useGetMedicineRatingQuery(medicine._id);
 	const isAdmin = Boolean(userInfoStatus?.user_type === "admin");
 
 	const [medicineId, setMedicineId] = useState("");
@@ -34,7 +36,6 @@ const MedicineExcerpt = ({ medicine }) => {
 		threshold: 0.3,
 		triggerOnce: true,
 	});
-
 
 	const handleMedicineDelete = (medicineId) => {
 		handleOpen();
@@ -51,7 +52,11 @@ const MedicineExcerpt = ({ medicine }) => {
 				}}
 			>
 				<CardActionArea
-					onClick={() => navigate(`/medicines/${medicine._id}`, { state: medicine })}
+					onClick={() =>
+						navigate(`/medicines/${medicine._id}`, {
+							state: medicine,
+						})
+					}
 				>
 					<CardMedia
 						sx={{ height: 200 }}
@@ -77,7 +82,7 @@ const MedicineExcerpt = ({ medicine }) => {
 						<Box component="div" display="flex" alignItems="center" columnGap="6px">
 							<IconStarHalfFilled style={{ color: "#5e35b1" }} size={19} />
 							<span style={{ marginBottom: "-4px", color: "#5e35b1" }}>
-								{medicine.rating || 0}
+								{medicineRatingInfo.data?.rating || "0.0"}
 							</span>
 						</Box>
 					</Stack>

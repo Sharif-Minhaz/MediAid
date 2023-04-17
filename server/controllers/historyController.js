@@ -15,7 +15,7 @@ exports.viewAllHistoryController = asyncHandler(async (req, res) => {
 
 	res.status(404).json({
 		msg: "history_not_found",
-		history: null,
+		history: [],
 	});
 });
 

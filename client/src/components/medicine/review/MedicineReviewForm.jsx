@@ -15,9 +15,11 @@ import {
 } from "@mui/material";
 import { IconSend } from "@tabler/icons-react";
 import { toast } from "react-toastify";
+import { useAddReviewMutation } from "../../../features/medicines/reviewSlice";
 
-const MedicineReviewForm = () => {
+const MedicineReviewForm = ({ medicineId }) => {
 	const theme = useTheme();
+	const [addReview, reviewInfo] = useAddReviewMutation();
 
 	const schema = yup
 		.object({
@@ -41,9 +43,20 @@ const MedicineReviewForm = () => {
 	});
 
 	const onSubmit = (data, e) => {
-		toast.success("Successfully get the data");
-		console.log(data);
-		reset();
+		addReview({ ...data, medicine: medicineId, review: data.description })
+			.unwrap()
+			.then((response) => {
+				if (response.msg === "review_added") {
+					toast.success("Thanks for your response");
+					return reset();
+				}
+				console.log(response);
+				toast.error("Something went wrong");
+			})
+			.catch((err) => {
+				console.error(err);
+				toast.error("Something went wrong");
+			});
 	};
 
 	return (
@@ -90,9 +103,16 @@ const MedicineReviewForm = () => {
 						fullWidth
 						sx={{ ...theme.customInput, mt: "13px" }}
 					>
-						<InputLabel htmlFor="description">Write about the quality and experiences...</InputLabel>
+						<InputLabel htmlFor="description">
+							Write about the quality and experiences...
+						</InputLabel>
 
-						<OutlinedInput multiline rows={6} {...register("description")} />
+						<OutlinedInput
+							disabled={reviewInfo.isLoading}
+							multiline
+							rows={6}
+							{...register("description")}
+						/>
 						{errors.description && (
 							<FormHelperText error>{errors.description?.message}</FormHelperText>
 						)}
@@ -102,6 +122,7 @@ const MedicineReviewForm = () => {
 			<Button
 				size="large"
 				disableElevation
+				disabled={reviewInfo.isLoading}
 				sx={{ color: "whitesmoke", mt: "10px", mb: "20px" }}
 				endIcon={<IconSend size={18} />}
 				variant="contained"

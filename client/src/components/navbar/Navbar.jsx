@@ -117,7 +117,7 @@ const Navbar = ({ profileInfo, handleNotificationClick, handleClick }) => {
 						<Stack direction="row" alignItems="center" gap={2}>
 							{profileInfo.isSuccess && profileInfo.data?.profile ? (
 								<>
-									{cartMedicinesInfo?.data?.applications?.length && (
+									{cartMedicinesInfo?.data?.applications?.length ? (
 										<Badge
 											badgeContent={
 												cartMedicinesInfo?.data?.applications?.length
@@ -130,7 +130,7 @@ const Navbar = ({ profileInfo, handleNotificationClick, handleClick }) => {
 												<IconShoppingBag size={22} />
 											</CustomIconButton>
 										</Badge>
-									)}
+									) : null}
 									<CustomIconButton onClick={handleNotificationClick}>
 										<NotificationsNoneIcon size={22} />
 									</CustomIconButton>

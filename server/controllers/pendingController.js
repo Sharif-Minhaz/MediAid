@@ -16,7 +16,7 @@ exports.allPendingDonationsController = asyncHandler(async (req, res) => {
 
 	res.status(200).json({
 		msg: "pending_donation_not_found",
-		pendingDonations: null,
+		pendingDonations: [],
 	});
 });
 
@@ -90,7 +90,7 @@ exports.allRecipientController = asyncHandler(async (req, res) => {
 
 	res.status(200).json({
 		msg: "pending_applications_not_found",
-		applications: null,
+		applications: [],
 	});
 });
 
@@ -110,7 +110,7 @@ exports.allAcceptedReceiverController = asyncHandler(async (req, res) => {
 
 	res.status(200).json({
 		msg: "pending_applications_not_found",
-		applications: null,
+		applications: [],
 	});
 });
 
@@ -133,7 +133,7 @@ exports.userCartItemsController = asyncHandler(async (req, res) => {
 
 	res.status(200).json({
 		msg: "pending_applications_not_found",
-		applications: null,
+		applications: [],
 	});
 });
 
@@ -141,13 +141,26 @@ exports.acceptReceiverApplicationController = asyncHandler(async (req, res) => {
 	const { medicineId } = req.params;
 	const { decoded } = req;
 
-	// TODO: keep in mind about the requested amount and the available amount.
+	const [application, getAvailableMedicine] = await Promise.all([
+		ReceiverApplication.findOne({ medicine: medicineId }),
+		Medicine.findById(medicineId).select("dosages"),
+	]);
 
-	const acceptApplication = await ReceiverApplication.findOneAndUpdate(
+	if (getAvailableMedicine.dosages < application.count) {
+		return res.status(409).json({
+			msg: "medicine_out_of_stock",
+			acceptedDonation: null,
+		});
+	}
+
+	const acceptApplication = await ReceiverApplication.updateOne(
 		{ medicine: medicineId },
 		{
-			status: "accepted",
-		}
+			$set: {
+				status: "accepted",
+			},
+		},
+		{ new: true }
 	).populate("medicine");
 
 	if (acceptApplication) {
@@ -168,8 +181,6 @@ exports.acceptReceiverApplicationController = asyncHandler(async (req, res) => {
 			acceptedDonation: acceptApplication,
 		});
 	}
-
-	console.log(acceptApplication, medicineId);
 
 	res.status(500).json({
 		msg: "application_not_accepted",

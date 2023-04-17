@@ -24,7 +24,7 @@ const DetailsMedicine = () => {
 					<MedicineBody medicine={state ? state : responseInfo?.data?.medicine} />
 				)}
 			</Paper>
-			<Review />
+			<Review medicineId={medicineId} />
 		</>
 	);
 };

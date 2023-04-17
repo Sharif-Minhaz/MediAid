@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Stack, Typography, useMediaQuery } from "@mui/material";
+import { useGetMedicineRatingQuery } from "../../features/medicines/reviewSlice";
 import { IconClipboardText, IconMinus, IconPlus, IconStarFilled } from "@tabler/icons-react";
 import { useState } from "react";
 
 const MedicineCartDetails = ({ medicine }) => {
 	const navigate = useNavigate();
 	const [count, setCount] = useState(1);
+	const medicineRatingInfo = useGetMedicineRatingQuery(medicine._id);
 
 	const smallScreenLg = useMediaQuery("(max-width: 1082px)");
 
@@ -27,8 +29,11 @@ const MedicineCartDetails = ({ medicine }) => {
 					size={16}
 					style={{ color: "#facc15", marginRight: "5px", marginBottom: "3px" }}
 				/>{" "}
-				{medicine?.rating || 0} <span style={{ marginInline: "10px" }}>|</span>
-				<span style={{ color: "#727272" }}>{142} reviews</span>
+				{medicineRatingInfo.data?.rating || "0.0"}{" "}
+				<span style={{ marginInline: "10px" }}>|</span>
+				<span style={{ color: "#727272" }}>
+					{medicineRatingInfo.data?.totalRating || 0} reviews
+				</span>
 			</Typography>
 			<Stack direction="row" gap={1.5} marginY={2.5}>
 				<Box

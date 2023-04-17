@@ -5,7 +5,8 @@ const healthTipHandler = require("./HealthTipRoute");
 const profileHandler = require("./profileRoute");
 const historyHandler = require("./historyRoute");
 const pendingHandler = require("./pendingRoute");
-const bestDonorHandler = require("./bestDonorRouter");
+const bestDonorHandler = require("./bestDonorRoute");
+const reviewHandler = require("./reviewRoute");
 
 const routes = [
 	{
@@ -39,6 +40,10 @@ const routes = [
 	{
 		path: "/api/best-donors",
 		handler: bestDonorHandler,
+	},
+	{
+		path: "/api/review",
+		handler: reviewHandler,
 	},
 ];
 

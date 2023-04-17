@@ -1,22 +1,28 @@
 import { useInView } from "react-intersection-observer";
+import { formatDistance } from "date-fns";
 import { Avatar, Box, Card, CardContent, CardHeader, Rating, Typography } from "@mui/material";
 import ReviewMenu from "./ReviewMenu";
+import { useFindProfileQuery } from "../../../features/profile/profileSlice";
 
-const PeopleReviewedCard = ({ review }) => {
+const PeopleReviewedCard = ({ review, currentUser }) => {
 	const { ref, inView } = useInView({
 		threshold: 0.2,
 		triggerOnce: true,
 	});
 
+	const userProfileInfo = useFindProfileQuery(review?.user);
+
 	return (
 		<Box sx={{ mb: 2 }} ref={ref} className={`${inView ? "fade-in visible" : "fade-in"}`}>
 			<Card elevation={0}>
 				<CardHeader
-					avatar={<Avatar src={review.avatar} />}
-					title={review.name}
-					subheader={review.date}
+					avatar={<Avatar src={userProfileInfo.data?.profile?.profilePicture} />}
+					title={userProfileInfo.data?.profile?.fullName}
+					subheader={formatDistance(new Date(review.createdAt), new Date(), {
+						addSuffix: true,
+					})}
 					sx={{ ml: -1 }}
-					action={<ReviewMenu />}
+					action={<ReviewMenu currentUser={currentUser} />}
 				/>
 				<Box sx={{ display: "flex", alignItems: "center", ml: 1 }}>
 					<Rating size="small" value={review.rating} readOnly />
