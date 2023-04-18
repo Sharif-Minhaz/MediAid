@@ -3,67 +3,12 @@ import { Box, Grid, useMediaQuery } from "@mui/material";
 import SectionTitle from "../../components/SectionTitle";
 import { useSelector } from "react-redux";
 import { drawerStatus } from "../../features/drawer/drawerSlice";
-
-const medicines = [
-	{
-		id: "1",
-		medicineName: "Esoral Mups",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/esoral-mups.png",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.8,
-	},
-	{
-		id: "2",
-		medicineName: "AstraZeneca",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/AstraZeneca.avif",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.3,
-	},
-	{
-		id: "3",
-		medicineName: "Brineura",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/brineura.jpeg",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.6,
-	},
-	{
-		id: "4",
-		medicineName: "Spinraza",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/Spinraza.jpg",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.2,
-	},
-	{
-		id: "5",
-		medicineName: "Esoral Mups",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/esoral-mups.png",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.9,
-	},
-];
+import { useGetTopRatedMedicinesQuery } from "../../features/medicines/medicinesSlice";
+import MedicineLoading from "../medicines/MedicineLoading";
 
 const RatedMedicines = () => {
 	const drawerOpen = useSelector(drawerStatus);
+	const topRatedMedicinesInfo = useGetTopRatedMedicinesQuery();
 
 	const midScreen = useMediaQuery("(min-width:900px)");
 	const smallScreen = useMediaQuery("(min-width:600px)");
@@ -79,18 +24,24 @@ const RatedMedicines = () => {
 				spacing={midScreen ? "20px" : "16px"}
 				sx={{ p: { xs: "16px", md: "20px" } }}
 			>
-				{medicines.map((medicine) => (
-					<Grid
-						key={medicine.id}
-						item
-						lg={4}
-						md={drawerOpen ? 6 : 4}
-						sm={smallScreen ? 6 : 4}
-						xs={12}
-					>
-						<MedicineExcerpt medicine={medicine} />
-					</Grid>
-				))}
+				{topRatedMedicinesInfo.isLoading ? (
+					<MedicineLoading drawerOpen={drawerOpen} smallScreen={smallScreen} />
+				) : (
+					<>
+						{topRatedMedicinesInfo.data?.topRatedMedicines?.map((medicineInfo) => (
+							<Grid
+								key={medicineInfo._id}
+								item
+								lg={4}
+								md={drawerOpen ? 6 : 4}
+								sm={smallScreen ? 6 : 4}
+								xs={12}
+							>
+								<MedicineExcerpt medicine={medicineInfo?.medicine} />
+							</Grid>
+						))}
+					</>
+				)}
 			</Grid>
 		</Box>
 	);
