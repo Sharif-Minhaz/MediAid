@@ -17,8 +17,8 @@ router.delete("/donation/reject/:medicineId", verifyJWT, rejectDonationControlle
 
 router.get("/receive", verifyJWT, allRecipientController);
 router.get("/receive/accepted", verifyJWT, allAcceptedReceiverController);
-router.patch("/receive/accept/:medicineId", verifyJWT, acceptReceiverApplicationController);
-router.delete("/receive/reject/:medicineId", verifyJWT, rejectReceiverApplicationController);
+router.patch("/receive/accept/:medicineId/:applicationId", verifyJWT, acceptReceiverApplicationController);
+router.delete("/receive/reject/:applicationId", verifyJWT, rejectReceiverApplicationController);
 
 router.get("/receive/cart", verifyJWT, userCartItemsController);
 

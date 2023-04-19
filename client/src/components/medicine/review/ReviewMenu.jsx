@@ -3,10 +3,11 @@ import { IconDotsVertical } from "@tabler/icons-react";
 import { useState } from "react";
 
 const options = ["Flag inappropriate", "Mark as spam"];
+const options2 = ["Edit", "Delete"];
 
 const ITEM_HEIGHT = 48;
 
-export default function ReviewMenu() {
+export default function ReviewMenu({ currentUser }) {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event) => {
@@ -43,7 +44,7 @@ export default function ReviewMenu() {
 					},
 				}}
 			>
-				{options.map((option) => (
+				{(currentUser ? options2 : options).map((option) => (
 					<MenuItem key={option} onClick={handleClose}>
 						{option}
 					</MenuItem>

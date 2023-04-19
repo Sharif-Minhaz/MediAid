@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Medicine = require("../models/MedicineModel");
+const Review = require("../models/ReviewModel");
 const ReceiverApplication = require("../models/ReceiverApplicationModel");
 const cloudinary = require("../utils/cloudinaryHandler");
 const { defaultMedicineImage } = require("../constants/imagesConst");
@@ -20,7 +21,7 @@ exports.viewAllMedicinesController = asyncHandler(async (req, res) => {
 
 	res.status(200).json({
 		msg: "medicines_not_found",
-		medicines: null,
+		medicines: [],
 	});
 });
 
@@ -201,5 +202,90 @@ exports.applyMedicineController = asyncHandler(async (req, res) => {
 	res.status(500).json({
 		msg: "apply_not_successful",
 		applyMedicine: null,
+	});
+});
+
+// donated and receiver medicine
+exports.getUserDonatedMedicineController = asyncHandler(async (req, res) => {
+	const { decoded } = req;
+
+	const medicines = await Medicine.find({ donorAccount: decoded.id });
+
+	if (medicines.length) {
+		return res.status(200).json({
+			msg: "donated_medicine_found",
+			medicines,
+		});
+	}
+
+	res.status(404).json({
+		msg: "donated_medicine_not_found",
+		medicines: null,
+	});
+});
+
+exports.getReceivedMedicineController = asyncHandler(async (req, res) => {
+	const { decoded } = req;
+
+	const receiverApplications = await ReceiverApplication.find({
+		user: decoded.id,
+		status: "accepted",
+	}).populate("medicine");
+
+	const medicineIds = receiverApplications.map((app) => app.medicine._id);
+
+	const medicines = await Medicine.find({ _id: { $in: medicineIds } });
+
+	if (medicines.length) {
+		return res.status(200).json({
+			msg: "received_medicine_found",
+			medicines,
+		});
+	}
+
+	res.status(404).json({
+		msg: "received_medicine_not_found",
+		medicines: [],
+	});
+});
+
+exports.getTopRatedMedicinesController = asyncHandler(async (req, res) => {
+	const { limit } = req.params;
+
+	const topRatedMedicines = await Review.aggregate([
+		{
+			$group: {
+				_id: "$medicine",
+				avgRating: { $avg: "$rating" },
+			},
+		},
+		{
+			$sort: {
+				avgRating: -1,
+			},
+		},
+		{
+			$lookup: {
+				from: "medicines",
+				localField: "_id",
+				foreignField: "_id",
+				as: "medicine",
+			},
+		},
+		{
+			$unwind: "$medicine",
+		},
+	]).limit(Number(limit));
+
+	if (topRatedMedicines.length) {
+		return res.status(200).json({
+			msg: "medicines_found",
+			topRatedMedicines,
+		});
+	}
+
+	res.status(404).json({
+		msg: "medicines_not_found",
+		topRatedMedicines: [],
 	});
 });

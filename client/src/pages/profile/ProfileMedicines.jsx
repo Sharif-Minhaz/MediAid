@@ -1,4 +1,4 @@
-import { Grid, Paper, useMediaQuery } from "@mui/material";
+import { Grid, Paper, Typography, useMediaQuery } from "@mui/material";
 import MedicineExcerpt from "../../components/medicine/MedicineExcerpt";
 import SectionTitle from "../../components/SectionTitle";
 import { useSelector } from "react-redux";
@@ -18,9 +18,16 @@ const ProfileMedicines = ({ medicines, titleText }) => {
 				spacing={midScreen ? "20px" : "16px"}
 				sx={{ p: { xs: "16px", md: "20px" }, pt: 0 }}
 			>
-				{medicines.map((medicine) => (
+				{!medicines.length && (
+					<Grid xs={12}>
+						<Typography sx={{ fontStyle: "italic", textAlign: "center" }} p={2} pt={4}>
+							The user didn't do anything yet
+						</Typography>
+					</Grid>
+				)}
+				{medicines?.map((medicine) => (
 					<Grid
-						key={medicine.id}
+						key={medicine._id}
 						item
 						lg={4}
 						md={drawerOpen ? 6 : 4}

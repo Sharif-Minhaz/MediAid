@@ -11,10 +11,12 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import SelectYear from "./SelectYear";
+import { useEffect, useState } from "react";
+import { useGetDashboardBarDataQuery } from "../../features/dashboard/dashboardSlice";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export const options = {
+const options = {
 	maintainAspectRatio: true,
 	responsive: true,
 	devicePixelRatio: 2,
@@ -27,12 +29,12 @@ export const options = {
 
 const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-export const data = {
+const initialData = {
 	labels,
 	datasets: [
 		{
-			label: "Donated Dosages",
-			data: labels.map(() => Math.ceil(Math.random() * 100)),
+			label: "Donation Requests",
+			data: [],
 			backgroundColor: [
 				"rgba(255, 99, 132, 0.2)",
 				"rgba(255, 159, 64, 0.2)",
@@ -57,6 +59,28 @@ export const data = {
 };
 
 const DonationBarChart = () => {
+	const [data, setData] = useState(initialData);
+	const [key, setKey] = useState(0);
+	const [year, setYear] = useState(2023);
+	const barChartInfo = useGetDashboardBarDataQuery(year);
+
+	const handleChange = (event) => {
+		setYear(event.target.value);
+	};
+
+	useEffect(() => {
+		if (barChartInfo.isSuccess) {
+			setData((prev) => {
+				prev.datasets[0].data = labels?.map(
+					(_, index) => Object.values(barChartInfo.data)[index]
+				);
+
+				return prev;
+			});
+		}
+		setKey((prev) => prev + 1);
+	}, [barChartInfo]);
+
 	return (
 		<Card
 			sx={{
@@ -70,7 +94,7 @@ const DonationBarChart = () => {
 					sx={{ background: "rgb(243 242 248)" }}
 					label="Donation History"
 				/>
-				<SelectYear />
+				<SelectYear year={year} handleChange={handleChange} />
 			</Stack>
 			<Box
 				sx={{
@@ -81,7 +105,11 @@ const DonationBarChart = () => {
 					mt: { xs: "12px", sm: "auto" },
 				}}
 			>
-				<Bar options={options} data={data} />
+				{barChartInfo.isLoading ? (
+					"Loading..."
+				) : (
+					<Bar key={key} options={options} data={data} />
+				)}
 			</Box>
 		</Card>
 	);

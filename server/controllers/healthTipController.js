@@ -12,7 +12,7 @@ exports.viewHealthTipsController = asyncHandler(async (req, res) => {
 
 	res.status(200).json({
 		msg: "health_tips_not_found",
-		healthTips: null,
+		healthTips: [],
 	});
 });
 

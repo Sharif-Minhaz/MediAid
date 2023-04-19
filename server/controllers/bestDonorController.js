@@ -35,6 +35,6 @@ exports.viewBestController = asyncHandler(async (req, res) => {
 
 	res.status(200).json({
 		msg: "donation_states_not_found",
-		donors: null,
+		donors: [],
 	});
 });

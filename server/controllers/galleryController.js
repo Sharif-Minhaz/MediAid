@@ -13,7 +13,7 @@ exports.viewGalleryImagesController = asyncHandler(async (req, res) => {
 
 	res.status(200).json({
 		msg: "gallery_img_not_found",
-		galleryImage: null,
+		galleryImage: [],
 	});
 });
 

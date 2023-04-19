@@ -10,7 +10,10 @@ export const apiSlice = createApi({
 	}),
 	tagTypes: [
 		"User",
+		"Dashboard",
 		"Medicine",
+		"Review",
+		"Rating",
 		"Gallery",
 		"HealthTip",
 		"Profile",
@@ -18,6 +21,8 @@ export const apiSlice = createApi({
 		"PendingDonation",
 		"PendingReceive",
 		"BestDonors",
+		"DonatedMedicines",
+		"ReceivedMedicines",
 	],
 	endpoints: (builder) => ({}),
 });

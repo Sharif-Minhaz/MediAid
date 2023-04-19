@@ -77,7 +77,10 @@ const SearchBar = ({
 					onKeyDown={handleSearch}
 					name="searchText"
 					freeSolo={true}
-					options={medicineInfo.data?.medicines?.map((option) => option.medicineName)}
+					options={
+						medicineInfo.data?.medicines?.map((option) => option.medicineName) ||
+						["Loading..."]
+					}
 					renderInput={(params) => (
 						<TextField
 							className="search-body"

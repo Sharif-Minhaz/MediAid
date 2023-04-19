@@ -1,28 +1,19 @@
 import { Grid, useMediaQuery } from "@mui/material";
 import InfoCard from "./InfoCard";
 import { IconUsers, IconHeartHandshake, IconClipboardHeart } from "@tabler/icons-react";
+import { useGetDashboardCardDataQuery } from "../../features/dashboard/dashboardSlice";
+import { useEffect, useState } from "react";
 
-const data = [
+const structures = [
+	{ title: "Total User", bg: "bg-gradient-warn", des: "All registered users", icon: IconUsers },
 	{
-		id: 1,
-		title: "Total User",
-		count: 223,
-		bg: "bg-gradient-warn",
-		des: "All registered users",
-		icon: IconUsers,
-	},
-	{
-		id: 2,
 		title: "Donation Request",
-		count: 121,
 		bg: "bg-gradient-info",
 		des: "User's donation request",
 		icon: IconHeartHandshake,
 	},
 	{
-		id: 3,
 		title: "Receive Request",
-		count: 79,
 		bg: "bg-gradient-success",
 		des: "User's receiver request",
 		icon: IconClipboardHeart,
@@ -31,6 +22,20 @@ const data = [
 
 const CardBase = () => {
 	const midScreen = useMediaQuery("(min-width:900px)");
+	const cardsInfo = useGetDashboardCardDataQuery();
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		if (cardsInfo.isSuccess) {
+			setData(
+				structures.map((structure, i) => {
+					structure.count = Object.values(cardsInfo.data)[i];
+
+					return structure;
+				})
+			);
+		}
+	}, [cardsInfo]);
 
 	return (
 		<Grid
@@ -39,7 +44,7 @@ const CardBase = () => {
 			sx={{ p: { xs: "16px", sm: "20px" } }}
 		>
 			{data.map((data, index) => (
-				<Grid key={data.id} item xs={12} md={6} lg={4}>
+				<Grid key={index} item xs={12} md={6} lg={4}>
 					<InfoCard index={index} data={data} />
 				</Grid>
 			))}
