@@ -7,11 +7,16 @@ const historyHandler = require("./historyRoute");
 const pendingHandler = require("./pendingRoute");
 const bestDonorHandler = require("./bestDonorRoute");
 const reviewHandler = require("./reviewRoute");
+const dashboardHandler = require("./dashboardRoute");
 
 const routes = [
 	{
 		path: "/api/auth",
 		handler: authHandler,
+	},
+	{
+		path: "/api/dashboard",
+		handler: dashboardHandler,
 	},
 	{
 		path: "/api/medicines",

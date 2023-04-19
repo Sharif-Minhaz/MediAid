@@ -12,7 +12,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 				url: `/pending/donation/accept/${medicineId}`,
 				method: "PATCH",
 			}),
-			invalidatesTags: ["PendingDonation", "Medicine", "DonatedMedicines"],
+			invalidatesTags: ["PendingDonation", "Medicine", "DonatedMedicines", "Dashboard"],
 		}),
 
 		pendingDonationReject: builder.mutation({
@@ -43,7 +43,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 				url: `/pending/receive/accept/${medicineId}/${applicationId}`,
 				method: "PATCH",
 			}),
-			invalidatesTags: ["PendingReceive", "ReceivedMedicines"],
+			invalidatesTags: ["PendingReceive", "ReceivedMedicines", "Dashboard"],
 		}),
 
 		pendingApplyReject: builder.mutation({

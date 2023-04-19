@@ -1,6 +1,8 @@
 import { Card } from "@mui/material";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { useGetDashboardChartDataQuery } from "../../features/dashboard/dashboardSlice";
+import { useEffect, useState } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -10,12 +12,12 @@ const options = {
 	devicePixelRatio: 2,
 };
 
-export const data = {
-	labels: ["Total", "Donated", "Received"],
+const initialData = {
+	labels: ["Total", "Donation", "Donation received"],
 	datasets: [
 		{
 			label: "Number of dosages",
-			data: [134, 36, 89],
+			data: [],
 			backgroundColor: [
 				"rgba(255, 99, 132, 0.2)",
 				"rgba(255, 206, 86, 0.2)",
@@ -32,6 +34,24 @@ export const data = {
 };
 
 const MedicinesPieChart = () => {
+	const chartInfo = useGetDashboardChartDataQuery();
+	const [data, setData] = useState(initialData);
+	const [key, setKey] = useState(0);
+
+	useEffect(() => {
+		if (chartInfo.isSuccess) {
+			setData((prev) => {
+				prev.datasets[0].data = [
+					chartInfo.data?.total,
+					chartInfo.data?.donation,
+					chartInfo.data?.donationReceived,
+				];
+				return prev;
+			});
+			setKey((prev) => prev + 1);
+		}
+	}, [chartInfo]);
+
 	return (
 		<Card
 			sx={{
@@ -40,7 +60,7 @@ const MedicinesPieChart = () => {
 				py: 2.5,
 			}}
 		>
-			<Pie data={data} options={options} />
+			{chartInfo.isLoading ? "Loading..." : <Pie key={key} data={data} options={options} />}
 		</Card>
 	);
 };

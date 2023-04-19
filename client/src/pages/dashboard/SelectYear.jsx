@@ -1,13 +1,8 @@
 import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
-import { useState } from "react";
 
-export default function SelectYear() {
-	const [year, setYear] = useState(2023);
+const years = [2023, 2024, 2025];
 
-	const handleChange = (event) => {
-		setYear(event.target.value);
-	};
-
+export default function SelectYear({ year, handleChange }) {
 	return (
 		<FormControl sx={{ minWidth: 100, height: "40px" }} size="small">
 			<InputLabel id="demo-select-small">Year</InputLabel>
@@ -18,9 +13,11 @@ export default function SelectYear() {
 				label="Year"
 				onChange={handleChange}
 			>
-				<MenuItem value={2021}>2021</MenuItem>
-				<MenuItem value={2022}>2022</MenuItem>
-				<MenuItem value={2023}>2023</MenuItem>
+				{years.map((year) => (
+					<MenuItem key={year} value={year}>
+						{year}
+					</MenuItem>
+				))}
 			</Select>
 		</FormControl>
 	);
