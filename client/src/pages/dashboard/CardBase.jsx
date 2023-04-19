@@ -5,17 +5,17 @@ import { useGetDashboardCardDataQuery } from "../../features/dashboard/dashboard
 import { useEffect, useState } from "react";
 
 const structures = [
-	{ title: "Total User", bg: "bg-gradient-warn", des: "All registered users", icon: IconUsers },
+	{ title: "Total Users", bg: "bg-gradient-warn", des: "All registered users", icon: IconUsers },
 	{
-		title: "Donation Request",
+		title: "Donated by User",
 		bg: "bg-gradient-info",
-		des: "User's donation request",
+		des: "Donated medicine category",
 		icon: IconHeartHandshake,
 	},
 	{
-		title: "Receive Request",
+		title: "Donation Application",
 		bg: "bg-gradient-success",
-		des: "User's receiver request",
+		des: "User's donation request",
 		icon: IconClipboardHeart,
 	},
 ];
