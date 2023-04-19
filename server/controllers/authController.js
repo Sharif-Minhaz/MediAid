@@ -56,7 +56,6 @@ exports.loginController = asyncHandler(async (req, res) => {
 				// domain: ".onrender.com",
 			});
 
-
 			return res.status(200).json({
 				msg: "login_successful",
 				user: user,
@@ -78,14 +77,42 @@ exports.loginController = asyncHandler(async (req, res) => {
 	});
 });
 
-exports.logoutController = asyncHandler((req, res) => {
-	res.clearCookie("auth");
-	res.clearCookie("uinfo");
+exports.logoutController = (req, res) => {
+	// Clear the uinfo cookie with the correct domain
+	res.clearCookie("uinfo", {
+		domain:
+			process.env.NODE_ENV === "production"
+				? "mediaid-online-platform.netlify.app"
+				: "localhost",
+	});
 
+	// Clear the auth cookie with the correct domain and flags
+	res.clearCookie("auth", {
+		domain: process.env.NODE_ENV === "production" ? "mediaid.onrender.com" : "localhost",
+		httpOnly: Boolean(process.env.NODE_ENV === "production"),
+		secure: Boolean(process.env.NODE_ENV === "production"),
+	});
+
+	// Check if the cookies were cleared successfully
+	if (process.env.NODE_ENV === "production") {
+		if (req.cookies?.auth || req.cookies?.uinfo) {
+			return res.status(500).json({
+				msg: "logout_not_successful",
+			});
+		}
+	} else {
+		if (res.cookies?.auth || res.cookies?.uinfo) {
+			return res.status(500).json({
+				msg: "logout_not_successful",
+			});
+		}
+	}
+
+	// Return a success message if the cookies were cleared successfully
 	res.status(200).json({
 		msg: "logout_successful",
 	});
-});
+};
 
 exports.resetPasswordController = asyncHandler(async (req, res) => {
 	const { prevPassword, newPassword } = req.body;
