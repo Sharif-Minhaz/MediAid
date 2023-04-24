@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { set } from "../../features/auth/userInfoSlice";
 import { toCapitalize } from "../../utils/toCapitalize";
+import Cookies from "js-cookie";
 
 const ProfileMenu = ({ profileInfo, anchorEl, open, handleClose }) => {
 	const navigate = useNavigate();
@@ -17,6 +18,7 @@ const ProfileMenu = ({ profileInfo, anchorEl, open, handleClose }) => {
 			.unwrap()
 			.then((response) => {
 				if (response.msg === "logout_successful") {
+					Cookies.remove("uinfo");
 					toast.success("Logout successful");
 					dispatch(set());
 					navigate("/", { replace: true });

@@ -53,7 +53,6 @@ exports.loginController = asyncHandler(async (req, res) => {
 				secure: process.env.NODE_ENV === "production" ? true : false,
 				httpOnly: process.env.NODE_ENV === "production" ? true : false,
 				sameSite: process.env.NODE_ENV === "production" ? "none" : false,
-				// domain: ".onrender.com",
 			});
 
 			return res.status(200).json({
@@ -78,35 +77,14 @@ exports.loginController = asyncHandler(async (req, res) => {
 });
 
 exports.logoutController = (req, res) => {
-	// Clear the uinfo cookie with the correct domain
-	res.clearCookie("uinfo", {
-		domain:
-			process.env.NODE_ENV === "production"
-				? "mediaid-online-platform.netlify.app"
-				: "localhost",
+	res.set("Access-Control-Expose-Headers", "Set-Cookie");
+	
+	res.cookie("auth", "", {
+		maxAge: -1,
+		secure: process.env.NODE_ENV === "production" ? true : false,
+		httpOnly: process.env.NODE_ENV === "production" ? true : false,
+		sameSite: process.env.NODE_ENV === "production" ? "none" : false,
 	});
-
-	// Clear the auth cookie with the correct domain and flags
-	res.clearCookie("auth", {
-		domain: process.env.NODE_ENV === "production" ? "mediaid.onrender.com" : "localhost",
-		httpOnly: Boolean(process.env.NODE_ENV === "production"),
-		secure: Boolean(process.env.NODE_ENV === "production"),
-	});
-
-	// Check if the cookies were cleared successfully
-	if (process.env.NODE_ENV === "production") {
-		if (req.cookies?.auth || req.cookies?.uinfo) {
-			return res.status(500).json({
-				msg: "logout_not_successful",
-			});
-		}
-	} else {
-		if (res.cookies?.auth || res.cookies?.uinfo) {
-			return res.status(500).json({
-				msg: "logout_not_successful",
-			});
-		}
-	}
 
 	// Return a success message if the cookies were cleared successfully
 	res.status(200).json({
