@@ -16,31 +16,6 @@ import {
 	useGetReceivedMedicinesQuery,
 } from "../../features/medicines/medicinesSlice";
 
-const medicine2 = [
-	{
-		id: "4",
-		medicineName: "Spinraza",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/Spinraza.jpg",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.2,
-	},
-	{
-		id: "5",
-		medicineName: "Esoral Mups",
-		medicineDescription:
-			"Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
-		medicineImage: "/images/esoral-mups.png",
-		donorName: "Sharif Md. Minhaz",
-		donorContact: "01309832862",
-		companyName: "Square",
-		rating: 4.9,
-	},
-];
-
 const Profile = () => {
 	const navigate = useNavigate();
 	const responseInfo = useViewProfileQuery();
