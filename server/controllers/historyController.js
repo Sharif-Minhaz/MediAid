@@ -22,6 +22,7 @@ exports.viewAllHistoryController = asyncHandler(async (req, res) => {
 exports.addHistoryController = asyncHandler(async (req, res) => {
 	const { decoded, historyInfo } = req;
 
+	// add new history
 	const newHistory = await new History({
 		user: decoded.id,
 		medicineName: historyInfo.medicineName,
