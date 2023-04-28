@@ -3,16 +3,14 @@ const express = require("express");
 const app = express();
 const connectDB = require("./db/connectDB");
 const { errorHandler } = require("./middlewares/errorHandler");
-
 const setMiddlewares = require("./middlewares/middlewares");
 const setRoutes = require("./routes/routes");
 
-app.enable("trust proxy");
-
-//set middlewares and routes
+// set middlewares and routes
 setMiddlewares(app);
 setRoutes(app);
 
+// using custom global error handler
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 8080;

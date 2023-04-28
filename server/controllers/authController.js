@@ -20,7 +20,10 @@ exports.registerController = asyncHandler(async (req, res) => {
 	const addNewUser = await new User({ ...body, password: hashedPassword }).save();
 
 	if (addNewUser) {
+		// bind the profile info to the request object
 		req.profileInfo = addNewUser;
+
+		// create a default user profile with basic info
 		createProfileController(req, res);
 
 		return res.status(201).json({
@@ -42,12 +45,15 @@ exports.loginController = asyncHandler(async (req, res) => {
 
 	if (user) {
 		const isMatched = await bcrypt.compare(password, user.password);
+
+		// removed password field from user  object
 		user.password = undefined;
 
 		if (isMatched) {
+			// generate json web token
 			const token = generateToken(user);
 
-			res.set("Access-Control-Expose-Headers", "Set-Cookie");
+			// res.set("Access-Control-Expose-Headers", "Set-Cookie");
 			res.cookie("auth", token, {
 				maxAge: 6 * 60 * 60 * 1000,
 				secure: process.env.NODE_ENV === "production" ? true : false,
@@ -77,8 +83,8 @@ exports.loginController = asyncHandler(async (req, res) => {
 });
 
 exports.logoutController = (req, res) => {
-	res.set("Access-Control-Expose-Headers", "Set-Cookie");
-	
+	// res.set("Access-Control-Expose-Headers", "Set-Cookie");
+
 	res.cookie("auth", "", {
 		maxAge: -1,
 		secure: process.env.NODE_ENV === "production" ? true : false,
