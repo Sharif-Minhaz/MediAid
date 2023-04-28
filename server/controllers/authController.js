@@ -53,9 +53,9 @@ exports.loginController = asyncHandler(async (req, res) => {
 			// generate json web token
 			const token = generateToken(user);
 
-			// res.set("Access-Control-Expose-Headers", "Set-Cookie");
+			// set httpOnly auth cookie to browser
 			res.cookie("auth", token, {
-				maxAge: 6 * 60 * 60 * 1000,
+				maxAge: 6 * 60 * 60 * 1000, // 6 hour
 				secure: process.env.NODE_ENV === "production" ? true : false,
 				httpOnly: process.env.NODE_ENV === "production" ? true : false,
 				sameSite: process.env.NODE_ENV === "production" ? "none" : false,
@@ -83,8 +83,7 @@ exports.loginController = asyncHandler(async (req, res) => {
 });
 
 exports.logoutController = (req, res) => {
-	// res.set("Access-Control-Expose-Headers", "Set-Cookie");
-
+	// expires the auth cookies instantly to logout
 	res.cookie("auth", "", {
 		maxAge: -1,
 		secure: process.env.NODE_ENV === "production" ? true : false,
@@ -92,7 +91,6 @@ exports.logoutController = (req, res) => {
 		sameSite: process.env.NODE_ENV === "production" ? "none" : false,
 	});
 
-	// Return a success message if the cookies were cleared successfully
 	res.status(200).json({
 		msg: "logout_successful",
 	});
@@ -105,22 +103,31 @@ exports.resetPasswordController = asyncHandler(async (req, res) => {
 	if (prevPassword === newPassword) return res.status(200).json({ msg: "same_pass" });
 
 	const user = await User.findById(id).select("+password");
-
+	
 	let isMatch;
 	if (user) {
 		isMatch = await bcrypt.compare(prevPassword, user.password);
 	} else {
-		return res.status(404).json({
+		return res.status(401).json({
 			msg: "pass_not_reset",
 		});
 	}
 
 	if (isMatch) {
 		const encryptedPass = await bcrypt.hash(newPassword, 12);
+
 		user.password = encryptedPass;
-		await user.save();
-		res.clearCookie("auth");
-		res.clearCookie("uinfo");
+
+		await user.save(); // update the password with the new one
+
+		// expires the auth cookies instantly to logout
+		res.cookie("auth", "", {
+			maxAge: -1,
+			secure: process.env.NODE_ENV === "production" ? true : false,
+			httpOnly: process.env.NODE_ENV === "production" ? true : false,
+			sameSite: process.env.NODE_ENV === "production" ? "none" : false,
+		});
+
 		return res.status(201).json({
 			msg: "pass_reset",
 		});

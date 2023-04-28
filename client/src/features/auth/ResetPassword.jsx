@@ -24,6 +24,7 @@ import { useResetPasswordMutation } from "./authSlice";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { set } from "../auth/userInfoSlice";
+import Cookies from "js-cookie";
 
 const ResetPassword = () => {
 	const theme = useTheme();
@@ -57,6 +58,7 @@ const ResetPassword = () => {
 			.then((response) => {
 				if (response.msg === "pass_reset") {
 					toast.success("Password reset completed");
+					Cookies.remove("uinfo");
 					dispatch(set());
 					return navigate("/login", { replace: true });
 				} else if (response.msg === "same_pass") {
@@ -65,6 +67,7 @@ const ResetPassword = () => {
 				setServerSideError("Wrong credential");
 			})
 			.catch((err) => {
+				console.log(err);
 				toast.error("Something went wrong!");
 				setServerSideError("Wrong credential");
 			})
