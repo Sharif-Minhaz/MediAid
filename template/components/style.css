@@ -6,6 +6,10 @@
 body {
     font-family: "roboto", Arial, Helvetica, sans-serif;
 }
+a {
+    text-decoration: none;
+    color: black;
+}
 h1 {
     color: black;
 }
@@ -103,16 +107,25 @@ h1 {
 }
 /*///////////////////////////////////////////////*/
 .cards {
-    background-color: aqua;
-    width: 100%;
+    /* width: 100%; */
+    flex-basis: calc(100% / 3);
     height: auto;
     padding: 20px;
+    
 }
+.cards .product_card {
+    transition: 0.4s;
+}
+.cards .product_card:hover {
+    transform: translateY(-20px);
+}
+
 .product_card {
     height: 100%;
     width: 350px;
     background-color: white;
     border-radius: 15px;
+    border: 2px solid black;
 }
 .pic {
     padding-left: 25px;
@@ -201,6 +214,8 @@ h1 {
     top: 205px;
     left: 48px;
     transition: 0.5s;
+    border-radius: 5%;
+    border: 5px solid blue;
 }
 .profile:hover {
     transform: translateY(-20px);
@@ -262,30 +277,19 @@ h1 {
     transform: scale(1.5);
 }
 .recent_donate {
-    /* background-color: aquamarine; */
-    width: 100%;
+    background-color: rgb(204, 201, 209);
+    /* width: 100%; */
     height: auto;
-    padding: 10px;
+    /* padding: 10px; */
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
+    width: 100%;
 }
-.recent_donate .card {
-    /* height: 400px; */
-    width: 400px;
-    /* background-color: rgb(219, 13, 13); */
-    background-color: white;
-    border-radius: 15px;
-    background-image: url("../images/image.jpg");
-    margin: 10px;
-    transition: 0.4s;
-}
-.recent_donate .card:hover {
-    transform: translateY(-20px);
-}
+
 #design_for_h1 {
     margin-top: 10px;
     padding: 10px;
     text-align: center;
-    background-color: rgb(100, 61, 173);
+    background-color: aqua;
 }
