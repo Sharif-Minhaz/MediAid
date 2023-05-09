@@ -3,7 +3,9 @@ export const componentsTheme = () => {
 		MuiButton: {
 			styleOverrides: {
 				root: {
-					lineHeight: 0,
+					"&:active": {
+						transform: "scale(0.95)",
+					},
 				},
 			},
 		},
@@ -24,6 +26,15 @@ export const componentsTheme = () => {
 			styleOverrides: {
 				root: {
 					borderRadius: "12px",
+				},
+			},
+		},
+		MuiFormHelperText: {
+			styleOverrides: {
+				root: {
+					marginTop: "8px",
+					marginBottom: "0px",
+					fontSize: "14px",
 				},
 			},
 		},

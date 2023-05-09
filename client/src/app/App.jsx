@@ -1,18 +1,15 @@
 import { ThemeProvider } from "@mui/material";
 import theme from "../theme/theme";
-import Login from "../features/auth/Login";
 import "./App.css";
-import Register from "../features/auth/Register";
-import ResetPassword from "../features/auth/ResetPassword"
-import Navbar from "../components/navbar/Navbar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Routers from "../Routers/Routers";
 
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			{/* <Login /> */}
-			{/* <Register /> */}
-			{/* <ResetPassword /> */}
-			<Navbar />
+			<Routers />
+			<ToastContainer position="bottom-right" autoClose={4000} />
 		</ThemeProvider>
 	);
 }

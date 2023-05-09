@@ -1,0 +1,172 @@
+[
+	{
+		"id": "1",
+		"medicineName": "Esoral Mups",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/esoral-mups.png",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.8
+	},
+	{
+		"id": "2",
+		"medicineName": "AstraZeneca",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/AstraZeneca.avif",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.3
+	},
+	{
+		"id": "3",
+		"medicineName": "Brineura",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/brineura.jpeg",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.6
+	},
+	{
+		"id": "4",
+		"medicineName": "Spinraza",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/Spinraza.jpg",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.2
+	},
+	{
+		"id": "5",
+		"medicineName": "Esoral Mups - 2",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/esoral-mups.png",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.9
+	},
+	{
+		"id": "6",
+		"medicineName": "Brineura - 2",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/brineura.jpeg",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.6
+	},
+	{
+		"id": "7",
+		"medicineName": "Spinraza - 3",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/Spinraza.jpg",
+		"donorName": "Asiful Haque",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.2
+	},
+	{
+		"id": "8",
+		"medicineName": "Brineura - 3",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/brineura.jpeg",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.6
+	},
+	{
+		"id": "9",
+		"medicineName": "Brineura - 4",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/brineura.jpeg",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.6
+	},
+	{
+		"id": "10",
+		"medicineName": "Spinraza - 4",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/Spinraza.jpg",
+		"donorName": "Asiful Haque",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.2
+	},
+	{
+		"id": "11",
+		"medicineName": "Esoral Mups - 3",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/esoral-mups.png",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.9
+	},
+	{
+		"id": "12",
+		"medicineName": "Brineura - 5",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/brineura.jpeg",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.6
+	},
+	{
+		"id": "13",
+		"medicineName": "Spinraza - 5",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/Spinraza.jpg",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.2
+	},
+	{
+		"id": "14",
+		"medicineName": "Esoral Mups - 4",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/esoral-mups.png",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.9
+	},
+	{
+		"id": "15",
+		"medicineName": "Brineura - 6",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/brineura.jpeg",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.6
+	},
+	{
+		"id": "16",
+		"medicineName": "Spinraza - 6",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/Spinraza.jpg",
+		"donorName": "Asiful Haque",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.2
+	},
+	{
+		"id": "17",
+		"medicineName": "Brineura - 7",
+		"medicineDescription": "Esomeprazole is a proton pump inhibitor that suppresses gastric acid secretion by specific inhibition of the H+/K+ ATPa",
+		"medicineImage": "/images/brineura.jpeg",
+		"donorName": "Sharif Md. Minhaz",
+		"donorContact": "01309832862",
+		"companyName": "Square",
+		"rating": 4.6
+	}
+]

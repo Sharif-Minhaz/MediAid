@@ -14,7 +14,10 @@ export const customTheme = () => {
 		},
 		"& > div > input": {
 			padding: "27.5px 14px 11.5px !important",
-            marginTop: "-4px"
+			marginTop: "-4px",
+		},
+		"& > div > textarea": {
+			paddingTop: "8px",
 		},
 		"& legend": {
 			display: "none",

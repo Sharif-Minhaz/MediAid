@@ -1,0 +1,262 @@
+.container {
+    padding: 25px 20px 20px;
+    margin-inline: auto;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.container .leader {
+    display: flex;
+}
+
+.container .crown {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.container .crown svg {
+    width: 3rem;
+}
+
+.container .image {
+    height: 58px;
+    object-fit: cover;
+    width: 58px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.container .topLeadersList {
+    display: flex;
+    position: relative;
+    min-height: 120px;
+    padding-top: 3rem;
+}
+
+.container .topLeadersList .image {
+    border-radius: 50%;
+    border: 4px solid #cb8fff;
+}
+
+.container .topLeadersList .leader:nth-child(1) {
+    color: black;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+}
+
+.container .topLeadersList .leader:nth-child(1):after {
+    content: '1';
+    width: 30px;
+    height: 30px;
+    background: #ffc500;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 700;
+    box-shadow: 1px 1px 4px black;
+}
+
+.container .topLeadersList .leader:nth-child(1) .image {
+    width: 130px;
+    height: 130px;
+}
+
+.container .topLeadersList .leader:nth-child(1) .crown {
+    top: -20%;
+}
+
+.container .topLeadersList .leader:nth-child(1) .crown svg {
+    fill: #ffc500;
+}
+
+.container .topLeadersList .leader:nth-child(2) {
+    color: black;
+    position: absolute;
+    left: 15%;
+    transform: translateX(-15%);
+    bottom: -20%;
+}
+
+.container .topLeadersList .leader:nth-child(2):after {
+    content: '2';
+    width: 30px;
+    height: 30px;
+    background: #d4d4d4;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 700;
+    box-shadow: 1px 1px 4px black;
+}
+
+.container .topLeadersList .leader:nth-child(2) .image {
+    width: 110px;
+    height: 110px;
+}
+
+.container .topLeadersList .leader:nth-child(2) .crown {
+    top: -25%;
+}
+
+.container .topLeadersList .leader:nth-child(2) .crown svg {
+    fill: #d4d4d4;
+}
+
+.container .topLeadersList .leader:nth-child(3) {
+    color: black;
+    position: absolute;
+    left: 85%;
+    transform: translateX(-85%);
+    bottom: -20%;
+}
+
+.container .topLeadersList .leader:nth-child(3):after {
+    content: '3';
+    width: 30px;
+    height: 30px;
+    background: #ab6528;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 700;
+    box-shadow: 1px 1px 4px black;
+}
+
+.container .topLeadersList .leader:nth-child(3) .image {
+    width: 110px;
+    height: 110px;
+}
+
+.container .topLeadersList .leader:nth-child(3) .crown {
+    top: -25%;
+}
+
+.container .topLeadersList .leader:nth-child(3) .crown svg {
+    fill: #ab6528;
+}
+
+.container .leaderName {
+    position: absolute;
+    text-align: center;
+    color: rgb(66, 66, 66);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px;
+    white-space: nowrap;
+}
+
+.container .player {
+    background-color: #f7f7f7;
+    display: grid;
+    grid-template-columns: 0.4fr 0.5fr 1fr 2fr;
+    align-items: center;
+    min-height: 42px;
+    text-align: center;
+    padding-block: 8px;
+    padding-right: 0.4rem;
+}
+
+.container .table {
+    display: grid;
+    font-size: 14px;
+    grid-template-columns: 0.4fr 0.5fr 1fr 2fr;
+    text-align: center;
+    font-weight: 500;
+    padding-block: 8px;
+    border: 1px solid #e3e3e3;
+    border-radius: 12px 12px 0px 0px;
+}
+
+.container .table div:nth-child(2) {
+    text-align: left;
+    margin-left: 5px;
+}
+
+.container .playerslist {
+    margin-top: 8rem;
+    font-size: 16px;
+    overflow: hidden;
+    color: rgb(0, 0, 0);
+}
+
+.container .playerslist .player:nth-child(odd) {
+    background-color: #898fd5;
+    color: rgb(246, 246, 246);
+    align-items: center;
+}
+
+.container .playerslist .player:last-child {
+    border-radius: 0px 0px 12px 12px;
+}
+
+.container .list {
+    border-radius: 0px 0px 12px 12px;
+    border: 1px solid #e3e3e3;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 585px) {
+    .container .topLeadersList .leader:nth-child(2) {
+        left: 3%;
+        transform: translateX(-3%);
+    }
+
+    .container .topLeadersList .leader:nth-child(3) {
+        left: 97%;
+        transform: translateX(-98%);
+    }
+}
+
+@media (max-width: 410px) {
+    .container .playerslist {
+        margin-top: 5.3rem;
+    }
+
+    .container .leaderName {
+        font-size: 16px;
+    }
+
+    .container .topLeadersList .leader:nth-child(1) {
+        z-index: 0;
+    }
+
+    .container .topLeadersList .leader:nth-child(1) .image {
+        width: 90px;
+        height: 90px;
+    }
+
+    .container .topLeadersList .leader:is(:nth-child(2), :nth-child(3)) .image {
+        width: 70px;
+        height: 70px;
+    }
+
+    .container .topLeadersList .leader:nth-child(1) .crown {
+        top: -28%;
+    }
+
+    .container .topLeadersList .leader:is(:nth-child(2), :nth-child(3)) .crown {
+        top: -35%;
+    }
+
+    .container .topLeadersList .leader:is(:nth-child(1), :nth-child(2), :nth-child(3))::after {
+        width: 23px;
+        height: 23px;
+        line-height: 24px;
+    }
+}

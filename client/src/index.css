@@ -9,6 +9,15 @@ a {
   text-decoration: none;
 }
 
+body {
+  min-height: 100vh;
+}
+
+img {
+  pointer-events: none;
+  user-select: none;
+}
+
 /* -----------------scrollbar------------------ */
 /* width */
 ::-webkit-scrollbar {
@@ -31,4 +40,14 @@ a {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #a8aed6;
+}
+
+.warning-message-no-js {
+  font-size: 20px;
+  padding: 12px;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
 }

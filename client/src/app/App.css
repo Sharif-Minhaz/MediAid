@@ -1,13 +1,18 @@
+.badge-item .MuiBadge-badge.MuiBadge-standard {
+    color: white;
+    background: #72df94;
+}
+
 .MuiInputBase-root.Mui-focused:not(.Mui-error) .MuiOutlinedInput-notchedOutline {
     border-color: #2196f3 !important;
 }
 
-.MuiButton-endIcon.MuiButton-iconSizeMedium.css-1gnd1fd-MuiButton-endIcon {
+.MuiButton-endIcon.MuiButton-iconSizeMedium {
     margin-left: 1px;
 }
 
-.search-floating-md .MuiFormControl-root.css-1x3zuk7-MuiFormControl-root {
-    padding-inline: 16px;
+.search-floating-md .MuiFormControl-root {
+    padding-inline: 0;
 }
 
 .down-list>.MuiPaper-root {
@@ -27,10 +32,71 @@
     /* color: #364152; */
 }
 
-.active .MuiListItemIcon-root.css-wa5fuu-MuiListItemIcon-root {
-    color: #5e35b1;
+.active .MuiListItemIcon-root {
+    color: #5e35b1 !important;
 }
-.active .MuiButtonBase-root.MuiListItemButton-root {
+
+.active :is(.MuiButtonBase-root.MuiListItemButton-root, .MuiListItemIcon-root) {
     background-color: #ede7f6;
-    color: #5e35b1;
+    color: #5e35b1 !important;
+}
+
+.bold-titles {
+    color: #5e5873;
+    font-weight: 500;
+}
+
+.drop-shadow-img {
+    filter: drop-shadow(2px 1px 5px #666666);
+}
+
+/* Jodit editor styles start here */
+
+.jodit-wysiwyg a {
+    text-decoration: underline;
+    color: blue;
+    font-style: italic;
+}
+
+.jodit-wysiwyg :is(ol, ul) {
+    margin: 20px;
+}
+
+/* search configuration */
+[name='searchText'] .search-body .MuiInputBase-root.MuiOutlinedInput-root {
+    padding-inline: 14px;
+}
+
+div[role='presentation'].MuiAutocomplete-popper {
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+    border-radius: 16px;
+}
+
+/* animation css */
+.fade-in {
+    opacity: 0;
+    transition: all 0.5s ease-in-out !important;
+    transform: translateY(42px)
+}
+
+.fade-in-delay {
+    opacity: 0;
+    transition: all 1.5s ease !important;
+    transform: translateY(70px)
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0)
+}
+
+/* responsive issue */
+@media (max-width: 899px) {
+    .search-floating-md .MuiFormControl-root {
+        padding-inline: 0;
+    }
+
+    [name=searchText] {
+        padding-inline: 16px;
+    }
 }

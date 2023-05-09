@@ -1,7 +1,35 @@
-import { Avatar, Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
-import { IconLogout as Logout, IconEdit } from "@tabler/icons-react";
+import { Avatar, Box, Divider, ListItemIcon, Menu, MenuItem, Stack } from "@mui/material";
+import { IconLogout as Logout } from "@tabler/icons-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogoutMutation } from "../../features/auth/authSlice";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { set } from "../../features/auth/userInfoSlice";
+import { toCapitalize } from "../../utils/toCapitalize";
+import Cookies from "js-cookie";
 
-const ProfileMenu = ({ anchorEl, open, handleClose }) => {
+const ProfileMenu = ({ profileInfo, anchorEl, open, handleClose }) => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const [logout, responseInfo] = useLogoutMutation();
+
+	const handleLogout = () => {
+		logout()
+			.unwrap()
+			.then((response) => {
+				if (response.msg === "logout_successful") {
+					Cookies.remove("uinfo");
+					toast.success("Logout successful");
+					dispatch(set());
+					navigate("/", { replace: true });
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+				toast.error("Something went wrong");
+			});
+	};
+
 	return (
 		<Menu
 			anchorEl={anchorEl}
@@ -16,8 +44,8 @@ const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 					filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
 					mt: 1.5,
 					"& .MuiAvatar-root": {
-						width: 32,
-						height: 32,
+						width: 60,
+						height: 60,
 						ml: -0.5,
 						mr: 1,
 					},
@@ -38,17 +66,26 @@ const ProfileMenu = ({ anchorEl, open, handleClose }) => {
 			transformOrigin={{ horizontal: "right", vertical: "top" }}
 			anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
 		>
-			<MenuItem onClick={handleClose}>
-				<Avatar src="https://mui.com/static/images/avatar/1.jpg" /> View Profile
-			</MenuItem>
+			<Link to="/profile">
+				<MenuItem onClick={handleClose} sx={{ mb: "8px" }}>
+					<Avatar src={profileInfo.data?.profile?.profilePicture} />{" "}
+					<Stack>
+						<Box component="span" color="#364152" fontSize={18}>
+							{profileInfo.data?.profile?.fullName}
+						</Box>
+						<Box component="span" color="#364152" fontSize={14}>
+							{toCapitalize(profileInfo.data?.profile?.user.user_type)} profile
+						</Box>
+					</Stack>
+				</MenuItem>
+			</Link>
 			<Divider />
-			<MenuItem onClick={handleClose}>
-				<ListItemIcon>
-					<IconEdit size={22} />
-				</ListItemIcon>
-				Edit
-			</MenuItem>
-			<MenuItem onClick={handleClose}>
+			<MenuItem
+				onClick={() => {
+					handleClose();
+					handleLogout();
+				}}
+			>
 				<ListItemIcon>
 					<Logout size={22} />
 				</ListItemIcon>
