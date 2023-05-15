@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Profile = require("../models/ProfileModel");
 const cloudinary = require("../utils/cloudinaryHandler");
+const { uploadImageHandler } = require("../utils/uploadImage");
 
 exports.viewProfileController = asyncHandler(async (req, res) => {
 	const { id } = req.decoded;
@@ -68,9 +69,7 @@ exports.updateProfileController = asyncHandler(async (req, res) => {
 	let uploadImage = {};
 
 	if (file) {
-		uploadImage = await cloudinary.uploader.upload(file.path, {
-			folder: "mediAid/profile",
-		});
+		uploadImage = await uploadImageHandler(file, "mediAid/profile");
 
 		if (profile.cloudinaryId) await cloudinary.uploader.destroy(profile.cloudinaryId);
 	}

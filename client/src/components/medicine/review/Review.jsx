@@ -27,9 +27,11 @@ const Review = ({ medicineId }) => {
 					</Grid>
 				</Grid>
 			) : (
+				// review form for the medicine
 				<MedicineReviewForm medicineId={medicineId} />
 			)}
 			<Divider />
+			{/* user review list for the medicine */}
 			<ReviewedMedicine reviews={reviewInfo.data?.reviews} />
 		</Paper>
 	);

@@ -9,6 +9,7 @@ const { addHistoryController } = require("./historyController");
 
 exports.viewAllMedicinesController = asyncHandler(async (req, res) => {
 	const medicines = await Medicine.find({
+		// Match documents that have status not equal to "pending" or do not have a status field
 		$or: [{ status: { $ne: "pending" } }, { status: { $exists: false } }],
 	}).populate("donorAccount");
 
@@ -48,10 +49,9 @@ exports.addMedicineController = asyncHandler(async (req, res) => {
 
 	let uploadImage = {};
 
+	// check if the file exist, if exist then upload it to cloudinary
 	if (file) {
-		uploadImage = await cloudinary.uploader.upload(file.path, {
-			folder: "mediAid/medicines",
-		});
+		uploadImage = await uploadImageHandler(file, "mediAid/medicines");
 	}
 
 	const addMedicine = await new Medicine({
@@ -85,11 +85,11 @@ exports.updateMedicineController = asyncHandler(async (req, res) => {
 
 	let uploadImage = {};
 
+	// check if the file exist, if exist then upload it to cloudinary
 	if (file) {
-		uploadImage = await cloudinary.uploader.upload(file.path, {
-			folder: "mediAid/medicines",
-		});
+		uploadImage = await uploadImageHandler(file, "mediAid/medicines");
 
+		// remove the previous uploaded image from cloudinary
 		if (medicinesDetails.cloudinaryId)
 			await cloudinary.uploader.destroy(medicinesDetails.cloudinaryId);
 	}
@@ -123,9 +123,11 @@ exports.deleteMedicineController = asyncHandler(async (req, res) => {
 	const targetedMedicine = await Medicine.findById(medicineId);
 
 	if (targetedMedicine) {
+		// if image available then delete it from cloudinary
 		if (targetedMedicine.cloudinaryId) {
 			await cloudinary.uploader.destroy(targetedMedicine.cloudinaryId);
 		}
+
 		const deletedMedicineInfo = await targetedMedicine.remove();
 
 		return res.status(200).json({
@@ -159,6 +161,7 @@ exports.donateMedicineController = asyncHandler(async (req, res) => {
 			action: "apply-donate",
 		};
 
+		// add action information to history collection
 		addHistoryController(req, res);
 
 		return res.status(201).json({
@@ -191,6 +194,7 @@ exports.applyMedicineController = asyncHandler(async (req, res) => {
 			action: "apply-receive",
 		};
 
+		// add action information to history collection
 		addHistoryController(req, res);
 
 		return res.status(201).json({
@@ -259,11 +263,13 @@ exports.getTopRatedMedicinesController = asyncHandler(async (req, res) => {
 				avgRating: { $avg: "$rating" },
 			},
 		},
+		// sorting medicines list with descending order
 		{
 			$sort: {
 				avgRating: -1,
 			},
 		},
+		// populate with medicine info
 		{
 			$lookup: {
 				from: "medicines",

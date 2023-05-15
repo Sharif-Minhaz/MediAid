@@ -7,8 +7,11 @@ import Routers from "../Routers/Routers";
 
 function App() {
 	return (
+		// MUI custom theme provider
 		<ThemeProvider theme={theme}>
+			{/* Client-side routers */}
 			<Routers />
+			{/* toastify container from react-toastify */}
 			<ToastContainer position="bottom-right" autoClose={4000} />
 		</ThemeProvider>
 	);

@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Gallery = require("../models/GalleryModel");
-const cloudinary = require("../utils/cloudinaryHandler");
+const { uploadImageHandler } = require("../utils/uploadImage");
 
 exports.viewGalleryImagesController = asyncHandler(async (req, res) => {
 	const galleryImage = await Gallery.find();
@@ -22,12 +22,12 @@ exports.addGalleryImageController = asyncHandler(async (req, res) => {
 
 	let uploadImage = {};
 
+	// check if the file exist, if exist then upload it to cloudinary
 	if (file) {
-		uploadImage = await cloudinary.uploader.upload(file.path, {
-			folder: "mediAid/gallery",
-		});
+		uploadImage = await uploadImageHandler(file, "mediAid/gallery");
 	}
 
+	// add new gallery image
 	const newGalleryImage = await new Gallery({
 		...body,
 		galleryImage: uploadImage.secure_url,

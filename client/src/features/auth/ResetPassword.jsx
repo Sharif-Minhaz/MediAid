@@ -86,6 +86,7 @@ const ResetPassword = () => {
 	};
 
 	return (
+		// wrapper component for auth forms
 		<AuthWrapper>
 			<AuthIntro
 				des1="Reset Password"

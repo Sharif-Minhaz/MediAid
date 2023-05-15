@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getUserInfo } from "../../utils/getUserInfo";
 
+const { _id, email, user_type } = getUserInfo();
+
 const initialState = {
-	id: getUserInfo()?._id,
-	email: getUserInfo()?._email,
-	user_type: getUserInfo()?.user_type,
+	id: _id,
+	email,
+	user_type,
 };
 
 export const userInfo = createSlice({

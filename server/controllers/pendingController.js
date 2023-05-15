@@ -56,6 +56,7 @@ exports.rejectDonationController = asyncHandler(async (req, res) => {
 			await cloudinary.uploader.destroy(deleteMedicine.cloudinaryId);
 		}
 
+		// // add action information to history collection
 		await new History({
 			user: decoded.id,
 			medicineName: deleteMedicine.medicineName,
@@ -146,6 +147,7 @@ exports.acceptReceiverApplicationController = asyncHandler(async (req, res) => {
 		Medicine.findById(medicineId).select("dosages"),
 	]);
 
+	// check if the medicine is available or not
 	if (getAvailableMedicine.dosages < application.count) {
 		return res.status(409).json({
 			msg: "medicine_out_of_stock",
@@ -162,12 +164,14 @@ exports.acceptReceiverApplicationController = asyncHandler(async (req, res) => {
 	).populate("medicine");
 
 	if (acceptApplication) {
+		// add action information to history collection
 		const history = new History({
 			user: decoded.id,
 			medicineName: acceptApplication.medicine?.medicineName,
 			action: "accept-receive",
 		});
 
+		// deduct the donated medicine count from medicine count
 		const updateMedicine = Medicine.findByIdAndUpdate(medicineId, {
 			$inc: { dosages: -Number(acceptApplication.count) },
 		});
@@ -195,6 +199,7 @@ exports.rejectReceiverApplicationController = asyncHandler(async (req, res) => {
 	);
 
 	if (deleteApplication) {
+		// add action information to history collection
 		await new History({
 			user: decoded.id,
 			medicineName: deleteApplication.medicine?.medicineName,

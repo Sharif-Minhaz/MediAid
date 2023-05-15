@@ -67,8 +67,16 @@ exports.getMedicineRatingController = asyncHandler(async (req, res) => {
 	const { medicineId } = req.params;
 
 	const medicineRating = await Review.aggregate([
-		{ $match: { medicine: Types.ObjectId(medicineId) } },
-		{ $group: { _id: "$medicine", averageRating: { $avg: "$rating" }, count: { $sum: 1 } } },
+		{
+			$match: { medicine: Types.ObjectId(medicineId) },
+		},
+		{
+			$group: {
+				_id: "$medicine",
+				averageRating: { $avg: "$rating" },
+				count: { $sum: 1 },
+			},
+		},
 	]);
 
 	if (!medicineRating || medicineRating.length === 0) {

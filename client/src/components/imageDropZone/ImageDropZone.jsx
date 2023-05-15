@@ -144,6 +144,7 @@ const ImageDropZone = forwardRef(({ image = "", onFileSelect, key }, ref) => {
 					)}
 					{files.length ? (
 						<Typography title={files[0]?.name}>
+							{/* showing the selected file name */}
 							{files[0]?.name.length > 19
 								? `${files[0]?.name?.substring(0, 10)}...${files[0].name.substring(
 										files[0].name?.length - 6

@@ -2,6 +2,12 @@ import { Box, Typography } from "@mui/material";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 import { useState } from "react";
 
+const details = [
+	{ type: "Brand", prop: "companyName" },
+	{ type: "Donated By", prop: "donorName" },
+	{ type: "Donor contact", prop: "donorContact" },
+];
+
 const ExtraDetailsAccordion = ({ medicine }) => {
 	const [descriptionOpen, setDescriptionOpen] = useState(true);
 
@@ -36,15 +42,16 @@ const ExtraDetailsAccordion = ({ medicine }) => {
 				<Box sx={{ mt: 2, px: 1 }}>
 					<Typography>{medicine?.medicineDescription}</Typography>
 					<Box mt={2}>
-						<Typography fontSize={15} color="#425b74" variant="body1">
-							<strong>Brand:</strong> {medicine?.companyName}
-						</Typography>
-						<Typography fontSize={15} color="#425b74" variant="body1">
-							<strong>Donated By:</strong> {medicine?.donorName}
-						</Typography>
-						<Typography fontSize={15} color="#425b74" variant="body1">
-							<strong>Donor contact:</strong> {medicine?.donorContact}
-						</Typography>
+						{details.map((detail) => (
+							<Typography
+								key={detail.prop}
+								fontSize={15}
+								color="#425b74"
+								variant="body1"
+							>
+								<strong>{detail.type}</strong> {medicine?.[detail.prop]}
+							</Typography>
+						))}
 					</Box>
 				</Box>
 			)}

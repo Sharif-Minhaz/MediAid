@@ -6,6 +6,7 @@ const ReceiverApplication = require("../models/ReceiverApplicationModel");
 exports.getDashboardBarDataController = asyncHandler(async (req, res) => {
 	const { year } = req.params;
 
+	// convert dates into ISO format
 	const startOfYear = new Date(`${year}-01-01`);
 	const endOfYear = new Date(`${year}-12-31`);
 
@@ -35,16 +36,14 @@ exports.getDashboardBarDataController = asyncHandler(async (req, res) => {
 		// sort by month in ascending order
 		{
 			$sort: {
-				_id: 1,
+				_id: 1, // month field
 			},
 		},
 	]);
 
 	//create an object with total donation for each month
 	const monthlyDonation = {};
-	for (let i = 1; i <= 12; i++) {
-		monthlyDonation[i] = 0;
-	}
+	for (let i = 1; i <= 12; i++) monthlyDonation[i] = 0;
 
 	result.forEach((item) => {
 		monthlyDonation[item._id] = item.totalDonation;
@@ -66,6 +65,7 @@ exports.getDashboardCardsInfoController = asyncHandler(async (req, res) => {
 exports.getDashboardChartDataController = asyncHandler(async (req, res) => {
 	const [totalMedicines, donatedMedicines] = await Promise.all([
 		Medicine.aggregate([
+			// Match documents that have status not equal to "pending" or do not have a status field
 			{
 				$match: {
 					$or: [{ status: { $ne: "pending" } }, { status: { $exists: false } }],
@@ -73,7 +73,7 @@ exports.getDashboardChartDataController = asyncHandler(async (req, res) => {
 			},
 			{
 				$group: {
-					_id: null,
+					_id: null, // no group - only one document
 					total: { $sum: "$storedDosages" },
 					remaining: { $sum: "$dosages" },
 				},
@@ -88,7 +88,7 @@ exports.getDashboardChartDataController = asyncHandler(async (req, res) => {
 			},
 			{
 				$group: {
-					_id: null,
+					_id: null, // no group - only one document
 					received: { $sum: "$count" },
 				},
 			},
@@ -97,7 +97,7 @@ exports.getDashboardChartDataController = asyncHandler(async (req, res) => {
 
 	res.status(200).json({
 		total: totalMedicines[0].total,
-		donation: totalMedicines[0].total - totalMedicines[0].remaining,
+		donation: totalMedicines[0].total - totalMedicines[0].remaining, // get donated medicine
 		donationReceived: donatedMedicines[0].received,
 	});
 });
