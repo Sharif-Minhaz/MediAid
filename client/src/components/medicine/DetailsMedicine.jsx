@@ -19,11 +19,13 @@ const DetailsMedicine = () => {
 					button={{ link: "/medicines", text: "Find More" }}
 				/>
 				{responseInfo.isLoading ? (
+					// loader component
 					<SkeletonCartPage />
 				) : (
 					<MedicineBody medicine={state ? state : responseInfo?.data?.medicine} />
 				)}
 			</Paper>
+			{/* review segment for the medicine */}
 			<Review medicineId={medicineId} />
 		</>
 	);

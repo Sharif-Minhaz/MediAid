@@ -102,6 +102,7 @@ const Register = () => {
 	const handleAgree = () => setAgreed((prev) => !prev);
 
 	return (
+		// wrapper component for auth forms
 		<AuthWrapper>
 			<AuthIntro
 				des1="Register Now"
