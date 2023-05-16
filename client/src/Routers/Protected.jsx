@@ -4,7 +4,7 @@ import { getUserInfo } from "../utils/getUserInfo";
 import { toast } from "react-toastify";
 
 const Protected = ({ children }) => {
-	const [user, setUser] = useState(getUserInfo());
+	const [user, _] = useState(getUserInfo());
 
 	if (!user?.user_type) {
 		toast.error("Login required for this action");

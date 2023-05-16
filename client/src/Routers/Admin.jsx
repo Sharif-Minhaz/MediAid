@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { getUserInfo } from "../utils/getUserInfo";
 
 const Admin = ({ children }) => {
-	const [user, setUser] = useState(getUserInfo());
+	const [user, _] = useState(getUserInfo());
 
 	if (user?.user_type !== "admin") {
 		toast.error("Unauthorized access");
