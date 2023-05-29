@@ -14,6 +14,7 @@ const InfoCard = ({ data, index }) => {
 			className={`${
 				inView ? "fade-in visible" : "fade-in"
 			}${` dashboard-card card-img-holder ${data.bg}`}`}
+			sx={{ "&:hover": { boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 8px" } }}
 		>
 			<img src="/images/circle.png" className="card-img-absolute" alt="circle-image" />
 			<Typography
