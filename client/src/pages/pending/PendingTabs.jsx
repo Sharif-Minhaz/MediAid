@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Tabs, Tab, Box, Grid, Card, Typography } from "@mui/material";
+import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { useState } from "react";
 import PendingElement from "./PendingElement";
 import {
@@ -67,20 +67,32 @@ const PendingTabs = () => {
 				</Tabs>
 			</Box>
 			<TabPanel value={value} index={0}>
-				{!donationInfo.data?.pendingDonations && (
+				{donationInfo.isLoading ? (
 					<Typography color="#8d8d8d" textAlign="center" fontStyle="italic" p={2}>
-						Currently, no requests are available
+						Loading...
 					</Typography>
+				) : (
+					!donationInfo.data?.pendingDonations && (
+						<Typography color="#8d8d8d" textAlign="center" fontStyle="italic" p={2}>
+							Currently, no requests are available
+						</Typography>
+					)
 				)}
 				{donationInfo.data?.pendingDonations?.map((donation) => (
 					<PendingElement key={donation._id} type="donation" request={donation} />
 				))}
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				{!receiverInfo.data?.applications && (
+				{receiverInfo.isLoading ? (
 					<Typography color="#8d8d8d" textAlign="center" fontStyle="italic" p={2}>
-						Currently, no requests are available
+						Loading...
 					</Typography>
+				) : (
+					!receiverInfo.data?.applications && (
+						<Typography color="#8d8d8d" textAlign="center" fontStyle="italic" p={2}>
+							Currently, no requests are available
+						</Typography>
+					)
 				)}
 				{receiverInfo.data?.applications?.map((application) => (
 					<PendingElement key={application._id} type="receiver" request={application} />

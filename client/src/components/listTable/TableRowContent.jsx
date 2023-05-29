@@ -77,7 +77,7 @@ const TableRowContent = ({ data, tableFormat, tableName }) => {
 							}}
 							size="small"
 							variant="contained"
-							onClick={() => handleUserRequest(data.user.name)}
+							onClick={() => handleUserRequest(data.user?.name)}
 						>
 							Block
 						</Button>
