@@ -5,6 +5,9 @@
 }
 body {
     font-family: "roboto", Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 a {
     text-decoration: none;
@@ -22,6 +25,7 @@ p {
     background-color: darkgrey;
     padding: 5px;
     border-radius: 10px;
+    width: 100%;
 }
 .header {
     background-color: white;
@@ -77,4 +81,28 @@ p {
     padding: 10px;
     background: #2694af;  
     cursor: pointer;  
+    color: white;
+    font-size: large;
+}
+.accordion .content_box .label::before{
+    content: '+';
+    position: absolute;
+    /* top: 50%; */
+    right: 10px;
+    font-weight: bold;
+}
+.accordion .content_box.active .label::before{
+    content: '-';
+}
+.accordion .content_box .content{
+    position: relative;
+    background: white;
+    /* padding: 10px; */
+    height: 0;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.accordion .content_box.active .content{
+    padding: 10px;
+    height: auto;
 }
