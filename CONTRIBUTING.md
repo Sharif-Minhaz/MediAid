@@ -114,7 +114,7 @@ The project currently not includes any suite of tests.
 
 ## License
 
-By contributing to this project, you agree that your contributions will be licensed under the [LICENSE](https://github.com/sharif-minhaz/mediaid/blob/main/LICENSE) of the project.
+By contributing to this project, you agree that your contributions will be licensed under the [LICENSE](LICENSE) of the project.
 
 ---
 
