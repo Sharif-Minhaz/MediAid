@@ -1,9 +1,9 @@
 <div>
-  <img src="./template/images/ss-1.png" alt="Image 1" style="width:49%; display:inline-block;">
-  <img src="./template/images/ss-2.png" alt="Image 2" style="width:49%; display:inline-block;">
+  <img src="./template/images/ss-1.png" alt="Image 1" style="width:48%; border: 1px solid black; margin-right: 2px; display:inline-block;">
+  <img src="./template/images/ss-2.png" alt="Image 2" style="width:48%; border: 1px solid black; display:inline-block;">
 </div><br>
-
-<img src='./template/images/default.png' alt='mediaid' style="width:45%">
+<hr>
+<img src='./template/images/default.png' alt='mediaid' style="width:40%">
 <hr>
 
 Welcome to the MediAid project repository! This project aims to provide a platform for individuals and organizations to donate unused or unexpired medicines to those in need. By donating medicines, you can help reduce healthcare costs and improve access to essential medications for people who cannot afford them.
