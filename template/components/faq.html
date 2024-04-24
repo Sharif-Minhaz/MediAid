@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FAQ</title>
+        <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> -->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            integrity="sha512-j8/OkF/yMow9jAgvOayLcnm8H0PCFbKjxGvRJLP2zidZOaGJZRMXKjtfIbHn3+8QRJMCyEoJxHkIyCQz1KjZVQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <!-- ================For Icons================ -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="styleforfaq.css" />
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="header">
+                <p class="text">FAQ</p>
+                <button class="button">Add</button>
+                <div class="hr-container">
+                    <hr />
+                </div>
+
+                <div class="accordion">
+                    <div class="content_box">
+                        <div class="label">Why is medicine donation important?</div>
+                        <div class="content">
+                            <p>
+                                Medicine donation is important because it helps people who cannot
+                                afford to buy medicine, particularly in low-income countries where
+                                access to healthcare is limited. It can also be helpful in emergency
+                                situations, such as natural disasters or conflict, when access to
+                                medicine may be disrupted.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content_box">
+                        <div class="label">What are the benefits of medicine donation?</div>
+                        <div class="content">
+                            <p>
+                                The benefits of medicine donation include improving access to
+                                healthcare, helping to reduce the spread of disease, and reducing
+                                suffering among people who cannot afford to buy medicine. It can
+                                also help to build goodwill and relationships between countries and
+                                organizations.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content_box">
+                        <div class="label">Who can donate medicine?</div>
+                        <div class="content">
+                            <p>
+                                Individuals, healthcare facilities, pharmaceutical companies, and
+                                aid organizations can all donate medicine. However, it is important
+                                to ensure that the medicine is safe, not expired, and meets the
+                                quality standards of the recipient country.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content_box">
+                        <div class="label">What types of medicine can be donated?</div>
+                        <div class="content">
+                            <p>
+                                Most types of medicine can be donated, including prescription and
+                                over-the-counter medication. However, it is important to ensure that
+                                the medicine is not expired, is in good condition, and is
+                                appropriate for the recipient country's needs.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content_box">
+                        <div class="label">How can medicine be donated?</div>
+                        <div class="content">
+                            <p>
+                                Medicine can be donated through various channels, including
+                                non-governmental organizations (NGOs), aid organizations, and
+                                government agencies. It can also be donated directly to hospitals
+                                and clinics.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content_box">
+                        <div class="label">what are the risks of medicine donated?</div>
+                        <div class="content">
+                            <p>
+                                The risks of medicine donation include the potential for expired or
+                                counterfeit medicine, which can be harmful to the recipient. It is
+                                important to ensure that the medicine being donated is safe, not
+                                expired, and meets the quality standards of the recipient country.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content_box">
+                        <div class="label">How the quality is maintained of donated medicine?</div>
+                        <div class="content">
+                            <p>
+                                The quality of donated medicine can be ensured through rigorous
+                                screening and testing processes. This can include checking the
+                                expiration dates, verifying that the medicine is not counterfeit,
+                                and ensuring that it meets the quality standards of the recipient
+                                country.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content_box">
+                        <div class="label">How can I get involved in medicine donation?</div>
+                        <div class="content">
+                            <p>
+                                You can get involved in medicine donation by donating medicine
+                                yourself or by volunteering with an organization that provides
+                                medicine donation services. It is important to do your research and
+                                ensure that the organization you are working with has a good
+                                reputation and follows ethical practices.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content_box">
+                        <div class="label">Will I get any return?</div>
+                        <div class="content">
+                            <p>
+                                The information will add to your profile but, you will never get
+                                money in return.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const accordion = document.getElementsByClassName("content_box");
+            for (i = 0; i < accordion.length; i++) {
+                accordion[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                });
+            }
+        </script>
+    </body>
+</html>
