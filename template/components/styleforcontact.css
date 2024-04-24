@@ -1,0 +1,135 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "roboto", Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+h1 {
+    color: black;
+}
+p {
+    color: black;
+    font-size: 120%;
+    font-weight: 400;
+}
+.container {
+    background-color: darkgrey;
+    padding: 5px;
+    border-radius: 10px;
+    width: 100%;
+}
+.header {
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding-bottom: 15px;
+    padding-top: 20px;
+    padding-left: 0px;
+    margin: 5px;
+    position: relative;
+    /* border-radius: 10px; */
+    /* border-bottom: 2px solid black; */
+    /* padding: 0;
+    margin: 0; */
+}
+.container .header .text{
+    padding-left: 15px;
+}
+.hr-container {
+    margin-top: 20px;
+}
+
+.button {
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(99, 81, 177);
+    padding: 10px 30px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: 0.4s;
+    margin: 10px;
+    /* position: absolute; */
+    /* right: 14px; */
+    /* top: 14px; */
+
+}
+.button:hover {
+    /* transform: scale(1.2); */
+    background-color: white;
+    color: black;
+}
+.map_form{
+    padding: 10px;
+    background: white;
+    display: flex;
+    justify-content: center;
+}
+.map{
+    /* background: rgb(99, 81, 177); */
+    width: 50%;
+    /* border-radius: 10px; */
+    padding: 8px;
+}
+.map iframe{
+    border-radius: 10px;
+}
+.form{
+    /* background: rgb(99, 223, 188); */
+    width: 50%;
+}
+.input_field{
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input{
+    height: 60px;
+    width: 100%;
+    border: 2px solid  rgb(157, 155, 166);
+    border-radius: 10px; 
+    outline: none;
+    padding: 0px 8px 0px 8px;
+    font-weight: bold;
+    font-size: medium;
+    transition: 0.3s;
+}
+.input:focus::placeholder{
+    color: rgb(62, 65, 170);
+}
+.input:hover{
+    border-color: black;
+}
+.input:focus{
+    border-color: rgb(62, 65, 170);
+}
+.input_unique{
+    height: 200px;
+    width: 100%;
+    border: 2px solid  rgb(157, 155, 166);
+    border-radius: 10px; 
+    outline: none;
+    padding: 0px 8px 0px 8px;
+    font-weight: bold;
+    font-size: large;
+    transition: 0.3s;
+}
+.input_unique:hover{
+    border-color: black;
+}
+.input_.input_unique:focus{
+    border-color: rgb(62, 65, 170);
+}
+.input_unique:focus::placeholder{
+    color: rgb(62, 65, 170);
+}
