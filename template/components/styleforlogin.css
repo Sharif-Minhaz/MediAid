@@ -1,0 +1,122 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "roboto", Arial, Helvetica, sans-serif;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+h1 {
+    color: black;
+}
+h2 {
+    color: rgb(100, 61, 173);
+}
+
+.description h4 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: darkgrey;
+}
+.description h2 {
+    text-align: center;
+}
+.logo {
+    padding: 25px;
+}
+.box{
+    background-color: brown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+.log_in_page{
+    /* background-color: darkslategrey; */
+    /* height: 100%; */
+    width: 450px;
+    background-color: white;
+    border-radius: 8px;
+    /* border: 2px solid black; */
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    flex-direction: column;
+}
+.form_description .auth{
+    border: 1px solid rgb(102, 95, 95);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+.form_description .auth1{
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.log_in_container{
+    /* background-color: rgb(52, 62, 125); */
+    width: 100%;
+    padding: 10px;
+}
+.input_field{
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input{
+    height: 45px;
+    width: 100%;
+    border: 1px solid darkgray;
+    border-radius: 6px; 
+    outline: none;
+    padding: 0px 8px 0px 8px;
+    font-weight: bold;
+    font-size: medium;
+}
+.input_button{
+    background-color: rgb(100, 61, 173);
+    color: white;
+    font-size: medium;
+    font-weight: bold;
+    height: 45px;
+    width: 100%;
+    border: 1px solid darkgray;
+    border-radius: 6px; 
+    outline: none;
+    padding: 0px 8px 0px 8px;
+}
+.input_field_unique{
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.input_field_unique .right a{ 
+    color:  rgb(133, 117, 164);
+}
+.input_field_unique .right{ 
+    font-weight: bold;
+}
+.hr-container{
+    /* border-top: 2px solid black;
+    height: auto;
+    background-color: red; */
+    padding: 8px;
+}
+.road_to_registration{
+    /* border: 1px solid maroon; */
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
