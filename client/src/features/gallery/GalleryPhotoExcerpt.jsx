@@ -41,8 +41,8 @@ const GalleryPhotoExcerpt = ({ item }) => {
 				{item.description}
 			</Box>
 			<LazyLoadImage
-				style={{ borderRadius: 4, transition: "0.4s all" }}
-				height="100%"
+				style={{ borderRadius: 4, transition: "0.4s all", objectFit: "cover" }}
+				height="320px"
 				width="100%"
 				effect="blur"
 				src={item.galleryImage}
