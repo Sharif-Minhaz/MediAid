@@ -4,7 +4,7 @@ export const apiSlice = createApi({
 	reducerPath: "api", // optional
 	baseQuery: fetchBaseQuery({
 		// baseUrl: "http://localhost:8080/api",
-		baseUrl: "https://mediaid.onrender.com/api",
+		baseUrl: "https://mediaid-vsoy.onrender.com/api",
 		// baseUrl: "https://mediaid-production.up.railway.app/api",
 		credentials: "include",
 	}),
