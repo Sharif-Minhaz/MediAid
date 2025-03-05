@@ -18,7 +18,7 @@ const ProfileMedicines = ({ medicines, titleText }) => {
 				spacing={midScreen ? "20px" : "16px"}
 				sx={{ p: { xs: "16px", md: "20px" }, pt: 0 }}
 			>
-				{!medicines.length && (
+				{!medicines?.length && (
 					<Grid xs={12}>
 						<Typography sx={{ fontStyle: "italic", textAlign: "center" }} p={2} pt={4}>
 							The user didn't do anything yet
@@ -27,7 +27,7 @@ const ProfileMedicines = ({ medicines, titleText }) => {
 				)}
 				{medicines?.map((medicine) => (
 					<Grid
-						key={medicine._id}
+						key={medicine?._id}
 						item
 						lg={4}
 						md={drawerOpen ? 6 : 4}

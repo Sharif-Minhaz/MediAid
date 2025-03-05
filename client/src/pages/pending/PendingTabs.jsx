@@ -67,20 +67,20 @@ const PendingTabs = () => {
 				</Tabs>
 			</Box>
 			<TabPanel value={value} index={0}>
-				{donationInfo.isLoading ? (
+				{donationInfo.isLoading && (
 					<Typography color="#8d8d8d" textAlign="center" fontStyle="italic" p={2}>
 						Loading...
 					</Typography>
-				) : (
-					!donationInfo.data?.pendingDonations && (
-						<Typography color="#8d8d8d" textAlign="center" fontStyle="italic" p={2}>
-							Currently, no requests are available
-						</Typography>
-					)
 				)}
-				{donationInfo.data?.pendingDonations?.map((donation) => (
-					<PendingElement key={donation._id} type="donation" request={donation} />
-				))}
+				{donationInfo.data?.pendingDonations?.length ? (
+					donationInfo.data?.pendingDonations?.map((donation) => (
+						<PendingElement key={donation._id} type="donation" request={donation} />
+					))
+				) : (
+					<Typography color="#8d8d8d" textAlign="center" fontStyle="italic" p={2}>
+						Currently, no requests are available
+					</Typography>
+				)}
 			</TabPanel>
 			<TabPanel value={value} index={1}>
 				{receiverInfo.isLoading ? (
